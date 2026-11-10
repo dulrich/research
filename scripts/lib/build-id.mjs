@@ -1,6 +1,5 @@
 // build-id.mjs — build-id helper (copied from the fleet build-id template).
-// Self-contained copy-in template: node builtins only. scripts/help-gate.mjs imports this
-// file directly, so the checker and the JS/TS helper are the same code.
+// Self-contained copy-in template: node builtins only.
 //
 //   import { handleBuildFlags } from "./build-id.mjs";
 //   if (argv.includes("--help")) { ...usage...; process.exit(0); }   // --help wins
