@@ -17,6 +17,9 @@ nostd = []
 # Inline Clinger fast path (port of the c-fast decimal path) instead of
 # copying into a buffer and calling str::parse.
 fast = []
+# With `fast`: slow path calls the C library strtod() instead of core's
+# str::parse::<f64> (smaller, but locale-dependent like c-fast).
+strtod = ["fast"]
 
 [profile.release]
 opt-level = 3

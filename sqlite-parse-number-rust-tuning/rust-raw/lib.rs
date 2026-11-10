@@ -188,7 +188,7 @@ static POW10: [f64; 23] = [
 #[inline(never)]
 #[cold]
 unsafe fn parse_slow(ctx: Ctx, s: &[u8]) {
-    let Some(mut buf) = Buf::new(s.len()) else {
+    let Some(mut buf) = Buf::new(s.len() + 1) else {
         slot::<unsafe extern "C" fn(Ctx)>(RESULT_ERROR_NOMEM)(ctx);
         return;
     };
@@ -197,8 +197,21 @@ unsafe fn parse_slow(ctx: Ctx, s: &[u8]) {
             buf.push(c); // input already validated; £'s bytes are not ASCII
         }
     }
+    #[cfg(not(feature = "strtod"))]
     if let Ok(f) = buf.as_str().parse::<f64>() {
         result_double(ctx, f);
+    }
+    // `strtod` feature: hand the slow path to the C library, as c-fast does.
+    // Drops core's float parser (and its 10 KB table) from the binary, at
+    // the price of c-fast's caveat: strtod reads the decimal point from the
+    // host process's locale.
+    #[cfg(feature = "strtod")]
+    {
+        extern "C" {
+            fn strtod(s: *const c_char, end: *mut *mut c_char) -> f64;
+        }
+        buf.push(0);
+        result_double(ctx, strtod(buf.as_str().as_ptr() as *const c_char, core::ptr::null_mut()));
     }
 }
 

@@ -29,15 +29,28 @@ RUN gcc -O2 -fPIC -shared -s c/parse_number.c -o c/parse_number.so \
  && (cd rust-rusqlite && cargo build --release --locked) \
  && (cd rust-loadable && cargo build --release --locked)
 
-# This investigation: harness patch (adds the rust-raw variants) + four builds.
+# This investigation: harness patch (adds the new builds to the upstream
+# test/fuzz/bench lists) + every variant. Each line: crate name features rustflags.
 COPY harness.patch /work/
 COPY rust-raw/Cargo.toml rust-raw/lib.rs /work/rust-raw/
+COPY rust-safe/Cargo.toml rust-safe/lib.rs rust-safe/parse.rs /work/rust-safe/
+ENV ALIGN="-C llvm-args=-align-all-functions=6 -C llvm-args=-align-loops=64"
 RUN git apply harness.patch \
- && cd rust-raw \
- && for v in std: nostd:nostd fast:fast nostd-fast:nostd,fast; do \
-      n="${v%%:*}"; f="${v#*:}"; \
-      CARGO_TARGET_DIR="target/$n" cargo build --release ${f:+--features "$f"} \
-      && mkdir -p "$n" && cp "target/$n/release/libparse_number.so" "$n/" || exit 1; \
+ && printf '%s\n' \
+      'rust-raw std - -' \
+      'rust-raw nostd nostd -' \
+      'rust-raw fast fast -' \
+      'rust-raw nostd-fast nostd,fast -' \
+      'rust-raw nostd-fast-strtod nostd,strtod -' \
+      'rust-raw fast-align64 fast align' \
+      'rust-raw nostd-fast-align64 nostd,fast align' \
+      'rust-safe std - -' \
+      'rust-safe nostd nostd -' \
+    | while read -r crate n f fl; do \
+      [ "$f" = - ] && f=; \
+      if [ "$fl" = align ]; then fl="$ALIGN"; else fl=; fi; \
+      (cd "$crate" && RUSTFLAGS="$fl" CARGO_TARGET_DIR="target/$n" cargo build --release ${f:+--features "$f"} \
+        && mkdir -p "$n" && cp "target/$n/release/libparse_number.so" "$n/") || exit 1; \
     done
 
 CMD ["python3", "test.py"]

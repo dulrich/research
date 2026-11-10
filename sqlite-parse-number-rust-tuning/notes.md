@@ -48,7 +48,19 @@ The upstream `test.py` / `fuzz.py` / `bench.py` are used unchanged except for `h
 - A repeat of mixed matched within 0.5 ns, so the 1.5 ns gap between raw-fast and raw-nostd-fast is real. Its cause is unmeasured: the parsing code is identical, and I suspect code layout or inlining differences between the two link configurations.
 - Upstream numbers on a 2 vCPU VM were ~2× ours; the plain C / c-fast / Rust ordering held, with rusqlite and sqlite-loadable swapping places.
 
+## Round 2: the three follow-ups
+
+Three follow-ups: `strtod` for the slow path, why `no_std` is faster, and how much `unsafe` is actually needed.
+
+- **`strtod` (`rust-raw` feature `strtod`, implies `fast`)**: the slow path NUL-terminates the stack buffer and calls libc's `strtod`. With `nostd`: **6,072 B** (`size`: 3.4 KB), importing only `abort` and `strtod`; `memcpy`/`memset` are gone too. It's smaller than c-fast's 14,224 B, which is mostly gcc's page-aligned layout. Speed is the same as `nostd,fast` because the slow path is rare. Its slow path depends on the locale, just like c-fast's.
+- **Why `no_std` is faster**: perf isn't usable here (not installed, and `perf_event_paranoid=3`), so I compared disassembly. Unstripped `fast` vs `nostd,fast`: `parse_number_func` is 245 vs 243 instructions, identical apart from address constants and two `lea`s on the cold panic path. The function starts at offset 48 mod 64 in the `std` build and 32 in the `no_std` one. For an A/B test, I built both with `-C llvm-args=-align-all-functions=6 -C llvm-args=-align-loops=64`, and the gap closed (mixed 8.8 vs 8.9, repeat 8.6 vs 8.7; int 6.2 vs 5.8; real 9.7 vs 9.5). It's code placement, not `std`. The aligned builds are not the fastest, either: unaligned `nostd,fast` happened to land on a better placement (7.6–7.9 mixed). Lesson: differences under about 2 ns here are layout noise. Even `raw-fast` itself measured 9.5, 10.6 and 9.6 on mixed across three image builds.
+- **Minimising `unsafe` (`rust-safe/`)**: the same fast algorithm, with the parser in its own module under `#![forbid(unsafe_code)]`. It uses slice patterns for trimming, `slice::Iter` for the loop (`as_slice().first()` for the `£` lookahead), `i64::try_from` for the range check, and `Vec` + `str::parse` on the slow path. `lib.rs` holds every `unsafe`, about 30 lines under `#![deny(unsafe_op_in_unsafe_fn)]`, each with a SAFETY comment: `slot()` (an `unsafe fn`), the `xFunc` body (deref `argv`, `from_raw_parts` for the text), the entry point, and with `nostd` a `GlobalAlloc` over `sqlite3_malloc`/`sqlite3_free` (refusing alignment > 8) plus `abort` in the panic handler. `static mut` became an `AtomicPtr`.
+  - Results: safe `std` 8.0 / 5.5 / 9.4 and safe `nostd` 8.0 / 5.5 / 9.3 (repeat mixed 8.4 / 7.9), against c-fast 9.9 / 5.8 / 9.6. Sizes: 289,424 B and 24,912 B.
+  - Safe code costs nothing measurable here. `std` vs `nostd` makes no speed difference, only a size difference.
+- All 13 extensions: 40/40 tests; fuzz 4 seeds × 500k × 13 with no mismatches. The `strtod` builds match too, because SQLite runs in Python's C numeric locale.
+- One mistake on the way: the regenerated `harness.patch` again had `a/a/` paths from `git diff --no-index` run on nested directories, so the image build failed at `git apply` until I fixed them.
+
 ## Not done
 
-- Calling `strtod` from `no_std` Rust for the slow path would remove the 10 KB float table and get near C's size, but brings back the locale dependence.
-- Finding out why `no_std` is faster than `std` for the same code (compare `perf annotate` of the two hot loops).
+- Getting the safe crate down to strtod size without giving up locale independence would need a smaller correctly rounded slow path, e.g. a simple big-decimal algorithm instead of core's Eisel-Lemire tables. That's possible, but it's a lot of code for a path money data never takes.
+- Confirming the placement explanation with hardware counters (frontend stalls / DSB misses) on a machine where perf is allowed.

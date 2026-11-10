@@ -9,5 +9,5 @@ Each folder holds one investigation with its working notes and final report.
 
 ### [Can Rust match fast C for a SQLite `parse_number()` extension?](sqlite-parse-number-rust-tuning/) (2026-11-10)
 
-A follow-up to Simon Willison's [sqlite-parse-number-c-vs-rust](https://github.com/simonw/research/tree/main/sqlite-parse-number-c-vs-rust), where hand-optimised C (`c-fast`) was ~2× faster than the Rust extensions and 20× smaller (14 KB vs ~300 KB). With no dependencies…
+A follow-up to Simon Willison's [sqlite-parse-number-c-vs-rust](https://github.com/simonw/research/tree/main/sqlite-parse-number-c-vs-rust), where hand-optimised C (`c-fast`) was ~2× faster than the Rust extensions and 20× smaller (14 KB vs ~300 KB). Rust with no dependencies…
 <!-- research-index:end -->

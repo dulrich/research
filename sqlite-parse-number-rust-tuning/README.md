@@ -1,55 +1,71 @@
 # Can Rust match fast C for a SQLite `parse_number()` extension?
 
-A follow-up to Simon Willison's [sqlite-parse-number-c-vs-rust](https://github.com/simonw/research/tree/main/sqlite-parse-number-c-vs-rust), where hand-optimised C (`c-fast`) was ~2× faster than the Rust extensions and 20× smaller (14 KB vs ~300 KB). With no dependencies, `#![no_std]`, a stack buffer and the same inline fast path, Rust is as fast as `c-fast` or slightly faster, and its `.so` shrinks from 289 KB to 23 KB.
+A follow-up to Simon Willison's [sqlite-parse-number-c-vs-rust](https://github.com/simonw/research/tree/main/sqlite-parse-number-c-vs-rust), where hand-optimised C (`c-fast`) was ~2× faster than the Rust extensions and 20× smaller (14 KB vs ~300 KB). Rust with no dependencies and the same inline fast path matches `c-fast`'s speed, even with the parser written in 100% safe Rust. Dropping `std` takes the `.so` to 24 KB, and handing the rare slow path to `strtod` takes it to 6 KB, smaller than the C file.
 
 > Every line of text and code here was written by an LLM (Claude Code).
 
 ## What was built
 
-One crate, [`rust-raw/`](rust-raw/lib.rs), with **zero dependencies**. It calls SQLite through the `sqlite3_api_routines` function table that SQLite hands to every loadable extension, which is what a C extension's `SQLITE_EXTENSION_INIT2` does. It avoids the per-call `Vec` with a 128-byte stack buffer, falling back to `sqlite3_malloc` for longer inputs. Two cargo features give four builds:
+Two crates, both with **zero dependencies**. Each calls SQLite through the `sqlite3_api_routines` function table that SQLite hands to every loadable extension, which is what a C extension's `SQLITE_EXTENSION_INIT2` does.
 
-| Build | `nostd` | `fast` |
-|---|---|---|
-| `raw-std` | – | – |
-| `raw-nostd` | ✓ | – |
-| `raw-fast` | – | ✓ |
-| `raw-nostd-fast` | ✓ | ✓ |
+[`rust-raw/`](rust-raw/lib.rs) is written like the C: raw pointers, a 128-byte stack buffer with unchecked writes (falling back to `sqlite3_malloc`), and every parsing function an `unsafe fn`. Cargo features select:
 
-- **`nostd`**: `#![no_std]`, using `core` only. `str::parse::<f64>` lives in `core`, so the correctly rounded float parser stays.
-- **`fast`**: a port of `c-fast`'s single pass. Integers are built while scanning, and decimals with ≤ 2^53 significand and ≤ 22 fractional digits use one exact division (Clinger's fast path). Everything else falls back to `str::parse::<f64>`, which, unlike `c-fast`'s `strtod` fallback, does not depend on the locale.
+- **`nostd`**: `#![no_std]`, using `core` only. `str::parse::<f64>` lives in `core`, so Rust's correctly rounded float parser stays.
+- **`fast`**: a port of `c-fast`'s single pass. Integers are built while scanning, and decimals with ≤ 2^53 significand and ≤ 22 fractional digits use one exact division (Clinger's fast path). Anything else falls back to `str::parse::<f64>`, which, unlike `c-fast`'s `strtod`, doesn't depend on the locale.
+- **`strtod`** (implies `fast`): the slow path calls the C library's `strtod` instead, as `c-fast` does.
+
+[`rust-safe/`](rust-safe/) is the same `fast` algorithm with `unsafe` kept to the FFI boundary:
+
+- **Parser:** [`parse.rs`](rust-safe/parse.rs) is `#![forbid(unsafe_code)]`. It uses slices, iterators and checked indexing, and the rare slow path allocates a `Vec`.
+- **FFI glue:** [`lib.rs`](rust-safe/lib.rs) holds every `unsafe`, about 30 lines. That covers reading API slots, turning `argv` and the text pointer into a slice, the entry point, and, in the `nostd` build, a global allocator over `sqlite3_malloc` plus the panic handler's `abort`.
+
+| | `unsafe` blocks | `unsafe fn` definitions | parsing code in unsafe context |
+|---|---|---|---|
+| `rust-raw` | 2 | 11 | all of it (~170 lines) |
+| `rust-safe` | 6 + 1 `unsafe impl` (allocator) | 5 (FFI only) | none (`forbid(unsafe_code)`) |
 
 The four upstream extensions were rebuilt from upstream's source at commit `aa4e39e` and measured on the same machine.
 
 ## Results
 
-Net nanoseconds per row (fastest of 15 alternating runs over 2M rows, minus a `sum(length(v))` baseline; method and harness unchanged from upstream). Lower is better.
+Net nanoseconds per row (fastest of 15 alternating runs over 2M rows, minus a `sum(length(v))` baseline; method and harness unchanged from upstream). Lower is better. A second mixed run is in [`results/`](results/).
 
-| Dataset | plain C | fast C | rusqlite | sqlite-loadable | raw-std | raw-nostd | raw-fast | **raw-nostd-fast** |
-|---|---|---|---|---|---|---|---|---|
-| Mixed | 30.5 | 9.2 | 23.7 | 25.7 | 14.5 | 13.7 | 9.5 | **7.9** |
-| Integers only | 8.3 | 7.0 | 18.2 | 18.5 | 10.7 | 11.0 | 7.0 | **5.5** |
-| Decimals only | 52.4 | 9.9 | 28.3 | 27.6 | 17.8 | 17.8 | 11.7 | **8.7** |
+| Build | Mixed | Integers | Decimals | Stripped `.so` | Shared libs needed |
+|---|---|---|---|---|---|
+| plain C | 31.1 | 7.7 | 52.5 | 14,224 B | libc |
+| **fast C (`c-fast`)** | **9.9** | **5.8** | **9.6** | **14,224 B** | libc |
+| rusqlite | 24.0 | 16.9 | 26.9 | 314,288 B | libc, libgcc_s, ld-linux |
+| sqlite-loadable | 24.6 | 16.7 | 27.8 | 291,184 B | libc, libgcc_s, ld-linux |
+| raw `std` | 15.1 | 9.9 | 18.2 | 288,800 B | libc, libgcc_s, ld-linux |
+| raw `nostd` | 14.3 | 10.1 | 18.0 | 23,280 B | none |
+| raw `fast` | 10.6 | 6.4 | 12.1 | 289,232 B | libc, libgcc_s, ld-linux |
+| raw `nostd,fast` | 7.6 | 5.9 | 8.6 | 23,616 B | none |
+| raw `nostd,strtod` | 7.9 | 4.7 | 8.6 | **6,072 B** | none |
+| raw `fast` + 64-byte align | 8.8 | 6.2 | 9.7 | 309,520 B | libc, libgcc_s, ld-linux |
+| raw `nostd,fast` + 64-byte align | 8.9 | 5.8 | 9.5 | 24,640 B | none |
+| **safe `std`** | **8.0** | **5.5** | **9.4** | 289,424 B | libc, libgcc_s, ld-linux |
+| **safe `nostd`** | **8.0** | **5.5** | **9.3** | 24,912 B | none |
 
-A repeat run of the mixed dataset agreed within 0.5 ns ([`results/`](results/)). Machine: AMD Ryzen 9 7900X, container pinned to one core. Absolute numbers are about half of upstream's (a 2 vCPU VM), and the upstream versions rank the same way (plain C slowest on mixed and decimals, fastest of them on integers; `c-fast` well ahead), except that rusqlite and sqlite-loadable swap places, within 2 ns.
-
-| | fast C | rusqlite | sqlite-loadable | raw-std | raw-fast | raw-nostd | raw-nostd-fast |
-|---|---|---|---|---|---|---|---|
-| Stripped `.so` | 14,224 B | 314,288 B | 291,184 B | 288,800 B | 289,232 B | **23,280 B** | **23,616 B** |
-| Shared libraries it needs | libc | libc, libgcc_s, ld-linux | libc, libgcc_s, ld-linux | libc, libgcc_s, ld-linux | libc, libgcc_s, ld-linux | none | none |
-| Dependencies | SQLite header | 20 crates | 62 crates | none | none | none | none |
+Machine: AMD Ryzen 9 7900X, container pinned to one core. Absolute numbers are about half of upstream's (a 2 vCPU VM), and the upstream versions rank the same way, except that rusqlite and sqlite-loadable trade places within 1 ns.
 
 ## Findings
 
-- **Most of the speed gap was wrapper overhead.** Calling the C API directly with a stack buffer (`raw-std`) took mixed data from ~24 ns to 14.5 ns. That build uses the same parsing algorithm as upstream's Rust.
-- **The rest was the algorithm, not the language.** With `c-fast`'s fast path ported over, Rust matches `c-fast` (`raw-fast`: 9.5 vs 9.2 ns). The `no_std` build of the same code is consistently 1.5–3 ns faster again and beats `c-fast` on all three datasets. I didn't track down why `no_std` is faster for identical parsing code; code layout is the likely suspect, but that's unmeasured.
-- **The 300 KB is `std`, not rusqlite.** The dependency-free `std` build is still 289 KB. Dropping `std` takes it to 23 KB, and the result links no shared libraries at all. It resolves only `abort`, `memcpy` and `memset` from the host process.
-- **The last 9 KB over C is Rust's float parser.** 10.4 KB of the `no_std` file is core's Eisel-Lemire power-of-five table, plus 3.3 KB of `f64::from_str`. C borrows glibc's `strtod` instead. `opt-level = "s"`/`"z"` only gets to 22.8 KB. Getting to C's size would mean calling `strtod` from Rust too, which brings back the locale dependence.
-- **The cost is `unsafe` code.** `rust-raw/lib.rs` is ~240 lines (all four variants, one file) with raw function-pointer slots, `transmute_copy` and unchecked buffer writes. That is closer to the C version's style than to the 30-line rusqlite version.
+- **Rust's speed gap was wrapper overhead plus algorithm, not the language.** Calling the C API directly with a stack buffer (raw `std`) took mixed data from ~24 to ~15 ns. Porting `c-fast`'s fast path took it to `c-fast`'s level.
+- **Safe Rust is just as fast.** The safe crate, with bounds-checked slices, an iterator loop and a `Vec` on the rare slow path, runs at 8.0 / 5.5 / 9.3 ns against `c-fast`'s 9.9 / 5.8 / 9.6. The safe hot loop walks a slice iterator, so it has no per-byte bounds checks to pay for; the one array index, `POW10[frac]`, is guarded by `frac <= 22` (I didn't confirm in the disassembly that the compiler drops that check). Either way, the `unsafe` in `rust-raw`'s parser bought nothing measurable. The only `unsafe` that's needed is the FFI boundary, which no SQLite extension in any language can avoid.
+- **`no_std` doesn't make the code faster; code placement does.** Without `no_std`, the raw fast build ran 1.5–3 ns slower than the `no_std` one, even though its hot function compiles to the same instructions: 245 vs 243, differing only in address constants and the cold panic path. When I forced 64-byte function and loop alignment on both builds, the gap disappeared (mixed 8.8 vs 8.9, repeat 8.6 vs 8.7). Placement alone moves these numbers by about ±1.5 ns, and the aligned builds didn't land on the fastest placement. Treat sub-2 ns differences in the table as layout luck, including the raw/safe builds' small lead over `c-fast`. The safe `std` and safe `nostd` builds tie, which is consistent with this.
+- **The 289 KB is `std`, not rusqlite.** Every `std` build is ~289 KB with no dependencies at all. Without `std` it's 23–25 KB, and the file links no shared libraries: it resolves `abort`, `memcpy` and `memset` (or `strtod`) from the host process when it's loaded.
+- **Most of the remaining size is Rust's float parser.** 10.4 KB of the `no_std` file is core's Eisel-Lemire power-of-five table, plus 3.3 KB of `f64::from_str`. Calling `strtod` for the slow path drops all of it: **6,072 B, 3.4 KB of actual content, smaller than `c-fast`'s 14 KB**. The C file is mostly ELF page padding from gcc's default layout. The price is the same as `c-fast`'s: the rare slow path reads the decimal point from the host's locale. Since the slow path is rare, speed is unchanged. `opt-level = "s"`/`"z"` only reaches 22.8 KB, because the float table sets the floor.
+
+| Want | Build |
+|---|---|
+| Fastest with least `unsafe` | `rust-safe` (`std` is fine) |
+| Small file, still safe and locale-independent | `rust-safe` `nostd` (25 KB) |
+| Smallest file | `rust-raw` `nostd,strtod` (6 KB; locale-dependent slow path, like `c-fast`) |
 
 ## Correctness
 
-- Upstream `test.py`: all 8 extensions pass all 40 cases.
-- Upstream `fuzz.py`, 4 seeds × 500k inputs × 8 extensions = 16M bit-exact comparisons against a correctly rounded Python reference: **no mismatches** ([`results/fuzz.txt`](results/fuzz.txt)).
+- Upstream `test.py`: all 13 extensions pass all 40 cases.
+- Upstream `fuzz.py`, 4 seeds × 500k inputs × 13 extensions = 26M bit-exact comparisons against a correctly rounded Python reference: **no mismatches** ([`results/fuzz.txt`](results/fuzz.txt)). In the C locale the image runs in, the `strtod` builds also match exactly.
 
 ## Setup and reproduce
 
@@ -63,7 +79,7 @@ Everything runs in Docker; nothing is needed on the host except Docker with Comp
 - `binutils`: `size`/`readelf` for the size table
 - `git` + `ca-certificates`: fetch upstream at commit `aa4e39e`
 
-The build fetches upstream, applies [`harness.patch`](harness.patch) (it only adds the four `raw-*` builds to the extension lists in `test.py`, `fuzz.py` and `bench.py`), and builds all eight extensions.
+The build fetches upstream, applies [`harness.patch`](harness.patch) (it only adds the nine new builds to the extension lists in `test.py`, `fuzz.py` and `bench.py`), and builds all 13 extensions. The 64-byte-aligned builds use `RUSTFLAGS="-C llvm-args=-align-all-functions=6 -C llvm-args=-align-loops=64"`.
 
 ```bash
 docker compose build
@@ -74,11 +90,10 @@ docker compose run --rm exp python3 bench.py mixed   # or: int, real
 
 `compose.yaml` pins the container to CPU 4 for stable timings; change `cpuset` to suit your machine.
 
-Building `rust-raw` alone needs only a Rust toolchain:
+Building one crate alone needs only a Rust toolchain:
 
 ```bash
-cd rust-raw
-cargo build --release --features nostd,fast
+cd rust-safe && cargo build --release --features nostd
 ```
 
 ```sql
