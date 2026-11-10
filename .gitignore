@@ -1,0 +1,55 @@
+# --- agents: agent-local state, never commit ---
+.claude/
+.codex/
+.gemini/
+.cursor/
+.continue/
+.windsurf/
+.cline/
+.roo/
+.roocode/
+.aider*
+.augment/
+.qwen/
+.kiro/
+.opencode/
+.crush/
+CLAUDE.local.md
+GEMINI.local.md
+# --- lang-bun: Bun/TypeScript workspace ---
+node_modules/
+apps/*/dist
+packages/*/dist
+dist/
+build/
+.vite/
+.svelte-kit/
+coverage/
+
+# generated runtime data (bun:sqlite) — recreate via seed/ingest, never commit
+*.db
+*.db-*
+*.log
+
+# env
+.env
+.env.*
+# --- editors: editor and OS junk ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+# --- personal: user conventions — extend with your own local-tooling patterns ---
+.cond.pyhistory
+.gpuedit.json
+.gpuedit.session
+.perplexity-research
+
+# --- project-specific ---
+runs/
+var/
+target/
+__pycache__/
+.venv/
