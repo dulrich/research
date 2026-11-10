@@ -1,0 +1,8 @@
+services:
+  exp:
+    build: .
+    image: sqlite-parse-number-rust-tuning
+    # Pin to one core so benchmark runs are comparable; change to a quiet
+    # core on your machine.
+    cpuset: "4"
+    command: ["python3", "test.py"]

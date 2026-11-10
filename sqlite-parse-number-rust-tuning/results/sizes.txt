@@ -1,0 +1,14 @@
+rustc 1.99.1 (58cf8f9c3 2026-10-13)
+gcc (Debian 14.2.0-19) 14.2.0
+Python 3.13.5
+sqlite 3.46.1
+
+file                                                   bytes      size  NEEDED
+c/parse_number.so                                      14224      2755  libc.so.6 
+c-fast/parse_number.so                                 14224      3134  libc.so.6 
+rust-rusqlite/target/release/libparse_number.so       314288    315101  libgcc_s.so.1 libc.so.6 ld-linux-x86-64.so.2 
+rust-loadable/target/release/libparse_number.so       291184    288629  libgcc_s.so.1 libc.so.6 ld-linux-x86-64.so.2 
+rust-raw/std/libparse_number.so                       288800    288641  libgcc_s.so.1 libc.so.6 ld-linux-x86-64.so.2 
+rust-raw/nostd/libparse_number.so                      23280     23950  
+rust-raw/fast/libparse_number.so                      289232    288641  libgcc_s.so.1 libc.so.6 ld-linux-x86-64.so.2 
+rust-raw/nostd-fast/libparse_number.so                 23616     23950  

@@ -1,0 +1,45 @@
+diff --git a/bench.py b/bench.py
+index e2d764a..3a0c8ff 100644
+--- a/bench.py
++++ b/bench.py
+@@ -32,6 +32,10 @@ EXTS = {
+     "c-fast": "c-fast/parse_number.so",
+     "rusqlite": "rust-rusqlite/target/release/libparse_number.so",
+     "sqlite-loadable": "rust-loadable/target/release/libparse_number.so",
++    "raw-std": "rust-raw/std/libparse_number.so",
++    "raw-nostd": "rust-raw/nostd/libparse_number.so",
++    "raw-fast": "rust-raw/fast/libparse_number.so",
++    "raw-nostd-fast": "rust-raw/nostd-fast/libparse_number.so",
+ }
+ PURE_SQL = ("sum(cast(nullif(replace(replace(replace(replace(v, ',', ''), "
+             "'$', ''), '£', ''), '%', ''), '') as real))")
+diff --git a/fuzz.py b/fuzz.py
+index 6ccd292..4cfa026 100644
+--- a/fuzz.py
++++ b/fuzz.py
+@@ -5,6 +5,10 @@ EXTS = {
+     "c-fast": "c-fast/parse_number.so",
+     "rusqlite": "rust-rusqlite/target/release/libparse_number.so",
+     "sqlite-loadable": "rust-loadable/target/release/libparse_number.so",
++    "raw-std": "rust-raw/std/libparse_number.so",
++    "raw-nostd": "rust-raw/nostd/libparse_number.so",
++    "raw-fast": "rust-raw/fast/libparse_number.so",
++    "raw-nostd-fast": "rust-raw/nostd-fast/libparse_number.so",
+ }
+ 
+ def reference(s):
+diff --git a/test.py b/test.py
+index c0e983a..3628ff2 100644
+--- a/test.py
++++ b/test.py
+@@ -5,6 +5,10 @@ EXTS = {
+     "c-fast": "c-fast/parse_number.so",
+     "rusqlite": "rust-rusqlite/target/release/libparse_number.so",
+     "sqlite-loadable": "rust-loadable/target/release/libparse_number.so",
++    "raw-std": "rust-raw/std/libparse_number.so",
++    "raw-nostd": "rust-raw/nostd/libparse_number.so",
++    "raw-fast": "rust-raw/fast/libparse_number.so",
++    "raw-nostd-fast": "rust-raw/nostd-fast/libparse_number.so",
+ }
+ 
+ CASES = [

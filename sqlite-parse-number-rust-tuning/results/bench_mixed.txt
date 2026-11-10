@@ -1,0 +1,11 @@
+dataset=mixed rows=2000000 runs=15
+baseline length()    min   74.2 ms  median   75.0 ms  net    0.0 ns/row
+pure SQL replace()   min  583.4 ms  median  590.6 ms  net  254.6 ns/row
+c                    min  135.1 ms  median  136.5 ms  net   30.5 ns/row
+c-fast               min   92.6 ms  median   93.6 ms  net    9.2 ns/row
+rusqlite             min  121.5 ms  median  123.6 ms  net   23.7 ns/row
+sqlite-loadable      min  125.5 ms  median  126.5 ms  net   25.7 ns/row
+raw-std              min  103.2 ms  median  104.7 ms  net   14.5 ns/row
+raw-nostd            min  101.6 ms  median  103.2 ms  net   13.7 ns/row
+raw-fast             min   93.1 ms  median   94.8 ms  net    9.5 ns/row
+raw-nostd-fast       min   90.1 ms  median   91.7 ms  net    7.9 ns/row
