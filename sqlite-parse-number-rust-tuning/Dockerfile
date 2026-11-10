@@ -54,3 +54,23 @@ RUN git apply harness.patch \
     done
 
 CMD ["python3", "test.py"]
+
+# Round 3: size-only builds of c-fast and rust-raw nostd,strtod under
+# matched linkers and size flags (never benchmarked; see README round 3).
+# LLD is the linker rustc already uses; gcc reaches it with -B.
+ENV LLD_DIR=/usr/local/rustup/toolchains/1.99.1-x86_64-unknown-linux-gnu/lib/rustlib/x86_64-unknown-linux-gnu/bin/gcc-ld
+ENV SZ_LINK="-Wl,-z,noseparate-code -Wl,--build-id=none -Wl,-z,norelro -Wl,--hash-style=gnu"
+ENV SZ_CC="-fno-asynchronous-unwind-tables -fno-unwind-tables -ffunction-sections -fdata-sections -Wl,--gc-sections"
+RUN mkdir -p /work/sizes \
+ && c() { n=$1; shift; gcc -fPIC -shared -s "$@" c-fast/parse_number.c -o "sizes/c-fast-$n.so"; } \
+ && c O2-gnuld          -O2 \
+ && c O2-lld            -O2 -B"$LLD_DIR" -fuse-ld=lld \
+ && c O2-gnuld-nosep    -O2 -Wl,-z,noseparate-code \
+ && c O2-gnuld-all      -O2 $SZ_LINK $SZ_CC \
+ && c Os-gnuld-all      -Os $SZ_LINK $SZ_CC \
+ && c O2-lld-all        -O2 -B"$LLD_DIR" -fuse-ld=lld -Wl,--build-id=none -Wl,-z,norelro $SZ_CC \
+ && cp rust-raw/nostd-fast-strtod/libparse_number.so sizes/rust-nostd-strtod-lld.so \
+ && (cd rust-raw && RUSTFLAGS="$(printf -- '-C link-arg=%s ' $SZ_LINK)" CARGO_TARGET_DIR=target/sz \
+      cargo build --release --features nostd,strtod) \
+ && cp rust-raw/target/sz/release/libparse_number.so sizes/rust-nostd-strtod-lld-all.so \
+ && for f in sizes/*-all.so; do strip -R .comment -R .note.gnu.property "$f"; done

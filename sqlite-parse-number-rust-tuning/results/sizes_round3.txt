@@ -1,0 +1,13 @@
+# Round 3: size-only builds (Dockerfile round-3 stage), stripped; size = text+data+bss
+# gnuld = GNU ld 2.44 (gcc default), lld = LLD 23.1.1 (rustc default)
+# -all = noseparate-code, build-id=none, norelro, no unwind tables, gc-sections, .comment/.note.gnu.property stripped
+GNU ld (GNU Binutils for Debian) 2.44
+file                                bytes   size
+c-fast-O2-gnuld-all.so               4752   2782
+c-fast-O2-gnuld-nosep.so             6032   3134
+c-fast-O2-gnuld.so                  14224   3134
+c-fast-O2-lld-all.so                 5008   2766
+c-fast-O2-lld.so                     5784   3498
+c-fast-Os-gnuld-all.so               4560   2600
+rust-nostd-strtod-lld-all.so         5456   3378
+rust-nostd-strtod-lld.so             6072   3446

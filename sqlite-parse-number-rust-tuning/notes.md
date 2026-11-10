@@ -64,3 +64,14 @@ Three follow-ups: `strtod` for the slow path, why `no_std` is faster, and how mu
 
 - Getting the safe crate down to strtod size without giving up locale independence would need a smaller correctly rounded slow path, e.g. a simple big-decimal algorithm instead of core's Eisel-Lemire tables. That's possible, but it's a lot of code for a path money data never takes.
 - Confirming the placement explanation with hardware counters (frontend stalls / DSB misses) on a machine where perf is allowed.
+
+## Round 3: can c-fast shrink?
+
+The round-2 claim that Rust `nostd,strtod` (6,072 B) is smaller than `c-fast` (14,224 B) was never checked against flag parity, so I built size-only variants (a new last Dockerfile stage; `results/sizes_round3.txt`).
+
+- gcc's default `-O2 -s` build is 14,224 B but only 3,134 B of `size` content. `-Os` alone changes nothing on disk (still 14,224 B), because the file is padding.
+- `-Wl,-z,noseparate-code` alone: 6,032 B. GNU ld's default `separate-code` puts each LOAD segment on its own 4 KB file offset.
+- rustc links with its bundled LLD 23.1.1 (`-C link-arg=-Wl,--version` prints it). `readelf -l` shows LLD packs the segments at unaligned file offsets, so the Rust file never paid that padding. `c-fast` linked with the same LLD (`gcc -B<gcc-ld dir> -fuse-ld=lld`): 5,784 B, already smaller than Rust's 6,072 B.
+- All size flags (`noseparate-code`, `--build-id=none`, `-z norelro`, `--hash-style=gnu`, no unwind tables, `-ffunction-sections -fdata-sections --gc-sections`, strip `.comment`/`.note.gnu.property`): `c-fast` 4,752 B at `-O2`, 4,560 B at `-Os`, 5,008 B with LLD. The same link flags plus the same strip on Rust `nostd,strtod`: 5,456 B. `-C force-unwind-tables=no` changed nothing (panic=abort already has none), and `opt-level=s` saved another 64 B.
+- Conclusion: with the linkers matched, C is ~0.3 KB smaller (5,784 vs 6,072 B), and with every size flag on both, ~0.7–0.9 KB smaller. The headline and findings in the README are corrected. These builds were only measured for size, not speed.
+- Also noticed while preparing the next round: on this host, run-to-run spread of `bench.py mixed` for `c-fast` on one pinned core is 8.2–10.7 ns across three runs while other work loads the machine. That is the same scale as the ±1.5 ns placement effect from round 2, so the earlier "differences under ~2 ns are noise" caveat stands.
