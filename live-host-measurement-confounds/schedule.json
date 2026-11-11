@@ -1,5 +1,5 @@
 {
- "note": "Frozen WP-1 schedule. Counts per class are in configs/*.json (invocations per variant, warm-up rounds); cells run once unless listed twice; seeds are per cell and class (--seed). Windows are AFK windows; quiet reference cells (cheap classes) bracket every window.",
+ "note": "Frozen schedule (amended: k3-120 in the I0 and I2 full cells and I2-L3, cross-level K1 references). Counts per class are in configs/*.json (invocations per variant, warm-up rounds); cells run once unless listed twice; seeds are per cell and class (--seed). Windows are AFK windows; quiet reference cells bracket every window (cheap classes for the window's own isolation levels, K1 only for the other of I0/I2/I3).",
  "master_seed": 20261113,
  "day": {
   "est_wall_s": 6530,
@@ -57,7 +57,7 @@
  "nights": [
   {
    "window": "night1",
-   "est_wall_s": 11507,
+   "est_wall_s": 15317,
    "cells": [
     {
      "id": "I0-L0-ref-start",
@@ -82,6 +82,40 @@
      "block": "ref-start"
     },
     {
+     "id": "I2-L0-ref-start",
+     "iso": "I2",
+     "load": "L0",
+     "tag": "ref-start",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 376938194
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 1,
+     "block": "ref-start"
+    },
+    {
+     "id": "I3-L0-ref-start",
+     "iso": "I3",
+     "load": "L0",
+     "tag": "ref-start",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 420002815
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 2,
+     "block": "ref-start"
+    },
+    {
      "id": "I0-L4-rep1",
      "iso": "I0",
      "load": "L4",
@@ -97,7 +131,7 @@
       "k1": 709042542
      },
      "est_wall_s": 331,
-     "order": 1,
+     "order": 3,
      "block": "body"
     },
     {
@@ -120,7 +154,7 @@
       "k1": 1147312805
      },
      "est_wall_s": 1696,
-     "order": 2,
+     "order": 4,
      "block": "body"
     },
     {
@@ -141,7 +175,7 @@
       "k4-warm": 1716416002
      },
      "est_wall_s": 2308,
-     "order": 3,
+     "order": 5,
      "block": "body"
     },
     {
@@ -162,7 +196,7 @@
       "k4-warm": 106864527
      },
      "est_wall_s": 2308,
-     "order": 4,
+     "order": 6,
      "block": "body"
     },
     {
@@ -174,6 +208,7 @@
       "k1",
       "k2",
       "k3",
+      "k3-120",
       "k3s",
       "k4-warm",
       "k4-cold"
@@ -182,12 +217,13 @@
       "k1": 740679193,
       "k2": 791012050,
       "k3": 774234431,
+      "k3-120": 1901456219,
       "k3s": 70681656,
       "k4-warm": 1371138844,
       "k4-cold": 513414937
      },
-     "est_wall_s": 3284,
-     "order": 5,
+     "est_wall_s": 6170,
+     "order": 7,
      "block": "body"
     },
     {
@@ -209,14 +245,48 @@
      },
      "est_wall_s": 790,
      "reference": true,
-     "order": 6,
+     "order": 8,
+     "block": "ref-end"
+    },
+    {
+     "id": "I2-L0-ref-end",
+     "iso": "I2",
+     "load": "L0",
+     "tag": "ref-end",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 974067871
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 9,
+     "block": "ref-end"
+    },
+    {
+     "id": "I3-L0-ref-end",
+     "iso": "I3",
+     "load": "L0",
+     "tag": "ref-end",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 437853298
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 10,
      "block": "ref-end"
     }
    ]
   },
   {
    "window": "night2",
-   "est_wall_s": 11507,
+   "est_wall_s": 18203,
    "cells": [
     {
      "id": "I2-L0-ref-start",
@@ -241,6 +311,40 @@
      "block": "ref-start"
     },
     {
+     "id": "I0-L0-ref-start",
+     "iso": "I0",
+     "load": "L0",
+     "tag": "ref-start",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 1905938036
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 1,
+     "block": "ref-start"
+    },
+    {
+     "id": "I3-L0-ref-start",
+     "iso": "I3",
+     "load": "L0",
+     "tag": "ref-start",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 420002815
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 2,
+     "block": "ref-start"
+    },
+    {
      "id": "I2-L2-rep1",
      "iso": "I2",
      "load": "L2",
@@ -258,7 +362,7 @@
       "k4-warm": 467217045
      },
      "est_wall_s": 2308,
-     "order": 1,
+     "order": 3,
      "block": "body"
     },
     {
@@ -270,6 +374,7 @@
       "k1",
       "k2",
       "k3",
+      "k3-120",
       "k3s",
       "k4-warm",
       "k4-cold"
@@ -278,12 +383,13 @@
       "k1": 884688759,
       "k2": 867911140,
       "k3": 851133521,
+      "k3-120": 1130216993,
       "k3s": 291576602,
       "k4-warm": 102205886,
       "k4-cold": 1437690451
      },
-     "est_wall_s": 3284,
-     "order": 2,
+     "est_wall_s": 6170,
+     "order": 4,
      "block": "body"
     },
     {
@@ -293,6 +399,7 @@
      "tag": "rep1",
      "classes": [
       "k3",
+      "k3-120",
       "k3s",
       "k4-warm",
       "k4-cold",
@@ -300,13 +407,14 @@
      ],
      "seeds": {
       "k3": 1962709249,
+      "k3-120": 749550833,
       "k3s": 627270666,
       "k4-warm": 641729422,
       "k4-cold": 1128207459,
       "k1": 1996264487
      },
-     "est_wall_s": 1696,
-     "order": 3,
+     "est_wall_s": 4582,
+     "order": 5,
      "block": "body"
     },
     {
@@ -327,7 +435,7 @@
       "k4-warm": 1224026460
      },
      "est_wall_s": 2308,
-     "order": 4,
+     "order": 6,
      "block": "body"
     },
     {
@@ -346,7 +454,7 @@
       "k1": 858851620
      },
      "est_wall_s": 331,
-     "order": 5,
+     "order": 7,
      "block": "body"
     },
     {
@@ -368,14 +476,48 @@
      },
      "est_wall_s": 790,
      "reference": true,
-     "order": 6,
+     "order": 8,
+     "block": "ref-end"
+    },
+    {
+     "id": "I0-L0-ref-end",
+     "iso": "I0",
+     "load": "L0",
+     "tag": "ref-end",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 31842677
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 9,
+     "block": "ref-end"
+    },
+    {
+     "id": "I3-L0-ref-end",
+     "iso": "I3",
+     "load": "L0",
+     "tag": "ref-end",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 437853298
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 10,
      "block": "ref-end"
     }
    ]
   },
   {
    "window": "night3",
-   "est_wall_s": 13195,
+   "est_wall_s": 14119,
    "cells": [
     {
      "id": "I3-L0-ref-start",
@@ -422,6 +564,40 @@
      "block": "ref-start"
     },
     {
+     "id": "I0-L0-ref-start",
+     "iso": "I0",
+     "load": "L0",
+     "tag": "ref-start",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 1905938036
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 2,
+     "block": "ref-start"
+    },
+    {
+     "id": "I2-L0-ref-start",
+     "iso": "I2",
+     "load": "L0",
+     "tag": "ref-start",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 376938194
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 3,
+     "block": "ref-start"
+    },
+    {
      "id": "I1-L0-full",
      "iso": "I1",
      "load": "L0",
@@ -443,7 +619,7 @@
       "k4-cold": 1752428436
      },
      "est_wall_s": 3284,
-     "order": 2,
+     "order": 4,
      "block": "body"
     },
     {
@@ -462,7 +638,7 @@
       "k4-warm": 1378408249
      },
      "est_wall_s": 720,
-     "order": 3,
+     "order": 5,
      "block": "body"
     },
     {
@@ -481,7 +657,7 @@
       "k4-warm": 1907727072
      },
      "est_wall_s": 720,
-     "order": 4,
+     "order": 6,
      "block": "body"
     },
     {
@@ -506,7 +682,7 @@
       "k4-cold": 760639142
      },
      "est_wall_s": 3284,
-     "order": 5,
+     "order": 7,
      "block": "body"
     },
     {
@@ -525,7 +701,7 @@
       "k1": 338263983
      },
      "est_wall_s": 331,
-     "order": 6,
+     "order": 8,
      "block": "body"
     },
     {
@@ -548,7 +724,7 @@
       "k1": 1037066380
      },
      "est_wall_s": 1696,
-     "order": 7,
+     "order": 9,
      "block": "body"
     },
     {
@@ -570,7 +746,7 @@
      },
      "est_wall_s": 790,
      "reference": true,
-     "order": 8,
+     "order": 10,
      "block": "ref-end"
     },
     {
@@ -592,7 +768,41 @@
      },
      "est_wall_s": 790,
      "reference": true,
-     "order": 9,
+     "order": 11,
+     "block": "ref-end"
+    },
+    {
+     "id": "I0-L0-ref-end",
+     "iso": "I0",
+     "load": "L0",
+     "tag": "ref-end",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 31842677
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 12,
+     "block": "ref-end"
+    },
+    {
+     "id": "I2-L0-ref-end",
+     "iso": "I2",
+     "load": "L0",
+     "tag": "ref-end",
+     "classes": [
+      "k1"
+     ],
+     "seeds": {
+      "k1": 974067871
+     },
+     "est_wall_s": 231,
+     "reference": true,
+     "cross_level": true,
+     "order": 13,
      "block": "ref-end"
     }
    ]
@@ -600,10 +810,10 @@
  ],
  "totals": {
   "night_est_wall_s": [
-   11507,
-   11507,
-   13195
+   15317,
+   18203,
+   14119
   ],
-  "night_total_s": 36209
+  "night_total_s": 47639
  }
 }

@@ -10,7 +10,7 @@ case $_shguard_m in
 esac
 # <<< shguard
 if [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
-  echo "usage: cell run --id <id> --iso <I0|I1|I2|I3> --load <L0|L1|L2|L3|L4|Llive> --classes <k1,k2,k3,k3s,k4-warm,k4-cold,k4-cold-local>"
+  echo "usage: cell run --id <id> --iso <I0|I1|I2|I3> --load <L0|L1|L2|L3|L4|Llive> --classes <k1,k2,k3,k3-120,k3s,k4-warm,k4-cold,k4-cold-local>"
   echo "                --out <dir> [--seeds k1=N,...] [--afk]"
   echo "       cell --help | --build | --version"
   echo "Applies the condition (ctl), starts the 0.5 s sampler, runs each class's frozen config through scripts/measure.mjs,"
@@ -94,7 +94,7 @@ envjson() { # envjson <measured-cpu> <phase>
   printf '"cpuset_probes":{'
   first=1
   for cls in $(echo "$classes" | tr ',' ' '); do
-    case $cls in k1) pin=$PIN1 ;; k2|k3|k3s) pin=$PIN2 ;; *) pin=$PINK4 ;; esac
+    case $cls in k1) pin=$PIN1 ;; k2|k3|k3-120|k3s) pin=$PIN2 ;; *) pin=$PINK4 ;; esac
     [ "$pin" != none ] || pin=""
     pinarg=""; [ -z "$pin" ] || pinarg="--cpuset-cpus $pin"
     # shellcheck disable=SC2086
@@ -134,7 +134,7 @@ for cls in $(echo "$classes" | tr ',' ' '); do
   case $cls in
     k1)
       "$HERE/k1.sh" start "$PIN1"; "$HERE/k1.sh" warm ;;
-    k2|k3|k3s) LHMC_PIN=$PIN2; export LHMC_PIN ;;
+    k2|k3|k3-120|k3s) LHMC_PIN=$PIN2; export LHMC_PIN ;;
     *) LHMC_PIN=$PINK4; export LHMC_PIN ;;
   esac
   [ "$cls" != k1 ] || { LHMC_PIN=$PIN1; [ "$PIN1" != none ] || LHMC_PIN=""; export LHMC_PIN; }

@@ -11,7 +11,7 @@ const argv = process.argv.slice(2);
 if (argv.includes("--help") || argv.includes("-h")) {
   console.log(`usage: gen-configs.mjs [--out-dir <dir>]
        gen-configs.mjs --help | --build | --version
-Writes the per-class measure.mjs configs (k1-pinned, k1-unpinned, k2, k3, k3s, k4-warm, k4-cold, k4-cold-local) with the frozen
+Writes the per-class measure.mjs configs (k1-pinned, k1-unpinned, k2, k3, k3-120, k3s, k4-warm, k4-cold, k4-cold-local) with the frozen
 invocation/warm-up counts from COUNTS below. K1 variants come from the round-5 mixed config (5 groups, all layouts).`);
   process.exit(0);
 }
@@ -24,11 +24,12 @@ const oi = argv.indexOf("--out-dir");
 const outDir = oi >= 0 ? argv[oi + 1] : join(here, "configs");
 mkdirSync(outDir, { recursive: true });
 
-// Frozen counts (WP-1 pilot): invocations per variant per cell and discarded warm-up rounds. See notes.md.
+// Frozen counts (pilot): invocations per variant per cell and discarded warm-up rounds. See notes.md.
 export const COUNTS = {
   k1: { invocations: 10, warmup: 3 },
   k2: { invocations: 10, warmup: 1 },
   k3: { invocations: 10, warmup: 1 },
+  "k3-120": { invocations: 10, warmup: 1 },
   k3s: { invocations: 10, warmup: 3 },
   "k4-warm": { invocations: 10, warmup: 3 },
   "k4-cold": { invocations: 10, warmup: 1 },
@@ -54,7 +55,7 @@ const out = {
   "k1-pinned": mk("k1", K1_VARIANTS, { aa: base.aa, baseline: base.baseline, probe: { cpu: 8, container: "lhmc-k1" } }),
   "k1-unpinned": mk("k1", K1_VARIANTS, { aa: base.aa, baseline: base.baseline, probe: { container: "lhmc-k1" } }),
 };
-for (const [cls, cmd] of [["k2", "k2"], ["k3", "k3"], ["k3s", "k3s"], ["k4-warm", "k4-warm"], ["k4-cold", "k4-cold"], ["k4-cold-local", "k4-cold-local"]]) {
+for (const [cls, cmd] of [["k2", "k2"], ["k3", "k3"], ["k3-120", "k3-120"], ["k3s", "k3s"], ["k4-warm", "k4-warm"], ["k4-cold", "k4-cold"], ["k4-cold-local", "k4-cold-local"]]) {
   out[cls] = mk(cls, [kv(`${cls}-a`, cmd), kv(`${cls}-a-copy`, cmd)]);
 }
 out["k1-pinned"].invocations = out["k1-unpinned"].invocations = COUNTS.k1.invocations;

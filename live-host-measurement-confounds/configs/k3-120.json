@@ -1,0 +1,33 @@
+{
+ "variants": [
+  {
+   "name": "k3-120-a",
+   "group": "k3-120-a",
+   "argv": [
+    "sh",
+    "live-host-measurement-confounds/runk.sh",
+    "k3-120",
+    "{pad}"
+   ]
+  },
+  {
+   "name": "k3-120-a-copy",
+   "group": "k3-120-a-copy",
+   "argv": [
+    "sh",
+    "live-host-measurement-confounds/runk.sh",
+    "k3-120",
+    "{pad}"
+   ]
+  }
+ ],
+ "invocations": 10,
+ "warmup": 1,
+ "padMax": 4096,
+ "aa": [
+  "k3-120-a",
+  "k3-120-a-copy"
+ ],
+ "baseline": "k3-120-a",
+ "seed": 20261112
+}
