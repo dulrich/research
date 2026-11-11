@@ -1,0 +1,609 @@
+{
+ "note": "Frozen WP-1 schedule. Counts per class are in configs/*.json (invocations per variant, warm-up rounds); cells run once unless listed twice; seeds are per cell and class (--seed). Windows are AFK windows; quiet reference cells (cheap classes) bracket every window.",
+ "master_seed": 20261113,
+ "day": {
+  "est_wall_s": 6530,
+  "cells": [
+   {
+    "id": "I0-Llive-day",
+    "iso": "I0",
+    "load": "Llive",
+    "tag": "day",
+    "classes": [
+     "k1",
+     "k2",
+     "k3",
+     "k3s",
+     "k4-warm",
+     "k4-cold-local"
+    ],
+    "seeds": {
+     "k1": 1448323654,
+     "k2": 1397990797,
+     "k3": 1414768416,
+     "k3s": 732991237,
+     "k4-warm": 299504293,
+     "k4-cold-local": 1373745026
+    },
+    "est_wall_s": 3265,
+    "order": 0
+   },
+   {
+    "id": "I2-Llive-day",
+    "iso": "I2",
+    "load": "Llive",
+    "tag": "day",
+    "classes": [
+     "k1",
+     "k2",
+     "k3",
+     "k3s",
+     "k4-warm",
+     "k4-cold-local"
+    ],
+    "seeds": {
+     "k1": 1860971212,
+     "k2": 1877748831,
+     "k3": 1894526450,
+     "k3s": 12089255,
+     "k4-warm": 22273119,
+     "k4-cold-local": 1977598460
+    },
+    "est_wall_s": 3265,
+    "order": 1
+   }
+  ]
+ },
+ "nights": [
+  {
+   "window": "night1",
+   "est_wall_s": 11507,
+   "cells": [
+    {
+     "id": "I0-L0-ref-start",
+     "iso": "I0",
+     "load": "L0",
+     "tag": "ref-start",
+     "classes": [
+      "k1",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 1905938036,
+      "k3s": 403790687,
+      "k4-warm": 744349367,
+      "k4-cold": 252158486
+     },
+     "est_wall_s": 790,
+     "reference": true,
+     "order": 0,
+     "block": "ref-start"
+    },
+    {
+     "id": "I0-L4-rep1",
+     "iso": "I0",
+     "load": "L4",
+     "tag": "rep1",
+     "classes": [
+      "k4-cold",
+      "k4-warm",
+      "k1"
+     ],
+     "seeds": {
+      "k4-cold": 85997004,
+      "k4-warm": 197575901,
+      "k1": 709042542
+     },
+     "est_wall_s": 331,
+     "order": 1,
+     "block": "body"
+    },
+    {
+     "id": "I0-L3-rep1",
+     "iso": "I0",
+     "load": "L3",
+     "tag": "rep1",
+     "classes": [
+      "k3",
+      "k3s",
+      "k4-warm",
+      "k4-cold",
+      "k1"
+     ],
+     "seeds": {
+      "k3": 1180868043,
+      "k3s": 798377532,
+      "k4-warm": 937089680,
+      "k4-cold": 996499029,
+      "k1": 1147312805
+     },
+     "est_wall_s": 1696,
+     "order": 2,
+     "block": "body"
+    },
+    {
+     "id": "I0-L1-rep1",
+     "iso": "I0",
+     "load": "L1",
+     "tag": "rep1",
+     "classes": [
+      "k1",
+      "k2",
+      "k3s",
+      "k4-warm"
+     ],
+     "seeds": {
+      "k1": 662358499,
+      "k2": 645580880,
+      "k3s": 1477534686,
+      "k4-warm": 1716416002
+     },
+     "est_wall_s": 2308,
+     "order": 3,
+     "block": "body"
+    },
+    {
+     "id": "I0-L2-rep1",
+     "iso": "I0",
+     "load": "L2",
+     "tag": "rep1",
+     "classes": [
+      "k1",
+      "k2",
+      "k3s",
+      "k4-warm"
+     ],
+     "seeds": {
+      "k1": 1283782876,
+      "k2": 1300560495,
+      "k3s": 223962999,
+      "k4-warm": 106864527
+     },
+     "est_wall_s": 2308,
+     "order": 4,
+     "block": "body"
+    },
+    {
+     "id": "I0-L0-full",
+     "iso": "I0",
+     "load": "L0",
+     "tag": "full",
+     "classes": [
+      "k1",
+      "k2",
+      "k3",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 740679193,
+      "k2": 791012050,
+      "k3": 774234431,
+      "k3s": 70681656,
+      "k4-warm": 1371138844,
+      "k4-cold": 513414937
+     },
+     "est_wall_s": 3284,
+     "order": 5,
+     "block": "body"
+    },
+    {
+     "id": "I0-L0-ref-end",
+     "iso": "I0",
+     "load": "L0",
+     "tag": "ref-end",
+     "classes": [
+      "k1",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 31842677,
+      "k3s": 1586975436,
+      "k4-warm": 1424526144,
+      "k4-cold": 291365317
+     },
+     "est_wall_s": 790,
+     "reference": true,
+     "order": 6,
+     "block": "ref-end"
+    }
+   ]
+  },
+  {
+   "window": "night2",
+   "est_wall_s": 11507,
+   "cells": [
+    {
+     "id": "I2-L0-ref-start",
+     "iso": "I2",
+     "load": "L0",
+     "tag": "ref-start",
+     "classes": [
+      "k1",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 376938194,
+      "k3s": 273306889,
+      "k4-warm": 1019455833,
+      "k4-cold": 432725552
+     },
+     "est_wall_s": 790,
+     "reference": true,
+     "order": 0,
+     "block": "ref-start"
+    },
+    {
+     "id": "I2-L2-rep1",
+     "iso": "I2",
+     "load": "L2",
+     "tag": "rep1",
+     "classes": [
+      "k1",
+      "k2",
+      "k3s",
+      "k4-warm"
+     ],
+     "seeds": {
+      "k1": 1922444694,
+      "k2": 1872111837,
+      "k3s": 29115925,
+      "k4-warm": 467217045
+     },
+     "est_wall_s": 2308,
+     "order": 1,
+     "block": "body"
+    },
+    {
+     "id": "I2-L0-full",
+     "iso": "I2",
+     "load": "L0",
+     "tag": "full",
+     "classes": [
+      "k1",
+      "k2",
+      "k3",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 884688759,
+      "k2": 867911140,
+      "k3": 851133521,
+      "k3s": 291576602,
+      "k4-warm": 102205886,
+      "k4-cold": 1437690451
+     },
+     "est_wall_s": 3284,
+     "order": 2,
+     "block": "body"
+    },
+    {
+     "id": "I2-L3-rep1",
+     "iso": "I2",
+     "load": "L3",
+     "tag": "rep1",
+     "classes": [
+      "k3",
+      "k3s",
+      "k4-warm",
+      "k4-cold",
+      "k1"
+     ],
+     "seeds": {
+      "k3": 1962709249,
+      "k3s": 627270666,
+      "k4-warm": 641729422,
+      "k4-cold": 1128207459,
+      "k1": 1996264487
+     },
+     "est_wall_s": 1696,
+     "order": 3,
+     "block": "body"
+    },
+    {
+     "id": "I2-L1-rep1",
+     "iso": "I2",
+     "load": "L1",
+     "tag": "rep1",
+     "classes": [
+      "k1",
+      "k2",
+      "k3s",
+      "k4-warm"
+     ],
+     "seeds": {
+      "k1": 1132816089,
+      "k2": 1183148946,
+      "k3s": 261751032,
+      "k4-warm": 1224026460
+     },
+     "est_wall_s": 2308,
+     "order": 4,
+     "block": "body"
+    },
+    {
+     "id": "I2-L4-rep1",
+     "iso": "I2",
+     "load": "L4",
+     "tag": "rep1",
+     "classes": [
+      "k4-cold",
+      "k4-warm",
+      "k1"
+     ],
+     "seeds": {
+      "k4-cold": 173697318,
+      "k4-warm": 1923100295,
+      "k1": 858851620
+     },
+     "est_wall_s": 331,
+     "order": 5,
+     "block": "body"
+    },
+    {
+     "id": "I2-L0-ref-end",
+     "iso": "I2",
+     "load": "L0",
+     "tag": "ref-end",
+     "classes": [
+      "k1",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 974067871,
+      "k3s": 1253974098,
+      "k4-warm": 744577398,
+      "k4-cold": 1720818683
+     },
+     "est_wall_s": 790,
+     "reference": true,
+     "order": 6,
+     "block": "ref-end"
+    }
+   ]
+  },
+  {
+   "window": "night3",
+   "est_wall_s": 13195,
+   "cells": [
+    {
+     "id": "I3-L0-ref-start",
+     "iso": "I3",
+     "load": "L0",
+     "tag": "ref-start",
+     "classes": [
+      "k1",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 420002815,
+      "k3s": 1988436274,
+      "k4-warm": 1559406422,
+      "k4-cold": 111190235
+     },
+     "est_wall_s": 790,
+     "reference": true,
+     "order": 0,
+     "block": "ref-start"
+    },
+    {
+     "id": "I1-L0-ref-start",
+     "iso": "I1",
+     "load": "L0",
+     "tag": "ref-start",
+     "classes": [
+      "k1",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 1038580937,
+      "k3s": 913171496,
+      "k4-warm": 868347244,
+      "k4-cold": 1234194409
+     },
+     "est_wall_s": 790,
+     "reference": true,
+     "order": 1,
+     "block": "ref-start"
+    },
+    {
+     "id": "I1-L0-full",
+     "iso": "I1",
+     "load": "L0",
+     "tag": "full",
+     "classes": [
+      "k1",
+      "k2",
+      "k3",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 1351267286,
+      "k2": 1300934429,
+      "k3": 1317712048,
+      "k3s": 153015893,
+      "k4-warm": 1090752341,
+      "k4-cold": 1752428436
+     },
+     "est_wall_s": 3284,
+     "order": 2,
+     "block": "body"
+    },
+    {
+     "id": "I3-L1-rep1",
+     "iso": "I3",
+     "load": "L1",
+     "tag": "rep1",
+     "classes": [
+      "k1",
+      "k3s",
+      "k4-warm"
+     ],
+     "seeds": {
+      "k1": 370408626,
+      "k3s": 1019903337,
+      "k4-warm": 1378408249
+     },
+     "est_wall_s": 720,
+     "order": 3,
+     "block": "body"
+    },
+    {
+     "id": "I3-L2-rep1",
+     "iso": "I3",
+     "load": "L2",
+     "tag": "rep1",
+     "classes": [
+      "k1",
+      "k3s",
+      "k4-warm"
+     ],
+     "seeds": {
+      "k1": 249867285,
+      "k3s": 867166188,
+      "k4-warm": 1907727072
+     },
+     "est_wall_s": 720,
+     "order": 4,
+     "block": "body"
+    },
+    {
+     "id": "I3-L0-full",
+     "iso": "I3",
+     "load": "L0",
+     "tag": "full",
+     "classes": [
+      "k1",
+      "k2",
+      "k3",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 431334820,
+      "k2": 448112439,
+      "k3": 464890058,
+      "k3s": 38836431,
+      "k4-warm": 510042119,
+      "k4-cold": 760639142
+     },
+     "est_wall_s": 3284,
+     "order": 5,
+     "block": "body"
+    },
+    {
+     "id": "I3-L4-rep1",
+     "iso": "I3",
+     "load": "L4",
+     "tag": "rep1",
+     "classes": [
+      "k4-cold",
+      "k4-warm",
+      "k1"
+     ],
+     "seeds": {
+      "k4-cold": 163267627,
+      "k4-warm": 1761184102,
+      "k1": 338263983
+     },
+     "est_wall_s": 331,
+     "order": 6,
+     "block": "body"
+    },
+    {
+     "id": "I3-L3-rep1",
+     "iso": "I3",
+     "load": "L3",
+     "tag": "rep1",
+     "classes": [
+      "k3",
+      "k3s",
+      "k4-warm",
+      "k4-cold",
+      "k1"
+     ],
+     "seeds": {
+      "k3": 1070621618,
+      "k3s": 923601511,
+      "k4-warm": 909676191,
+      "k4-cold": 181697390,
+      "k1": 1037066380
+     },
+     "est_wall_s": 1696,
+     "order": 7,
+     "block": "body"
+    },
+    {
+     "id": "I3-L0-ref-end",
+     "iso": "I3",
+     "load": "L0",
+     "tag": "ref-end",
+     "classes": [
+      "k1",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 437853298,
+      "k3s": 662876969,
+      "k4-warm": 64598137,
+      "k4-cold": 1053410384
+     },
+     "est_wall_s": 790,
+     "reference": true,
+     "order": 8,
+     "block": "ref-end"
+    },
+    {
+     "id": "I1-L0-ref-end",
+     "iso": "I1",
+     "load": "L0",
+     "tag": "ref-end",
+     "classes": [
+      "k1",
+      "k3s",
+      "k4-warm",
+      "k4-cold"
+     ],
+     "seeds": {
+      "k1": 1688201152,
+      "k3s": 1440789027,
+      "k4-warm": 569685851,
+      "k4-cold": 960344354
+     },
+     "est_wall_s": 790,
+     "reference": true,
+     "order": 9,
+     "block": "ref-end"
+    }
+   ]
+  }
+ ],
+ "totals": {
+  "night_est_wall_s": [
+   11507,
+   11507,
+   13195
+  ],
+  "night_total_s": 36209
+ }
+}

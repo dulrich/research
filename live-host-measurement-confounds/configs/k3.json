@@ -1,0 +1,33 @@
+{
+ "variants": [
+  {
+   "name": "k3-a",
+   "group": "k3-a",
+   "argv": [
+    "sh",
+    "live-host-measurement-confounds/runk.sh",
+    "k3",
+    "{pad}"
+   ]
+  },
+  {
+   "name": "k3-a-copy",
+   "group": "k3-a-copy",
+   "argv": [
+    "sh",
+    "live-host-measurement-confounds/runk.sh",
+    "k3",
+    "{pad}"
+   ]
+  }
+ ],
+ "invocations": 10,
+ "warmup": 1,
+ "padMax": 4096,
+ "aa": [
+  "k3-a",
+  "k3-a-copy"
+ ],
+ "baseline": "k3-a",
+ "seed": 20261112
+}

@@ -1,0 +1,33 @@
+{
+ "variants": [
+  {
+   "name": "k4-cold-a",
+   "group": "k4-cold-a",
+   "argv": [
+    "sh",
+    "live-host-measurement-confounds/runk.sh",
+    "k4-cold",
+    "{pad}"
+   ]
+  },
+  {
+   "name": "k4-cold-a-copy",
+   "group": "k4-cold-a-copy",
+   "argv": [
+    "sh",
+    "live-host-measurement-confounds/runk.sh",
+    "k4-cold",
+    "{pad}"
+   ]
+  }
+ ],
+ "invocations": 10,
+ "warmup": 1,
+ "padMax": 4096,
+ "aa": [
+  "k4-cold-a",
+  "k4-cold-a-copy"
+ ],
+ "baseline": "k4-cold-a",
+ "seed": 20261112
+}

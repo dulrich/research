@@ -1,0 +1,11 @@
+{
+  "exclude": [],
+  "entries": [
+    {"path":"live-host-measurement-confounds/cell","disposition":"sh","modes":["exec"],"strict":"required"},
+    {"path":"live-host-measurement-confounds/ctl","disposition":"sh","modes":["exec"],"strict":"required"},
+    {"path":"live-host-measurement-confounds/cvblock.sh","disposition":"sh","modes":["exec"],"strict":"required","exec-suffix":"cvblock.sh"},
+    {"path":"live-host-measurement-confounds/k1.sh","disposition":"sh","modes":["exec"],"strict":"required"},
+    {"path":"live-host-measurement-confounds/runk.sh","disposition":"sh","modes":["exec"],"strict":"required"},
+    {"path":"live-host-measurement-confounds/sampler.sh","disposition":"sh","modes":["exec"],"strict":"required"}
+  ]
+}
