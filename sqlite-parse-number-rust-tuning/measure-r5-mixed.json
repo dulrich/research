@@ -1,0 +1,1453 @@
+{
+ "variants": [
+  {
+   "name": "c-gcc-O3-pgo-L0",
+   "group": "c-gcc-O3-pgo",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-pgo-L1",
+   "group": "c-gcc-O3-pgo",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-pgo-L2",
+   "group": "c-gcc-O3-pgo",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-pgo-L3",
+   "group": "c-gcc-O3-pgo",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-pgo-L4",
+   "group": "c-gcc-O3-pgo",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-pgo-L5",
+   "group": "c-gcc-O3-pgo",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O2-L0",
+   "group": "c-clang-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O2-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O2-L1",
+   "group": "c-clang-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O2-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O2-L2",
+   "group": "c-clang-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O2-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O2-L3",
+   "group": "c-clang-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O2-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O2-L4",
+   "group": "c-clang-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O2-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O2-L5",
+   "group": "c-clang-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O2-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o2-L0",
+   "group": "raw-nostd-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o2-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o2-L1",
+   "group": "raw-nostd-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o2-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o2-L2",
+   "group": "raw-nostd-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o2-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o2-L3",
+   "group": "raw-nostd-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o2-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o2-L4",
+   "group": "raw-nostd-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o2-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o2-L5",
+   "group": "raw-nostd-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o2-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o2-lto-L0",
+   "group": "raw-nostd-llvm-o2-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o2-lto-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o2-lto-L1",
+   "group": "raw-nostd-llvm-o2-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o2-lto-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o2-lto-L2",
+   "group": "raw-nostd-llvm-o2-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o2-lto-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o2-lto-L3",
+   "group": "raw-nostd-llvm-o2-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o2-lto-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o2-lto-L4",
+   "group": "raw-nostd-llvm-o2-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o2-lto-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o2-lto-L5",
+   "group": "raw-nostd-llvm-o2-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o2-lto-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o2-L0",
+   "group": "safe-std-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o2-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o2-L1",
+   "group": "safe-std-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o2-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o2-L2",
+   "group": "safe-std-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o2-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o2-L3",
+   "group": "safe-std-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o2-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o2-L4",
+   "group": "safe-std-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o2-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o2-L5",
+   "group": "safe-std-gcc-o2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o2-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-llvm-o3-nolto-L0",
+   "group": "safe-std-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-llvm-o3-nolto-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-llvm-o3-nolto-L1",
+   "group": "safe-std-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-llvm-o3-nolto-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-llvm-o3-nolto-L2",
+   "group": "safe-std-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-llvm-o3-nolto-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-llvm-o3-nolto-L3",
+   "group": "safe-std-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-llvm-o3-nolto-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-llvm-o3-nolto-L4",
+   "group": "safe-std-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-llvm-o3-nolto-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-llvm-o3-nolto-L5",
+   "group": "safe-std-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-llvm-o3-nolto-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-L0",
+   "group": "c-gcc-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-L1",
+   "group": "c-gcc-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-L2",
+   "group": "c-gcc-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-L3",
+   "group": "c-gcc-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-L4",
+   "group": "c-gcc-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-L5",
+   "group": "c-gcc-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O3-L0",
+   "group": "c-clang-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O3-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O3-L1",
+   "group": "c-clang-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O3-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O3-L2",
+   "group": "c-clang-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O3-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O3-L3",
+   "group": "c-clang-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O3-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O3-L4",
+   "group": "c-clang-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O3-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-clang-O3-L5",
+   "group": "c-clang-O3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-clang-O3-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o3-L0",
+   "group": "raw-nostd-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o3-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o3-L1",
+   "group": "raw-nostd-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o3-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o3-L2",
+   "group": "raw-nostd-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o3-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o3-L3",
+   "group": "raw-nostd-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o3-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o3-L4",
+   "group": "raw-nostd-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o3-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-gcc-o3-L5",
+   "group": "raw-nostd-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-gcc-o3-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o3-nolto-L0",
+   "group": "raw-nostd-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o3-nolto-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o3-nolto-L1",
+   "group": "raw-nostd-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o3-nolto-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o3-nolto-L2",
+   "group": "raw-nostd-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o3-nolto-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o3-nolto-L3",
+   "group": "raw-nostd-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o3-nolto-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o3-nolto-L4",
+   "group": "raw-nostd-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o3-nolto-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-llvm-o3-nolto-L5",
+   "group": "raw-nostd-llvm-o3-nolto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-llvm-o3-nolto-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o3-L0",
+   "group": "safe-std-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o3-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o3-L1",
+   "group": "safe-std-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o3-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o3-L2",
+   "group": "safe-std-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o3-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o3-L3",
+   "group": "safe-std-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o3-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o3-L4",
+   "group": "safe-std-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o3-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "safe-std-gcc-o3-L5",
+   "group": "safe-std-gcc-o3",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/safe-std-gcc-o3-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O2-L0",
+   "group": "c-gcc-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O2-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O2-L1",
+   "group": "c-gcc-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O2-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O2-L2",
+   "group": "c-gcc-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O2-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O2-L3",
+   "group": "c-gcc-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O2-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O2-L4",
+   "group": "c-gcc-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O2-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O2-L5",
+   "group": "c-gcc-O2",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O2-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-stable-llvm-o3-lto-L0",
+   "group": "raw-nostd-stable-llvm-o3-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-stable-llvm-o3-lto-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-stable-llvm-o3-lto-L1",
+   "group": "raw-nostd-stable-llvm-o3-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-stable-llvm-o3-lto-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-stable-llvm-o3-lto-L2",
+   "group": "raw-nostd-stable-llvm-o3-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-stable-llvm-o3-lto-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-stable-llvm-o3-lto-L3",
+   "group": "raw-nostd-stable-llvm-o3-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-stable-llvm-o3-lto-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-stable-llvm-o3-lto-L4",
+   "group": "raw-nostd-stable-llvm-o3-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-stable-llvm-o3-lto-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "raw-nostd-stable-llvm-o3-lto-L5",
+   "group": "raw-nostd-stable-llvm-o3-lto",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/raw-nostd-stable-llvm-o3-lto-L5/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-pgo-copy-L0",
+   "group": "c-gcc-O3-pgo-copy",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L0/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-pgo-copy-L1",
+   "group": "c-gcc-O3-pgo-copy",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L1/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-pgo-copy-L2",
+   "group": "c-gcc-O3-pgo-copy",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L2/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-pgo-copy-L3",
+   "group": "c-gcc-O3-pgo-copy",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L3/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-pgo-copy-L4",
+   "group": "c-gcc-O3-pgo-copy",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L4/parse_number.so",
+    "mixed"
+   ]
+  },
+  {
+   "name": "c-gcc-O3-pgo-copy-L5",
+   "group": "c-gcc-O3-pgo-copy",
+   "argv": [
+    "docker",
+    "exec",
+    "-e",
+    "MEASURE_PAD={pad}",
+    "-e",
+    "MEASURE_PERF=1",
+    "r5bench",
+    "python3",
+    "measure_one.py",
+    "r5/c-gcc-O3-pgo-L5/parse_number.so",
+    "mixed"
+   ]
+  }
+ ],
+ "invocations": 10,
+ "warmup": 3,
+ "padMax": 4096,
+ "seed": 20261112,
+ "aa": [
+  "c-gcc-O3-pgo",
+  "c-gcc-O3-pgo-copy"
+ ],
+ "baseline": "c-gcc-O2",
+ "channel": {
+  "argv": [
+   "ssh",
+   "{host}",
+   "sh",
+   "-s"
+  ]
+ },
+ "probe": {
+  "cpu": 2,
+  "container": "r5bench"
+ }
+}
