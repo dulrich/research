@@ -1,0 +1,37 @@
+# Round 5: stripped .so sizes of the layout-L0 builds (no pad object), read from the round-5 toolchain image (/work/r5/<variant>-L0/parse_number.so)
+# bytes = file size; text/data/bss = GNU size 2.44 (Berkeley); .text/.rodata = size -A sections; needed = DT_NEEDED; linker from the unstripped build's .comment
+# C (gcc 14.2 and clang-23) link with the compiler default, GNU ld 2.44 (no .comment entry; 4 KB-aligned LOAD offsets, -z separate-code); Rust links with LLD
+# Layouts L1-L5 add the 16*k-byte pad: Rust files grow by 16 B per step, C files do not change (the pad fits inside GNU ld's segment padding)
+# Not built (exclusions, variants.txt): the four Rust-on-GCC PGO variants
+variant                           bytes    text   data   bss   .text .rodata  needed                                       linker
+c-gcc-O2                          14224    2574    544    16    1259     240  libc.so.6                                    GNU ld 2.44
+c-gcc-O3                          14224    2590    544    16    1275     240  libc.so.6                                    GNU ld 2.44
+c-gcc-O3-pgo                      14224    2815    544    16    1432     240  libc.so.6                                    GNU ld 2.44
+c-clang-O2                        14312    2529    544    16    1222     216  libc.so.6                                    GNU ld 2.44
+c-clang-O3                        14312    2548    544    16    1241     216  libc.so.6                                    GNU ld 2.44
+c-clang-O3-pgo                    14312    2759    544    16    1324     216  libc.so.6                                    GNU ld 2.44
+raw-nostd-llvm-o2-lto             23464   20335    464  3144    6361   12552  none                                         LLD 23.1.5
+raw-nostd-stable-llvm-o3-lto      23616   20502    464  2984    6520   12552  none                                         LLD 23.1.1
+raw-nostd-llvm-o3-lto             23624   20502    464  2984    6520   12552  none                                         LLD 23.1.5
+raw-nostd-llvm-o3-lto-pgo         23720   20590    464  2888    6632   12552  none                                         LLD 23.1.5
+safe-nostd-llvm-o3-lto-pgo        24696   21566    464  1912    7272   12808  none                                         LLD 23.1.5
+safe-nostd-llvm-o2-lto            24744   21623    464  1864    7193   12808  none                                         LLD 23.1.5
+safe-nostd-llvm-o3-lto            24920   21790    464  1688    7352   12808  none                                         LLD 23.1.5
+raw-nostd-llvm-o3-nolto           29904   26241    824   968   10519   13216  none                                         LLD 23.1.5
+raw-nostd-gcc-o2                  30256   26493    824   728   10823   13184  none                                         LLD 23.1.5
+raw-nostd-gcc-o3                  30256   26493    824   728   10823   13184  none                                         LLD 23.1.5
+safe-nostd-llvm-o3-nolto          33320   29561    928  1648   11703   13784  none                                         LLD 23.1.5
+safe-nostd-gcc-o3                 33640   29793    896  1440   11959   13784  none                                         LLD 23.1.5
+safe-nostd-gcc-o2                 33840   29977    904  1240   12071   13784  none                                         LLD 23.1.5
+raw-std-llvm-o2-lto              287776  276051   8616  3972  215609   30482  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
+safe-std-llvm-o2-lto             287920  276243   8568  3828  215801   30474  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
+raw-std-llvm-o3-lto              289472  277751   8616  2276  217001   30578  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
+safe-std-llvm-o3-lto             289632  277959   8568  2116  217209   30570  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
+safe-std-llvm-o3-lto-pgo         292136  280479   8544  3708  221961   30810  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
+raw-std-llvm-o3-lto-pgo          292280  280583   8592  3564  221977   30818  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
+raw-std-llvm-o3-nolto            333104  318804  11120  3836  233747   31755  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
+safe-std-llvm-o3-nolto           333328  319068  11072  3612  234019   31747  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
+raw-std-gcc-o2                   333672  319260  11120  3380  234211   31731  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
+raw-std-gcc-o3                   333672  319260  11120  3380  234211   31731  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
+safe-std-gcc-o3                  333880  319504  11064  3172  234419   31747  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
+safe-std-gcc-o2                  333992  319628  11064  3060  234515   31747  libgcc_s.so.1,libc.so.6,ld-linux-x86-64.so.2 LLD 23.1.5
