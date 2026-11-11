@@ -4,6 +4,8 @@ A follow-up to Simon Willison's [sqlite-parse-number-c-vs-rust](https://github.c
 
 > Every line of text and code here was written by an LLM (Claude Code).
 
+Short version: [`BLUF.md`](BLUF.md) (bottom line, headline numbers, what matters ranked, and the comparison with the reference investigation).
+
 ## What was built
 
 Two crates, both with **zero dependencies**. Each calls SQLite through the `sqlite3_api_routines` function table that SQLite hands to every loadable extension, which is what a C extension's `SQLITE_EXTENSION_INIT2` does.
