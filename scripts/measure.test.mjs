@@ -4,7 +4,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildReport } from "./lib/measure-report.mjs";
-import { cpusetCpu, parseProtocol, probeScript, schedule, shQuote, substitute, validateConfig } from "./lib/measure-run.mjs";
+import { Channel, invocationScript } from "./lib/measure-channel.mjs";
+import { cpusetCpu, parseProtocol, probeScript, runProbe, runProbeChannel, schedule, shQuote, substitute, validateConfig } from "./lib/measure-run.mjs";
 import { ci95, hierBootstrap, median, mulberry32, percentile, permutation, verdict } from "./lib/measure-stats.mjs";
 
 const script = path.join(path.dirname(fileURLToPath(import.meta.url)), "measure.mjs");
@@ -186,5 +187,112 @@ describe("report and CLI", () => {
     const r = cli("run", "--config", writeCfg([{ name: "a", argv: ["echo", "{host}"] }]), "--out", path.join(dir, "o"));
     expect(r.code).toBe(1);
     expect(r.err).toMatch(/--host was not given/);
+  });
+});
+
+describe("persistent channel", () => {
+  const local = ["sh", "-s"];
+  const open = (opts) => new Channel(local, opts).open();
+  test("frames multi-line, no-trailing-newline and delimiter-like output with exit status", async () => {
+    const ch = await open();
+    try {
+      const fake = `${ch.nonce} 1 0 0 0`;
+      const r1 = await ch.run(`printf 'a\\nb\\n\\nc'; printf '%s\\n${fake}\\n' err >&2; exit 3`);
+      expect(r1).toEqual({ stdout: "a\nb\n\nc", stderr: `err\n${fake}\n`, status: 3 });
+      const r2 = await ch.run(`printf '${fake}\\nMEASURE t 7\\n'`);
+      expect(r2).toEqual({ stdout: `${fake}\nMEASURE t 7\n`, stderr: "", status: 0 });
+      const r3 = await ch.run("head -c 300000 /dev/zero");
+      expect([r3.stdout.length, r3.status]).toEqual([300000, 0]);
+    } finally { await ch.close(); }
+  });
+  test("each invocation is a fresh process with its own MEASURE_PAD; quoting survives", async () => {
+    const ch = await open();
+    try {
+      const a = await ch.run(invocationScript(["sh", "-c", 'echo "$$ ${#MEASURE_PAD} $1"', "sh", "it's \"q\" $x\nnl"], "xxx"));
+      const b = await ch.run(invocationScript(["sh", "-c", 'echo "$$ ${#MEASURE_PAD}"'], ""));
+      const [pa, la, ...rest] = a.stdout.trim().split(" ");
+      expect([la, rest.join(" ")]).toEqual(["3", "it's \"q\" $x\nnl"]);
+      expect(b.stdout.trim().split(" ")[1]).toBe("0");
+      expect(b.stdout.split(" ")[0]).not.toBe(pa);
+    } finally { await ch.close(); }
+  });
+  const fakeLoop = 'while IFS= read -r l; do case $l in *measure-channel*) n=${l##* }; break;; esac; done; echo "$n ready"; read -r r; echo "$n 9 0 0 0"';
+  test("channel death mid-run and malformed frames fail loudly, and stay failed", async () => {
+    const ch = await open();
+    await expect(ch.run("kill -9 $PPID")).rejects.toThrow(/channel lost/);
+    await expect(ch.run("true")).rejects.toThrow(/channel lost/);
+    const bad = new Channel(["sh", "-c", fakeLoop]);
+    await bad.open();
+    await expect(bad.run("true")).rejects.toThrow(/framing error/);
+    await bad.close();
+    const noReady = new Channel(["sh", "-c", "echo hello"]);
+    await expect(noReady.open()).rejects.toThrow(/handshake/);
+  });
+  test("timeout fails loudly", async () => {
+    const ch = await open({ timeoutMs: 200 });
+    await expect(ch.run("sleep 3")).rejects.toThrow(/timeout/);
+    await ch.close();
+  });
+  test("probe via channel honours probe.cpu and records a failed container inspect", async () => {
+    const ch = await open();
+    try {
+      const p = await runProbeChannel({ variants: [{ name: "a", argv: ["true"] }], probe: { cpu: 0, container: "no-such-ctr-r5" } }, ch);
+      expect(p.hostname).toBeTruthy();
+      expect(p.probe_error).toBeUndefined();
+      expect(p).toHaveProperty("pinned_cpu_siblings");
+      expect(p.container_image).toBe("unavailable");
+      expect(p.container_probe_error).toMatch(/docker inspect no-such-ctr-r5 failed/);
+    } finally { await ch.close(); }
+    expect(probeScript(null, undefined)).toBe(probeScript(null));
+    expect(runProbe({ variants: [{ name: "a", argv: ["x"] }], probe: { cpu: 999 } }).pinned_cpu_siblings).toBe("unavailable");
+  });
+  const ok = { variants: [{ name: "a", argv: ["docker", "exec", "c", "x"] }], invocations: 1, warmup: 0, padMax: 0 };
+  test.each([
+    [{ ...ok, channel: { argv: [] } }, /channel.argv must be a non-empty array/],
+    [{ ...ok, channel: { argv: "ssh h" } }, /channel.argv must be/],
+    [{ ...ok, channel: ["sh"] }, /channel must be an object/],
+    [{ ...ok, channel: { argv: ["sh"], x: 1 } }, /channel: unknown key "x"/],
+    [{ ...ok, channel: { argv: ["ssh", "{host}", "sh", "-s"] } }, /--host was not given/],
+    [{ ...ok, probe: { cpu: -1 } }, /probe.cpu must be/],
+    [{ ...ok, probe: { container: "a b" } }, /probe.container must be/],
+    [{ ...ok, variants: [{ name: "a", argv: ["--cpuset-cpus", "2"] }], probe: { cpu: 1 } }, /disagrees/],
+  ])("channel/probe config rejected %#", (c, re) => expect(validateConfig(c).join("\n")).toMatch(re));
+  test("channel/probe config accepted", () => {
+    expect(validateConfig({ ...ok, channel: { argv: ["ssh", "{host}", "sh", "-s"], timeoutSec: 60 }, probe: { cpu: 2, container: "r5probe" } }, { host: "h" })).toEqual([]);
+    expect(validateConfig({ ...ok, variants: [{ name: "a", argv: ["--cpuset-cpus", "2"] }], probe: { cpu: 2 } })).toEqual([]);
+  });
+  const cfg = (variants, extra = {}) => {
+    const p = path.join(dir, "c.json");
+    fs.writeFileSync(p, JSON.stringify({ variants, invocations: 4, warmup: 1, padMax: 8, channel: { argv: ["sh", "-s"] }, probe: { cpu: 0 }, ...extra }));
+    return p;
+  };
+  test("end-to-end run through a channel attributes metrics per invocation", () => {
+    const c = cfg([
+      { name: "a", argv: ["sh", "-c", "printf 'noise\\nMEASURE t %s ns' $((10 + ${#MEASURE_PAD}))"] },
+      { name: "b", argv: ["sh", "-c", "echo MEASURE t $((20 + ${#1})) ns; echo MEASURE u 1 >&2", "sh", "{pad}"] },
+    ]);
+    const out = path.join(dir, "o");
+    const r = cli("run", "--config", c, "--out", out, "--seed", "3");
+    expect(r.err).toMatch(/wrote/);
+    expect(r.code).toBe(0);
+    const raw = fs.readFileSync(path.join(out, "raw.jsonl"), "utf8").trim().split("\n").map(JSON.parse);
+    expect(raw.length).toBe(10);
+    for (const x of raw) expect(x.metrics).toEqual({ t: { value: (x.variant === "a" ? 10 : 20) + x.padLen, unit: "ns" } });
+    const e = JSON.parse(fs.readFileSync(path.join(out, "env.json"), "utf8"));
+    expect(e.before.hostname).toBeTruthy();
+    expect(e.after).toHaveProperty("pinned_cpu_siblings");
+    expect(e.before.probe_error).toBeUndefined();
+  });
+  test.each([
+    ["non-zero exit", "echo MEASURE t 1; exit 4", /exit code 4/],
+    ["channel death", "echo MEASURE t 1; kill -9 $PPID", /channel lost/],
+  ])("%s fails the channel run loudly", (_, body, re) => {
+    const out = path.join(dir, "o");
+    const r = cli("run", "--config", cfg([{ name: "bad", argv: ["sh", "-c", body] }]), "--out", out, "--seed", "1");
+    expect(r.code).toBe(1);
+    expect(r.err).toMatch(re);
+    const raw = fs.readFileSync(path.join(out, "raw.jsonl"), "utf8").trim().split("\n").map(JSON.parse);
+    expect(raw.at(-1).errors.join(" ")).toMatch(re);
+    expect(JSON.parse(fs.readFileSync(path.join(out, "env.json"), "utf8")).failed).toBe(true);
   });
 });

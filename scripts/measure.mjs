@@ -5,7 +5,8 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { buildId, handleBuildFlags } from "./lib/build-id.mjs";
 import { buildReport } from "./lib/measure-report.mjs";
-import { runProbe, runRounds, validateConfig } from "./lib/measure-run.mjs";
+import { Channel } from "./lib/measure-channel.mjs";
+import { runProbe, runProbeChannel, runRounds, substitute, validateConfig } from "./lib/measure-run.mjs";
 
 const USAGE = `usage: measure.mjs run --config <file.json> --out <dir> [--seed N] [--host NAME]
        measure.mjs report <dir> [--resamples N]
@@ -20,7 +21,13 @@ report  Prints per-metric Markdown tables (hierarchical bootstrap over layout bu
         invocations; ratio vs baseline; A/A noise floor; claim-rule verdicts) and writes <dir>/report.md.
 
 Config: { variants: [{ name, argv, group? }], invocations, warmup, padMax, aa?: [groupA, groupB],
-          baseline?: group, envPrefix?: [argv...], seed? }
+          baseline?: group, envPrefix?: [argv...], seed?, channel?: { argv: [argv...], timeoutSec? },
+          probe?: { cpu?, container? } }
+channel  One persistent process (e.g. ["ssh","{host}","sh","-s"]) runs a POSIX sh loop that executes every
+         invocation and the env probe as a fresh remote process, with length-prefixed, nonce-checked frames.
+         A lost channel, a framing error or a timeout (timeoutSec, default 3600 per invocation) fails the run.
+probe    cpu: CPU whose SMT siblings the probe records (else --cpuset-cpus from variant argv; must agree);
+         container: records container_image and container_cpuset via docker inspect on the measured host.
 `;
 
 const argv = process.argv.slice(2);
@@ -54,11 +61,18 @@ if (cmd === "run") {
   const seed = o.seed !== undefined ? intFlag(o.seed, "seed") : config.seed ?? (Date.now() % 2 ** 32) >>> 0;
   const command = ["measure.mjs", ...argv.map((a, i, all) => (all[i - 1] === "--host" ? "{host}" : a))];
   const env = { start: new Date().toISOString(), seed, build: buildId(import.meta.filename), configHash: createHash("sha256").update(text).digest("hex"), command, config };
-  env.before = runProbe(config, o.host);
+  let channel = null;
+  if (config.channel) {
+    channel = new Channel(substitute(config.channel.argv, { pad: "", host: o.host }), { timeoutMs: (config.channel.timeoutSec ?? 3600) * 1000 });
+    try { await channel.open(); } catch (e) { die(`cannot open channel: ${e.message}`, 1); }
+  }
+  const probe = () => (channel ? runProbeChannel(config, channel) : runProbe(config, o.host));
+  env.before = await probe();
   env.probeHost = env.before.hostname ?? "unavailable";
   const write = () => writeFileSync(join(o.out, "env.json"), `${JSON.stringify(env, null, 2)}\n`);
-  const { failures } = runRounds(config, { out: o.out, seed, host: o.host, log: (m) => process.stderr.write(`${m}\n`) });
-  env.after = runProbe(config, o.host);
+  const { failures } = await runRounds(config, { out: o.out, seed, host: o.host, log: (m) => process.stderr.write(`${m}\n`), channel });
+  env.after = await probe();
+  await channel?.close();
   env.end = new Date().toISOString();
   if (failures.length) env.failed = true;
   write();
