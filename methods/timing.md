@@ -2,6 +2,15 @@
 
 This is the method every timing claim in this repository follows. The goal is a claim a reader can check: how many times it was measured, at which levels, in which order, against which noise floor, and on what machine. The standard has to hold on an ordinary, shared, untuned host; host tuning (below) only makes it cheaper to meet. Sections are rules (R1, R2, ...), each with a one-line reason and a citation. Resource measurements other than time (binary size, memory) are planned as separate standards.
 
+## Scope: rigor follows use
+
+How rigorous a measurement has to be depends on how the number is used and how small the separation it supports is. Every reported number states its rigor level next to it, so a reader knows how far to trust it.
+
+- **Indicative.** Quick, incidental timings: sizing, spikes, feasibility checks, a sanity check while working. A few runs on whatever host is at hand, with no layout builds, no host tuning and no second machine. Report the number with the label *indicative*, the command, the run count and the host type. When the separation is far larger than any plausible noise, an indicative number is enough to report it as what it is. For example: "indicative, 5 runs each on a laptop: naive C 17 ms, naive Rust 50 ms, idiomatic TypeScript port 200 ms." An indicative number never carries a precise ratio or a "faster by N%" claim.
+- **Standard.** The full protocol (R1-R11, the reporting checklist and `scripts/measure.mjs`). Required whenever timing or resource cost is the product of the research, or whenever the claimed separation is small enough (a few percent, or within an order of magnitude of observed run-to-run spread) that layout, frequency or host noise could produce it. Any strong claim stated in an investigation's findings, such as "X is faster than Y" or "no measurable difference", is held to this level.
+
+When unsure, report the number as indicative and state no strong claim. A pilot (R9) bridges the two levels: it is used to choose the counts for a standard run and is excluded from inference.
+
 ## Rules
 
 **R1. Repeat at two levels.** Time inside the process (iterations of the timed loop, many per invocation) and across processes (separate invocations of the whole program). Minimum: at least 10 timed in-process iterations per invocation and at least 30 measured invocations per variant (per layout build when R5 applies). Choose the counts before the claim-producing run (R9). Reason: variation arises at every level (process start, ASLR, page placement, scheduler, frequency state) and repeating only the innermost level measures only that level's noise; the invocation level is where most unexplained variance lives. Kalibera and Jones recommend allocating repetitions by the measured variance at each level instead of repeating one level ever more.
@@ -30,7 +39,7 @@ This is the method every timing claim in this repository follows. The goal is a 
 
 An investigation README with a timing claim states:
 
-- Method line: that it follows this standard, and the driver build id.
+- Method line: the rigor level (Scope), that it follows this standard, and the driver build id.
 - Counts: variants, rounds, warm-up rounds discarded, invocations per variant (per layout), in-process warm-up and timed iterations, seed, `padMax`.
 - CI table: per variant and metric, median with its 95% CI; per comparison, the ratio with its CI.
 - A/A floor: the A/A ratio and CI.
