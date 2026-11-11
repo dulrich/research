@@ -56,6 +56,17 @@ describe("render-index", () => {
     expect(readme()).not.toContain("no-readme");
   });
 
+  test("methods folder without notes.md is skipped", () => {
+    project("keep");
+    fs.mkdirSync(path.join(dir, "methods"));
+    fs.writeFileSync(path.join(dir, "methods", "timing.md"), "# Timing\n\nA methods doc.\n");
+    const r = run();
+    expect(r.code).toBe(0);
+    expect(readme()).toContain("## 1 research projects");
+    expect(readme()).not.toContain("methods");
+    expect(run("--check").code).toBe(0);
+  });
+
   test("title fallback to folder name", () => {
     project("plain", { body: "Just text without a heading.\n" });
     run();

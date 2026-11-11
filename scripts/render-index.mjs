@@ -7,7 +7,7 @@ import { handleBuildFlags } from "./lib/build-id.mjs";
 
 const START = "<!-- research-index:start -->";
 const END = "<!-- research-index:end -->";
-const EXCLUDED = new Set(["scripts", "plans", "references", "runs", "reviews", "node_modules", "var"]);
+const EXCLUDED = new Set(["scripts", "plans", "references", "runs", "reviews", "node_modules", "var", "methods"]);
 const USAGE = `usage: render-index.mjs [--check] [--root <dir>]
 
 Regenerates the research index block between the research-index markers in README.md.

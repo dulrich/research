@@ -4,6 +4,10 @@ Research experiments carried out by LLM coding agents (usually Claude Code). Eve
 
 Each folder holds one investigation with its working notes and final report.
 
+## Methods
+
+- [Timing measurements](methods/timing.md): the standard every timing claim here follows (repetition, interleaving, placement bias, confidence intervals, noise floor).
+
 <!-- research-index:start -->
 ## 1 research projects
 
