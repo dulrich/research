@@ -38,11 +38,129 @@ index 6ccd292..ae7ee4f 100644
  }
  
  def reference(s):
+diff --git a/measure_one.py b/measure_one.py
+new file mode 100644
+index 0000000..82f939f
+--- /dev/null
++++ b/measure_one.py
+@@ -0,0 +1,112 @@
++"""One timing invocation: one extension, one dataset, in one process.
++
++Usage: python measure_one.py EXTENSION.so [mixed|int|real]
++
++Builds the dataset (setup), runs in-process warm-up, then ITERS timed
++iterations of `select sum(parse_number(v)) from t` interleaved with the
++baseline `select sum(length(v)) from t` (alternating which goes first).
++Prints, in the line protocol read by the host-side driver:
++
++  MEASURE ns_per_row <median over iterations of (query - baseline) / rows>
++
++With MEASURE_PERF=1 it also prints `MEASURE instr_per_row`: user-space
++instructions retired by this process over the timed region only, net of the
++baseline query. Each phase (query, then baseline) is counted by a separate
++`perf stat -p <this pid> --delay -1 --control fd:...` that is enabled just
++before and disabled just after the loop, so dataset setup, warm-up and
++process start are never counted.
++
++Environment knobs: MEASURE_ROWS (default 500000), MEASURE_WARMUP (5),
++MEASURE_ITERS (15), MEASURE_PERF_ITERS (3), MEASURE_SETUP_EXTRA (build the
++dataset that many extra times first; only used to test that the instruction
++count excludes setup).
++"""
++import os, random, re, signal, sqlite3, statistics, subprocess, sys, time
++
++ext = sys.argv[1]
++KIND = sys.argv[2] if len(sys.argv) > 2 else "mixed"
++if KIND not in ("mixed", "int", "real"):
++    sys.exit(f"bad dataset {KIND!r}")
++N = int(os.environ.get("MEASURE_ROWS", "500000"))
++WARM = int(os.environ.get("MEASURE_WARMUP", "5"))
++ITERS = int(os.environ.get("MEASURE_ITERS", "15"))
++PERF = os.environ.get("MEASURE_PERF") == "1"
++PERF_ITERS = int(os.environ.get("MEASURE_PERF_ITERS", "3"))
++EXTRA = int(os.environ.get("MEASURE_SETUP_EXTRA", "0"))
++
++def gen():
++    n = random.uniform(-1e6, 1e6)
++    if KIND == "int":
++        return f"${int(n):,}"
++    if KIND == "real":
++        return f"${n:,.2f}"
++    r = random.random()
++    if r < 0.25: return f"${n:,.2f}"
++    if r < 0.45: return f"£{int(n):,}"
++    if r < 0.60: return f"{n/1e4:.1f}%"
++    if r < 0.80: return str(int(n))
++    if r < 0.90: return f"{n:,.3f}"
++    return random.choice(["n/a", "", "TBD", "-", "12abc"])
++
++def build():
++    random.seed(1)
++    db = sqlite3.connect(":memory:")
++    db.execute("create table t(v text)")
++    db.executemany("insert into t values (?)", ((gen(),) for _ in range(N)))
++    db.commit()
++    return db
++
++for _ in range(EXTRA):
++    build().close()
++db = build()
++db.enable_load_extension(True)
++db.load_extension(ext)
++Q = "select sum(parse_number(v)) from t"
++B = "select sum(length(v)) from t"
++
++def run(sql):
++    t = time.perf_counter()
++    db.execute(sql).fetchone()
++    return time.perf_counter() - t
++
++for _ in range(WARM):
++    run(Q); run(B)
++
++net = []
++for i in range(ITERS):
++    if i % 2:
++        b = run(B); q = run(Q)
++    else:
++        q = run(Q); b = run(B)
++    net.append((q - b) / N * 1e9)
++print(f"MEASURE ns_per_row {statistics.median(net):.4f} ns")
++
++def counted(sql):
++    """Instructions:u retired by this process while running `sql` PERF_ITERS times."""
++    ctl_r, ctl_w = os.pipe()
++    ack_r, ack_w = os.pipe()
++    p = subprocess.Popen(
++        ["perf", "stat", "-x,", "-e", "instructions:u", "-p", str(os.getpid()),
++         "--delay", "-1", "--control", f"fd:{ctl_r},{ack_w}"],
++        pass_fds=(ctl_r, ack_w), stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
++    os.close(ctl_r); os.close(ack_w)
++    def cmd(c):
++        os.write(ctl_w, c.encode() + b"\n")
++        if not os.read(ack_r, 16).startswith(b"ack"):  # perf appends a NUL
++            raise RuntimeError("perf control: no ack")
++    cmd("enable")
++    for _ in range(PERF_ITERS):
++        db.execute(sql).fetchone()
++    cmd("disable")
++    p.send_signal(signal.SIGINT)
++    err = p.communicate()[1].decode()
++    os.close(ctl_w); os.close(ack_r)
++    m = re.search(r"^(\d+),,instructions", err, re.M)
++    if not m:
++        raise RuntimeError(f"perf stat gave no count: {err!r}")
++    return int(m.group(1))
++
++if PERF:
++    cq = counted(Q)
++    cb = counted(B)
++    print(f"MEASURE instr_per_row {(cq - cb) / (PERF_ITERS * N):.4f} instr")
 diff --git a/test.py b/test.py
-index c0e983a..1bfe04f 100644
+index c0e983a..97c8e8e 100644
 --- a/test.py
 +++ b/test.py
-@@ -5,6 +5,15 @@ EXTS = {
+@@ -5,6 +5,33 @@ EXTS = {
      "c-fast": "c-fast/parse_number.so",
      "rusqlite": "rust-rusqlite/target/release/libparse_number.so",
      "sqlite-loadable": "rust-loadable/target/release/libparse_number.so",
@@ -55,6 +173,24 @@ index c0e983a..1bfe04f 100644
 +    "raw-nostd-fast-align64": "rust-raw/nostd-fast-align64/libparse_number.so",
 +    "safe-std": "rust-safe/std/libparse_number.so",
 +    "safe-nostd": "rust-safe/nostd/libparse_number.so",
++    "c-fast-a16": "layouts/c-fast-a16/parse_number.so",
++    "c-fast-a32": "layouts/c-fast-a32/parse_number.so",
++    "c-fast-a64": "layouts/c-fast-a64/parse_number.so",
++    "raw-fast-a16": "layouts/raw-fast-a16/libparse_number.so",
++    "raw-fast-a32": "layouts/raw-fast-a32/libparse_number.so",
++    "raw-fast-a64": "layouts/raw-fast-a64/libparse_number.so",
++    "raw-nostd-fast-a16": "layouts/raw-nostd-fast-a16/libparse_number.so",
++    "raw-nostd-fast-a32": "layouts/raw-nostd-fast-a32/libparse_number.so",
++    "raw-nostd-fast-a64": "layouts/raw-nostd-fast-a64/libparse_number.so",
++    "raw-nostd-fast-strtod-a16": "layouts/raw-nostd-fast-strtod-a16/libparse_number.so",
++    "raw-nostd-fast-strtod-a32": "layouts/raw-nostd-fast-strtod-a32/libparse_number.so",
++    "raw-nostd-fast-strtod-a64": "layouts/raw-nostd-fast-strtod-a64/libparse_number.so",
++    "safe-std-a16": "layouts/safe-std-a16/libparse_number.so",
++    "safe-std-a32": "layouts/safe-std-a32/libparse_number.so",
++    "safe-std-a64": "layouts/safe-std-a64/libparse_number.so",
++    "safe-nostd-a16": "layouts/safe-nostd-a16/libparse_number.so",
++    "safe-nostd-a32": "layouts/safe-nostd-a32/libparse_number.so",
++    "safe-nostd-a64": "layouts/safe-nostd-a64/libparse_number.so",
  }
  
  CASES = [

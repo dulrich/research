@@ -75,3 +75,72 @@ The round-2 claim that Rust `nostd,strtod` (6,072 B) is smaller than `c-fast` (1
 - All size flags (`noseparate-code`, `--build-id=none`, `-z norelro`, `--hash-style=gnu`, no unwind tables, `-ffunction-sections -fdata-sections --gc-sections`, strip `.comment`/`.note.gnu.property`): `c-fast` 4,752 B at `-O2`, 4,560 B at `-Os`, 5,008 B with LLD. The same link flags plus the same strip on Rust `nostd,strtod`: 5,456 B. `-C force-unwind-tables=no` changed nothing (panic=abort already has none), and `opt-level=s` saved another 64 B.
 - Conclusion: with the linkers matched, C is ~0.3 KB smaller (5,784 vs 6,072 B), and with every size flag on both, ~0.7–0.9 KB smaller. The headline and findings in the README are corrected. These builds were only measured for size, not speed.
 - Also noticed while preparing the next round: on this host, run-to-run spread of `bench.py mixed` for `c-fast` on one pinned core is 8.2–10.7 ns across three runs while other work loads the machine. That is the same scale as the ±1.5 ns placement effect from round 2, so the earlier "differences under ~2 ns are noise" caveat stands.
+
+## Round 4: re-measuring the speed claims to the measurement standard
+
+Rounds 1-3 timed with upstream's `bench.py`: one build per variant, fastest of 15 alternating runs, one process, no noise floor. Round 2 had already found that code placement moves results by about ±1.5 ns, so round 4 re-measures the sub-3 ns claims under [the repository's timing standard](../methods/timing.md) (R1-R11), on a second, quiet machine instead of the shared workstation.
+
+### Method
+
+- **Machine:** a second, quiet machine (Intel Core i7-5600U laptop, 2 cores / 4 threads, Debian 13, kernel 6.12, Docker 29.9.3, wired network, on AC power). The host-side driver (`scripts/measure.mjs`, build `0813579eb401f83aac842b3e68a1106f93c15f86-dirty`) ran on the workstation and reached the machine only over ssh; every timed invocation and the environment probe ran there. The image was built on that machine (`sha256:bcb5c9f95d78...`). Absolute numbers are not comparable with rounds 1-3 (a Ryzen 9 7900X at boost clocks): this laptop is about 2.5-3× slower per row.
+- **Tuning (user-consented, applied through a short-lived privileged container, restored afterwards):** governor `performance` on all CPUs (was `schedutil`); `intel_pstate/no_turbo=1` (was 0); CPU 3 offline, the SMT sibling of benchmark CPU 2 (was online); `kernel.perf_event_paranoid=2` (was 3); stopped `unattended-upgrades`, `smartmontools`, `cron` and `iwd` (all four were active). The ssh path used the wired interface (default route via the Ethernet port, Wi-Fi metric higher), so stopping `iwd` could not cut the session. `ssh`, `systemd-networkd`, `systemd-resolved`, `docker`, `containerd` and `dbus` were never touched, and the machine was not rebooted.
+  - Read-back after apply: governors 3× `performance` (CPU 3 offline), `no_turbo=1`, online CPUs 0-2, `perf_event_paranoid=2`, the four services `inactive`, `ssh`/`systemd-networkd`/`systemd-resolved`/`docker` `active`.
+  - Read-back after restore (after all runs): governors 4× `schedutil`, `no_turbo=0`, CPU 3 online (online 0-3), `perf_event_paranoid=3`, the four services `active` again.
+  - The benchmark container is pinned to CPU 2 (`--cpuset-cpus 2`), whose sibling is offline. `intel_pstate` runs in passive mode (`intel_cpufreq` driver); there is no EPP or HWP.
+- **Per invocation** (`measure_one.py`, added by `harness.patch`): build a 200,000-row dataset (the same generator as `bench.py`, seeded, so every invocation sees the same rows), load one extension, 5 in-process warm-up runs of both queries, then 15 timed iterations of `select sum(parse_number(v)) from t` interleaved with the baseline `select sum(length(v)) from t` (alternating which goes first). `MEASURE ns_per_row` is the median over the 15 iterations of the net per-row time. Rows are 200,000 instead of upstream's 2,000,000, only to fit the ~5 s per-invocation budget; the per-row time was the same at 200,000 and 500,000 rows in a spot check (about 30 ns for `c-fast` mixed).
+- **Instructions** (secondary metric, R10): with `MEASURE_PERF=1` the process starts `perf stat -e instructions:u -p <its own pid> --delay -1 --control fd:...` once for the query and once for the baseline, enables it just before 3 timed runs and disables it just after, and prints `MEASURE instr_per_row` net of the baseline. Setup, warm-up and process start are never counted. Check of that attribution (one build, `int`): the same invocation with the dataset built 3 extra times first printed 165.0258 and 165.0257 instr/row (unchanged), while a whole-process `perf stat` over the same two runs rose from 18.5 to 33.5 billion instructions. The counters needed `--cap-add PERFMON` only (with `perf_event_paranoid=2`); `SYS_ADMIN` was not needed.
+- **Layouts (R5):** each compared variant has 3 builds: Rust `-C llvm-args=-align-all-functions={4,5,6} -C llvm-args=-align-loops={16,32,64}`, C `-falign-functions={16,32,64} -falign-loops={16,32,64}` (suffix `-a16`, `-a32`, `-a64` = loop alignment in bytes). The 6 logical variants are `c-fast`, `raw-fast`, `raw-nostd-fast`, `raw-nostd-fast-strtod`, `safe-std`, `safe-nostd`, 18 builds. The report pools the 3 layout builds of each variant and resamples layouts first, invocations second. `test.py` passes 40/40 for all 18 new layout builds along with the original 13 (a fuzz run was skipped: alignment flags change no semantics).
+- **A/A (R7):** a second group `c-fast-copy` runs the same three `c-fast` builds under other names, so the A/A ratio has the same layout-pooled structure as the comparisons. (The brief's minimal version was a single duplicated build; pooling avoids understating the floor.)
+- **Protocol:** per dataset 3 warm-up rounds discarded, then 30 measured invocations of every build (90 per variant; 21 builds × 33 rounds = 693 invocations per dataset), each round in a fresh seeded random order (seed 20261110), `MEASURE_PAD` 0-4096 bytes per invocation, ASLR on.
+- **Pilot and final counts:** the count was fixed in the committed config before the main run. The pilot (`results/round4/pilot/`, mixed only, seed 1, 1 warm-up + 5 measured invocations per build) only checked the pipeline end to end (no failures, instruction counts deterministic, ~5.4 s per invocation of which ~3 s is the ssh session setup on this machine) and is excluded from all inference. The final run uses 30 per build, the standard's minimum (R1); the pilot did not change it. No dataset was re-run. Reference pacing for this machine: ~5.4 s per invocation (~2.2 s in the container, ~3 s ssh session setup), 693 invocations and ~61 min per dataset, ~3.1 h for pilot plus three datasets.
+- Each dataset has its own config (`measure-mixed.json`, `measure-int.json`, `measure-real.json`; the dataset is an argv element) and its own output directory under `results/round4/`. Besides `report.md` (every group against `c-fast`), `report-vs-raw-nostd-fast.md` and `report-vs-safe-nostd.md` are the same data re-reported against those two baselines, for the Rust-vs-Rust comparisons.
+
+### Results
+
+Net ns per row, median over invocations with the layout-pooled 95% CI (full tables in `results/round4/<dataset>/report.md`). A/A ratio and CI: mixed 1.004 [0.947, 1.060]; int 1.001 [0.958, 1.049]; real 1.000 [0.929, 1.081].
+
+| Variant | Mixed | Integers | Decimals |
+|---|---|---|---|
+| c-fast | 29.37 [28.29, 30.25] | 24.55 [23.64, 24.91] | 37.48 [35.25, 38.18] |
+| raw `fast` | 25.69 [25.52, 26.13] | 18.51 [18.03, 19.26] | 31.91 [31.50, 32.28] |
+| raw `nostd,fast` | 23.64 [23.46, 23.96] | 18.05 [16.50, 18.17] | 30.08 [29.78, 30.69] |
+| raw `nostd,strtod` | 24.00 [22.79, 26.15] | 17.95 [17.67, 18.51] | 30.07 [29.21, 31.92] |
+| safe `std` | 27.16 [24.24, 29.52] | 20.85 [20.48, 21.44] | 32.24 [30.97, 33.37] |
+| safe `nostd` | 25.88 [25.70, 26.10] | 20.18 [19.55, 20.34] | 32.44 [32.12, 32.60] |
+
+Ratio to `c-fast` (95% CI; every row but one passes the claim rule: CI excludes 1 and the effect exceeds the A/A half-width, which is 0.057 / 0.046 / 0.076):
+
+| Variant | Mixed | Integers | Decimals |
+|---|---|---|---|
+| raw `fast` | 0.875 [0.848, 0.917] | 0.754 [0.727, 0.808] | 0.852 [0.830, 0.908] |
+| raw `nostd,fast` | 0.805 [0.780, 0.838] | 0.735 [0.666, 0.764] | 0.803 [0.783, 0.865] |
+| raw `nostd,strtod` | 0.817 [0.761, 0.917] | 0.731 [0.713, 0.778] | 0.802 [0.769, 0.896] |
+| safe `std` | 0.925 [0.812, 1.033] (no measurable difference) | 0.849 [0.827, 0.896] | 0.860 [0.817, 0.941] |
+| safe `nostd` | 0.881 [0.854, 0.918] | 0.822 [0.791, 0.856] | 0.866 [0.846, 0.921] |
+
+Rust-vs-Rust comparisons (ratio of the first to the second):
+
+| Comparison | Mixed | Integers | Decimals |
+|---|---|---|---|
+| raw `fast` / raw `nostd,fast` | 1.087 [1.072, 1.108] slower | 1.026 [0.996, 1.158] none | 1.061 [1.032, 1.077] none (effect below the 0.076 floor) |
+| raw `nostd,strtod` / raw `nostd,fast` | 1.015 [0.961, 1.108] none | 0.995 [0.976, 1.115] none | 1.000 [0.958, 1.064] none |
+| safe `std` / safe `nostd` | 1.050 [0.936, 1.142] none | 1.033 [1.011, 1.083] none (effect below the 0.046 floor) | 0.994 [0.955, 1.033] none |
+| safe `nostd` / raw `nostd,fast` | 1.095 [1.079, 1.109] slower | 1.118 [1.082, 1.227] slower | 1.078 [1.052, 1.093] slower (effect barely above the 0.076 floor) |
+
+Instructions retired per row (net of baseline; they vary only with layout, so their CIs are narrow and the A/A floor is about 1e-6): `c-fast` 185.1 / 165.0 / 249.5 (mixed / int / real), raw 186.9 / 170.0 / 250.5, safe 190.6 / 173.9 / 257.4. So `c-fast` retires the fewest instructions and is still the slowest build: the speed ordering is not an instruction-count ordering (this round did not investigate why). The alignment padding shows up as retired no-ops: the same code at `-a16`, `-a32` and `-a64` differs by up to 2.7 instr/row.
+
+Placement band (mixed, per-build medians, ns/row): `c-fast` 28.3-30.3; raw `fast` 25.5-26.2; raw `nostd,fast` 23.5-24.0; raw `nostd,strtod` 22.8-26.2; safe `std` 24.2-29.5; safe `nostd` 25.8-26.1. The same safe `std` code spans 5.3 ns across its three alignments, which is the same kind of effect round 2 found, larger on this machine (it is slower in absolute terms).
+
+### What changed relative to the old README
+
+- "Rust fast path matches `c-fast`'s speed" became "faster than `c-fast` on this machine": 12-27% less time per row for every Rust variant in every dataset, except `safe std` on mixed (no measurable difference). In round 1 the rust builds were 1-2 ns *ahead* of `c-fast` on the Ryzen too, but that gap was inside the placement band; here it survives the claim rule.
+- "`no_std` doesn't make the code faster; placement does" is no longer supported for mixed: raw `fast` is 8.7% [7.2%, 10.8%] slower than raw `nostd,fast` with layouts pooled, and the gap is there at every one of the three alignments (a16 25.5 vs 23.5, a32 25.7 vs 23.5, a64 26.2 vs 24.0 ns). Forcing alignment did not erase it. On integers and decimals there is no measurable difference. `safe std` vs `safe nostd` shows no measurable difference in any dataset, as before.
+- "`unsafe` in `rust-raw`'s parser bought nothing measurable" is no longer supported: safe `nostd` is 8-12% slower than raw `nostd,fast` in all three datasets (the decimals effect only just clears the floor). The safe crates are still faster than `c-fast`.
+- "`strtod` leaves speed unchanged" holds: no measurable difference in any dataset.
+- Not re-measured (still upstream-harness numbers, labelled so in the README): plain C, rusqlite, sqlite-loadable, raw `std`, raw `nostd`, and the two 64-byte-aligned raw builds.
+
+### Replication and deviations
+
+- No replication run was made; no result was re-run (R9). Diagnostics only, no pass condition: the A/A CI contains 1 in all three datasets; the Rust builds' lead over `c-fast` in round 4 is larger than in round 1 (e.g. mixed raw `nostd,fast` / `c-fast` 0.80 here versus 7.6 / 9.9 = 0.77 there, within the CI of each given their different machines).
+- Deviations from the standard and the brief: 200,000-row datasets (not 2M); invocation timing includes ~3 s of ssh session setup per run that no metric contains; A/A uses a 3-layout copy of `c-fast` rather than one build; one config per dataset (`measure-<dataset>.json`) instead of a single `measure.json`; `env.json` holds no Docker image id (recorded above), and its `hostname` fields were replaced by `{host}`; `smt_active` in `env.json` reads `1` because the machine has SMT on in general, the pinned CPU's `thread_siblings_list` is `2` alone (sibling offline).
+- Instruction counts exist per build but the report's claim rule on them is degenerate (an A/A floor near zero makes every 0.5% difference "slower"); instructions are reported as secondary, never as a speed claim.

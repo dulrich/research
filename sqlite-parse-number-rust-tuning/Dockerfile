@@ -6,10 +6,11 @@ FROM rust:1.99.1-slim-trixie
 # gcc + libc6-dev: C extensions; libsqlite3-dev: sqlite3ext.h (3.46.1);
 # python3: test/fuzz/bench host (its sqlite3 module links the same libsqlite3);
 # libclang-dev: bindgen for sqlite-loadable; binutils: size(1);
-# git + ca-certificates: fetch the upstream investigation.
+# git + ca-certificates: fetch the upstream investigation;
+# linux-perf: hardware instruction counts for round 4.
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-      gcc libc6-dev libsqlite3-dev python3 libclang-dev binutils git ca-certificates \
+      gcc libc6-dev libsqlite3-dev python3 libclang-dev binutils git ca-certificates linux-perf \
  && rm -rf /var/lib/apt/lists/*
 
 ARG UPSTREAM=https://github.com/simonw/research.git
@@ -51,6 +52,31 @@ RUN git apply harness.patch \
       if [ "$fl" = align ]; then fl="$ALIGN"; else fl=; fi; \
       (cd "$crate" && RUSTFLAGS="$fl" CARGO_TARGET_DIR="target/$n" cargo build --release ${f:+--features "$f"} \
         && mkdir -p "$n" && cp "target/$n/release/libparse_number.so" "$n/") || exit 1; \
+    done
+
+# Round 4: layout-perturbed copies of the compared variants (code placement
+# is a random factor). Suffix -a16/-a32/-a64 is the loop alignment in bytes.
+# Rust: -align-all-functions=4/5/6 (log2: 16/32/64 B) with -align-loops=16/32/64;
+# C: -falign-functions=N -falign-loops=N. Each build sits in its own directory
+# under its original file name, because SQLite derives the init symbol from it.
+RUN mkdir -p /work/layouts \
+ && for a in 16 32 64; do \
+      mkdir -p "layouts/c-fast-a$a" && gcc -O2 -fPIC -shared -s -falign-functions=$a -falign-loops=$a c-fast/parse_number.c -o "layouts/c-fast-a$a/parse_number.so" || exit 1; \
+    done \
+ && printf '%s\n' \
+      'rust-raw raw-fast fast' \
+      'rust-raw raw-nostd-fast nostd,fast' \
+      'rust-raw raw-nostd-fast-strtod nostd,strtod' \
+      'rust-safe safe-std -' \
+      'rust-safe safe-nostd nostd' \
+    | while read -r crate n f; do \
+      [ "$f" = - ] && f=; \
+      for pair in 16:4 32:5 64:6; do \
+        a=${pair%:*}; fa=${pair#*:}; \
+        (cd "$crate" && RUSTFLAGS="-C llvm-args=-align-all-functions=$fa -C llvm-args=-align-loops=$a" CARGO_TARGET_DIR="target/lay-$n-$a" \
+          cargo build --release ${f:+--features "$f"} \
+          && mkdir -p "/work/layouts/$n-a$a" && cp "target/lay-$n-$a/release/libparse_number.so" "/work/layouts/$n-a$a/") || exit 1; \
+      done; \
     done
 
 CMD ["python3", "test.py"]
