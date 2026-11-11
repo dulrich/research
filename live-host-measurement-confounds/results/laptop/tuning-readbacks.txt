@@ -1,0 +1,28 @@
+2026-11-11T13:37:36 begin
+READBACK before:
+gov0=schedutil gov1=schedutil gov2=schedutil gov3=schedutil 
+no_turbo=0 online=0-3 paranoid=3
+unattended-upgrades=active smartmontools=active cron=active iwd=active ssh=active systemd-networkd=active systemd-resolved=active docker=active 
+containers=command-center inference-engine-router
+READBACK after apply:
+gov0=performance gov1=performance gov2=performance gov3=cat: /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor: Device or resource busy 
+no_turbo=1 online=0-2 paranoid=2
+unattended-upgrades=inactive smartmontools=inactive cron=inactive iwd=inactive ssh=active systemd-networkd=active systemd-resolved=active docker=active 
+containers=command-center inference-engine-router
+2026-11-11T13:37:45 k3 seed=774234431 start
+2026-11-11T13:56:29 k3 rc=0 wall=1124
+2026-11-11T13:56:29 k2 seed=791012050 start
+2026-11-11T14:29:50 k2 rc=0 wall=2001
+2026-11-11T14:29:50 k3-120 seed=1901456219 start
+2026-11-11T15:21:30 k3-120 rc=0 wall=3100
+2026-11-11T15:21:30 k3s seed=70681656 start
+2026-11-11T15:29:17 k3s rc=0 wall=467
+2026-11-11T15:29:17 drivers done
+2026-11-11T15:29:17 restore begin
+sh: 1: cannot create /sys/devices/system/cpu/cpu0/online: Permission denied
+2026-11-11T15:29:21 restore done
+READBACK after restore:
+gov0=schedutil gov1=schedutil gov2=schedutil gov3=schedutil 
+no_turbo=0 online=0-3 paranoid=3
+unattended-upgrades=active smartmontools=active cron=active iwd=active ssh=active systemd-networkd=active systemd-resolved=active docker=active 
+containers=command-center inference-engine-router

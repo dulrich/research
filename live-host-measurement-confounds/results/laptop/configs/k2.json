@@ -1,0 +1,48 @@
+{
+ "variants": [
+  {
+   "name": "k2-a",
+   "group": "k2-a",
+   "argv": [
+    "env",
+    "LHMC_PIN=1-2",
+    "sh",
+    "lhmc-scratch/live-host-measurement-confounds/runk.sh",
+    "k2",
+    "{pad}"
+   ]
+  },
+  {
+   "name": "k2-a-copy",
+   "group": "k2-a-copy",
+   "argv": [
+    "env",
+    "LHMC_PIN=1-2",
+    "sh",
+    "lhmc-scratch/live-host-measurement-confounds/runk.sh",
+    "k2",
+    "{pad}"
+   ]
+  }
+ ],
+ "invocations": 10,
+ "warmup": 1,
+ "padMax": 4096,
+ "aa": [
+  "k2-a",
+  "k2-a-copy"
+ ],
+ "baseline": "k2-a",
+ "seed": 20261112,
+ "channel": {
+  "argv": [
+   "ssh",
+   "{host}",
+   "sh",
+   "-s"
+  ]
+ },
+ "probe": {
+  "cpu": 1
+ }
+}
