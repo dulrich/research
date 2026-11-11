@@ -22,6 +22,14 @@ fn panic(_: &core::panic::PanicInfo) -> ! {
     unsafe { abort() }
 }
 
+// Round 5: a `no_std` cdylib built without LTO leaves `rust_eh_personality`
+// (referenced by the precompiled `core`) undefined. The crate aborts on
+// panic, so the personality is never called; this stub only satisfies the
+// symbol. Enabled only for the non-LTO `nostd` builds.
+#[cfg(all(feature = "nostd", feature = "eh-stub"))]
+#[no_mangle]
+pub extern "C" fn rust_eh_personality() {}
+
 // ---------------------------------------------------------------------------
 // The slice of the SQLite C API we use. SQLite passes a pointer to its
 // sqlite3_api_routines struct (a table of function pointers) to the entry

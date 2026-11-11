@@ -100,3 +100,37 @@ RUN mkdir -p /work/sizes \
       cargo build --release --features nostd,strtod) \
  && cp rust-raw/target/sz/release/libparse_number.so sizes/rust-nostd-strtod-lld-all.so \
  && for f in sizes/*-all.so; do strip -R .comment -R .note.gnu.property "$f"; done
+
+# ---------------------------------------------------------------------------
+# Round 5: like-vs-like C/Rust x GCC/LLVM toolchains.
+# clang-23 / llvm-23 (llvm-profdata) / libclang-rt-23-dev (PGO profile
+# runtime) come from apt.llvm.org, the same LLVM major as rustc 1.99.1's
+# (23.1.1). If apt.llvm.org stops carrying 23, fall back to Debian's
+# clang-22/llvm-22/libclang-rt-22-dev and record the parity deviation.
+ARG LLVM_MAJOR=23
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends curl gnupg \
+ && curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key | gpg --dearmor -o /usr/share/keyrings/llvm-snapshot.gpg \
+ && echo "deb [signed-by=/usr/share/keyrings/llvm-snapshot.gpg] https://apt.llvm.org/trixie/ llvm-toolchain-trixie-$LLVM_MAJOR main" > /etc/apt/sources.list.d/llvm.list \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends clang-$LLVM_MAJOR llvm-$LLVM_MAJOR libclang-rt-$LLVM_MAJOR-dev \
+ && rm -rf /var/lib/apt/lists/*
+
+# Nightly pinned by date: rustc_codegen_gcc (preview), the GCC it drives
+# (libgccjit, shipped as a component) and llvm-tools (llvm-profdata for
+# Rust-on-LLVM PGO). The GCC backend is selected per build with
+# RUSTFLAGS=-Zcodegen-backend=gcc.
+ARG NIGHTLY=nightly-2026-11-10
+RUN rustup toolchain install "$NIGHTLY" --profile minimal \
+      -c rustc-codegen-gcc-preview -c gcc-x86_64-unknown-linux-gnu -c llvm-tools-preview \
+ && rustup toolchain list
+
+# Round 5 build stage: every candidate of the comparison matrix x 6 layouts under
+# /work/r5/<variant>-L<k>/parse_number.so (see build_r5.py for the matrix, the
+# layout method and the PGO flow). /work/r5/variants.txt lists the builds and the
+# recorded exclusions; /work/r5/layouts.txt the hot-function addresses.
+# Checks (run in the built image, from /work):
+#   R5_VARIANTS=r5/variants.txt python3 test.py        # 40/40 per build
+#   python3 equivalence.py r5/variants.txt             # vs c-fast, >= 200k rows
+COPY build_r5.py build_id.py pgo_train.py equivalence.py /work/
+RUN python3 build_r5.py --jobs 3

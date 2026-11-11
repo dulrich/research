@@ -43,7 +43,7 @@ new file mode 100644
 index 0000000..82f939f
 --- /dev/null
 +++ b/measure_one.py
-@@ -0,0 +1,112 @@
+@@ -0,0 +1,129 @@
 +"""One timing invocation: one extension, one dataset, in one process.
 +
 +Usage: python measure_one.py EXTENSION.so [mixed|int|real]
@@ -65,7 +65,9 @@ index 0000000..82f939f
 +Environment knobs: MEASURE_ROWS (default 500000), MEASURE_WARMUP (5),
 +MEASURE_ITERS (15), MEASURE_PERF_ITERS (3), MEASURE_SETUP_EXTRA (build the
 +dataset that many extra times first; only used to test that the instruction
-+count excludes setup).
++count excludes setup), MEASURE_DATA_CACHE (a directory: the first invocation
++writes the generated dataset there, later ones load the identical rows from it
++instead of regenerating them; unset, the dataset is generated every time).
 +"""
 +import os, random, re, signal, sqlite3, statistics, subprocess, sys, time
 +
@@ -79,6 +81,7 @@ index 0000000..82f939f
 +PERF = os.environ.get("MEASURE_PERF") == "1"
 +PERF_ITERS = int(os.environ.get("MEASURE_PERF_ITERS", "3"))
 +EXTRA = int(os.environ.get("MEASURE_SETUP_EXTRA", "0"))
++CACHE = os.environ.get("MEASURE_DATA_CACHE")  # optional directory caching the generated rows
 +
 +def gen():
 +    n = random.uniform(-1e6, 1e6)
@@ -95,11 +98,25 @@ index 0000000..82f939f
 +    return random.choice(["n/a", "", "TBD", "-", "12abc"])
 +
 +def build():
++    path = f"{CACHE}/{KIND}-{N}.db" if CACHE else None
++    if path and os.path.exists(path):  # same rows, loaded instead of regenerated
++        src = sqlite3.connect(path)
++        db = sqlite3.connect(":memory:")
++        src.backup(db)
++        src.close()
++        return db
 +    random.seed(1)
 +    db = sqlite3.connect(":memory:")
 +    db.execute("create table t(v text)")
 +    db.executemany("insert into t values (?)", ((gen(),) for _ in range(N)))
 +    db.commit()
++    if path:  # first call writes the cache (atomically); setup is never timed
++        os.makedirs(CACHE, exist_ok=True)
++        tmp = f"{path}.{os.getpid()}"
++        out = sqlite3.connect(tmp)
++        db.backup(out)
++        out.close()
++        os.rename(tmp, path)
 +    return db
 +
 +for _ in range(EXTRA):
@@ -194,3 +211,13 @@ index c0e983a..97c8e8e 100644
  }
  
  CASES = [
+@@ -26,6 +53,9 @@ EXTS = {
+     (42, 42), (3.14, 3.14), (b"123", None),
+ ]
+ 
++import os
++if os.environ.get("R5_VARIANTS"):  # round 5: test every build listed in this variants file
++    EXTS = {l.split()[0]: l.split()[1] for l in open(os.environ["R5_VARIANTS"]) if l.strip() and not l.startswith("#")}
+ ok = True
+ for name, path in EXTS.items():
+     db = sqlite3.connect(":memory:")

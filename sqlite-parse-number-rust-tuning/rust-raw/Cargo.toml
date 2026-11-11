@@ -20,6 +20,8 @@ fast = []
 # With `fast`: slow path calls the C library strtod() instead of core's
 # str::parse::<f64> (smaller, but locale-dependent like c-fast).
 strtod = ["fast"]
+# Round 5: stub `rust_eh_personality` for `nostd` builds without LTO.
+eh-stub = []
 
 [profile.release]
 opt-level = 3

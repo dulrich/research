@@ -132,5 +132,11 @@ mod ffi {
             // SAFETY: abort() never returns and has no preconditions.
             unsafe { abort() }
         }
+
+        // Round 5: satisfies `core`'s reference to the personality in non-LTO
+        // builds; the crate aborts on panic, so it is never called.
+        #[cfg(feature = "eh-stub")]
+        #[no_mangle]
+        pub extern "C" fn rust_eh_personality() {}
     }
 }

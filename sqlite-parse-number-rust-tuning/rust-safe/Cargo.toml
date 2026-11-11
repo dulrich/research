@@ -12,6 +12,8 @@ path = "lib.rs"
 [features]
 # `#![no_std]` + `alloc` (global allocator backed by sqlite3_malloc).
 nostd = []
+# Round 5: stub `rust_eh_personality` for `nostd` builds without LTO.
+eh-stub = []
 
 [profile.release]
 opt-level = 3

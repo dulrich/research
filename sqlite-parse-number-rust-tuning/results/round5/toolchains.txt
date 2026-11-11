@@ -1,0 +1,17 @@
+gcc: gcc (Debian 14.2.0-19) 14.2.0
+libgccjit (from the nightly gcc-x86_64-unknown-linux-gnu component; gcc_jit_version_major/minor/patchlevel): 17.0.0 (a development GCC 17; the ".comment" string inside the library reads "GCC: (GNU) 9.5.0", which is the compiler that built it)
+clang: Debian clang version 23.1.6 (++20261108033743+c47d7823685a-1~exp1~20261108153758.94)
+llvm-profdata (llvm-23): Debian LLVM version 23.1.6; nightly llvm-tools-preview llvm-profdata ships with the nightly (LLVM 23.1.5)
+clang-23 1:23.1.6~++20261108033743+c47d7823685a-1~exp1~20261108153758.94
+libclang-rt-23-dev 1:23.1.6~++20261108033743+c47d7823685a-1~exp1~20261108153758.94
+llvm-23 1:23.1.6~++20261108033743+c47d7823685a-1~exp1~20261108153758.94
+llvm-23-linker-tools 1:23.1.6~++20261108033743+c47d7823685a-1~exp1~20261108153758.94
+llvm-23-runtime 1:23.1.6~++20261108033743+c47d7823685a-1~exp1~20261108153758.94
+rustc stable: release: 1.99.1 LLVM version: 23.1.1 
+rustc nightly: commit-date: 2026-11-09 release: 1.102.0-nightly LLVM version: 23.1.5 
+nightly pin: nightly-2026-11-10 (components rustc-codegen-gcc-preview, gcc-x86_64-unknown-linux-gnu, llvm-tools-preview)
+binutils ld: GNU ld (GNU Binutils for Debian) 2.44
+python: Python 3.13.5
+
+GCC-parity note: C on GCC is Debian gcc 14.2; Rust on GCC runs on libgccjit 17.0.0, three majors apart (more than one), so Rust-on-GCC vs C-on-GCC carries that caveat.
+image id: sha256:e78e6c8e143ef29e37a2a9dca9e2af290e465e963e43e6a2c65cd68b84f1759a (docker compose build of the folder, tag sqlite-parse-number-rust-tuning)
