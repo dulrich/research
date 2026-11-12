@@ -63,3 +63,29 @@ Working log, appended as the work proceeds (what was tried, what was learned).
 - Guard events: none (no `GUARD TRIP` in the controller or guard logs); the memory-pressure cell stayed far from the 4 GB threshold.
 - Data hygiene: absolute paths and the host name in generated outputs were rewritten to repo-relative paths and `{host}`; raw block logs stay in the gitignored `var/`. Largest committed night-1 file is below 2 MB.
 - Not covered here: nights 2 and 3, analysis.
+
+## 2026-11-12 Night 2: the `night2` window
+
+- Frozen inputs: `results/night2/frozen-inputs.sha256` lists the sha256 of `schedule.json` and every `configs/*.json`, taken before the first cell; each of the 10 equalled `git show HEAD:<file> | sha256sum`.
+- Night-1 carry-over: night 1 had no invalid or deferred cell, so nothing was carried over and nothing was re-run (no `-r2` cells).
+- Cells (schedule order, `cell run ... --afk`; wall vs estimate in s; all `status=ok`, none `INVALID`, none re-run, none deferred; every one ended `READBACK OK (restored)`; the window ran 05:24 to 10:20, so nothing came near the 11:00 AFK end). I2 is the isolated level (measured CPUs 6-11,18-23 on CCD1, everything else on CCD0), so the I2 refs are the within-night reference for the I2 body cells; the I0 and I3 k1 refs are the cross-level references.
+
+  | cell | block | wall | est |
+  |---|---|---|---|
+  | I2-L0-ref-start | ref-start | 692 | 790 |
+  | I0-L0-ref-start | ref-start (k1 only) | 180 | 231 |
+  | I3-L0-ref-start | ref-start (k1 only) | 201 | 231 |
+  | I2-L2-rep1 | body | 2432 | 2308 |
+  | I2-L0-full | body | 6053 | 6170 |
+  | I2-L3-rep1 | body | 4475 | 4582 |
+  | I2-L1-rep1 | body | 2302 | 2308 |
+  | I2-L4-rep1 | body | 319 | 331 |
+  | I2-L0-ref-end | ref-end | 698 | 790 |
+  | I0-L0-ref-end | ref-end (k1 only) | 180 | 231 |
+  | I3-L0-ref-end | ref-end (k1 only) | 201 | 231 |
+
+  Total 17,733 s against 18,203 s estimated (only I2-L2-rep1 ran longer than its estimate, by 124 s). Per-class walls are in each cell's `walls.tsv`; `results/night2/driver.log` has the run log with start/end clock times. The k4-cold path (`ctl dropcache` under `--afk`) ran in the five cells that include it (I2 ref-start, I2-L0-full, I2-L3-rep1, I2-L4-rep1, I2 ref-end).
+- Host trace per cell (0.5 s sampler; avg10 PSI percentages; `some` unless stated; median / max): I2-L0 ref-start cpu 18.33 / 45.16, ref-end 18.10 / 45.38, io max 43.4 / 47.0, memory `full` max 0.30 / 0.00; I0 refs cpu 0.00 / 0.16 and 0.00 / 0.02, io max 35.8 / 30.5; I3 refs cpu 1.99 / 2.31 and 2.00 / 2.36, io max 7.1 / 0.5; I2-L0-full cpu 0.00 / 42.12, io max 42.0, MemAvailable min 50.6 GB; I2-L1 cpu 3.06 / 25.63, CCD0 util median 100 %; I2-L2 cpu 15.58 / 33.65, CCD0 util median 89 %, memory `full` max 2.12 (highest of the night); I2-L3 cpu 0.00 / 25.00, io max 29.6, MemAvailable min 39.2 GB (about 12 GB held by the load), CCD0 util median 33.9 %; I2-L4 io max 65.7, cpu max 12.61. MemAvailable never fell below 39.2 GB and memory `full` never exceeded 2.12 against the guard's 5.
+- Guard events: none (no `GUARD TRIP` or `INVALID` in any cell); the guard-trip path remains untested.
+- Data hygiene: absolute paths and the host name in generated outputs were rewritten to repo-relative paths and `{host}`; raw block logs stay in the gitignored `var/`. Largest committed night-2 file is below 2 MB.
+- Not covered here: night 3, analysis.
