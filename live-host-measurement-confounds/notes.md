@@ -37,3 +37,29 @@ Working log, appended as the work proceeds (what was tried, what was learned).
 - Overlap: laptop K3, K2 and K3-120 ran concurrently with the workstation day cells (K3 13:37-13:56 and K2 13:56-14:29 during `I0-Llive-day`/start of `I2-Llive-day`, K3-120 14:29-15:21 during `I2-Llive-day`); K3s ran after both cells. The laptop driver is an ssh client on the workstation; its load was not separated from the user's.
 - Laptop tuning (`results/laptop/tuning-readbacks.txt`): before: governors 4x `schedutil`, `no_turbo=0`, online 0-3, `perf_event_paranoid=3`, `unattended-upgrades`/`smartmontools`/`cron`/`iwd` `active`, `ssh`/`systemd-networkd`/`systemd-resolved`/`docker` `active`, containers `command-center` and `inference-engine-router`. The default route and the ssh source address were the wired interface. After apply: 3x `performance` (CPU 3 offline, its governor unreadable), `no_turbo=1`, online 0-2, `perf_event_paranoid=2`, the four services `inactive`, the others `active`, the two containers still running. After restore (EXIT trap, at the end of the K3s run): governors 4x `schedutil`, `no_turbo=0`, online 0-3, `perf_event_paranoid=3`, the four services `active`.
 - Deletion verified: the laptop scratch directory (including the vault copy) was removed and `ls` reports it absent; the `lhmc-bench` image was removed from the laptop; its two containers were never touched. Raw per-block `requests` and daemon logs stay under the gitignored `var/`; `env.json` hostname fields hold `{host}`.
+
+## 2026-11-12 Night 1: antagonist smoke and the `night1` window
+
+- Frozen inputs: `results/night1/frozen-inputs.sha256` lists the sha256 of `schedule.json` and every `configs/*.json`, taken before the first cell; each equalled `git show HEAD:<file> | sha256sum`.
+- Antagonist smoke (`results/night1/smoke.txt`; each load applied at I2 for 45 s while the 0.5 s sampler ran, then `ctl restore` and `ctl readback --expect restored`): the L1, L2, L3 and L4 containers were created with cpuset 0-5,12-17 and the process and cgroup both report 0-5,12-17; CCD1 utilisation stayed at or below 1 %. L1 CCD0 utilisation mean 99.9 %; L2 90.7 % (PSI cpu some max 23.3); L3 MemAvailable 54.0 -> 42.6 GB with memory PSI 0 and CCD0 about 40 %; L4 io PSI some mean 61 / max 85 with CCD0 about 2 %. Every restore ended `READBACK OK (restored)`. `ctl dropcache` with `LHMC_AFK=1` returned 0 (the k4-cold path was then exercised in six night cells). The guard trip path is untested: `ctl` has no documented knob for its thresholds (MemAvailable < 4 GB, memory full avg10 > 5) and is frozen.
+- Cells (schedule order, `cell run ... --afk`; wall vs estimate in s; all `status=ok`, none `INVALID`, none re-run, none deferred; every one ended `READBACK OK (restored)`; the window started 01:17 and ended 05:21, so nothing crossed 07:00):
+
+  | cell | block | wall | est |
+  |---|---|---|---|
+  | I0-L0-ref-start | ref-start | 699 | 790 |
+  | I2-L0-ref-start | ref-start (k1 only) | 181 | 231 |
+  | I3-L0-ref-start | ref-start (k1 only) | 203 | 231 |
+  | I0-L4-rep1 | body | 311 | 331 |
+  | I0-L3-rep1 | body | 1612 | 1696 |
+  | I0-L1-rep1 | body | 2236 | 2308 |
+  | I0-L2-rep1 | body | 2254 | 2308 |
+  | I0-L0-full | body | 6058 | 6170 |
+  | I0-L0-ref-end | ref-end | 690 | 790 |
+  | I2-L0-ref-end | ref-end (k1 only) | 181 | 231 |
+  | I3-L0-ref-end | ref-end (k1 only) | 202 | 231 |
+
+  Total 14,627 s against 15,317 s estimated. Per-class walls are in each cell's `walls.tsv`; `results/night1/driver.log` has the run log (start/end clock times).
+- Host trace per cell (0.5 s sampler; avg10 `some` PSI percentages; median / max): I0-L0-full cpu 0.00 / 8.02, io 0.06 / 24.27, MemAvailable min 50.3 GB. I0-L0 ref-start / ref-end cpu max 0.06 / 0.00, io max 25.9 / 27.1. I0-L1 CCD0 util median 100 %, cpu PSI max 1.29. I0-L2 CCD0 median 75.6 %, cpu PSI median 9.45 / max 13.14. I0-L3 CCD0 median 34.2 %, memory PSI some/full max 0.00, io max 37.4, MemAvailable min 39.0 GB (about 12 GB held by the load). I0-L4 io PSI median 45.1 / max 60.9, memory PSI some/full max 0.18, MemAvailable min 51.3 GB. I2 refs: cpu PSI median 2.5 / max 2.95; I3 refs 2.1 / 2.56 (the measured CPU's CCD1 sits at about 8 % in these k1 cells, as the driver runs there). Memory `full` never exceeded 0.18 anywhere.
+- Guard events: none (no `GUARD TRIP` in the controller or guard logs); the memory-pressure cell stayed far from the 4 GB threshold.
+- Data hygiene: absolute paths and the host name in generated outputs were rewritten to repo-relative paths and `{host}`; raw block logs stay in the gitignored `var/`. Largest committed night-1 file is below 2 MB.
+- Not covered here: nights 2 and 3, analysis.

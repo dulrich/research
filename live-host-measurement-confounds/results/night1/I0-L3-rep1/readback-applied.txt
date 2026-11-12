@@ -1,0 +1,8 @@
+AllowedCPUs user.slice=[] effective=[0-23]
+AllowedCPUs system.slice=[] effective=[0-23]
+AllowedCPUs init.scope=[] effective=[0-23]
+AllowedCPUs lhmc.slice=[] effective=[n/a]
+EPP all-cpus: balance_performance x24 
+EPP CCD1: balance_performance 
+boost=1 perf_event_paranoid=2 lhmc_containers=[lhmc-load-vm ]
+READBACK OK

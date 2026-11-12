@@ -1,0 +1,146 @@
+=== I2 L1 01:13:37
+--- containers
+lhmc-load-cpu Up 45 seconds
+cpuset-config: 0-5,12-17
+Cpus_allowed_list(pid 567676): Cpus_allowed_list:	0-5,12-17
+cpuset.cpus.effective: 0-5,12-17
+--- sampler (first / last-5 median-ish summary)
+n=88
+psi_cpu mean=3.49 min=0.00 max=4.81
+psi_mem_some mean=0.00 min=0.00 max=
+psi_mem_full mean=0.00 min=0.00 max=
+psi_io_some mean=0.00 min=0.00 max=0.03
+psi_io_full mean=0.00 min=0.00 max=0.03
+memavail_kb mean=53929024.86 min=53854228 max=53987544
+util_ccd0 mean=99.92 min=93.5 max=100.0
+util_ccd1 mean=0.20 min=0.0 max=0.7
+freq mean=3051316.25 min=3007258 max=4932956
+first row memavail_kb=53914432 ccd0=93.5
+last row memavail_kb=53978572 ccd0=100.0 io_some=0.00
+guard-tripped: -
+abort: -
+guard.pid: 567694
+pre.env: allowed.user.slice=
+AllowedCPUs user.slice=[] effective=[0-23]
+AllowedCPUs system.slice=[] effective=[0-23]
+AllowedCPUs init.scope=[] effective=[0-23]
+AllowedCPUs lhmc.slice=[] effective=[n/a]
+EPP all-cpus: balance_performance x24 
+EPP CCD1: balance_performance 
+boost=1 perf_event_paranoid=3 lhmc_containers=[]
+READBACK OK (restored)
+readback rc=0
+=== I2 L2 01:14:24
+--- containers
+lhmc-load-mem Up 45 seconds
+cpuset-config: 0-5,12-17
+Cpus_allowed_list(pid 570046): Cpus_allowed_list:	0-5,12-17
+cpuset.cpus.effective: 0-5,12-17
+--- sampler (first / last-5 median-ish summary)
+n=86
+psi_cpu mean=13.54 min=4.23 max=23.29
+psi_mem_some mean=0.00 min=0.00 max=
+psi_mem_full mean=0.00 min=0.00 max=
+psi_io_some mean=0.00 min=0.00 max=
+psi_io_full mean=0.00 min=0.00 max=
+memavail_kb mean=53553089.49 min=53315916 max=53609852
+util_ccd0 mean=90.66 min=82.0 max=100.0
+util_ccd1 mean=0.20 min=0.0 max=0.8
+freq mean=3258413.87 min=2957514 max=5361038
+first row memavail_kb=53549992 ccd0=92.3
+last row memavail_kb=53382964 ccd0=96.3 io_some=0.00
+guard-tripped: -
+abort: -
+guard.pid: 570064
+pre.env: allowed.user.slice=
+AllowedCPUs user.slice=[] effective=[0-23]
+AllowedCPUs system.slice=[] effective=[0-23]
+AllowedCPUs init.scope=[] effective=[0-23]
+AllowedCPUs lhmc.slice=[] effective=[n/a]
+EPP all-cpus: balance_performance x24 
+EPP CCD1: balance_performance 
+boost=1 perf_event_paranoid=3 lhmc_containers=[]
+READBACK OK (restored)
+readback rc=0
+=== I2 L3 01:15:12
+--- containers
+lhmc-load-vm Up 45 seconds
+cpuset-config: 0-5,12-17
+Cpus_allowed_list(pid 572141): Cpus_allowed_list:	0-5,12-17
+cpuset.cpus.effective: 0-5,12-17
+--- sampler (first / last-5 median-ish summary)
+n=89
+psi_cpu mean=5.23 min=0.28 max=23.52
+psi_mem_some mean=0.00 min=0.00 max=
+psi_mem_full mean=0.00 min=0.00 max=
+psi_io_some mean=0.08 min=0.00 max=0.36
+psi_io_full mean=0.08 min=0.00 max=0.36
+memavail_kb mean=42591878.52 min=42500688 max=44824016
+util_ccd0 mean=39.59 min=33.6 max=54.9
+util_ccd1 mean=0.04 min=0.0 max=1.0
+freq mean=3495761.89 min=3007258 max=5255088
+first row memavail_kb=44824016 ccd0=50.1
+last row memavail_kb=42620148 ccd0=34.0 io_some=0.00
+guard-tripped: -
+abort: -
+guard.pid: 572158
+pre.env: allowed.user.slice=
+AllowedCPUs user.slice=[] effective=[0-23]
+AllowedCPUs system.slice=[] effective=[0-23]
+AllowedCPUs init.scope=[] effective=[0-23]
+AllowedCPUs lhmc.slice=[] effective=[n/a]
+EPP all-cpus: balance_performance x24 
+EPP CCD1: balance_performance 
+boost=1 perf_event_paranoid=3 lhmc_containers=[]
+READBACK OK (restored)
+readback rc=0
+=== I2 L4 01:15:58
+--- containers
+lhmc-load-hdd Up 45 seconds
+cpuset-config: 0-5,12-17
+Cpus_allowed_list(pid 574177): Cpus_allowed_list:	0-5,12-17
+cpuset.cpus.effective: 0-5,12-17
+--- sampler (first / last-5 median-ish summary)
+n=89
+psi_cpu mean=0.04 min=0.00 max=0.23
+psi_mem_some mean=0.00 min=0.00 max=
+psi_mem_full mean=0.00 min=0.00 max=
+psi_io_some mean=61.46 min=0.00 max=84.60
+psi_io_full mean=60.44 min=0.00 max=82.13
+memavail_kb mean=54017210.56 min=53940220 max=54047944
+util_ccd0 mean=2.31 min=0.5 max=17.3
+util_ccd1 mean=0.04 min=0.0 max=0.5
+freq mean=3007258.00 min=3007258 max=3007258
+first row memavail_kb=53981628 ccd0=1.8
+last row memavail_kb=54043888 ccd0=2.9 io_some=84.60
+guard-tripped: -
+abort: -
+guard.pid: 574194
+pre.env: allowed.user.slice=
+AllowedCPUs user.slice=[] effective=[0-23]
+AllowedCPUs system.slice=[] effective=[0-23]
+AllowedCPUs init.scope=[] effective=[0-23]
+AllowedCPUs lhmc.slice=[] effective=[n/a]
+EPP all-cpus: balance_performance x24 
+EPP CCD1: balance_performance 
+boost=1 perf_event_paranoid=3 lhmc_containers=[]
+READBACK OK (restored)
+readback rc=0
+=== k4-cold smoke
+dropcache rc=0
+AllowedCPUs user.slice=[] effective=[0-23]
+AllowedCPUs system.slice=[] effective=[0-23]
+AllowedCPUs init.scope=[] effective=[0-23]
+AllowedCPUs lhmc.slice=[] effective=[0-23]
+EPP all-cpus: balance_performance x24 
+EPP CCD1: balance_performance 
+boost=1 perf_event_paranoid=3 lhmc_containers=[]
+READBACK OK (restored)
+readback rc=0
+DONE
+
+=== summary
+All four loads ran at I2 for 45 s each: the antagonist container was created with cpuset 0-5,12-17, its process and cgroup report 0-5,12-17 (CCD0 plus SMT siblings); CCD1 utilisation stayed <= 1 %.
+L1: CCD0 util mean 99.9 %, PSI cpu some max 4.8. L2: CCD0 util mean 90.7 %, PSI cpu some max 23.3. L3: MemAvailable 54.0 -> 42.6 GB (about 11 GB held), CCD0 util about 40 %, memory PSI 0. L4: PSI io some mean 61 / max 85 (avg10, percent), CCD0 util about 2 %.
+Each restore + readback ended READBACK OK (restored). k4-cold: `ctl dropcache` with LHMC_AFK=1 returned rc 0, then restore and READBACK OK.
+Guard trip path: untested. ctl exposes no documented knob for the thresholds (4 GB MemAvailable, memory full avg10 > 5 are fixed in the script), and ctl is frozen.
