@@ -1,0 +1,66 @@
+kind	label	cell_refs	ref_refs	class	metric	ratio	ci_lo	ci_hi	aa_halfwidth	matters	disp_ratio	verdict
+k1-controls-within-night	I2 vs I0, night1	night1/I2	night1/I0	k1-abs	ns_per_row	1.039560	1.014290	1.077740	0.0207	0.03	1.01	bias
+k1-controls-within-night	I2 vs I0, night1	night1/I2	night1/I0	k5	instr_per_row	0.999997	0.999997	0.999998	0.0000	0.01	1.00	bias (below size that matters)
+k1-controls-within-night	I2 vs I0, night1	night1/I2	night1/I0	k1-ratio:c-gcc-O3-pgo	ns_per_row	1.014345	0.975571	1.043939	0.0207	0.02	1.01	unresolved at measured resolution
+k1-controls-within-night	I2 vs I0, night1	night1/I2	night1/I0	k1-ratio:safe-std-gcc-o2	ns_per_row	0.982716	0.945117	1.031566	0.0207	0.02	1.01	unresolved at measured resolution
+k1-controls-within-night	I2 vs I0, night1	night1/I2	night1/I0	k1-ratio:raw-nostd-gcc-o2	ns_per_row	1.010346	0.961324	1.038774	0.0207	0.02	1.01	unresolved at measured resolution
+k1-controls-within-night	I3 vs I0, night1	night1/I3	night1/I0	k1-abs	ns_per_row	1.185175	1.137378	1.228082	0.0197	0.03	0.91	bias
+k1-controls-within-night	I3 vs I0, night1	night1/I3	night1/I0	k5	instr_per_row	0.999997	0.999997	0.999998	0.0000	0.01	0.63	bias (below size that matters)
+k1-controls-within-night	I3 vs I0, night1	night1/I3	night1/I0	k1-ratio:c-gcc-O3-pgo	ns_per_row	0.993097	0.953273	1.035997	0.0197	0.02	0.91	unresolved at measured resolution
+k1-controls-within-night	I3 vs I0, night1	night1/I3	night1/I0	k1-ratio:safe-std-gcc-o2	ns_per_row	0.976620	0.929972	1.034966	0.0197	0.02	0.91	unresolved at measured resolution
+k1-controls-within-night	I3 vs I0, night1	night1/I3	night1/I0	k1-ratio:raw-nostd-gcc-o2	ns_per_row	0.993405	0.950394	1.035488	0.0197	0.02	0.91	unresolved at measured resolution
+k1-controls-within-night	I2 vs I0, night2	night2/I2	night2/I0	k1-abs	ns_per_row	1.051051	0.995638	1.083260	0.0188	0.03	0.96	unresolved at measured resolution
+k1-controls-within-night	I2 vs I0, night2	night2/I2	night2/I0	k5	instr_per_row	0.999998	0.999997	0.999998	0.0000	0.01	0.67	bias (below size that matters)
+k1-controls-within-night	I2 vs I0, night2	night2/I2	night2/I0	k1-ratio:c-gcc-O3-pgo	ns_per_row	1.000360	0.969616	1.062351	0.0188	0.02	0.96	unresolved at measured resolution
+k1-controls-within-night	I2 vs I0, night2	night2/I2	night2/I0	k1-ratio:safe-std-gcc-o2	ns_per_row	0.997300	0.959216	1.067679	0.0188	0.02	0.96	unresolved at measured resolution
+k1-controls-within-night	I2 vs I0, night2	night2/I2	night2/I0	k1-ratio:raw-nostd-gcc-o2	ns_per_row	0.989431	0.957907	1.051619	0.0188	0.02	0.96	unresolved at measured resolution
+k1-controls-within-night	I3 vs I0, night2	night2/I3	night2/I0	k1-abs	ns_per_row	1.200741	1.125032	1.247385	0.0194	0.03	1.13	bias
+k1-controls-within-night	I3 vs I0, night2	night2/I3	night2/I0	k5	instr_per_row	0.999997	0.999997	0.999998	0.0000	0.01	0.67	bias (below size that matters)
+k1-controls-within-night	I3 vs I0, night2	night2/I3	night2/I0	k1-ratio:c-gcc-O3-pgo	ns_per_row	0.996483	0.955517	1.062826	0.0194	0.02	1.13	unresolved at measured resolution
+k1-controls-within-night	I3 vs I0, night2	night2/I3	night2/I0	k1-ratio:safe-std-gcc-o2	ns_per_row	0.989353	0.940646	1.061703	0.0194	0.02	1.13	unresolved at measured resolution
+k1-controls-within-night	I3 vs I0, night2	night2/I3	night2/I0	k1-ratio:raw-nostd-gcc-o2	ns_per_row	0.980503	0.936552	1.044244	0.0194	0.02	1.13	unresolved at measured resolution
+k1-controls-within-night	I1 vs I0, night3	night3/I1	night3/I0	k1-abs	ns_per_row	1.048941	1.018418	1.090336	0.0241	0.03	0.95	bias
+k1-controls-within-night	I1 vs I0, night3	night3/I1	night3/I0	k5	instr_per_row	0.999998	0.999997	0.999998	0.0000	0.01	0.67	bias (below size that matters)
+k1-controls-within-night	I1 vs I0, night3	night3/I1	night3/I0	k1-ratio:c-gcc-O3-pgo	ns_per_row	0.996711	0.960278	1.038278	0.0241	0.02	0.95	unresolved at measured resolution
+k1-controls-within-night	I1 vs I0, night3	night3/I1	night3/I0	k1-ratio:safe-std-gcc-o2	ns_per_row	0.989647	0.942535	1.032096	0.0241	0.02	0.95	unresolved at measured resolution
+k1-controls-within-night	I1 vs I0, night3	night3/I1	night3/I0	k1-ratio:raw-nostd-gcc-o2	ns_per_row	0.983713	0.944263	1.021963	0.0241	0.02	0.95	unresolved at measured resolution
+k1-controls-within-night	I2 vs I0, night3	night3/I2	night3/I0	k1-abs	ns_per_row	1.054017	0.986240	1.078766	0.0241	0.03	0.95	unresolved at measured resolution
+k1-controls-within-night	I2 vs I0, night3	night3/I2	night3/I0	k5	instr_per_row	0.999997	0.999997	0.999998	0.0000	0.01	0.67	bias (below size that matters)
+k1-controls-within-night	I2 vs I0, night3	night3/I2	night3/I0	k1-ratio:c-gcc-O3-pgo	ns_per_row	0.999357	0.970177	1.071432	0.0241	0.02	0.95	unresolved at measured resolution
+k1-controls-within-night	I2 vs I0, night3	night3/I2	night3/I0	k1-ratio:safe-std-gcc-o2	ns_per_row	0.986478	0.939227	1.052294	0.0241	0.02	0.95	unresolved at measured resolution
+k1-controls-within-night	I2 vs I0, night3	night3/I2	night3/I0	k1-ratio:raw-nostd-gcc-o2	ns_per_row	0.975178	0.952324	1.051406	0.0241	0.02	0.95	unresolved at measured resolution
+k1-controls-within-night	I3 vs I0, night3	night3/I3	night3/I0	k1-abs	ns_per_row	1.206402	1.157546	1.261662	0.0241	0.03	1.10	bias
+k1-controls-within-night	I3 vs I0, night3	night3/I3	night3/I0	k5	instr_per_row	0.999998	0.999997	0.999998	0.0000	0.01	1.00	bias (below size that matters)
+k1-controls-within-night	I3 vs I0, night3	night3/I3	night3/I0	k1-ratio:c-gcc-O3-pgo	ns_per_row	0.994018	0.944866	1.040462	0.0241	0.02	1.10	unresolved at measured resolution
+k1-controls-within-night	I3 vs I0, night3	night3/I3	night3/I0	k1-ratio:safe-std-gcc-o2	ns_per_row	0.981800	0.922092	1.040519	0.0241	0.02	1.10	unresolved at measured resolution
+k1-controls-within-night	I3 vs I0, night3	night3/I3	night3/I0	k1-ratio:raw-nostd-gcc-o2	ns_per_row	0.985133	0.941843	1.034280	0.0241	0.02	1.10	unresolved at measured resolution
+k1-night-shift	I0: night2 vs night1	night2/I0	night1/I0	k1-abs	ns_per_row	0.994387	0.950780	1.029117	0.0181	0.03	1.09	unresolved at measured resolution
+k1-night-shift	I0: night2 vs night1	night2/I0	night1/I0	k5	instr_per_row	1.000000	0.999999	1.000001	0.0000	0.01	1.50	no measurable effect
+k1-night-shift	I0: night2 vs night1	night2/I0	night1/I0	k1-ratio:c-gcc-O3-pgo	ns_per_row	1.006928	0.967896	1.054960	0.0181	0.02	1.09	unresolved at measured resolution
+k1-night-shift	I0: night2 vs night1	night2/I0	night1/I0	k1-ratio:safe-std-gcc-o2	ns_per_row	0.989050	0.948492	1.050468	0.0181	0.02	1.09	unresolved at measured resolution
+k1-night-shift	I0: night2 vs night1	night2/I0	night1/I0	k1-ratio:raw-nostd-gcc-o2	ns_per_row	1.012356	0.968688	1.060021	0.0181	0.02	1.09	unresolved at measured resolution
+k1-night-shift	I0: night3 vs night1	night3/I0	night1/I0	k1-abs	ns_per_row	0.986753	0.947377	1.029611	0.0241	0.03	1.07	unresolved at measured resolution
+k1-night-shift	I0: night3 vs night1	night3/I0	night1/I0	k5	instr_per_row	1.000000	1.000000	1.000001	0.0000	0.01	1.50	no measurable effect
+k1-night-shift	I0: night3 vs night1	night3/I0	night1/I0	k1-ratio:c-gcc-O3-pgo	ns_per_row	1.010088	0.966952	1.056520	0.0241	0.02	1.07	unresolved at measured resolution
+k1-night-shift	I0: night3 vs night1	night3/I0	night1/I0	k1-ratio:safe-std-gcc-o2	ns_per_row	1.004759	0.945333	1.060833	0.0241	0.02	1.07	unresolved at measured resolution
+k1-night-shift	I0: night3 vs night1	night3/I0	night1/I0	k1-ratio:raw-nostd-gcc-o2	ns_per_row	1.004279	0.952987	1.041984	0.0241	0.02	1.07	unresolved at measured resolution
+k1-night-shift	I2: night2 vs night1	night2/I2	night1/I2	k1-abs	ns_per_row	1.005378	0.935266	1.025450	0.0207	0.03	1.04	unresolved at measured resolution
+k1-night-shift	I2: night2 vs night1	night2/I2	night1/I2	k5	instr_per_row	1.000000	0.999999	1.000001	0.0000	0.01	1.00	no measurable effect
+k1-night-shift	I2: night2 vs night1	night2/I2	night1/I2	k1-ratio:c-gcc-O3-pgo	ns_per_row	0.993045	0.969449	1.064705	0.0207	0.02	1.04	unresolved at measured resolution
+k1-night-shift	I2: night2 vs night1	night2/I2	night1/I2	k1-ratio:safe-std-gcc-o2	ns_per_row	1.003729	0.967105	1.080357	0.0207	0.02	1.04	unresolved at measured resolution
+k1-night-shift	I2: night2 vs night1	night2/I2	night1/I2	k1-ratio:raw-nostd-gcc-o2	ns_per_row	0.991399	0.971252	1.069669	0.0207	0.02	1.04	unresolved at measured resolution
+k1-night-shift	I2: night3 vs night1	night3/I2	night1/I2	k1-abs	ns_per_row	1.000475	0.942822	1.019858	0.0207	0.03	1.01	unresolved at measured resolution
+k1-night-shift	I2: night3 vs night1	night3/I2	night1/I2	k5	instr_per_row	1.000000	0.999999	1.000001	0.0000	0.01	1.00	no measurable effect
+k1-night-shift	I2: night3 vs night1	night3/I2	night1/I2	k1-ratio:c-gcc-O3-pgo	ns_per_row	0.995163	0.970760	1.056166	0.0207	0.02	1.01	unresolved at measured resolution
+k1-night-shift	I2: night3 vs night1	night3/I2	night1/I2	k1-ratio:safe-std-gcc-o2	ns_per_row	1.008605	0.949755	1.064146	0.0207	0.02	1.01	unresolved at measured resolution
+k1-night-shift	I2: night3 vs night1	night3/I2	night1/I2	k1-ratio:raw-nostd-gcc-o2	ns_per_row	0.969322	0.948260	1.036460	0.0207	0.02	1.01	unresolved at measured resolution
+k1-night-shift	I3: night2 vs night1	night2/I3	night1/I3	k1-abs	ns_per_row	1.007447	0.935632	1.040504	0.0197	0.03	1.36	unresolved at measured resolution
+k1-night-shift	I3: night2 vs night1	night2/I3	night1/I3	k5	instr_per_row	1.000000	0.999999	1.000001	0.0000	0.01	1.60	no measurable effect
+k1-night-shift	I3: night2 vs night1	night2/I3	night1/I3	k1-ratio:c-gcc-O3-pgo	ns_per_row	1.010361	0.971087	1.088607	0.0197	0.02	1.36	unresolved at measured resolution
+k1-night-shift	I3: night2 vs night1	night2/I3	night1/I3	k1-ratio:safe-std-gcc-o2	ns_per_row	1.001946	0.951312	1.084539	0.0197	0.02	1.36	unresolved at measured resolution
+k1-night-shift	I3: night2 vs night1	night2/I3	night1/I3	k1-ratio:raw-nostd-gcc-o2	ns_per_row	0.999208	0.957230	1.072392	0.0197	0.02	1.36	unresolved at measured resolution
+k1-night-shift	I3: night3 vs night1	night3/I3	night1/I3	k1-abs	ns_per_row	1.004426	0.969899	1.048432	0.0197	0.03	1.30	unresolved at measured resolution
+k1-night-shift	I3: night3 vs night1	night3/I3	night1/I3	k5	instr_per_row	1.000001	0.999999	1.000001	0.0000	0.01	2.40	no measurable effect
+k1-night-shift	I3: night3 vs night1	night3/I3	night1/I3	k1-ratio:c-gcc-O3-pgo	ns_per_row	1.011025	0.963914	1.050967	0.0197	0.02	1.30	unresolved at measured resolution
+k1-night-shift	I3: night3 vs night1	night3/I3	night1/I3	k1-ratio:safe-std-gcc-o2	ns_per_row	1.010088	0.945723	1.064506	0.0197	0.02	1.30	unresolved at measured resolution
+k1-night-shift	I3: night3 vs night1	night3/I3	night1/I3	k1-ratio:raw-nostd-gcc-o2	ns_per_row	0.995917	0.946321	1.036182	0.0197	0.02	1.30	unresolved at measured resolution

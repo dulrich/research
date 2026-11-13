@@ -1,0 +1,241 @@
+kind	cell	ref	class	metric	n	n_ref	cell_median	ref_median	ratio	ci_lo	ci_hi	aa_halfwidth	rep_spread	floor	matters	disp_ratio	verdict	note
+load	night1/I0-L1-rep1	night1/I0-L0-full	k1-abs	ns_per_row	60	60	9.5739	8.9917	1.064737	1.021898	1.118427	0.0304	0.0133	0.0304	0.03	0.87	bias	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k5	instr_per_row	60	60	185.1013	185.1012	1.000000	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	1.00	no measurable effect	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8562	0.8651	0.989697	0.938039	1.039547	0.0304	0.0336	0.0336	0.02	0.87	unresolved at measured resolution	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8868	0.8935	0.992528	0.930662	1.060338	0.0304	0.0165	0.0304	0.02	0.87	unresolved at measured resolution	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0670	1.0751	0.992476	0.932315	1.047847	0.0304	0.0277	0.0304	0.02	0.87	unresolved at measured resolution	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k2	view_p95_ms	20	20	428.9000	427.9500	1.002220	0.988684	1.018328	0.0196	n/a	0.0196	0.10	0.45	no measurable effect	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k2	daemon_cpu_s	20	20	48.5100	52.3200	0.927179	0.922629	1.036329	0.0864	n/a	0.0864	0.10	22.94	noise only	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k2	dupes_scan_p95_ms	20	20	5500.0000	5250.0000	1.047619	1.037736	1.057692	0.0094	n/a	0.0094	0.10	0.00	bias (below size that matters)	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k2	link_scan_all_p95_ms	20	20	2250.0000	2850.0000	0.789474	0.617647	1.238095	0.4359	n/a	0.4359	0.10	1.05	unresolved at measured resolution	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k2	anon_settled_mib	20	20	72.5750	72.9050	0.995474	0.870338	1.017025	0.1463	n/a	0.1463	0.10	0.16	unresolved at measured resolution	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k3s	settled_rss_mib	20	20	415.8800	416.3550	0.998859	0.997660	0.999640	0.0016	0.0006	0.0016	0.05	1.64	no measurable effect	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k3s	peak_rss_mib	20	20	418.2200	418.6350	0.999009	0.998543	0.999272	0.0006	0.0002	0.0006	0.05	0.88	bias (below size that matters)	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	
+load	night1/I0-L1-rep1	night1/I0-L0-full	k4-warm	read_ms	20	20	40.6750	39.5750	1.027795	0.965558	1.056318	0.0742	0.0691	0.0742	0.10	0.16	no measurable effect	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k1-abs	ns_per_row	60	60	9.5637	8.9917	1.063608	0.984294	1.107957	0.0284	0.0133	0.0284	0.03	1.12	unresolved at measured resolution	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k5	instr_per_row	60	60	185.1012	185.1012	1.000000	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	1.00	no measurable effect	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8334	0.8651	0.963372	0.920683	1.051381	0.0284	0.0336	0.0336	0.02	1.12	unresolved at measured resolution	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8688	0.8935	0.972330	0.918265	1.057045	0.0284	0.0165	0.0284	0.02	1.12	unresolved at measured resolution	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0590	1.0751	0.985082	0.931959	1.062206	0.0284	0.0277	0.0284	0.02	1.12	unresolved at measured resolution	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k2	view_p95_ms	20	20	485.8000	427.9500	1.135179	1.116477	1.150803	0.0196	n/a	0.0196	0.10	0.72	bias	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k2	daemon_cpu_s	20	20	49.3900	52.3200	0.943998	0.940940	1.005161	0.0574	n/a	0.0574	0.10	22.83	noise only	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k2	dupes_scan_p95_ms	20	20	5500.0000	5250.0000	1.047619	1.037736	1.057692	0.0094	n/a	0.0094	0.10	0.00	bias (below size that matters)	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k2	link_scan_all_p95_ms	20	20	2200.0000	2850.0000	0.771930	0.647059	1.047619	0.4359	n/a	0.4359	0.10	0.15	unresolved at measured resolution	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k2	anon_settled_mib	20	20	71.9050	72.9050	0.986284	0.865158	1.079517	0.1589	n/a	0.1589	0.10	1.04	unresolved at measured resolution	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k3s	settled_rss_mib	20	20	415.6550	416.3550	0.998319	0.997504	0.998991	0.0013	0.0006	0.0013	0.05	1.03	bias (below size that matters)	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k3s	peak_rss_mib	20	20	417.9000	418.6350	0.998244	0.997910	0.998734	0.0007	0.0002	0.0007	0.05	1.07	bias (below size that matters)	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	
+load	night1/I0-L2-rep1	night1/I0-L0-full	k4-warm	read_ms	20	20	80.4350	39.5750	2.032470	1.908799	2.104344	0.0742	0.0691	0.0742	0.10	0.38	bias	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k1-abs	ns_per_row	60	60	9.2260	8.9917	1.026052	0.973890	1.083806	0.0284	0.0133	0.0284	0.03	1.07	unresolved at measured resolution	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k5	instr_per_row	60	60	185.1012	185.1012	1.000000	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	0.67	no measurable effect	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8495	0.8651	0.982002	0.930442	1.041187	0.0284	0.0336	0.0336	0.02	1.07	unresolved at measured resolution	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8787	0.8935	0.983435	0.926941	1.061491	0.0284	0.0165	0.0284	0.02	1.07	unresolved at measured resolution	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0714	1.0751	0.996589	0.927298	1.050314	0.0284	0.0277	0.0284	0.02	1.07	unresolved at measured resolution	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k3	anon_settled_mib	20	20	81.6700	88.8600	0.919086	0.846695	1.029405	0.1548	n/a	0.1548	0.10	1.07	unresolved at measured resolution	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k3	anon_peak_mib	20	20	125.2300	134.9850	0.927733	0.860613	1.040864	0.1290	n/a	0.1290	0.10	2.05	noise only	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k3	view_p95_ms	20	20	74.6000	76.8000	0.971354	0.940863	1.009823	0.0633	n/a	0.0633	0.10	1.60	no measurable effect	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k3	daemon_cpu_s	20	20	2.3000	2.2850	1.006565	0.997749	1.015385	0.0151	n/a	0.0151	0.10	0.99	no measurable effect	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k3s	settled_rss_mib	20	20	416.4750	416.3550	1.000288	0.999664	1.000926	0.0013	0.0006	0.0013	0.05	0.97	no measurable effect	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k3s	peak_rss_mib	20	20	418.3200	418.6350	0.999248	0.998615	0.999618	0.0008	0.0002	0.0008	0.05	1.45	no measurable effect	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k4-cold	read_ms	20	20	1009.9100	1031.3950	0.979169	0.947057	1.028924	0.0607	0.0218	0.0607	0.10	1.06	no measurable effect	
+load	night1/I0-L3-rep1	night1/I0-L0-full	k4-warm	read_ms	20	20	49.1900	39.5750	1.242956	1.168052	1.288472	0.0742	0.0691	0.0742	0.10	0.36	bias	
+load	night1/I0-L4-rep1	night1/I0-L0-full	k1-abs	ns_per_row	60	60	9.1043	8.9917	1.012517	0.962415	1.045952	0.0363	0.0133	0.0363	0.03	1.04	unresolved at measured resolution	
+load	night1/I0-L4-rep1	night1/I0-L0-full	k5	instr_per_row	60	60	185.1012	185.1012	1.000000	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	1.00	no measurable effect	
+load	night1/I0-L4-rep1	night1/I0-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8387	0.8651	0.969437	0.929217	1.031934	0.0363	0.0336	0.0363	0.02	1.04	unresolved at measured resolution	
+load	night1/I0-L4-rep1	night1/I0-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8957	0.8935	1.002420	0.916974	1.065981	0.0363	0.0165	0.0363	0.02	1.04	unresolved at measured resolution	
+load	night1/I0-L4-rep1	night1/I0-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0464	1.0751	0.973319	0.931961	1.025880	0.0363	0.0277	0.0363	0.02	1.04	unresolved at measured resolution	
+load	night1/I0-L4-rep1	night1/I0-L0-full	k4-cold	read_ms	20	20	1158.1900	1031.3950	1.122935	1.091231	1.207434	0.0815	0.0218	0.0815	0.10	1.48	bias	
+load	night1/I0-L4-rep1	night1/I0-L0-full	k4-warm	read_ms	20	20	42.4550	39.5750	1.072773	1.008312	1.099870	0.0742	0.0691	0.0742	0.10	0.07	no measurable effect	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k1-abs	ns_per_row	60	60	9.7319	9.6527	1.008200	0.949160	1.051607	0.0393	0.0217	0.0393	0.03	0.80	unresolved at measured resolution	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k5	instr_per_row	60	60	185.1008	185.1007	1.000001	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	2.00	no measurable effect	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8530	0.8402	1.015281	0.968005	1.082148	0.0393	0.0123	0.0393	0.02	0.80	unresolved at measured resolution	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8802	0.8867	0.992672	0.951013	1.102380	0.0393	0.0419	0.0419	0.02	0.80	unresolved at measured resolution	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0520	1.0356	1.015904	0.958179	1.080890	0.0393	0.0260	0.0393	0.02	0.80	unresolved at measured resolution	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k2	view_p95_ms	20	20	418.2500	418.9000	0.998448	0.975738	1.013922	0.0460	n/a	0.0460	0.10	0.35	no measurable effect	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k2	daemon_cpu_s	20	20	47.9250	52.6050	0.911035	0.908599	1.020331	0.1151	n/a	0.1151	0.10	22.09	noise only	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k2	dupes_scan_p95_ms	20	20	5400.0000	5300.0000	1.018868	1.018868	1.018868	0.0138	n/a	0.0138	0.10	Infinity	bias (below size that matters)	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k2	link_scan_all_p95_ms	20	20	2100.0000	2100.0000	1.000000	0.792453	1.000000	0.3720	n/a	0.3720	0.10	0.00	unresolved at measured resolution	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k2	anon_settled_mib	20	20	71.1750	78.6350	0.905131	0.846887	1.000211	0.1678	n/a	0.1678	0.10	0.11	unresolved at measured resolution	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k3s	settled_rss_mib	20	20	415.5500	415.4500	1.000241	0.999459	1.001228	0.0015	0.0001	0.0015	0.05	1.19	no measurable effect	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k3s	peak_rss_mib	20	20	417.8850	417.8450	1.000096	0.999761	1.000347	0.0005	0.0001	0.0005	0.05	0.80	no measurable effect	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	
+load	night2/I2-L1-rep1	night2/I2-L0-full	k4-warm	read_ms	20	20	39.6950	40.9450	0.969471	0.963071	0.973681	0.0145	0.0432	0.0432	0.10	1.09	no measurable effect	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k1-abs	ns_per_row	60	60	9.7293	9.6527	1.007930	0.943998	1.037385	0.0351	0.0217	0.0351	0.03	0.88	unresolved at measured resolution	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k5	instr_per_row	60	60	185.1007	185.1007	1.000000	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	1.00	no measurable effect	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8333	0.8402	0.991741	0.957112	1.065466	0.0351	0.0123	0.0351	0.02	0.88	unresolved at measured resolution	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8833	0.8867	0.996143	0.951874	1.077396	0.0351	0.0419	0.0419	0.02	0.88	unresolved at measured resolution	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0342	1.0356	0.998663	0.955851	1.074503	0.0351	0.0260	0.0351	0.02	0.88	unresolved at measured resolution	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k2	view_p95_ms	20	20	478.5000	418.9000	1.142277	1.110223	1.184807	0.0460	n/a	0.0460	0.10	1.16	bias	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k2	daemon_cpu_s	20	20	54.3950	52.6050	1.034027	1.032178	1.037545	0.0054	n/a	0.0054	0.10	0.66	bias (below size that matters)	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k2	dupes_scan_p95_ms	20	20	5400.0000	5300.0000	1.018868	1.018868	1.037736	0.0137	n/a	0.0137	0.10	Infinity	bias (below size that matters)	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k2	link_scan_all_p95_ms	20	20	2650.0000	2100.0000	1.261905	0.916667	1.666667	0.4517	n/a	0.4517	0.10	1.14	unresolved at measured resolution	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k2	anon_settled_mib	20	20	71.9900	78.6350	0.915496	0.856981	1.022109	0.1678	n/a	0.1678	0.10	1.08	unresolved at measured resolution	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k3s	settled_rss_mib	20	20	415.3750	415.4500	0.999819	0.999086	1.001108	0.0015	0.0001	0.0015	0.05	1.01	no measurable effect	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k3s	peak_rss_mib	20	20	417.6150	417.8450	0.999450	0.999151	0.999761	0.0005	0.0001	0.0005	0.05	0.79	bias (below size that matters)	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	
+load	night2/I2-L2-rep1	night2/I2-L0-full	k4-warm	read_ms	20	20	78.5350	40.9450	1.918061	1.887763	1.942047	0.0242	0.0432	0.0432	0.10	3.46	bias	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k1-abs	ns_per_row	60	60	9.6105	9.6527	0.995623	0.954571	1.037316	0.0319	0.0217	0.0319	0.03	0.87	unresolved at measured resolution	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k5	instr_per_row	60	60	185.1007	185.1007	1.000000	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	3.00	no measurable effect	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8448	0.8402	1.005474	0.943564	1.057054	0.0319	0.0123	0.0319	0.02	0.87	unresolved at measured resolution	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8737	0.8867	0.985316	0.940904	1.062127	0.0319	0.0419	0.0419	0.02	0.87	unresolved at measured resolution	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0259	1.0356	0.990671	0.940553	1.054320	0.0319	0.0260	0.0319	0.02	0.87	unresolved at measured resolution	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k3	anon_settled_mib	20	20	96.3050	90.9850	1.058471	0.945082	1.262072	0.2014	n/a	0.2014	0.10	0.70	unresolved at measured resolution	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k3	anon_peak_mib	20	20	139.3800	135.8900	1.025683	0.947851	1.113706	0.1413	n/a	0.1413	0.10	0.79	unresolved at measured resolution	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k3	view_p95_ms	20	20	71.4000	74.5500	0.957746	0.950667	0.982131	0.0282	n/a	0.0282	0.10	0.20	bias (below size that matters)	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k3	daemon_cpu_s	20	20	2.2500	2.2900	0.982533	0.978261	0.986842	0.0088	n/a	0.0088	0.10	1.02	bias (below size that matters)	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k3-120	anon_settled_mib	20	20	82.0350	81.7550	1.003425	0.798728	1.146650	0.2569	n/a	0.2569	0.10	1.15	unresolved at measured resolution	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k3-120	anon_peak_mib	20	20	139.6650	136.5300	1.022962	0.971688	1.173508	0.0843	n/a	0.0843	0.10	0.55	unresolved at measured resolution	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k3-120	view_p95_ms	20	20	71.2500	74.1000	0.961538	0.950667	0.978709	0.0261	n/a	0.0261	0.10	0.30	bias (below size that matters)	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k3-120	daemon_cpu_s	20	20	2.2800	2.3450	0.972281	0.965957	0.974468	0.0066	n/a	0.0066	0.10	1.03	bias (below size that matters)	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k3s	settled_rss_mib	20	20	415.4950	415.4500	1.000108	0.999170	1.000963	0.0015	0.0001	0.0015	0.05	1.09	no measurable effect	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k3s	peak_rss_mib	20	20	417.8150	417.8450	0.999928	0.999545	1.000263	0.0005	0.0001	0.0005	0.05	0.93	no measurable effect	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k4-cold	read_ms	20	20	930.0350	919.1150	1.011881	0.972107	1.039663	0.0508	0.1101	0.1101	0.10	0.48	no measurable effect	
+load	night2/I2-L3-rep1	night2/I2-L0-full	k4-warm	read_ms	20	20	43.3600	40.9450	1.058982	1.052940	1.066381	0.0127	0.0432	0.0432	0.10	1.71	bias (below size that matters)	
+load	night2/I2-L4-rep1	night2/I2-L0-full	k1-abs	ns_per_row	60	60	9.5944	9.6527	0.993955	0.914510	1.029702	0.0289	0.0217	0.0289	0.03	0.90	unresolved at measured resolution	
+load	night2/I2-L4-rep1	night2/I2-L0-full	k5	instr_per_row	60	60	185.1008	185.1007	1.000001	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	2.00	no measurable effect	
+load	night2/I2-L4-rep1	night2/I2-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8354	0.8402	0.994247	0.946393	1.077108	0.0289	0.0123	0.0289	0.02	0.90	unresolved at measured resolution	
+load	night2/I2-L4-rep1	night2/I2-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8810	0.8867	0.993564	0.950802	1.097161	0.0289	0.0419	0.0419	0.02	0.90	unresolved at measured resolution	
+load	night2/I2-L4-rep1	night2/I2-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0592	1.0356	1.022814	0.965171	1.107960	0.0289	0.0260	0.0289	0.02	0.90	unresolved at measured resolution	
+load	night2/I2-L4-rep1	night2/I2-L0-full	k4-cold	read_ms	20	20	1181.5400	919.1150	1.285519	1.195436	1.371997	0.1048	0.1101	0.1101	0.10	2.28	bias	
+load	night2/I2-L4-rep1	night2/I2-L0-full	k4-warm	read_ms	20	20	41.1900	40.9450	1.005984	0.998295	1.019804	0.0175	0.0432	0.0432	0.10	2.40	no measurable effect	
+load	night3/I3-L1-rep1	night3/I3-L0-full	k1-abs	ns_per_row	60	60	10.7590	10.8839	0.988524	0.943481	1.028850	0.0318	0.0304	0.0318	0.03	1.19	unresolved at measured resolution	
+load	night3/I3-L1-rep1	night3/I3-L0-full	k5	instr_per_row	60	60	185.1008	185.1007	1.000001	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	1.60	no measurable effect	
+load	night3/I3-L1-rep1	night3/I3-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8488	0.8256	1.028170	0.970522	1.087102	0.0318	0.0445	0.0445	0.02	1.19	unresolved at measured resolution	
+load	night3/I3-L1-rep1	night3/I3-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8724	0.8973	0.972206	0.926012	1.053016	0.0318	0.0204	0.0318	0.02	1.19	unresolved at measured resolution	
+load	night3/I3-L1-rep1	night3/I3-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0511	1.0274	1.023116	0.960054	1.082598	0.0318	0.0411	0.0411	0.02	1.19	unresolved at measured resolution	
+load	night3/I3-L1-rep1	night3/I3-L0-full	k3s	settled_rss_mib	20	20	416.0000	415.9150	1.000204	0.999038	1.001191	0.0017	0.0007	0.0017	0.05	1.12	no measurable effect	
+load	night3/I3-L1-rep1	night3/I3-L0-full	k3s	peak_rss_mib	20	20	417.8700	417.7700	1.000239	0.999856	1.000598	0.0006	0.0002	0.0006	0.05	1.90	no measurable effect	
+load	night3/I3-L1-rep1	night3/I3-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	
+load	night3/I3-L1-rep1	night3/I3-L0-full	k4-warm	read_ms	20	20	43.9950	43.7400	1.005830	0.997619	1.011916	0.0184	0.4068	0.4068	0.10	0.96	no measurable effect	
+load	night3/I3-L2-rep1	night3/I3-L0-full	k1-abs	ns_per_row	60	60	10.6192	10.8839	0.975675	0.944569	1.040984	0.0301	0.0304	0.0304	0.03	1.10	unresolved at measured resolution	
+load	night3/I3-L2-rep1	night3/I3-L0-full	k5	instr_per_row	60	60	185.1008	185.1007	1.000001	1.000000	1.000001	0.0000	0.0000	0.0000	0.01	1.60	no measurable effect	
+load	night3/I3-L2-rep1	night3/I3-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8595	0.8256	1.041066	0.967062	1.081640	0.0301	0.0445	0.0445	0.02	1.10	unresolved at measured resolution	
+load	night3/I3-L2-rep1	night3/I3-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8963	0.8973	0.998852	0.934466	1.072277	0.0301	0.0204	0.0301	0.02	1.10	unresolved at measured resolution	
+load	night3/I3-L2-rep1	night3/I3-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0514	1.0274	1.023336	0.953999	1.072777	0.0301	0.0411	0.0411	0.02	1.10	unresolved at measured resolution	
+load	night3/I3-L2-rep1	night3/I3-L0-full	k3s	settled_rss_mib	20	20	415.7300	415.9150	0.999555	0.999087	1.000446	0.0013	0.0007	0.0013	0.05	0.35	no measurable effect	
+load	night3/I3-L2-rep1	night3/I3-L0-full	k3s	peak_rss_mib	20	20	417.6050	417.7700	0.999605	0.999390	0.999976	0.0004	0.0002	0.0004	0.05	1.32	no measurable effect	
+load	night3/I3-L2-rep1	night3/I3-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	
+load	night3/I3-L2-rep1	night3/I3-L0-full	k4-warm	read_ms	20	20	83.2800	43.7400	1.903978	1.889961	1.922627	0.0182	0.4068	0.4068	0.10	1.16	bias	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k1-abs	ns_per_row	60	60	10.7561	10.8839	0.988258	0.965716	1.025691	0.0271	0.0304	0.0304	0.03	0.89	unresolved at measured resolution	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k5	instr_per_row	60	60	185.1008	185.1007	1.000000	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	1.00	no measurable effect	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8423	0.8256	1.020260	0.968586	1.056364	0.0271	0.0445	0.0445	0.02	0.89	unresolved at measured resolution	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.9170	0.8973	1.021927	0.951743	1.119668	0.0271	0.0204	0.0271	0.02	0.89	unresolved at measured resolution	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0458	1.0274	1.017954	0.965063	1.059756	0.0271	0.0411	0.0411	0.02	0.89	unresolved at measured resolution	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k3	anon_settled_mib	20	20	87.1550	85.1900	1.023066	0.833667	1.218383	0.2573	n/a	0.2573	0.10	0.56	unresolved at measured resolution	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k3	anon_peak_mib	20	20	136.9750	130.9750	1.045810	0.904477	1.212816	0.1938	n/a	0.1938	0.10	0.61	unresolved at measured resolution	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k3	view_p95_ms	20	20	79.3000	78.3000	1.012771	1.003171	1.020592	0.0124	n/a	0.0124	0.10	0.76	bias (below size that matters)	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k3	daemon_cpu_s	20	20	2.5300	2.5300	1.000000	0.996047	1.001980	0.0080	n/a	0.0080	0.10	0.44	no measurable effect	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k3s	settled_rss_mib	20	20	415.8550	415.9150	0.999856	0.999447	1.001144	0.0013	0.0007	0.0013	0.05	0.82	no measurable effect	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k3s	peak_rss_mib	20	20	417.8000	417.7700	1.000072	0.999725	1.000347	0.0005	0.0002	0.0005	0.05	1.63	no measurable effect	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k4-cold	read_ms	20	20	813.0250	808.9300	1.005062	0.928362	1.057720	0.1549	0.3187	0.3187	0.10	1.05	no measurable effect	
+load	night3/I3-L3-rep1	night3/I3-L0-full	k4-warm	read_ms	20	20	46.5450	43.7400	1.064129	1.054560	1.069377	0.0182	0.4068	0.4068	0.10	1.06	no measurable effect	
+load	night3/I3-L4-rep1	night3/I3-L0-full	k1-abs	ns_per_row	60	60	10.9693	10.8839	1.007846	0.954215	1.051400	0.0280	0.0304	0.0304	0.03	1.12	unresolved at measured resolution	
+load	night3/I3-L4-rep1	night3/I3-L0-full	k5	instr_per_row	60	60	185.1007	185.1007	1.000000	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	0.80	no measurable effect	
+load	night3/I3-L4-rep1	night3/I3-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8345	0.8256	1.010832	0.955724	1.074071	0.0280	0.0445	0.0445	0.02	1.12	unresolved at measured resolution	
+load	night3/I3-L4-rep1	night3/I3-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8723	0.8973	0.972088	0.923069	1.070611	0.0280	0.0204	0.0280	0.02	1.12	unresolved at measured resolution	
+load	night3/I3-L4-rep1	night3/I3-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0255	1.0274	0.998186	0.947956	1.066343	0.0280	0.0411	0.0411	0.02	1.12	unresolved at measured resolution	
+load	night3/I3-L4-rep1	night3/I3-L0-full	k4-cold	read_ms	20	20	1162.1550	808.9300	1.436657	1.328650	1.535367	0.1549	0.3187	0.3187	0.10	1.57	bias	
+load	night3/I3-L4-rep1	night3/I3-L0-full	k4-warm	read_ms	20	20	44.5350	43.7400	1.018176	1.005914	1.031977	0.0234	0.4068	0.4068	0.10	1.85	no measurable effect	
+llive	live/I0-Llive-day	night1/I0-L0-full	k1-abs	ns_per_row	60	60	9.0536	8.9917	1.006873	0.969060	1.064699	0.0284	0.0133	0.0284	0.03	0.92	unresolved at measured resolution	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k5	instr_per_row	60	60	185.1012	185.1012	1.000000	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	0.33	no measurable effect	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8515	0.8651	0.984275	0.923978	1.031610	0.0284	0.0336	0.0336	0.02	0.92	unresolved at measured resolution	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.9086	0.8935	1.016908	0.939634	1.075723	0.0284	0.0165	0.0284	0.02	0.92	unresolved at measured resolution	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0617	1.0751	0.987549	0.930612	1.034980	0.0284	0.0277	0.0284	0.02	0.92	unresolved at measured resolution	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k2	view_p95_ms	20	20	432.7500	427.9500	1.011216	0.997578	1.027043	0.0196	n/a	0.0196	0.10	0.53	no measurable effect	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k2	daemon_cpu_s	20	20	52.5050	52.3200	1.003536	0.998089	1.007853	0.0072	n/a	0.0072	0.10	2.09	no measurable effect	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k2	dupes_scan_p95_ms	20	20	5300.0000	5250.0000	1.009524	0.990476	1.019231	0.0096	n/a	0.0096	0.10	0.99	no measurable effect	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k2	link_scan_all_p95_ms	20	20	2650.0000	2850.0000	0.929825	0.647059	1.476190	0.4359	n/a	0.4359	0.10	1.16	unresolved at measured resolution	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k2	anon_settled_mib	20	20	73.3700	72.9050	1.006378	0.879420	1.163839	0.1463	n/a	0.1463	0.10	1.00	unresolved at measured resolution	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k3	anon_settled_mib	20	20	81.9450	88.8600	0.922181	0.776648	1.069933	0.2642	n/a	0.2642	0.10	1.59	unresolved at measured resolution	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k3	anon_peak_mib	20	20	130.7000	134.9850	0.968256	0.843957	1.043316	0.1334	n/a	0.1334	0.10	1.82	unresolved at measured resolution	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k3	view_p95_ms	20	20	78.6500	76.8000	1.024089	0.992366	1.068717	0.0696	n/a	0.0696	0.10	2.10	noise only	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k3	daemon_cpu_s	20	20	2.3500	2.2850	1.028446	1.013072	1.043956	0.0319	n/a	0.0319	0.10	2.29	no measurable effect	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k3s	settled_rss_mib	20	20	416.6600	416.3550	1.000733	0.999976	1.001405	0.0013	0.0006	0.0013	0.05	0.97	no measurable effect	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k3s	peak_rss_mib	20	20	418.6000	418.6350	0.999916	0.999618	1.000155	0.0006	0.0002	0.0006	0.05	0.41	no measurable effect	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	observational (day vs night)
+llive	live/I0-Llive-day	night1/I0-L0-full	k4-cold-local	read_ms			n/a	n/a	n/a	n/a	n/a	n/a	n/a	n/a	n/a	n/a	no matching reference	class not run in night cells
+llive	live/I0-Llive-day	night1/I0-L0-full	k4-warm	read_ms	20	20	59.3100	39.5750	1.498673	1.408119	1.546468	0.0742	0.0691	0.0742	0.10	0.43	bias	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k1-abs	ns_per_row	60	60	9.5249	9.6527	0.986755	0.931970	1.027608	0.0306	0.0217	0.0306	0.03	0.84	unresolved at measured resolution	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k5	instr_per_row	60	60	185.1008	185.1007	1.000001	0.999999	1.000001	0.0000	0.0000	0.0000	0.01	2.00	no measurable effect	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8492	0.8402	1.010674	0.964772	1.074986	0.0306	0.0123	0.0306	0.02	0.84	unresolved at measured resolution	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8965	0.8867	1.011001	0.939761	1.081821	0.0306	0.0419	0.0419	0.02	0.84	unresolved at measured resolution	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0628	1.0356	1.026288	0.970561	1.093506	0.0306	0.0260	0.0306	0.02	0.84	unresolved at measured resolution	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k2	view_p95_ms	20	20	426.9500	418.9000	1.019217	0.992428	1.065896	0.0636	n/a	0.0636	0.10	1.64	no measurable effect	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k2	daemon_cpu_s	20	20	52.8050	52.6050	1.003802	0.996201	1.008375	0.0524	n/a	0.0524	0.10	1.98	no measurable effect	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k2	dupes_scan_p95_ms	20	20	5350.0000	5300.0000	1.009434	1.000000	1.018868	0.0235	n/a	0.0235	0.10	Infinity	no measurable effect	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k2	link_scan_all_p95_ms	20	20	3050.0000	2100.0000	1.452381	0.900000	1.738095	0.5257	n/a	0.5257	0.10	1.19	unresolved at measured resolution	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k2	anon_settled_mib	20	20	72.6200	78.6350	0.923507	0.851719	1.138106	0.1678	n/a	0.1678	0.10	1.07	unresolved at measured resolution	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k3	anon_settled_mib	20	20	91.8900	90.9850	1.009947	0.869718	1.200313	0.2014	n/a	0.2014	0.10	0.86	unresolved at measured resolution	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k3	anon_peak_mib	20	20	136.1650	135.8900	1.002024	0.910047	1.087325	0.1413	n/a	0.1413	0.10	1.00	no measurable effect	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k3	view_p95_ms	20	20	73.4000	74.5500	0.984574	0.974086	1.010997	0.0282	n/a	0.0282	0.10	0.81	no measurable effect	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k3	daemon_cpu_s	20	20	2.3100	2.2900	1.008734	0.995633	1.017544	0.0184	n/a	0.0184	0.10	2.48	no measurable effect	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k3s	settled_rss_mib	20	20	415.4850	415.4500	1.000084	0.998509	1.001144	0.0018	0.0001	0.0018	0.05	1.65	no measurable effect	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k3s	peak_rss_mib	20	20	417.8700	417.8450	1.000060	0.999749	1.000311	0.0005	0.0001	0.0005	0.05	0.66	no measurable effect	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	observational (day vs night)
+llive	live/I2-Llive-day	night2/I2-L0-full	k4-cold-local	read_ms			n/a	n/a	n/a	n/a	n/a	n/a	n/a	n/a	n/a	n/a	no matching reference	class not run in night cells
+llive	live/I2-Llive-day	night2/I2-L0-full	k4-warm	read_ms	20	20	39.3950	40.9450	0.962144	0.952590	0.999144	0.0358	0.0432	0.0432	0.10	5.96	no measurable effect	observational (day vs night)
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k1-abs	ns_per_row	60	60	9.1971	8.9917	1.022838	0.984775	1.082958	0.0354	0.0133	0.0354	0.03	1.21	unresolved at measured resolution	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k5	instr_per_row	60	60	185.1007	185.1012	0.999997	0.999997	0.999998	0.0000	0.0000	0.0000	0.01	0.33	bias (below size that matters)	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8651	0.8651	0.999937	0.929755	1.043015	0.0354	0.0336	0.0354	0.02	1.21	unresolved at measured resolution	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.9197	0.8935	1.029304	0.946789	1.083148	0.0354	0.0165	0.0354	0.02	1.21	unresolved at measured resolution	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0693	1.0751	0.994674	0.920333	1.032954	0.0354	0.0277	0.0354	0.02	1.21	unresolved at measured resolution	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k2	view_p95_ms	20	20	413.4000	427.9500	0.966001	0.951908	0.991205	0.0277	n/a	0.0277	0.10	1.20	bias (below size that matters)	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k2	daemon_cpu_s	20	20	52.1900	52.3200	0.997515	0.995042	1.000574	0.0048	n/a	0.0048	0.10	0.71	no measurable effect	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k2	dupes_scan_p95_ms	20	20	5300.0000	5250.0000	1.009524	1.000000	1.019231	0.0094	n/a	0.0094	0.10	0.00	no measurable effect	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k2	link_scan_all_p95_ms	20	20	2100.0000	2850.0000	0.736842	0.617647	1.057692	0.4359	n/a	0.4359	0.10	1.36	unresolved at measured resolution	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k2	anon_settled_mib	20	20	83.0900	72.9050	1.139702	0.989576	1.169193	0.1463	n/a	0.1463	0.10	0.79	unresolved at measured resolution	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k3	anon_settled_mib	20	20	92.8500	88.8600	1.044902	0.936935	1.118849	0.1251	n/a	0.1251	0.10	0.75	unresolved at measured resolution	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k3	anon_peak_mib	20	20	136.3900	134.9850	1.010409	0.976954	1.067999	0.0834	n/a	0.0834	0.10	0.71	no measurable effect	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k3	view_p95_ms	20	20	73.4000	76.8000	0.955729	0.931992	0.979673	0.0379	n/a	0.0379	0.10	0.99	bias (below size that matters)	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k3	daemon_cpu_s	20	20	2.2650	2.2850	0.991247	0.984749	1.000000	0.0142	n/a	0.0142	0.10	0.58	no measurable effect	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k3s	settled_rss_mib	20	20	415.4600	416.3550	0.997850	0.997118	0.998919	0.0015	0.0006	0.0015	0.05	1.61	bias (below size that matters)	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k3s	peak_rss_mib	20	20	417.8750	418.6350	0.998185	0.997827	0.998483	0.0006	0.0002	0.0006	0.05	0.79	bias (below size that matters)	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k4-cold	read_ms	20	20	1071.1800	1031.3950	1.038574	1.004729	1.090343	0.0607	0.0218	0.0607	0.10	0.59	no measurable effect	crosses night3 vs night1
+controls-crossnight	night3/I1-L0-full	night1/I0-L0-full	k4-warm	read_ms	20	20	40.1500	39.5750	1.014529	0.949169	1.046736	0.0742	0.0691	0.0742	0.10	0.47	no measurable effect	crosses night3 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k1-abs	ns_per_row	60	60	9.6527	8.9917	1.073512	1.018968	1.134450	0.0284	0.0133	0.0284	0.03	1.31	bias	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k5	instr_per_row	60	60	185.1007	185.1012	0.999997	0.999997	0.999998	0.0000	0.0000	0.0000	0.01	0.33	bias (below size that matters)	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8402	0.8651	0.971207	0.912514	1.032294	0.0284	0.0336	0.0336	0.02	1.31	unresolved at measured resolution	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8867	0.8935	0.992403	0.919042	1.052085	0.0284	0.0165	0.0284	0.02	1.31	unresolved at measured resolution	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0356	1.0751	0.963279	0.902138	1.021107	0.0284	0.0277	0.0284	0.02	1.31	unresolved at measured resolution	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k2	view_p95_ms	20	20	418.9000	427.9500	0.978853	0.962240	1.003882	0.0460	n/a	0.0460	0.10	1.54	no measurable effect	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k2	daemon_cpu_s	20	20	52.6050	52.3200	1.005447	1.001720	1.008035	0.0054	n/a	0.0054	0.10	1.06	bias (below size that matters)	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k2	dupes_scan_p95_ms	20	20	5300.0000	5250.0000	1.009524	1.000000	1.019231	0.0094	n/a	0.0094	0.10	0.00	no measurable effect	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k2	link_scan_all_p95_ms	20	20	2100.0000	2850.0000	0.736842	0.617647	1.127660	0.4359	n/a	0.4359	0.10	0.97	unresolved at measured resolution	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k2	anon_settled_mib	20	20	78.6350	72.9050	1.078595	0.912667	1.164717	0.1678	n/a	0.1678	0.10	0.98	unresolved at measured resolution	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k3	anon_settled_mib	20	20	90.9850	88.8600	1.023914	0.857693	1.120711	0.2014	n/a	0.2014	0.10	1.38	unresolved at measured resolution	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k3	anon_peak_mib	20	20	135.8900	134.9850	1.006704	0.924773	1.063454	0.1413	n/a	0.1413	0.10	1.33	no measurable effect	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k3	view_p95_ms	20	20	74.5500	76.8000	0.970703	0.943152	0.983520	0.0379	n/a	0.0379	0.10	0.96	no measurable effect	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k3	daemon_cpu_s	20	20	2.2900	2.2850	1.002188	0.993478	1.010989	0.0142	n/a	0.0142	0.10	0.57	no measurable effect	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k3-120	anon_settled_mib	20	20	81.7550	71.4200	1.144707	0.994029	1.328353	0.2569	n/a	0.2569	0.10	0.78	unresolved at measured resolution	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k3-120	anon_peak_mib	20	20	136.5300	135.4950	1.007639	0.888832	1.182047	0.1417	n/a	0.1417	0.10	1.08	unresolved at measured resolution	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k3-120	view_p95_ms	20	20	74.1000	75.9500	0.975642	0.956094	0.988719	0.0288	n/a	0.0288	0.10	1.15	no measurable effect	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k3-120	daemon_cpu_s	20	20	2.3450	2.3250	1.008602	1.004292	1.015086	0.0107	n/a	0.0107	0.10	1.32	no measurable effect	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k3s	settled_rss_mib	20	20	415.4500	416.3550	0.997826	0.997035	0.998775	0.0015	0.0006	0.0015	0.05	1.21	bias (below size that matters)	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k3s	peak_rss_mib	20	20	417.8450	418.6350	0.998113	0.997767	0.998435	0.0006	0.0002	0.0006	0.05	0.97	bias (below size that matters)	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k4-cold	read_ms	20	20	919.1150	1031.3950	0.891138	0.864962	0.945977	0.0607	0.0218	0.0607	0.10	0.80	bias	crosses night2 vs night1
+controls-crossnight	night2/I2-L0-full	night1/I0-L0-full	k4-warm	read_ms	20	20	40.9450	39.5750	1.034618	0.972338	1.062016	0.0742	0.0691	0.0742	0.10	0.09	no measurable effect	crosses night2 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k1-abs	ns_per_row	60	60	10.8839	8.9917	1.210432	1.146511	1.252122	0.0284	0.0133	0.0284	0.03	1.02	bias	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k5	instr_per_row	60	60	185.1007	185.1012	0.999997	0.999997	0.999998	0.0000	0.0000	0.0000	0.01	0.42	bias (below size that matters)	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k1-ratio:c-gcc-O3-pgo	ns_per_row	60	60	0.8256	0.8651	0.954314	0.915738	1.018546	0.0284	0.0336	0.0336	0.02	1.02	unresolved at measured resolution	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k1-ratio:safe-std-gcc-o2	ns_per_row	60	60	0.8973	0.8935	1.004233	0.924770	1.064551	0.0284	0.0165	0.0284	0.02	1.02	unresolved at measured resolution	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k1-ratio:raw-nostd-gcc-o2	ns_per_row	60	60	1.0274	1.0751	0.955656	0.905325	1.015372	0.0284	0.0277	0.0284	0.02	1.02	unresolved at measured resolution	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k2	view_p95_ms	20	20	456.1000	427.9500	1.065779	1.051605	1.081483	0.0337	n/a	0.0337	0.10	0.32	bias (below size that matters)	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k2	daemon_cpu_s	20	20	52.2450	52.3200	0.998567	0.991112	1.001341	0.0106	n/a	0.0106	0.10	2.36	no measurable effect	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k2	dupes_scan_p95_ms	20	20	6000.0000	5250.0000	1.142857	1.132075	1.153846	0.0094	n/a	0.0094	0.10	0.00	bias	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k2	link_scan_all_p95_ms	20	20	2500.0000	2850.0000	0.877193	0.676471	1.500000	0.4359	n/a	0.4359	0.10	1.14	unresolved at measured resolution	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k2	anon_settled_mib	20	20	93.7100	72.9050	1.285371	1.122803	1.328225	0.1463	n/a	0.1463	0.10	0.51	bias	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k3	anon_settled_mib	20	20	85.1900	88.8600	0.958699	0.816649	1.133985	0.2573	n/a	0.2573	0.10	2.02	noise only	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k3	anon_peak_mib	20	20	130.9750	134.9850	0.970293	0.834143	1.073134	0.1938	n/a	0.1938	0.10	2.57	noise only	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k3	view_p95_ms	20	20	78.3000	76.8000	1.019531	0.996154	1.033399	0.0379	n/a	0.0379	0.10	0.40	no measurable effect	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k3	daemon_cpu_s	20	20	2.5300	2.2850	1.107221	1.100000	1.114537	0.0142	n/a	0.0142	0.10	0.58	bias	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k3s	settled_rss_mib	20	20	415.9150	416.3550	0.998943	0.997935	0.999460	0.0013	0.0006	0.0013	0.05	1.44	no measurable effect	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k3s	peak_rss_mib	20	20	417.7700	418.6350	0.997934	0.997588	0.998184	0.0006	0.0002	0.0006	0.05	0.59	bias (below size that matters)	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k3s	arenas	20	20	13.0000	13.0000	1.000000	1.000000	1.000000	0.0000	0.0000	0.0000	0.05	1.00	no measurable effect	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k4-cold	read_ms	20	20	808.9300	1031.3950	0.784307	0.761112	0.840431	0.1549	0.0218	0.1549	0.10	1.17	bias	crosses night3 vs night1
+controls-crossnight	night3/I3-L0-full	night1/I0-L0-full	k4-warm	read_ms	20	20	43.7400	39.5750	1.105243	1.038708	1.136187	0.0742	0.0691	0.0742	0.10	0.14	bias	crosses night3 vs night1

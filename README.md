@@ -13,7 +13,7 @@ Each folder holds one investigation with its working notes and final report.
 
 ### [Which live-workstation confounds matter for which measurement class](live-host-measurement-confounds/) (2026-11-11)
 
-A live developer workstation is not a quiet benchmark machine. This investigation measures, per measurement class (CPU-bound ratios and absolute time, tail latency, memory, page-cache I/O, instruction counts), which confounds of a live 12-core desktop workstation (AMD Ryzen 9…
+On a live 12-core desktop workstation (AMD Ryzen 9 7900X, Debian 13), instruction counts and same-cell CPU-bound ratio verdicts are unaffected by any load tested, while page-cache reads, tail latency and absolute CPU time are biased by specific loads that CPU pinning, CCD…
 
 ### [Can Rust match fast C for a SQLite `parse_number()` extension?](sqlite-parse-number-rust-tuning/) (2026-11-10)
 

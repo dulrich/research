@@ -91,6 +91,8 @@ None of this is required; the standard holds on an untuned host. Each item narro
 
 Whatever tuning is in effect goes in `env.json` and the README; an untuned run is reported as untuned.
 
+Measuring on a live workstation someone is using: follow [live-host.md](live-host.md) (per-class acceptability, runtime controls, labelling, re-run rules).
+
 ## Using the driver
 
 `scripts/measure.mjs` is a dependency-free bun script that runs on the host, so experiments need no shared runtime in their images. It runs each variant as separate process invocations, interleaved (R3), discards warm-up rounds (R2), pads the environment (R4), records the environment (R11), and reports medians, bootstrap CIs, ratios, the A/A floor and claim verdicts (R6-R8). In-process warm-up and the timed loop stay in the experiment's code.
