@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { buildReport } from "./lib/measure-report.mjs";
 import { Channel, invocationScript } from "./lib/measure-channel.mjs";
 import { cpusetCpu, parseProtocol, probeScript, runProbe, runProbeChannel, schedule, shQuote, substitute, validateConfig } from "./lib/measure-run.mjs";
-import { ci95, hierBootstrap, median, mulberry32, percentile, permutation, verdict } from "./lib/measure-stats.mjs";
+import { ci95, clopperPearson, hierBootstrap, levelVerdict, median, mulberry32, newcombeDiff, percentile, permutation, rateVerdict, verdict, wilson } from "./lib/measure-stats.mjs";
 
 const script = path.join(path.dirname(fileURLToPath(import.meta.url)), "measure.mjs");
 let dir;
@@ -183,6 +183,12 @@ describe("report and CLI", () => {
     expect(raw.at(-1).errors.join(" ")).toMatch(re);
     expect(fs.existsSync(path.join(out, "env.json"))).toBe(true);
   });
+  test("a rate metric value other than 0/1 fails the run", () => {
+    const out = path.join(dir, "o");
+    const r = cli("run", "--config", writeCfg([{ name: "r", argv: ["sh", "-c", "echo MEASURE bad 2"] }], { metrics: { bad: { kind: "rate", better: "lower" } } }), "--out", out, "--seed", "1");
+    expect(r.code).toBe(1);
+    expect(r.err).toMatch(/rate metric bad must be 0 or 1, got 2/);
+  });
   test("{host} without --host fails validation", () => {
     const r = cli("run", "--config", writeCfg([{ name: "a", argv: ["echo", "{host}"] }]), "--out", path.join(dir, "o"));
     expect(r.code).toBe(1);
@@ -294,5 +300,87 @@ describe("persistent channel", () => {
     const raw = fs.readFileSync(path.join(out, "raw.jsonl"), "utf8").trim().split("\n").map(JSON.parse);
     expect(raw.at(-1).errors.join(" ")).toMatch(re);
     expect(JSON.parse(fs.readFileSync(path.join(out, "env.json"), "utf8")).failed).toBe(true);
+  });
+});
+
+describe("metrics: level and rate", () => {
+  test("Clopper-Pearson known values", () => {
+    const [lo, hi] = clopperPearson(7, 20);
+    expect(lo).toBeCloseTo(0.1539, 4);
+    expect(hi).toBeCloseTo(0.5922, 4);
+    expect(clopperPearson(0, 20)[0]).toBe(0);
+    expect(clopperPearson(20, 20)[1]).toBe(1);
+  });
+  test("Newcombe hybrid score difference interval reproduces the published worked examples", () => {
+    // Newcombe RG (1998) "Interval estimation for the difference between independent proportions",
+    // Statistics in Medicine 17:873-890, Table II, method 10 (score, no continuity correction).
+    const cases = [
+      [[56, 70, 48, 80], 0.0524, 0.3339],
+      [[9, 10, 3, 10], 0.1705, 0.809],
+      [[6, 7, 2, 7], 0.0582, 0.8062],
+      [[5, 56, 0, 29], -0.0381, 0.1926],
+      [[0, 10, 0, 20], -0.1611, 0.2775], // 0/n vs 0/n
+      [[10, 10, 0, 10], 0.6075, 1], // n/n vs 0/n
+    ];
+    for (const [a, lo, hi] of cases) {
+      const d = newcombeDiff(...a);
+      expect(d.lo).toBeCloseTo(lo, 4);
+      expect(d.hi).toBeCloseTo(hi, 4);
+    }
+    expect(newcombeDiff(10, 10, 10, 10).d).toBe(0);
+    expect(newcombeDiff(10, 10, 10, 10).hi).toBeCloseTo(-newcombeDiff(10, 10, 10, 10).lo, 12);
+    expect(wilson(0, 10)[0]).toBe(0);
+    expect(wilson(10, 10)[1]).toBe(1);
+  });
+  test("rate and level verdicts", () => {
+    expect(rateVerdict({ d: 0.4, lo: 0.1, hi: 0.6 }, 0.2, "lower")).toBe("higher (worse)");
+    expect(rateVerdict({ d: -0.4, lo: -0.6, hi: -0.1 }, 0.2, "lower")).toBe("lower (better)");
+    expect(rateVerdict({ d: 0.15, lo: 0.05, hi: 0.3 }, 0.2, "lower")).toBe("no measurable difference"); // inside floor
+    expect(rateVerdict({ d: 0.4, lo: -0.01, hi: 0.6 }, 0.1, "lower")).toBe("no measurable difference"); // spans 0
+    expect(rateVerdict({ d: 0.4, lo: 0.1, hi: 0.6 }, null, "lower")).toBe("no A/A floor");
+    expect(levelVerdict(0.8, [0.75, 0.85], 0.02, "lower")).toBe("lower (better)");
+    expect(levelVerdict(0.8, [0.75, 0.85], 0.02, "higher")).toBe("lower (worse)");
+    expect(levelVerdict(1.2, [1.15, 1.25], 0.02, "lower")).toBe("higher (worse)");
+    expect(levelVerdict(0.97, [0.96, 0.98], 0.05, "lower")).toBe("no measurable difference");
+  });
+  const ok = { variants: [{ name: "a", argv: ["true"] }], invocations: 1, warmup: 0, padMax: 0 };
+  test("metrics config accepted", () => expect(validateConfig({ ...ok, metrics: { rss: { kind: "level", better: "lower" }, bad_mode: { kind: "rate", better: "lower" } } })).toEqual([]));
+  test.each([
+    [[], /metrics must be an object/],
+    [{ rss: "level" }, /metrics\.rss must be an object/],
+    [{ rss: { kind: "peak", better: "lower" } }, /metrics\.rss\.kind must be "level" or "rate"/],
+    [{ rss: { kind: "level" } }, /metrics\.rss\.better must be "lower" or "higher"/],
+    [{ rss: { kind: "level", better: "lower", unit: "B" } }, /metrics\.rss: unknown key "unit"/],
+    [{ "a b": { kind: "level", better: "lower" } }, /without whitespace/],
+  ])("bad metrics %j rejected", (metrics, re) => expect(validateConfig({ ...ok, metrics }).join("\n")).toMatch(re));
+
+  const rec = (variant, group, m, value) => ({ variant, group, warmup: false, metrics: { [m]: { value, unit: m === "rss" ? "B" : "" } } });
+  const variants = [{ name: "base" }, { name: "dup" }, { name: "x1", group: "x" }, { name: "x2", group: "x" }];
+  const recs = [];
+  for (let i = 0; i < 40; i++) {
+    recs.push(rec("base", "base", "bad", i % 10 === 0 ? 1 : 0), rec("dup", "dup", "bad", i % 10 === 5 ? 1 : 0), rec(i < 20 ? "x1" : "x2", "x", "bad", i % 5 === 0 ? 0 : 1));
+    recs.push(rec("base", "base", "rss", 100 + (i % 4)), rec("dup", "dup", "rss", 100 + (i % 5)), rec(i < 20 ? "x1" : "x2", "x", "rss", 150 + (i % 3)));
+  }
+  const env = (metrics, aa = ["base", "dup"]) => ({ seed: 3, config: { variants, baseline: "base", aa, metrics } });
+  test("rate metric renders k/n, Clopper-Pearson, Newcombe difference and verdict; level uses neutral wording", () => {
+    const md = buildReport(recs, env({ bad: { kind: "rate", better: "lower" }, rss: { kind: "level", better: "lower" } }), { resamples: 300 });
+    expect(md).toMatch(/## bad — rate/);
+    expect(md).toMatch(/\| base \| 1 \| 4\/40 \(0\.1\) \| \[0\.02793, 0\.2366\] \| 0 \| n\/a \| baseline \|/);
+    expect(md).toMatch(/\| x \| 2 \| 32\/40 \(0\.8\) \|.*\| 0\.7 \|.*\| higher \(worse\) \|/); // pooled over builds
+    expect(md).toMatch(/\| dup \|.*\| no measurable difference \|/);
+    expect(md).toMatch(/A\/A \(base - dup\): difference 0,/);
+    expect(md).toMatch(/\| x \| x1 \| 16\/20 \(0\.8\) \|/);
+    expect(md).toMatch(/\| x \|.*\| higher \(worse\) \|\n\n.*\n\n.*\n\n\| group \| build \| k\/n/);
+    expect(md).toMatch(/## rss \(B\)[\s\S]*\| x \| 2 \| 40 \| 151 \|.*\| higher \(worse\) \|/);
+    expect(md).not.toMatch(/\| (faster|slower) \|/);
+    expect(buildReport(recs, env({ bad: { kind: "rate", better: "lower" } }, null), { resamples: 300 })).toMatch(/\| x \|.*\| no A\/A floor \|/);
+    // a metric without an entry keeps time wording
+    expect(buildReport(recs, env({ bad: { kind: "rate", better: "lower" } }), { resamples: 300 })).toMatch(/## rss \(B\)[\s\S]*\| x \|.*\| slower \|/);
+  });
+  test("golden: a committed time-only report regenerates byte-identical", () => {
+    const d = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "sqlite-parse-number-rust-tuning", "results", "round4", "pilot");
+    const records = fs.readFileSync(path.join(d, "raw.jsonl"), "utf8").split("\n").filter(Boolean).map((l) => JSON.parse(l));
+    const e = JSON.parse(fs.readFileSync(path.join(d, "env.json"), "utf8"));
+    expect(buildReport(records, e)).toBe(fs.readFileSync(path.join(d, "report.md"), "utf8"));
   });
 });

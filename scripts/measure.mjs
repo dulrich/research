@@ -22,12 +22,15 @@ report  Prints per-metric Markdown tables (hierarchical bootstrap over layout bu
 
 Config: { variants: [{ name, argv, group? }], invocations, warmup, padMax, aa?: [groupA, groupB],
           baseline?: group, envPrefix?: [argv...], seed?, channel?: { argv: [argv...], timeoutSec? },
-          probe?: { cpu?, container? } }
+          probe?: { cpu?, container? }, metrics?: { <metric>: { kind: "level"|"rate", better: "lower"|"higher" } } }
 channel  One persistent process (e.g. ["ssh","{host}","sh","-s"]) runs a POSIX sh loop that executes every
          invocation and the env probe as a fresh remote process, with length-prefixed, nonce-checked frames.
          A lost channel, a framing error or a timeout (timeoutSec, default 3600 per invocation) fails the run.
 probe    cpu: CPU whose SMT siblings the probe records (else --cpuset-cpus from variant argv; must agree);
          container: records container_image and container_cpuset via docker inspect on the measured host.
+metrics  Metrics without an entry are lower-is-better times ("faster"/"slower"). level: same statistics, verdicts
+         "lower"/"higher" (better/worse). rate: values must be 0/1 (else the run fails); reported as k/n with a
+         Clopper-Pearson interval and a Newcombe difference-in-proportions interval vs baseline.
 `;
 
 const argv = process.argv.slice(2);

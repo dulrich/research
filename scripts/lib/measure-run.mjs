@@ -4,7 +4,7 @@ import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { mulberry32, permutation, randInt } from "./measure-stats.mjs";
 
-const TOP_KEYS = ["variants", "invocations", "warmup", "padMax", "aa", "baseline", "envPrefix", "seed", "channel", "probe"];
+const TOP_KEYS = ["variants", "invocations", "warmup", "padMax", "aa", "baseline", "envPrefix", "seed", "channel", "probe", "metrics"];
 const VAR_KEYS = ["name", "argv", "group"];
 const isInt = (x, min) => Number.isInteger(x) && x >= min;
 const isStrs = (a) => Array.isArray(a) && a.length > 0 && a.every((s) => typeof s === "string");
@@ -34,6 +34,17 @@ export function validateConfig(c, { host } = {}) {
       if (c.probe.cpu !== undefined && !isInt(c.probe.cpu, 0)) e.push("probe.cpu must be an integer >= 0");
       if (c.probe.container !== undefined && (typeof c.probe.container !== "string" || !/^[A-Za-z0-9][A-Za-z0-9_.-]*$/.test(c.probe.container))) e.push("probe.container must be a docker container name ([A-Za-z0-9][A-Za-z0-9_.-]*)");
     }
+  }
+  if (c.metrics !== undefined) {
+    if (!c.metrics || typeof c.metrics !== "object" || Array.isArray(c.metrics)) e.push('metrics must be an object { <metric>: { kind: "level"|"rate", better: "lower"|"higher" } }');
+    else
+      for (const [name, m] of Object.entries(c.metrics)) {
+        if (!/^\S+$/.test(name)) e.push(`metrics: name ${JSON.stringify(name)} must be a non-empty token without whitespace`);
+        if (!m || typeof m !== "object" || Array.isArray(m)) { e.push(`metrics.${name} must be an object { kind, better }`); continue; }
+        for (const k of Object.keys(m)) if (!["kind", "better"].includes(k)) e.push(`metrics.${name}: unknown key "${k}"`);
+        if (!["level", "rate"].includes(m.kind)) e.push(`metrics.${name}.kind must be "level" or "rate"`);
+        if (!["lower", "higher"].includes(m.better)) e.push(`metrics.${name}.better must be "lower" or "higher"`);
+      }
   }
   if (!Array.isArray(c.variants) || !c.variants.length) return [...e, "variants must be a non-empty array"];
   const names = new Set();
@@ -188,6 +199,7 @@ export async function runRounds(config, { out, seed, host, log = () => {}, chann
       if (r.status !== 0 && !r.channelError) errors.push(`exit code ${r.status}${r.signal ? ` (signal ${r.signal})` : ""}`);
       for (const m of seen[v]) if (!(m in p.metrics)) errors.push(`missing metric ${m} reported earlier`);
       for (const m of Object.keys(p.metrics)) seen[v].add(m);
+      for (const [m, { value }] of Object.entries(p.metrics)) if (config.metrics?.[m]?.kind === "rate" && value !== 0 && value !== 1) errors.push(`rate metric ${m} must be 0 or 1, got ${value}`);
       const rec = { round, order, variant: variant.name, group: variant.group ?? variant.name, warmup: round < config.warmup, padLen, exit: r.status, wallMs, metrics: p.metrics };
       if (errors.length) rec.errors = errors;
       appendFileSync(rawPath, `${JSON.stringify(rec)}\n`);
