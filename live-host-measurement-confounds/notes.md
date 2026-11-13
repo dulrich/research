@@ -89,3 +89,33 @@ Working log, appended as the work proceeds (what was tried, what was learned).
 - Guard events: none (no `GUARD TRIP` or `INVALID` in any cell); the guard-trip path remains untested.
 - Data hygiene: absolute paths and the host name in generated outputs were rewritten to repo-relative paths and `{host}`; raw block logs stay in the gitignored `var/`. Largest committed night-2 file is below 2 MB.
 - Not covered here: night 3, analysis.
+
+## 2026-11-13 Night 3: the `night3` window
+
+- Kernel fact: the workstation rebooted at 2026-11-13 02:00 (boot time 02:00:36) into kernel `7.2.12+deb13-amd64`; `uname -r` at the window start, the `kernel` field of the first cell's `env.json` (`I3-L0-ref-start/k1/env.json`) and the end-of-window `uname -r` all read `7.2.12+deb13-amd64`. Nights 1 and 2 ran 7.2.11. No reboot occurred during the window.
+- Frozen inputs: `results/night3/frozen-inputs.sha256` lists the sha256 of `schedule.json` and every `configs/*.json`, taken before the first cell; each of the 10 equalled `git show HEAD:<file> | sha256sum`.
+- Carry-over: nights 1 and 2 had no invalid or deferred cell, so nothing was carried over (no `-r2` cells).
+- Cells (schedule order, `cell run ... --afk`; wall vs estimate in s; all `status=ok`, none `INVALID`, none re-run, none deferred; every one ended `READBACK OK (restored)`). The window ran 04:06 to 07:50. The I0 and I2 refs are k1-only cross-level references.
+
+  | cell | block | wall | est |
+  |---|---|---|---|
+  | I3-L0-ref-start | ref-start | 723 | 790 |
+  | I1-L0-ref-start | ref-start | 698 | 790 |
+  | I0-L0-ref-start | ref-start (k1 only) | 178 | 231 |
+  | I2-L0-ref-start | ref-start (k1 only) | 179 | 231 |
+  | I1-L0-full | body | 3171 | 3284 |
+  | I3-L1-rep1 | body | 723 | 720 |
+  | I3-L2-rep1 | body | 835 | 720 |
+  | I3-L0-full | body | 3218 | 3284 |
+  | I3-L4-rep1 | body | 325 | 331 |
+  | I3-L3-rep1 | body | 1630 | 1696 |
+  | I3-L0-ref-end | ref-end | 713 | 790 |
+  | I1-L0-ref-end | ref-end | 689 | 790 |
+  | I0-L0-ref-end | ref-end (k1 only) | 177 | 231 |
+  | I2-L0-ref-end | ref-end (k1 only) | 180 | 231 |
+
+  Total 13,639 s against 14,119 s estimated (I3-L1-rep1 ran 3 s and I3-L2-rep1 115 s longer than estimated; the rest shorter). Per-class walls are in each cell's `walls.tsv`; `results/night3/driver.log` has the run log with start/end clock times. The k4-cold path (`ctl dropcache` under `--afk`) ran in every cell that includes it.
+- Host trace per cell (0.5 s sampler; avg10 PSI percentages; `some` unless stated; cpu median / max, then other maxima): I3 ref-start cpu 17.10 / 44.70, ref-end 17.33 / 45.33; I1 ref-start 16.68 / 43.25, ref-end 17.45 / 43.54 (io max 43.1 / 37.9); I0 refs 0.00 / 0.03 and 0.00 / 0.04; I2 refs 2.66 / 2.93 and 2.70 / 2.99; I1-L0-full 0.00 / 42.81, io max 43.1; I3-L0-full 0.06 / 44.30, io max 39.9; I3-L1 10.00 / 20.82, CCD0 util median 100 %; I3-L2 23.23 / 40.81, CCD0 util median 92.1 %, memory `full` max 1.00; I3-L3 0.15 / 26.28, io max 44.9, MemAvailable min 39.9 GB (about 12 GB held by the load), CCD0 util median 34.1 %; I3-L4 0.97 / 1.18, io max 67.0. Memory `full` never exceeded 1.00 against the guard's 5; MemAvailable never fell below 39.9 GB.
+- Guard events: none (no `GUARD TRIP` or `INVALID` in any cell); the guard-trip path remains untested.
+- Data hygiene: absolute paths and the host name in generated outputs were rewritten to repo-relative paths and `{host}`; raw block logs stay in the gitignored `var/`. No night-3 file exceeds 2 MB (results/night3 totals 4.9 MB).
+- Not covered here: analysis.
