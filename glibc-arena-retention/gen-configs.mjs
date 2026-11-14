@@ -66,3 +66,30 @@ if (badMib) {
   };
   writeFileSync(join(here, "configs", "pilot", "settle.json"), JSON.stringify(settle, null, 1) + "\n");
 }
+// Claim classes (configs/{r,s,p}.json), written with --bad-mib: burst settings match the pilot (25 MiB thread burst, 70% fastbin, trim, interval 0.1 s).
+if (badMib) {
+  const rateM = (ws) => ({ ...mk([...probeFor(ws), ...truth], lvl), ...mk(ws.map((w) => `bad_mode_${w}s`), rate) });
+  // R: rate recovery. Baseline p0 (the always-good-mode endpoint); p25b is the A/A copy of p25.
+  const wr = [0, 2];
+  const ro = { interval: "0.1", settle: wr.join(","), badMib };
+  const r = {
+    ...base, warmup: 1, invocations: 60,
+    variants: [v("p0", ["--bad-p", "0", ...T], ro), v("p25", ["--bad-p", "0.25", ...T], ro), v("p25b", ["--bad-p", "0.25", ...T], ro), v("p50", ["--bad-p", "0.5", ...T], ro)],
+    aa: ["p25", "p25b"], baseline: "p0", metrics: rateM(wr),
+  };
+  // S: settle-window bias. Bad mode always present; late free uniform in [0, 10 s] vs none.
+  const ws = [0, 2, 4, 6, 8, 10, 12];
+  const so = { interval: "0.1", settle: ws.join(","), badMib, idle: 14 };
+  const s = {
+    ...base, warmup: 1, invocations: 30,
+    variants: [v("late10", ["--bad-p", "1", "--late-max", "10", ...T], so), v("nolate", ["--bad-p", "1", ...T], so)], baseline: "nolate", metrics: rateM(ws),
+  };
+  // P: continuous spread in pool mode (4 workers, 12 requests, default queue); the rate at other thresholds is derived from the levels by analyze.mjs.
+  const wp = [0, 3];
+  const po = { interval: "0.1", settle: wp.join(","), badMib };
+  const p = {
+    ...base, warmup: 1, invocations: 40,
+    variants: [v("pool", ["--pool", "4", "--requests", "12", ...T], po)], baseline: "pool", metrics: rateM(wp),
+  };
+  for (const [n, c] of [["r", r], ["s", s], ["p", p]]) writeFileSync(join(here, "configs", `${n}.json`), JSON.stringify(c, null, 1) + "\n");
+}

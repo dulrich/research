@@ -86,3 +86,38 @@ CPU PSI `some`: pilot p start avg10=0.01 avg60=0.06 avg300=0.02, end avg10=0.00 
 - `--bad-p` good mode places the pin at 0.99 of the burst (retains about 1 MiB of a 25 MiB burst), not at the very end, as in the spike's sweep.
 - Recorded hostnames in each `env.json` were replaced by `measurement-host` after the runs.
 - The late-free target for the settle pilot is applied only in a bad-mode burst (`release_delay_s` is -1 when a pin is placed).
+
+## 2026-11-14 claim runs (WP-2)
+
+Each class ran sequentially through `bun scripts/measure.mjs run --config glibc-arena-retention/configs/<class>.json --out glibc-arena-retention/results/<class> --host measurement-host` (seed 20261114, one warm-up round per variant, cpuset 6-11,18-23, image `gar:1`). Configs come from `glibc-arena-retention/gen-configs.mjs` (bad-mode threshold fixed at 12 MiB from the pilot, never re-tuned). All three runs exited 0. Truth tables come from `bun glibc-arena-retention/analyze.mjs` (`results/<class>/truth.md`), computed from the program's emitted ground-truth lines, warm-ups excluded.
+
+CPU PSI `some` (`/proc/pressure/cpu`), avg10/avg60/avg300 at the start and end of each class: R start 0.00/0.00/0.00, end 0.00/0.00/0.00; S start 0.00/0.00/0.00, end 0.00/0.00/0.00; P start 0.00/0.00/0.00, end 0.00/0.00/0.00. No contended stretch was observed at any class boundary and none was dropped. Wall time: R about 18 min, S about 15 min, P about 4 min.
+
+### Class R: rate recovery (rigor: standard, M7)
+
+Variants `p0` (`--bad-p 0`, the driver baseline), `p25`, `p25b` (the A/A copy of `p25`) and `p50`, each 60 invocations after warm-up, windows 0 s and 2 s, 25 MiB thread burst, 70% fastbin, `--trim`, interval 0.1 s. Rate = share with settled anon above 12 MiB, truth = the program's `bad_drawn`.
+
+- Every configured p lies inside its Clopper-Pearson 95% interval: p0 0/60 [0.000, 0.060]; p25 19/60 [0.203, 0.450]; p25b 14/60 [0.134, 0.360]; p50 32/60 [0.400, 0.663].
+- `bad_mode_0s` equals `bad_drawn` in 60/60 invocations of every variant, and the 2 s window gives the same counts as 0 s.
+- Newcombe 95% for the difference (window 0 s): p25 vs p50 at all 60: -0.217 [-0.375, -0.040] (excludes 0); at the first 20: -0.100 [-0.370, 0.193] (does not). A/A floor p25 vs p25b: all 60: 0.083 [-0.076, 0.237]; first 20: 0.250 [-0.028, 0.485]. Both A/A intervals include 0, but the first-20 point difference of 0.25 shows how wide the noise is at that count.
+
+### Class S: settle-window bias (rigor: standard for rates, indicative for the timing margin)
+
+Variants `late10` (`--bad-p 1 --late-max 10`, late free uniform in [0, 10 s]) and `nolate` (`--bad-p 1`, control), 30 invocations each, windows 0,2,4,6,8,10,12 s, `--idle 14`. Truth per invocation is `release_actual_s` > window; invocations within 0.25 s of a window edge are ambiguous (boundary-detection lag 0.04-0.17 s plus one 0.1 s interval) and reported separately.
+
+- `late10` observed bad k/30 against truth share by window: 0 s 29 vs 30; 2 s 23 vs 23; 4 s 17 vs 18; 6 s 12 vs 12; 8 s 2 vs 2; 10 s 0 vs 0; 12 s 0 vs 0. Outside the ambiguous band (28-30 invocations per window) observed and truth agree in every invocation, no mismatch; the ambiguous invocations (0-2 per window) account for the two differing windows.
+- Largest gap between `release_actual_s` and `release_delay_s`: 0.003 s.
+- `nolate` is bad in 30/30 at every window (CP 95% lower bound 0.884).
+
+### Class P: continuous spread (rigor: indicative for levels)
+
+Pool mode (`--pool 4 --requests 12 --trim`), 40 invocations, windows 0 s and 3 s. There is no per-invocation truth in pool mode (`bad_drawn` is -1), so the threshold rates are descriptive only. Thresholds 12, 30 and 60 MiB were stated before looking.
+
+- Settled cgroup anon at 0 s (MiB): min 7.09, Q1 44.35, median 54.43, Q3 63.98, max 89.00 (the 3 s window differs by at most 0.03 MiB at the quartiles). The sorted values are in `results/p/truth.md`.
+- Bad rate by threshold at 0 s: above 12 MiB 39/40 [0.868, 0.999]; above 30 MiB 35/40 [0.732, 0.958]; above 60 MiB 15/40 [0.227, 0.542]. The rate depends strongly on the threshold because the distribution is continuous, not bimodal.
+- The driver's `bad_mode_0s` (12 MiB) matches the 12 MiB count in 40/40 invocations.
+
+### Deviations
+
+- Class R used windows 0 and 2 s; class P used windows 0 and 3 s.
+- Hostnames in `env.json` of the three classes were replaced by `measurement-host` after the runs, as in the mechanism class; `analyze.mjs` output was re-run afterwards and the `truth.md` files are byte-identical.

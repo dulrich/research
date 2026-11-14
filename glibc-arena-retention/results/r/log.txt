@@ -1,0 +1,732 @@
+## round 0 order 0 p50
+BOUNDARY
+retain: seed 4422333266680069818
+## round 0 order 1 p25b
+BOUNDARY
+retain: seed 5149124014640040649
+## round 0 order 2 p25
+BOUNDARY
+retain: seed 2507389597950574003
+## round 0 order 3 p0
+BOUNDARY
+retain: seed 7193254082117394158
+## round 1 order 0 p50
+BOUNDARY
+retain: seed 8539467797541527158
+## round 1 order 1 p0
+BOUNDARY
+retain: seed 7736151607729110347
+## round 1 order 2 p25b
+BOUNDARY
+retain: seed 5050761429428373490
+## round 1 order 3 p25
+BOUNDARY
+retain: seed 6381186374560813378
+## round 2 order 0 p0
+BOUNDARY
+retain: seed 3309598266709156710
+## round 2 order 1 p25
+BOUNDARY
+retain: seed 7400668641613029767
+## round 2 order 2 p50
+BOUNDARY
+retain: seed 3860827144817672254
+## round 2 order 3 p25b
+BOUNDARY
+retain: seed 8424493129620855758
+## round 3 order 0 p0
+BOUNDARY
+retain: seed 6367927266083773798
+## round 3 order 1 p50
+BOUNDARY
+retain: seed 6887224262284053284
+## round 3 order 2 p25
+BOUNDARY
+retain: seed 7403401983211899735
+## round 3 order 3 p25b
+BOUNDARY
+retain: seed 4628176902988934104
+## round 4 order 0 p25
+BOUNDARY
+retain: seed 8236679238741196304
+## round 4 order 1 p25b
+BOUNDARY
+retain: seed 1259285640245643301
+## round 4 order 2 p0
+BOUNDARY
+retain: seed 5092596222628390962
+## round 4 order 3 p50
+BOUNDARY
+retain: seed 1521890491106021336
+## round 5 order 0 p0
+BOUNDARY
+retain: seed 7463066613164386344
+## round 5 order 1 p25
+BOUNDARY
+retain: seed 5051272150602415207
+## round 5 order 2 p25b
+BOUNDARY
+retain: seed 451753664446854851
+## round 5 order 3 p50
+BOUNDARY
+retain: seed 8855183333387526454
+## round 6 order 0 p50
+BOUNDARY
+retain: seed 503018473048603336
+## round 6 order 1 p25
+BOUNDARY
+retain: seed 8760722036926893018
+## round 6 order 2 p25b
+BOUNDARY
+retain: seed 1972949110234715690
+## round 6 order 3 p0
+BOUNDARY
+retain: seed 7955292374076083259
+## round 7 order 0 p0
+BOUNDARY
+retain: seed 6668447971992002351
+## round 7 order 1 p50
+BOUNDARY
+retain: seed 7263505342332608840
+## round 7 order 2 p25
+BOUNDARY
+retain: seed 3288515055898028587
+## round 7 order 3 p25b
+BOUNDARY
+retain: seed 3357608970603005582
+## round 8 order 0 p25b
+BOUNDARY
+retain: seed 8418421603365462381
+## round 8 order 1 p0
+BOUNDARY
+retain: seed 1891726064911212702
+## round 8 order 2 p50
+BOUNDARY
+retain: seed 1474367594090625420
+## round 8 order 3 p25
+BOUNDARY
+retain: seed 3141859390580101844
+## round 9 order 0 p25b
+BOUNDARY
+retain: seed 2916685279056526943
+## round 9 order 1 p0
+BOUNDARY
+retain: seed 1753894687970860011
+## round 9 order 2 p25
+BOUNDARY
+retain: seed 5623558145376229190
+## round 9 order 3 p50
+BOUNDARY
+retain: seed 3544078039118506300
+## round 10 order 0 p0
+BOUNDARY
+retain: seed 2153223213029142635
+## round 10 order 1 p25
+BOUNDARY
+retain: seed 4374935296093643649
+## round 10 order 2 p50
+BOUNDARY
+retain: seed 3195381985800534160
+## round 10 order 3 p25b
+BOUNDARY
+retain: seed 4349588010845999757
+## round 11 order 0 p25b
+BOUNDARY
+retain: seed 7436892382788067822
+## round 11 order 1 p50
+BOUNDARY
+retain: seed 279637427566115557
+## round 11 order 2 p25
+BOUNDARY
+retain: seed 4895718221849852821
+## round 11 order 3 p0
+BOUNDARY
+retain: seed 50267308954134818
+## round 12 order 0 p25b
+BOUNDARY
+retain: seed 4651036117771664205
+## round 12 order 1 p25
+BOUNDARY
+retain: seed 6920075693351251612
+## round 12 order 2 p0
+BOUNDARY
+retain: seed 5651057833059445030
+## round 12 order 3 p50
+BOUNDARY
+retain: seed 6551795117412452109
+## round 13 order 0 p50
+BOUNDARY
+retain: seed 1168257492445988071
+## round 13 order 1 p0
+BOUNDARY
+retain: seed 7568479625971749081
+## round 13 order 2 p25
+BOUNDARY
+retain: seed 7611600722723185353
+## round 13 order 3 p25b
+BOUNDARY
+retain: seed 1029151413099752006
+## round 14 order 0 p50
+BOUNDARY
+retain: seed 1267133007755948564
+## round 14 order 1 p25
+BOUNDARY
+retain: seed 8965496538376659112
+## round 14 order 2 p0
+BOUNDARY
+retain: seed 336557412033820317
+## round 14 order 3 p25b
+BOUNDARY
+retain: seed 2758421756814244878
+## round 15 order 0 p50
+BOUNDARY
+retain: seed 8025946134766169557
+## round 15 order 1 p0
+BOUNDARY
+retain: seed 1915563039113268192
+## round 15 order 2 p25b
+BOUNDARY
+retain: seed 8454452430105901810
+## round 15 order 3 p25
+BOUNDARY
+retain: seed 6515017327630458374
+## round 16 order 0 p25
+BOUNDARY
+retain: seed 86167588232252840
+## round 16 order 1 p50
+BOUNDARY
+retain: seed 5013859342348118113
+## round 16 order 2 p0
+BOUNDARY
+retain: seed 3372410788970701343
+## round 16 order 3 p25b
+BOUNDARY
+retain: seed 5318650055876747544
+## round 17 order 0 p25b
+BOUNDARY
+retain: seed 1676976421031363757
+## round 17 order 1 p25
+BOUNDARY
+retain: seed 205914799054394922
+## round 17 order 2 p50
+BOUNDARY
+retain: seed 1148263145585132445
+## round 17 order 3 p0
+BOUNDARY
+retain: seed 4011079888055366506
+## round 18 order 0 p0
+BOUNDARY
+retain: seed 7921422787550503685
+## round 18 order 1 p25b
+BOUNDARY
+retain: seed 1869025694882800427
+## round 18 order 2 p25
+BOUNDARY
+retain: seed 7664467152938449901
+## round 18 order 3 p50
+BOUNDARY
+retain: seed 7338775252640774191
+## round 19 order 0 p25
+BOUNDARY
+retain: seed 8128701789448478280
+## round 19 order 1 p0
+BOUNDARY
+retain: seed 266337907459203713
+## round 19 order 2 p25b
+BOUNDARY
+retain: seed 1593905057470917189
+## round 19 order 3 p50
+BOUNDARY
+retain: seed 4666051567915603650
+## round 20 order 0 p50
+BOUNDARY
+retain: seed 7066429588111123667
+## round 20 order 1 p25b
+BOUNDARY
+retain: seed 1156312773948192814
+## round 20 order 2 p0
+BOUNDARY
+retain: seed 5474401270694347311
+## round 20 order 3 p25
+BOUNDARY
+retain: seed 8970211065636843556
+## round 21 order 0 p25b
+BOUNDARY
+retain: seed 810242897108538781
+## round 21 order 1 p25
+BOUNDARY
+retain: seed 2242615206163055361
+## round 21 order 2 p0
+BOUNDARY
+retain: seed 2411389282387736283
+## round 21 order 3 p50
+BOUNDARY
+retain: seed 9020933672889974637
+## round 22 order 0 p25
+BOUNDARY
+retain: seed 7543820224985466451
+## round 22 order 1 p0
+BOUNDARY
+retain: seed 5645803887534292685
+## round 22 order 2 p50
+BOUNDARY
+retain: seed 6712157784412723372
+## round 22 order 3 p25b
+BOUNDARY
+retain: seed 3206241512249394466
+## round 23 order 0 p50
+BOUNDARY
+retain: seed 11646419921043867
+## round 23 order 1 p0
+BOUNDARY
+retain: seed 5120159944096978447
+## round 23 order 2 p25
+BOUNDARY
+retain: seed 674226599723057566
+## round 23 order 3 p25b
+BOUNDARY
+retain: seed 5356582316912176334
+## round 24 order 0 p25b
+BOUNDARY
+retain: seed 8558628289370692245
+## round 24 order 1 p50
+BOUNDARY
+retain: seed 5811623414143248326
+## round 24 order 2 p0
+BOUNDARY
+retain: seed 942496227684726478
+## round 24 order 3 p25
+BOUNDARY
+retain: seed 3587924907749518361
+## round 25 order 0 p25
+BOUNDARY
+retain: seed 7891817407188016633
+## round 25 order 1 p25b
+BOUNDARY
+retain: seed 91177695203620721
+## round 25 order 2 p0
+BOUNDARY
+retain: seed 8876703747393107143
+## round 25 order 3 p50
+BOUNDARY
+retain: seed 6656551651629287063
+## round 26 order 0 p50
+BOUNDARY
+retain: seed 637937310871858324
+## round 26 order 1 p0
+BOUNDARY
+retain: seed 7405229968882666482
+## round 26 order 2 p25b
+BOUNDARY
+retain: seed 7826650480103519988
+## round 26 order 3 p25
+BOUNDARY
+retain: seed 5870015972483408467
+## round 27 order 0 p25
+BOUNDARY
+retain: seed 3057789904756544872
+## round 27 order 1 p50
+BOUNDARY
+retain: seed 5676605792917978966
+## round 27 order 2 p25b
+BOUNDARY
+retain: seed 5204728772708726032
+## round 27 order 3 p0
+BOUNDARY
+retain: seed 172971328192371558
+## round 28 order 0 p25b
+BOUNDARY
+retain: seed 6201640807608698573
+## round 28 order 1 p25
+BOUNDARY
+retain: seed 2330013143090082647
+## round 28 order 2 p50
+BOUNDARY
+retain: seed 5726745652428642125
+## round 28 order 3 p0
+BOUNDARY
+retain: seed 6690342333795880043
+## round 29 order 0 p25b
+BOUNDARY
+retain: seed 4198092220549478127
+## round 29 order 1 p0
+BOUNDARY
+retain: seed 449813175617698462
+## round 29 order 2 p50
+BOUNDARY
+retain: seed 8187899059460721426
+## round 29 order 3 p25
+BOUNDARY
+retain: seed 5073652971428778573
+## round 30 order 0 p25
+BOUNDARY
+retain: seed 7344113934654705456
+## round 30 order 1 p25b
+BOUNDARY
+retain: seed 5882512804996619548
+## round 30 order 2 p50
+BOUNDARY
+retain: seed 6988679034172836971
+## round 30 order 3 p0
+BOUNDARY
+retain: seed 1494119866419211990
+## round 31 order 0 p0
+BOUNDARY
+retain: seed 5803042059333655204
+## round 31 order 1 p25
+BOUNDARY
+retain: seed 2983259801674533326
+## round 31 order 2 p25b
+BOUNDARY
+retain: seed 5670054360877979089
+## round 31 order 3 p50
+BOUNDARY
+retain: seed 6455380081559663533
+## round 32 order 0 p25b
+BOUNDARY
+retain: seed 3475624776900805672
+## round 32 order 1 p0
+BOUNDARY
+retain: seed 5867423059148655783
+## round 32 order 2 p50
+BOUNDARY
+retain: seed 2552900454127642483
+## round 32 order 3 p25
+BOUNDARY
+retain: seed 9209653029473832370
+## round 33 order 0 p0
+BOUNDARY
+retain: seed 508784762238572862
+## round 33 order 1 p50
+BOUNDARY
+retain: seed 7761639540671015363
+## round 33 order 2 p25
+BOUNDARY
+retain: seed 1616064930723706752
+## round 33 order 3 p25b
+BOUNDARY
+retain: seed 4967105068881947357
+## round 34 order 0 p25b
+BOUNDARY
+retain: seed 6914354082780640530
+## round 34 order 1 p50
+BOUNDARY
+retain: seed 7409529723371626195
+## round 34 order 2 p25
+BOUNDARY
+retain: seed 5707418278366274745
+## round 34 order 3 p0
+BOUNDARY
+retain: seed 7617047246234325383
+## round 35 order 0 p25b
+BOUNDARY
+retain: seed 5824963712915520819
+## round 35 order 1 p25
+BOUNDARY
+retain: seed 4177983242049521344
+## round 35 order 2 p50
+BOUNDARY
+retain: seed 8329022091421060128
+## round 35 order 3 p0
+BOUNDARY
+retain: seed 6009435729716015832
+## round 36 order 0 p0
+BOUNDARY
+retain: seed 6261605932999531833
+## round 36 order 1 p25b
+BOUNDARY
+retain: seed 1911696903132653526
+## round 36 order 2 p50
+BOUNDARY
+retain: seed 8041817087361477104
+## round 36 order 3 p25
+BOUNDARY
+retain: seed 6487156497362878071
+## round 37 order 0 p25b
+BOUNDARY
+retain: seed 5688183335194665364
+## round 37 order 1 p0
+BOUNDARY
+retain: seed 2500362202461345815
+## round 37 order 2 p50
+BOUNDARY
+retain: seed 3137051193416128995
+## round 37 order 3 p25
+BOUNDARY
+retain: seed 3855060486839525837
+## round 38 order 0 p25
+BOUNDARY
+retain: seed 29123684607383290
+## round 38 order 1 p0
+BOUNDARY
+retain: seed 7523178058063673703
+## round 38 order 2 p50
+BOUNDARY
+retain: seed 4605030492799829886
+## round 38 order 3 p25b
+BOUNDARY
+retain: seed 5625002080732339108
+## round 39 order 0 p50
+BOUNDARY
+retain: seed 2968204586511606983
+## round 39 order 1 p25
+BOUNDARY
+retain: seed 4307755233283863280
+## round 39 order 2 p25b
+BOUNDARY
+retain: seed 1790491289640144779
+## round 39 order 3 p0
+BOUNDARY
+retain: seed 6985932087765232349
+## round 40 order 0 p50
+BOUNDARY
+retain: seed 8664819601377072196
+## round 40 order 1 p25b
+BOUNDARY
+retain: seed 4606155793445530911
+## round 40 order 2 p0
+BOUNDARY
+retain: seed 7430409222773642990
+## round 40 order 3 p25
+BOUNDARY
+retain: seed 1333367689754868628
+## round 41 order 0 p25
+BOUNDARY
+retain: seed 5378012849050780199
+## round 41 order 1 p50
+BOUNDARY
+retain: seed 7266041827387471914
+## round 41 order 2 p0
+BOUNDARY
+retain: seed 5368535763526134172
+## round 41 order 3 p25b
+BOUNDARY
+retain: seed 7849145868920788819
+## round 42 order 0 p0
+BOUNDARY
+retain: seed 5456975496372194909
+## round 42 order 1 p25b
+BOUNDARY
+retain: seed 5323206455885436128
+## round 42 order 2 p50
+BOUNDARY
+retain: seed 5536173050215842989
+## round 42 order 3 p25
+BOUNDARY
+retain: seed 7101738453737963150
+## round 43 order 0 p25
+BOUNDARY
+retain: seed 3623689043372357547
+## round 43 order 1 p25b
+BOUNDARY
+retain: seed 8145674895106486768
+## round 43 order 2 p0
+BOUNDARY
+retain: seed 5867544970588024631
+## round 43 order 3 p50
+BOUNDARY
+retain: seed 6910749148067902720
+## round 44 order 0 p0
+BOUNDARY
+retain: seed 3959299711752967037
+## round 44 order 1 p25
+BOUNDARY
+retain: seed 8211174904092785686
+## round 44 order 2 p50
+BOUNDARY
+retain: seed 8735312523128983252
+## round 44 order 3 p25b
+BOUNDARY
+retain: seed 1062999341346547681
+## round 45 order 0 p25b
+BOUNDARY
+retain: seed 3787592054217360245
+## round 45 order 1 p50
+BOUNDARY
+retain: seed 370551726358070217
+## round 45 order 2 p25
+BOUNDARY
+retain: seed 9056389739550240773
+## round 45 order 3 p0
+BOUNDARY
+retain: seed 5499389059289897804
+## round 46 order 0 p25
+BOUNDARY
+retain: seed 5567095711508854613
+## round 46 order 1 p50
+BOUNDARY
+retain: seed 4605600702885985224
+## round 46 order 2 p0
+BOUNDARY
+retain: seed 3153605253316786422
+## round 46 order 3 p25b
+BOUNDARY
+retain: seed 3240367158893608142
+## round 47 order 0 p50
+BOUNDARY
+retain: seed 1346269857462801681
+## round 47 order 1 p25
+BOUNDARY
+retain: seed 4460155771160968424
+## round 47 order 2 p25b
+BOUNDARY
+retain: seed 6661427863167203642
+## round 47 order 3 p0
+BOUNDARY
+retain: seed 4168379005927544845
+## round 48 order 0 p25
+BOUNDARY
+retain: seed 7323292728535221325
+## round 48 order 1 p0
+BOUNDARY
+retain: seed 3858433989071919536
+## round 48 order 2 p25b
+BOUNDARY
+retain: seed 3448824569639209183
+## round 48 order 3 p50
+BOUNDARY
+retain: seed 4167092010656012683
+## round 49 order 0 p50
+BOUNDARY
+retain: seed 2950516879491552696
+## round 49 order 1 p25
+BOUNDARY
+retain: seed 5788187863956270429
+## round 49 order 2 p0
+BOUNDARY
+retain: seed 2365612190161080779
+## round 49 order 3 p25b
+BOUNDARY
+retain: seed 919190184881890524
+## round 50 order 0 p25b
+BOUNDARY
+retain: seed 7336396520604939525
+## round 50 order 1 p50
+BOUNDARY
+retain: seed 5015858810033072577
+## round 50 order 2 p25
+BOUNDARY
+retain: seed 7686107753577093306
+## round 50 order 3 p0
+BOUNDARY
+retain: seed 3383160258045778959
+## round 51 order 0 p25
+BOUNDARY
+retain: seed 7523371241253884850
+## round 51 order 1 p25b
+BOUNDARY
+retain: seed 3278496262368244369
+## round 51 order 2 p50
+BOUNDARY
+retain: seed 438790884752036089
+## round 51 order 3 p0
+BOUNDARY
+retain: seed 4911006173216501133
+## round 52 order 0 p25
+BOUNDARY
+retain: seed 5039374212008170973
+## round 52 order 1 p25b
+BOUNDARY
+retain: seed 933269006562909174
+## round 52 order 2 p0
+BOUNDARY
+retain: seed 2133439304444211503
+## round 52 order 3 p50
+BOUNDARY
+retain: seed 419280950819562113
+## round 53 order 0 p25
+BOUNDARY
+retain: seed 3125302157107815537
+## round 53 order 1 p0
+BOUNDARY
+retain: seed 7838441895785620726
+## round 53 order 2 p25b
+BOUNDARY
+retain: seed 6874241872395930685
+## round 53 order 3 p50
+BOUNDARY
+retain: seed 1276356131279998516
+## round 54 order 0 p25b
+BOUNDARY
+retain: seed 5706329481114812860
+## round 54 order 1 p0
+BOUNDARY
+retain: seed 561958672814623249
+## round 54 order 2 p25
+BOUNDARY
+retain: seed 1108536454106048079
+## round 54 order 3 p50
+BOUNDARY
+retain: seed 617527985749671005
+## round 55 order 0 p25
+BOUNDARY
+retain: seed 4288843020995761584
+## round 55 order 1 p0
+BOUNDARY
+retain: seed 1465336499841832447
+## round 55 order 2 p25b
+BOUNDARY
+retain: seed 3599729397856580946
+## round 55 order 3 p50
+BOUNDARY
+retain: seed 4672738188252731409
+## round 56 order 0 p50
+BOUNDARY
+retain: seed 9046043564335708471
+## round 56 order 1 p25
+BOUNDARY
+retain: seed 9036429413589144119
+## round 56 order 2 p25b
+BOUNDARY
+retain: seed 8058711668872417487
+## round 56 order 3 p0
+BOUNDARY
+retain: seed 4313291425851577638
+## round 57 order 0 p25b
+BOUNDARY
+retain: seed 1682050148765980658
+## round 57 order 1 p50
+BOUNDARY
+retain: seed 3252263335286305773
+## round 57 order 2 p0
+BOUNDARY
+retain: seed 1089551187355893736
+## round 57 order 3 p25
+BOUNDARY
+retain: seed 2100246044019219092
+## round 58 order 0 p25b
+BOUNDARY
+retain: seed 8161087720386501185
+## round 58 order 1 p25
+BOUNDARY
+retain: seed 5385601415372101817
+## round 58 order 2 p0
+BOUNDARY
+retain: seed 3616977448244496522
+## round 58 order 3 p50
+BOUNDARY
+retain: seed 6526962271218179785
+## round 59 order 0 p25
+BOUNDARY
+retain: seed 6570126090009481883
+## round 59 order 1 p25b
+BOUNDARY
+retain: seed 8504481215701755525
+## round 59 order 2 p0
+BOUNDARY
+retain: seed 1758572242950254787
+## round 59 order 3 p50
+BOUNDARY
+retain: seed 2372999322867783624
+## round 60 order 0 p50
+BOUNDARY
+retain: seed 574418418061812063
+## round 60 order 1 p25b
+BOUNDARY
+retain: seed 7285953202567833940
+## round 60 order 2 p25
+BOUNDARY
+retain: seed 4609355687053070079
+## round 60 order 3 p0
+BOUNDARY
+retain: seed 3793242943065355008
