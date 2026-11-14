@@ -1,0 +1,25 @@
+Per-invocation spread, 90 recorded invocations (warm-up rounds excluded); range = (max - min) / median.
+
+| variant | metric | n | min | median | max | range |
+| --- | --- | --- | --- | --- | --- | --- |
+| idle-lat-copy | `cpu_task_clock_ms` | 30 | 377.5 | 378 | 379.4 | 0.521% |
+| idle-lat-copy | `cpu_user_ms` | 30 | 374.3 | 378.4 | 379.9 | 1.5% |
+| idle-lat-copy | `cpu_sys_ms` | 30 | 0 | 0 | 3.994 | n/a |
+| idle-lat-copy | `instructions_u` | 30 | 1500000000 | 1500000000 | 1500000000 | 0.0000022% |
+| idle-lat-copy | `cycles_u` | 30 | 1201000000 | 1201000000 | 1201000000 | 0.0544% |
+| idle-lat-copy | `cgroup_usage_ms` | 30 | 395.1 | 395.5 | 396.9 | 0.445% |
+| idle-lat-copy | `sibling_busy` | 30 | 0 | 0 | 0.0256 | n/a |
+| busy-lat | `cpu_task_clock_ms` | 30 | 378.7 | 379.2 | 382.9 | 1.12% |
+| busy-lat | `cpu_user_ms` | 30 | 375.6 | 379.9 | 383.8 | 2.14% |
+| busy-lat | `cpu_sys_ms` | 30 | 0 | 0 | 4.001 | n/a |
+| busy-lat | `instructions_u` | 30 | 1500000000 | 1500000000 | 1500000000 | 0.0000016% |
+| busy-lat | `cycles_u` | 30 | 1201000000 | 1201000000 | 1201000000 | 0.038% |
+| busy-lat | `cgroup_usage_ms` | 30 | 402.5 | 402.9 | 406.8 | 1.07% |
+| busy-lat | `sibling_busy` | 30 | 1 | 1 | 1 | 0% |
+| idle-lat | `cpu_task_clock_ms` | 30 | 377.5 | 378.1 | 379.3 | 0.471% |
+| idle-lat | `cpu_user_ms` | 30 | 374.1 | 378.4 | 379.9 | 1.52% |
+| idle-lat | `cpu_sys_ms` | 30 | 0 | 0 | 3.994 | n/a |
+| idle-lat | `instructions_u` | 30 | 1500000000 | 1500000000 | 1500000000 | 0.0000016% |
+| idle-lat | `cycles_u` | 30 | 1201000000 | 1201000000 | 1203000000 | 0.182% |
+| idle-lat | `cgroup_usage_ms` | 30 | 394.9 | 395.7 | 396.9 | 0.5% |
+| idle-lat | `sibling_busy` | 30 | 0 | 0 | 0.0488 | n/a |

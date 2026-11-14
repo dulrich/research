@@ -1,0 +1,42 @@
+## round 0 order 0 busy-lat
+cpus_allowed_list 2
+## round 0 order 1 idle-lat
+cpus_allowed_list 2
+## round 0 order 2 idle-lat-copy
+cpus_allowed_list 2
+## round 1 order 0 busy-lat
+cpus_allowed_list 2
+## round 1 order 1 idle-lat
+cpus_allowed_list 2
+## round 1 order 2 idle-lat-copy
+cpus_allowed_list 2
+## round 2 order 0 idle-lat-copy
+cpus_allowed_list 2
+## round 2 order 1 idle-lat
+cpus_allowed_list 2
+## round 2 order 2 busy-lat
+cpus_allowed_list 2
+## round 3 order 0 idle-lat-copy
+cpus_allowed_list 2
+## round 3 order 1 busy-lat
+cpus_allowed_list 2
+## round 3 order 2 idle-lat
+cpus_allowed_list 2
+## round 4 order 0 idle-lat-copy
+cpus_allowed_list 2
+## round 4 order 1 busy-lat
+cpus_allowed_list 2
+## round 4 order 2 idle-lat
+cpus_allowed_list 2
+## round 5 order 0 idle-lat-copy
+cpus_allowed_list 2
+## round 5 order 1 idle-lat
+cpus_allowed_list 2
+## round 5 order 2 busy-lat
+cpus_allowed_list 2
+## round 6 order 0 idle-lat
+cpus_allowed_list 2
+## round 6 order 1 busy-lat
+cpus_allowed_list 2
+## round 6 order 2 idle-lat-copy
+cpus_allowed_list 2

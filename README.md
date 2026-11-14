@@ -9,7 +9,11 @@ Each folder holds one investigation with its working notes and final report.
 - [Timing measurements](methods/timing.md): the standard every timing claim here follows (repetition, interleaving, placement bias, confidence intervals, noise floor).
 
 <!-- research-index:start -->
-## 3 research projects
+## 4 research projects
+
+### [CPU measurement calibration: what each CPU source counts](cpu-measurement-calibration/) (2026-11-13)
+
+A calibration of the CPU numbers a container run can produce — perf task-clock, the child's rusage user and system time, retired instructions and cycles (user and kernel mode), and the container cgroup's `cpu.stat` usage — against a fixed-work program at several sizes and a…
 
 ### [Memory measurement calibration: what each memory source counts](memory-measurement-calibration/) (2026-11-13)
 

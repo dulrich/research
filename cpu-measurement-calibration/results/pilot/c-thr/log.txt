@@ -1,0 +1,42 @@
+## round 0 order 0 unpinned-thr
+cpus_allowed_list 0-23
+## round 0 order 1 pinned-thr
+cpus_allowed_list 6
+## round 0 order 2 pinned-thr-copy
+cpus_allowed_list 6
+## round 1 order 0 unpinned-thr
+cpus_allowed_list 0-23
+## round 1 order 1 pinned-thr
+cpus_allowed_list 6
+## round 1 order 2 pinned-thr-copy
+cpus_allowed_list 6
+## round 2 order 0 pinned-thr-copy
+cpus_allowed_list 6
+## round 2 order 1 pinned-thr
+cpus_allowed_list 6
+## round 2 order 2 unpinned-thr
+cpus_allowed_list 0-23
+## round 3 order 0 pinned-thr-copy
+cpus_allowed_list 6
+## round 3 order 1 unpinned-thr
+cpus_allowed_list 0-23
+## round 3 order 2 pinned-thr
+cpus_allowed_list 6
+## round 4 order 0 pinned-thr-copy
+cpus_allowed_list 6
+## round 4 order 1 unpinned-thr
+cpus_allowed_list 0-23
+## round 4 order 2 pinned-thr
+cpus_allowed_list 6
+## round 5 order 0 pinned-thr-copy
+cpus_allowed_list 6
+## round 5 order 1 pinned-thr
+cpus_allowed_list 6
+## round 5 order 2 unpinned-thr
+cpus_allowed_list 0-23
+## round 6 order 0 pinned-thr
+cpus_allowed_list 6
+## round 6 order 1 unpinned-thr
+cpus_allowed_list 0-23
+## round 6 order 2 pinned-thr-copy
+cpus_allowed_list 6

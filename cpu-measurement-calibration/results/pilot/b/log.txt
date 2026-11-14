@@ -1,0 +1,56 @@
+## round 0 order 0 pair
+cpus_allowed_list 6
+## round 0 order 1 later
+cpus_allowed_list 6
+## round 0 order 2 fresh
+cpus_allowed_list 6
+## round 0 order 3 fresh-copy
+cpus_allowed_list 6
+## round 1 order 0 later
+cpus_allowed_list 6
+## round 1 order 1 fresh
+cpus_allowed_list 6
+## round 1 order 2 pair
+cpus_allowed_list 6
+## round 1 order 3 fresh-copy
+cpus_allowed_list 6
+## round 2 order 0 fresh-copy
+cpus_allowed_list 6
+## round 2 order 1 later
+cpus_allowed_list 6
+## round 2 order 2 fresh
+cpus_allowed_list 6
+## round 2 order 3 pair
+cpus_allowed_list 6
+## round 3 order 0 later
+cpus_allowed_list 6
+## round 3 order 1 fresh
+cpus_allowed_list 6
+## round 3 order 2 fresh-copy
+cpus_allowed_list 6
+## round 3 order 3 pair
+cpus_allowed_list 6
+## round 4 order 0 fresh
+cpus_allowed_list 6
+## round 4 order 1 pair
+cpus_allowed_list 6
+## round 4 order 2 later
+cpus_allowed_list 6
+## round 4 order 3 fresh-copy
+cpus_allowed_list 6
+## round 5 order 0 fresh
+cpus_allowed_list 6
+## round 5 order 1 pair
+cpus_allowed_list 6
+## round 5 order 2 fresh-copy
+cpus_allowed_list 6
+## round 5 order 3 later
+cpus_allowed_list 6
+## round 6 order 0 later
+cpus_allowed_list 6
+## round 6 order 1 fresh-copy
+cpus_allowed_list 6
+## round 6 order 2 fresh
+cpus_allowed_list 6
+## round 6 order 3 pair
+cpus_allowed_list 6

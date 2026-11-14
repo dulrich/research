@@ -1,0 +1,146 @@
+{
+ "warmup": 1,
+ "padMax": 4096,
+ "seed": 20261113,
+ "invocations": 6,
+ "probe": {
+  "cpu": 2
+ },
+ "variants": [
+  {
+   "name": "n0",
+   "group": "n0",
+   "argv": [
+    "sh",
+    "/var/tmp/cpucal/cpu-measurement-calibration/run.sh",
+    "probe",
+    "lat",
+    "0",
+    "--pin",
+    "2",
+    "--sibling",
+    "3",
+    "--kernel"
+   ]
+  },
+  {
+   "name": "n1e8",
+   "group": "n1e8",
+   "argv": [
+    "sh",
+    "/var/tmp/cpucal/cpu-measurement-calibration/run.sh",
+    "probe",
+    "lat",
+    "100000000",
+    "--pin",
+    "2",
+    "--sibling",
+    "3",
+    "--kernel"
+   ]
+  },
+  {
+   "name": "n3e8",
+   "group": "n3e8",
+   "argv": [
+    "sh",
+    "/var/tmp/cpucal/cpu-measurement-calibration/run.sh",
+    "probe",
+    "lat",
+    "300000000",
+    "--pin",
+    "2",
+    "--sibling",
+    "3",
+    "--kernel"
+   ]
+  },
+  {
+   "name": "n1e9",
+   "group": "n1e9",
+   "argv": [
+    "sh",
+    "/var/tmp/cpucal/cpu-measurement-calibration/run.sh",
+    "probe",
+    "lat",
+    "1000000000",
+    "--pin",
+    "2",
+    "--sibling",
+    "3",
+    "--kernel"
+   ]
+  },
+  {
+   "name": "n3e8-copy",
+   "group": "n3e8-copy",
+   "argv": [
+    "sh",
+    "/var/tmp/cpucal/cpu-measurement-calibration/run.sh",
+    "probe",
+    "lat",
+    "300000000",
+    "--pin",
+    "2",
+    "--sibling",
+    "3",
+    "--kernel"
+   ]
+  }
+ ],
+ "aa": [
+  "n3e8",
+  "n3e8-copy"
+ ],
+ "baseline": "n3e8",
+ "metrics": {
+  "cpu_task_clock_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpu_user_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpu_sys_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "instructions_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cycles_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_usage_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "sibling_busy": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpuset_ncpus": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "instructions_k": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cycles_k": {
+   "kind": "level",
+   "better": "lower"
+  }
+ },
+ "channel": {
+  "argv": [
+   "ssh",
+   "{host}",
+   "sh",
+   "-s"
+  ]
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "warmup": 3,
+ "padMax": 4096,
+ "seed": 20261113,
+ "invocations": 30,
+ "probe": {
+  "cpu": 2
+ },
+ "variants": [
+  {
+   "name": "idle-thr",
+   "group": "idle-thr",
+   "argv": [
+    "sh",
+    "/var/tmp/cpucal/cpu-measurement-calibration/run.sh",
+    "probe",
+    "thr",
+    "300000000",
+    "--pin",
+    "2",
+    "--sibling",
+    "3"
+   ]
+  },
+  {
+   "name": "busy-thr",
+   "group": "busy-thr",
+   "argv": [
+    "sh",
+    "/var/tmp/cpucal/cpu-measurement-calibration/run.sh",
+    "probe",
+    "thr",
+    "300000000",
+    "--pin",
+    "2",
+    "--sibling",
+    "3",
+    "--antagonist",
+    "3"
+   ]
+  },
+  {
+   "name": "idle-thr-copy",
+   "group": "idle-thr-copy",
+   "argv": [
+    "sh",
+    "/var/tmp/cpucal/cpu-measurement-calibration/run.sh",
+    "probe",
+    "thr",
+    "300000000",
+    "--pin",
+    "2",
+    "--sibling",
+    "3"
+   ]
+  }
+ ],
+ "aa": [
+  "idle-thr",
+  "idle-thr-copy"
+ ],
+ "baseline": "idle-thr",
+ "metrics": {
+  "cpu_task_clock_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpu_user_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpu_sys_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "instructions_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cycles_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_usage_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "sibling_busy": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpuset_ncpus": {
+   "kind": "level",
+   "better": "lower"
+  }
+ },
+ "channel": {
+  "argv": [
+   "ssh",
+   "{host}",
+   "sh",
+   "-s"
+  ]
+ }
+}

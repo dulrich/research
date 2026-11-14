@@ -1,0 +1,166 @@
+{
+ "warmup": 1,
+ "padMax": 4096,
+ "seed": 20261113,
+ "invocations": 6,
+ "probe": {
+  "cpu": 6
+ },
+ "variants": [
+  {
+   "name": "fresh",
+   "group": "fresh",
+   "argv": [
+    "sh",
+    "cpu-measurement-calibration/run.sh",
+    "probe",
+    "lat",
+    "300000000",
+    "--pin",
+    "6",
+    "--sibling",
+    "18"
+   ]
+  },
+  {
+   "name": "later",
+   "group": "later",
+   "argv": [
+    "sh",
+    "cpu-measurement-calibration/run.sh",
+    "later",
+    "lat",
+    "300000000",
+    "--pin",
+    "6",
+    "--sibling",
+    "18"
+   ]
+  },
+  {
+   "name": "pair",
+   "group": "pair",
+   "argv": [
+    "sh",
+    "cpu-measurement-calibration/run.sh",
+    "pair",
+    "lat",
+    "300000000",
+    "--pin",
+    "6",
+    "--sibling",
+    "18"
+   ]
+  },
+  {
+   "name": "fresh-copy",
+   "group": "fresh-copy",
+   "argv": [
+    "sh",
+    "cpu-measurement-calibration/run.sh",
+    "probe",
+    "lat",
+    "300000000",
+    "--pin",
+    "6",
+    "--sibling",
+    "18"
+   ]
+  }
+ ],
+ "aa": [
+  "fresh",
+  "fresh-copy"
+ ],
+ "baseline": "fresh",
+ "metrics": {
+  "cpu_task_clock_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpu_user_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpu_sys_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "instructions_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cycles_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_usage_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "sibling_busy": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpuset_ncpus": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "first_cpu_task_clock_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "first_cpu_user_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "first_cpu_sys_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "first_instructions_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "first_cycles_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "first_cgroup_usage_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "first_sibling_busy": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "second_cpu_task_clock_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "second_cpu_user_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "second_cpu_sys_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "second_instructions_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "second_cycles_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "second_cgroup_usage_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "second_sibling_busy": {
+   "kind": "level",
+   "better": "lower"
+  }
+ }
+}

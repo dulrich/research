@@ -1,0 +1,25 @@
+Per-invocation spread, 90 recorded invocations (warm-up rounds excluded); range = (max - min) / median.
+
+| variant | metric | n | min | median | max | range |
+| --- | --- | --- | --- | --- | --- | --- |
+| idle-thr-copy | `cpu_task_clock_ms` | 30 | 377.5 | 378.8 | 382.8 | 1.39% |
+| idle-thr-copy | `cpu_user_ms` | 30 | 375.3 | 379.3 | 381.6 | 1.66% |
+| idle-thr-copy | `cpu_sys_ms` | 30 | 0 | 0 | 3.994 | n/a |
+| idle-thr-copy | `instructions_u` | 30 | 3300000000 | 3300000000 | 3300000000 | 0.00000173% |
+| idle-thr-copy | `cycles_u` | 30 | 1201000000 | 1203000000 | 1209000000 | 0.686% |
+| idle-thr-copy | `cgroup_usage_ms` | 30 | 395 | 396.6 | 400.6 | 1.41% |
+| idle-thr-copy | `sibling_busy` | 30 | 0 | 0 | 0.0444 | n/a |
+| busy-thr | `cpu_task_clock_ms` | 30 | 784 | 785.2 | 788.4 | 0.559% |
+| busy-thr | `cpu_user_ms` | 30 | 781.2 | 785.9 | 789.1 | 1% |
+| busy-thr | `cpu_sys_ms` | 30 | 0 | 0 | 4.006 | n/a |
+| busy-thr | `instructions_u` | 30 | 3300000000 | 3300000000 | 3300000000 | 0.00000133% |
+| busy-thr | `cycles_u` | 30 | 2487000000 | 2489000000 | 2489000000 | 0.108% |
+| busy-thr | `cgroup_usage_ms` | 30 | 808.5 | 809.7 | 812.8 | 0.534% |
+| busy-thr | `sibling_busy` | 30 | 1 | 1 | 1 | 0% |
+| idle-thr | `cpu_task_clock_ms` | 30 | 377.4 | 379.2 | 382.8 | 1.41% |
+| idle-thr | `cpu_user_ms` | 30 | 374.2 | 378.8 | 383.3 | 2.39% |
+| idle-thr | `cpu_sys_ms` | 30 | 0 | 0 | 3.998 | n/a |
+| idle-thr | `instructions_u` | 30 | 3300000000 | 3300000000 | 3300000000 | 0.00000121% |
+| idle-thr | `cycles_u` | 30 | 1201000000 | 1203000000 | 1211000000 | 0.819% |
+| idle-thr | `cgroup_usage_ms` | 30 | 395 | 396.6 | 400.5 | 1.38% |
+| idle-thr | `sibling_busy` | 30 | 0 | 0 | 0.05 | n/a |

@@ -1,0 +1,93 @@
+{
+ "warmup": 1,
+ "padMax": 4096,
+ "seed": 20261113,
+ "invocations": 6,
+ "probe": {
+  "cpu": 6
+ },
+ "variants": [
+  {
+   "name": "pinned-thr",
+   "group": "pinned-thr",
+   "argv": [
+    "sh",
+    "cpu-measurement-calibration/run.sh",
+    "probe",
+    "thr",
+    "300000000",
+    "--pin",
+    "6",
+    "--sibling",
+    "18"
+   ]
+  },
+  {
+   "name": "unpinned-thr",
+   "group": "unpinned-thr",
+   "argv": [
+    "sh",
+    "cpu-measurement-calibration/run.sh",
+    "probe",
+    "thr",
+    "300000000",
+    "--sibling",
+    "18"
+   ]
+  },
+  {
+   "name": "pinned-thr-copy",
+   "group": "pinned-thr-copy",
+   "argv": [
+    "sh",
+    "cpu-measurement-calibration/run.sh",
+    "probe",
+    "thr",
+    "300000000",
+    "--pin",
+    "6",
+    "--sibling",
+    "18"
+   ]
+  }
+ ],
+ "aa": [
+  "pinned-thr",
+  "pinned-thr-copy"
+ ],
+ "baseline": "pinned-thr",
+ "metrics": {
+  "cpu_task_clock_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpu_user_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpu_sys_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "instructions_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cycles_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_usage_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "sibling_busy": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpuset_ncpus": {
+   "kind": "level",
+   "better": "lower"
+  }
+ }
+}

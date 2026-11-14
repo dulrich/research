@@ -1,0 +1,25 @@
+Per-invocation spread, 90 recorded invocations (warm-up rounds excluded); range = (max - min) / median.
+
+| variant | metric | n | min | median | max | range |
+| --- | --- | --- | --- | --- | --- | --- |
+| pinned-thr-copy | `cpu_task_clock_ms` | 30 | 224.4 | 225.3 | 282 | 25.5% |
+| pinned-thr-copy | `cpu_user_ms` | 30 | 221.5 | 225.4 | 282.3 | 27% |
+| pinned-thr-copy | `cpu_sys_ms` | 30 | 0 | 0 | 4.03 | n/a |
+| pinned-thr-copy | `instructions_u` | 30 | 3300000000 | 3300000000 | 3300000000 | 0.00000203% |
+| pinned-thr-copy | `cycles_u` | 30 | 1200000000 | 1200000000 | 1412000000 | 17.6% |
+| pinned-thr-copy | `cgroup_usage_ms` | 30 | 234.9 | 235.8 | 299.4 | 27.4% |
+| pinned-thr-copy | `sibling_busy` | 30 | 0 | 0 | 0.9333 | n/a |
+| unpinned-thr | `cpu_task_clock_ms` | 30 | 217.9 | 219.5 | 241.8 | 10.9% |
+| unpinned-thr | `cpu_user_ms` | 30 | 214.8 | 219.2 | 242.2 | 12.5% |
+| unpinned-thr | `cpu_sys_ms` | 30 | 0 | 0 | 4.074 | n/a |
+| unpinned-thr | `instructions_u` | 30 | 3300000000 | 3300000000 | 3300000000 | 0.00000258% |
+| unpinned-thr | `cycles_u` | 30 | 1200000000 | 1202000000 | 1241000000 | 3.41% |
+| unpinned-thr | `cgroup_usage_ms` | 30 | 229.8 | 231.3 | 254.3 | 10.6% |
+| unpinned-thr | `sibling_busy` | 30 | 0 | 0 | 0.72 | n/a |
+| pinned-thr | `cpu_task_clock_ms` | 30 | 224.6 | 225.4 | 229.1 | 2.01% |
+| pinned-thr | `cpu_user_ms` | 30 | 221.2 | 225.5 | 229.4 | 3.65% |
+| pinned-thr | `cpu_sys_ms` | 30 | 0 | 0 | 3.959 | n/a |
+| pinned-thr | `instructions_u` | 30 | 3300000000 | 3300000000 | 3300000000 | 0.00000115% |
+| pinned-thr | `cycles_u` | 30 | 1200000000 | 1200000000 | 1201000000 | 0.092% |
+| pinned-thr | `cgroup_usage_ms` | 30 | 234.9 | 235.8 | 241.1 | 2.6% |
+| pinned-thr | `sibling_busy` | 30 | 0 | 0 | 0 | n/a |

@@ -1,0 +1,42 @@
+## round 0 order 0 offline-lat
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 0 order 1 offline-lat-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 1 order 0 offline-lat
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 1 order 1 offline-lat-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 2 order 0 offline-lat-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 2 order 1 offline-lat
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 3 order 0 offline-lat-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 3 order 1 offline-lat
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 4 order 0 offline-lat
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 4 order 1 offline-lat-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 5 order 0 offline-lat-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 5 order 1 offline-lat
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 6 order 0 offline-lat-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 6 order 1 offline-lat
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)

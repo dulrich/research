@@ -1,0 +1,93 @@
+{
+ "warmup": 1,
+ "padMax": 4096,
+ "seed": 20261113,
+ "invocations": 6,
+ "probe": {
+  "cpu": 6
+ },
+ "variants": [
+  {
+   "name": "pinned-lat",
+   "group": "pinned-lat",
+   "argv": [
+    "sh",
+    "cpu-measurement-calibration/run.sh",
+    "probe",
+    "lat",
+    "300000000",
+    "--pin",
+    "6",
+    "--sibling",
+    "18"
+   ]
+  },
+  {
+   "name": "unpinned-lat",
+   "group": "unpinned-lat",
+   "argv": [
+    "sh",
+    "cpu-measurement-calibration/run.sh",
+    "probe",
+    "lat",
+    "300000000",
+    "--sibling",
+    "18"
+   ]
+  },
+  {
+   "name": "pinned-lat-copy",
+   "group": "pinned-lat-copy",
+   "argv": [
+    "sh",
+    "cpu-measurement-calibration/run.sh",
+    "probe",
+    "lat",
+    "300000000",
+    "--pin",
+    "6",
+    "--sibling",
+    "18"
+   ]
+  }
+ ],
+ "aa": [
+  "pinned-lat",
+  "pinned-lat-copy"
+ ],
+ "baseline": "pinned-lat",
+ "metrics": {
+  "cpu_task_clock_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpu_user_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpu_sys_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "instructions_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cycles_u": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_usage_ms": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "sibling_busy": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cpuset_ncpus": {
+   "kind": "level",
+   "better": "lower"
+  }
+ }
+}

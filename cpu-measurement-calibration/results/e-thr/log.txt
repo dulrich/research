@@ -1,0 +1,198 @@
+## round 0 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 0 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 1 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 1 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 2 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 2 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 3 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 3 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 4 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 4 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 5 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 5 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 6 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 6 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 7 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 7 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 8 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 8 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 9 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 9 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 10 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 10 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 11 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 11 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 12 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 12 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 13 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 13 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 14 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 14 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 15 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 15 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 16 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 16 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 17 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 17 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 18 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 18 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 19 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 19 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 20 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 20 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 21 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 21 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 22 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 22 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 23 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 23 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 24 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 24 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 25 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 25 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 26 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 26 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 27 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 27 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 28 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 28 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 29 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 29 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 30 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 30 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 31 order 0 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 31 order 1 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 32 order 0 offline-thr-copy
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
+## round 32 order 1 offline-thr
+cpus_allowed_list 2
+cpuprobe.sh: sibling offline (cpu3)
