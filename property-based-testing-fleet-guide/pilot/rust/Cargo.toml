@@ -1,0 +1,15 @@
+[package]
+name = "pbt-pilot-rust"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+
+[dev-dependencies]
+hegeltest = "0.52"
+cv-text = { path = "../../../../crucible-vault/crates/cv-text" }
+crucible-keys = { path = "../../../../crucible-dev-env/crates/crucible-keys" }
+crucible-layout = { path = "../../../../crucible-dev-env/crates/crucible-layout" }
