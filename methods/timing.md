@@ -1,6 +1,6 @@
 # Timing measurement standard
 
-This is the method every timing claim in this repository follows. The goal is a claim a reader can check: how many times it was measured, at which levels, in which order, against which noise floor, and on what machine. The standard has to hold on an ordinary, shared, untuned host; host tuning (below) only makes it cheaper to meet. Sections are rules (R1, R2, ...), each with a one-line reason and a citation. Resource measurements other than time (binary size, memory) are planned as separate standards.
+This is the method every timing claim in this repository follows. The goal is a claim a reader can check: how many times it was measured, at which levels, in which order, against which noise floor, and on what machine. The standard has to hold on an ordinary, shared, untuned host; host tuning (below) only makes it cheaper to meet. Sections are rules (R1, R2, ...), each with a one-line reason and a citation. Memory measurements follow [memory.md](memory.md), which extends this standard; binary size is planned as a separate standard.
 
 ## Scope: rigor follows use
 
