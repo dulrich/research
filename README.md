@@ -9,7 +9,11 @@ Each folder holds one investigation with its working notes and final report.
 - [Timing measurements](methods/timing.md): the standard every timing claim here follows (repetition, interleaving, placement bias, confidence intervals, noise floor).
 
 <!-- research-index:start -->
-## 5 research projects
+## 6 research projects
+
+### [glibc thread-arena retention: a reproducible bad mode with a known ground truth](glibc-arena-retention/) (2026-11-14)
+
+A fastbin-heavy burst freed on a worker thread and followed by `malloc_trim(0)` stays resident in glibc 2.41 (25 MiB burst: about 25 MiB anon after the trim, against about 1 MiB for the same burst on the main arena, with no fastbin-sized chunks, or with `mxfast=0`), so the bad…
 
 ### [CPU measurement calibration: what each CPU source counts](cpu-measurement-calibration/) (2026-11-13)
 

@@ -121,3 +121,7 @@ Pool mode (`--pool 4 --requests 12 --trim`), 40 invocations, windows 0 s and 3 s
 
 - Class R used windows 0 and 2 s; class P used windows 0 and 3 s.
 - Hostnames in `env.json` of the three classes were replaced by `measurement-host` after the runs, as in the mechanism class; `analyze.mjs` output was re-run afterwards and the `truth.md` files are byte-identical.
+
+## 2026-11-14 report (WP-3)
+
+`README.md` synthesises the mechanism class, the pilot, and the R, S and P claim classes with their rigor labels, and states the implications for M5, M6 (the `mxfast` and arena-type effect is resolved at indicative rigor; the `MALLOC_ARENA_MAX` effect was not tested) and M7. The glibc source anchors were read from upstream glibc 2.41 (the image's version, 2.41-12+deb13u4): `mtrim` and `_int_free_maybe_consolidate` in `malloc/malloc.c`, `heap_trim` and `HEAP_MAX_SIZE` in `malloc/arena.c`, and the fastbin path in `_int_free_chunk`. Discrepancy: none with the mechanism, one refinement. In 2.41 `mtrim` walks every arena in the ring (consolidating and `madvise`-ing whole free pages in the bins) and only calls `systrim` for the main arena, so the spike's "malloc_trim only shrinks the main arena's top" is right for the top but incomplete for the bins; the thread arena's top is never shrunk by `malloc_trim`. The bun version used (1.4.4) is not recorded in any `env.json`; the README says so.
