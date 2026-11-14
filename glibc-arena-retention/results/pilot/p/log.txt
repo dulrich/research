@@ -1,0 +1,78 @@
+## round 0 order 0 p1
+BOUNDARY
+retain: seed 218208441457533021
+## round 0 order 1 p0
+BOUNDARY
+retain: seed 2858922098594686444
+## round 1 order 0 p1
+BOUNDARY
+retain: seed 4341386003633683425
+## round 1 order 1 p0
+BOUNDARY
+retain: seed 1133756493979937751
+## round 2 order 0 p0
+BOUNDARY
+retain: seed 7100978502054464219
+## round 2 order 1 p1
+BOUNDARY
+retain: seed 4402712110052204926
+## round 3 order 0 p1
+BOUNDARY
+retain: seed 1812541570507684698
+## round 3 order 1 p0
+BOUNDARY
+retain: seed 7890587895995918421
+## round 4 order 0 p1
+BOUNDARY
+retain: seed 3853219827139968688
+## round 4 order 1 p0
+BOUNDARY
+retain: seed 8961715928628769137
+## round 5 order 0 p0
+BOUNDARY
+retain: seed 1307299031069856822
+## round 5 order 1 p1
+BOUNDARY
+retain: seed 3246325806828698401
+## round 6 order 0 p1
+BOUNDARY
+retain: seed 7923892559723106865
+## round 6 order 1 p0
+BOUNDARY
+retain: seed 5032400161200518146
+## round 7 order 0 p0
+BOUNDARY
+retain: seed 5427081170060857473
+## round 7 order 1 p1
+BOUNDARY
+retain: seed 2477169714266976317
+## round 8 order 0 p1
+BOUNDARY
+retain: seed 8487891654750296179
+## round 8 order 1 p0
+BOUNDARY
+retain: seed 8431135250803616087
+## round 9 order 0 p1
+BOUNDARY
+retain: seed 1210392305489034091
+## round 9 order 1 p0
+BOUNDARY
+retain: seed 2123829484140507263
+## round 10 order 0 p1
+BOUNDARY
+retain: seed 5568412012136917203
+## round 10 order 1 p0
+BOUNDARY
+retain: seed 5590382653045182935
+## round 11 order 0 p1
+BOUNDARY
+retain: seed 2840070707852357988
+## round 11 order 1 p0
+BOUNDARY
+retain: seed 6690812407516426113
+## round 12 order 0 p0
+BOUNDARY
+retain: seed 8193166825170836671
+## round 12 order 1 p1
+BOUNDARY
+retain: seed 4199956227867258293

@@ -1,0 +1,95 @@
+{
+ "padMax": 4096,
+ "seed": 20261114,
+ "warmup": 1,
+ "invocations": 12,
+ "variants": [
+  {
+   "name": "p0",
+   "group": "p0",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--bad-p",
+    "0",
+    "--trim"
+   ]
+  },
+  {
+   "name": "p1",
+   "group": "p1",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--bad-p",
+    "1",
+    "--trim"
+   ]
+  }
+ ],
+ "baseline": "p0",
+ "metrics": {
+  "cgroup_peak_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_anon_hwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_file_hwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "vmhwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "anon_settled_0s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "rssanon_settled_0s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "anon_settled_3s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "rssanon_settled_3s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "bad_drawn": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "release_delay_s": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "release_actual_s": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "self_rssanon_boundary_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "self_rssanon_mib": {
+   "kind": "level",
+   "better": "lower"
+  }
+ }
+}

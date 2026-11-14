@@ -1,0 +1,78 @@
+## round 0 order 0 nolate
+BOUNDARY
+retain: seed 2009493996486420968
+## round 0 order 1 late10
+BOUNDARY
+retain: seed 2811866875099840954
+## round 1 order 0 nolate
+BOUNDARY
+retain: seed 2177641904437132732
+## round 1 order 1 late10
+BOUNDARY
+retain: seed 3594243987385659188
+## round 2 order 0 late10
+BOUNDARY
+retain: seed 7990075905400622560
+## round 2 order 1 nolate
+BOUNDARY
+retain: seed 2562255911667550017
+## round 3 order 0 nolate
+BOUNDARY
+retain: seed 8615502727213418088
+## round 3 order 1 late10
+BOUNDARY
+retain: seed 8057989858627590472
+## round 4 order 0 nolate
+BOUNDARY
+retain: seed 5702078586624455135
+## round 4 order 1 late10
+BOUNDARY
+retain: seed 3306915379483542083
+## round 5 order 0 late10
+BOUNDARY
+retain: seed 7279732839784118922
+## round 5 order 1 nolate
+BOUNDARY
+retain: seed 2627898953022398453
+## round 6 order 0 nolate
+BOUNDARY
+retain: seed 916372826572839137
+## round 6 order 1 late10
+BOUNDARY
+retain: seed 3753331959579557265
+## round 7 order 0 late10
+BOUNDARY
+retain: seed 7005318634508368015
+## round 7 order 1 nolate
+BOUNDARY
+retain: seed 9075035735035457747
+## round 8 order 0 nolate
+BOUNDARY
+retain: seed 4934626297145732852
+## round 8 order 1 late10
+BOUNDARY
+retain: seed 6941278061556529388
+## round 9 order 0 nolate
+BOUNDARY
+retain: seed 941884144894656593
+## round 9 order 1 late10
+BOUNDARY
+retain: seed 2874002137277268269
+## round 10 order 0 nolate
+BOUNDARY
+retain: seed 883115085318458094
+## round 10 order 1 late10
+BOUNDARY
+retain: seed 1184122057787301087
+## round 11 order 0 nolate
+BOUNDARY
+retain: seed 4821787772692204605
+## round 11 order 1 late10
+BOUNDARY
+retain: seed 8116021464944493331
+## round 12 order 0 late10
+BOUNDARY
+retain: seed 8179430767717686151
+## round 12 order 1 nolate
+BOUNDARY
+retain: seed 2126143593464942019

@@ -1,0 +1,348 @@
+{
+ "padMax": 4096,
+ "seed": 20261114,
+ "warmup": 1,
+ "invocations": 6,
+ "variants": [
+  {
+   "name": "thread",
+   "group": "thread",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--trim"
+   ]
+  },
+  {
+   "name": "thread-copy",
+   "group": "thread-copy",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--trim"
+   ]
+  },
+  {
+   "name": "main",
+   "group": "main",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--main",
+    "--trim"
+   ]
+  },
+  {
+   "name": "fast0",
+   "group": "fast0",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--fast-pct",
+    "0",
+    "--trim"
+   ]
+  },
+  {
+   "name": "fast70",
+   "group": "fast70",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--fast-pct",
+    "70",
+    "--trim"
+   ]
+  },
+  {
+   "name": "fast100",
+   "group": "fast100",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--fast-pct",
+    "100",
+    "--trim"
+   ]
+  },
+  {
+   "name": "mxfast0",
+   "group": "mxfast0",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--tunables",
+    "glibc.malloc.mxfast=0",
+    "--",
+    "--trim"
+   ]
+  },
+  {
+   "name": "pin0.1",
+   "group": "pin0.1",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--pin-at",
+    "0.1",
+    "--trim"
+   ]
+  },
+  {
+   "name": "pin0.5",
+   "group": "pin0.5",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--pin-at",
+    "0.5",
+    "--trim"
+   ]
+  },
+  {
+   "name": "pin0.9",
+   "group": "pin0.9",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--pin-at",
+    "0.9",
+    "--trim"
+   ]
+  },
+  {
+   "name": "pin0.99",
+   "group": "pin0.99",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--pin-at",
+    "0.99",
+    "--trim"
+   ]
+  },
+  {
+   "name": "mib16",
+   "group": "mib16",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--mib",
+    "16",
+    "--trim"
+   ]
+  },
+  {
+   "name": "mib48",
+   "group": "mib48",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--mib",
+    "48",
+    "--trim"
+   ]
+  },
+  {
+   "name": "mib100",
+   "group": "mib100",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--mib",
+    "100",
+    "--trim"
+   ]
+  },
+  {
+   "name": "notrim",
+   "group": "notrim",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--"
+   ]
+  },
+  {
+   "name": "thr128k",
+   "group": "thr128k",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--trim-threshold",
+    "131072",
+    "--trim"
+   ]
+  },
+  {
+   "name": "thr128k-notrim",
+   "group": "thr128k-notrim",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--trim-threshold",
+    "131072"
+   ]
+  },
+  {
+   "name": "late1s",
+   "group": "late1s",
+   "argv": [
+    "bun",
+    "glibc-arena-retention/run.mjs",
+    "--interval",
+    "0.1",
+    "--settle",
+    "0,3",
+    "--",
+    "--late-max",
+    "1",
+    "--trim",
+    "--idle",
+    "5"
+   ]
+  }
+ ],
+ "aa": [
+  "thread",
+  "thread-copy"
+ ],
+ "baseline": "thread",
+ "metrics": {
+  "cgroup_peak_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_anon_hwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_file_hwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "vmhwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "anon_settled_0s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "rssanon_settled_0s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "anon_settled_3s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "rssanon_settled_3s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "bad_drawn": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "release_delay_s": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "release_actual_s": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "self_rssanon_boundary_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "self_rssanon_mib": {
+   "kind": "level",
+   "better": "lower"
+  }
+ }
+}
