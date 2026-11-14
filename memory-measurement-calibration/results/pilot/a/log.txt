@@ -1,0 +1,56 @@
+## round 0 order 0 a256
+BOUNDARY
+## round 0 order 1 a64
+BOUNDARY
+## round 0 order 2 a16
+BOUNDARY
+## round 0 order 3 a64-copy
+BOUNDARY
+## round 1 order 0 a64
+BOUNDARY
+## round 1 order 1 a16
+BOUNDARY
+## round 1 order 2 a256
+BOUNDARY
+## round 1 order 3 a64-copy
+BOUNDARY
+## round 2 order 0 a64-copy
+BOUNDARY
+## round 2 order 1 a64
+BOUNDARY
+## round 2 order 2 a16
+BOUNDARY
+## round 2 order 3 a256
+BOUNDARY
+## round 3 order 0 a64
+BOUNDARY
+## round 3 order 1 a16
+BOUNDARY
+## round 3 order 2 a64-copy
+BOUNDARY
+## round 3 order 3 a256
+BOUNDARY
+## round 4 order 0 a16
+BOUNDARY
+## round 4 order 1 a256
+BOUNDARY
+## round 4 order 2 a64
+BOUNDARY
+## round 4 order 3 a64-copy
+BOUNDARY
+## round 5 order 0 a16
+BOUNDARY
+## round 5 order 1 a256
+BOUNDARY
+## round 5 order 2 a64-copy
+BOUNDARY
+## round 5 order 3 a64
+BOUNDARY
+## round 6 order 0 a64
+BOUNDARY
+## round 6 order 1 a64-copy
+BOUNDARY
+## round 6 order 2 a16
+BOUNDARY
+## round 6 order 3 a256
+BOUNDARY

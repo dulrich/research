@@ -1,0 +1,210 @@
+## round 0 order 0 c12
+BOUNDARY
+## round 0 order 1 c2
+BOUNDARY
+## round 0 order 2 c6-copy
+BOUNDARY
+## round 0 order 3 c6
+BOUNDARY
+## round 0 order 4 c6-arena2
+BOUNDARY
+## round 1 order 0 c6-arena2
+BOUNDARY
+## round 1 order 1 c6
+BOUNDARY
+## round 1 order 2 c6-copy
+BOUNDARY
+## round 1 order 3 c2
+BOUNDARY
+## round 1 order 4 c12
+BOUNDARY
+## round 2 order 0 c6-copy
+BOUNDARY
+## round 2 order 1 c6-arena2
+BOUNDARY
+## round 2 order 2 c12
+BOUNDARY
+## round 2 order 3 c6
+BOUNDARY
+## round 2 order 4 c2
+BOUNDARY
+## round 3 order 0 c6-copy
+BOUNDARY
+## round 3 order 1 c2
+BOUNDARY
+## round 3 order 2 c6
+BOUNDARY
+## round 3 order 3 c6-arena2
+BOUNDARY
+## round 3 order 4 c12
+BOUNDARY
+## round 4 order 0 c6-copy
+BOUNDARY
+## round 4 order 1 c12
+BOUNDARY
+## round 4 order 2 c6
+BOUNDARY
+## round 4 order 3 c6-arena2
+BOUNDARY
+## round 4 order 4 c2
+BOUNDARY
+## round 5 order 0 c6-copy
+BOUNDARY
+## round 5 order 1 c6-arena2
+BOUNDARY
+## round 5 order 2 c2
+BOUNDARY
+## round 5 order 3 c6
+BOUNDARY
+## round 5 order 4 c12
+BOUNDARY
+## round 6 order 0 c12
+BOUNDARY
+## round 6 order 1 c6
+BOUNDARY
+## round 6 order 2 c6-arena2
+BOUNDARY
+## round 6 order 3 c2
+BOUNDARY
+## round 6 order 4 c6-copy
+BOUNDARY
+## round 7 order 0 c6
+BOUNDARY
+## round 7 order 1 c6-copy
+BOUNDARY
+## round 7 order 2 c12
+BOUNDARY
+## round 7 order 3 c6-arena2
+BOUNDARY
+## round 7 order 4 c2
+BOUNDARY
+## round 8 order 0 c6
+BOUNDARY
+## round 8 order 1 c6-arena2
+BOUNDARY
+## round 8 order 2 c12
+BOUNDARY
+## round 8 order 3 c2
+BOUNDARY
+## round 8 order 4 c6-copy
+BOUNDARY
+## round 9 order 0 c2
+BOUNDARY
+## round 9 order 1 c6-copy
+BOUNDARY
+## round 9 order 2 c6
+BOUNDARY
+## round 9 order 3 c12
+BOUNDARY
+## round 9 order 4 c6-arena2
+BOUNDARY
+## round 10 order 0 c6-copy
+BOUNDARY
+## round 10 order 1 c6
+BOUNDARY
+## round 10 order 2 c12
+BOUNDARY
+## round 10 order 3 c6-arena2
+BOUNDARY
+## round 10 order 4 c2
+BOUNDARY
+## round 11 order 0 c6-arena2
+BOUNDARY
+## round 11 order 1 c2
+BOUNDARY
+## round 11 order 2 c6
+BOUNDARY
+## round 11 order 3 c12
+BOUNDARY
+## round 11 order 4 c6-copy
+BOUNDARY
+## round 12 order 0 c6
+BOUNDARY
+## round 12 order 1 c6-copy
+BOUNDARY
+## round 12 order 2 c6-arena2
+BOUNDARY
+## round 12 order 3 c2
+BOUNDARY
+## round 12 order 4 c12
+BOUNDARY
+## round 13 order 0 c6-arena2
+BOUNDARY
+## round 13 order 1 c6-copy
+BOUNDARY
+## round 13 order 2 c6
+BOUNDARY
+## round 13 order 3 c2
+BOUNDARY
+## round 13 order 4 c12
+BOUNDARY
+## round 14 order 0 c2
+BOUNDARY
+## round 14 order 1 c6
+BOUNDARY
+## round 14 order 2 c6-arena2
+BOUNDARY
+## round 14 order 3 c12
+BOUNDARY
+## round 14 order 4 c6-copy
+BOUNDARY
+## round 15 order 0 c6-copy
+BOUNDARY
+## round 15 order 1 c12
+BOUNDARY
+## round 15 order 2 c6
+BOUNDARY
+## round 15 order 3 c6-arena2
+BOUNDARY
+## round 15 order 4 c2
+BOUNDARY
+## round 16 order 0 c6-arena2
+BOUNDARY
+## round 16 order 1 c12
+BOUNDARY
+## round 16 order 2 c2
+BOUNDARY
+## round 16 order 3 c6
+BOUNDARY
+## round 16 order 4 c6-copy
+BOUNDARY
+## round 17 order 0 c6-arena2
+BOUNDARY
+## round 17 order 1 c12
+BOUNDARY
+## round 17 order 2 c6
+BOUNDARY
+## round 17 order 3 c2
+BOUNDARY
+## round 17 order 4 c6-copy
+BOUNDARY
+## round 18 order 0 c6-copy
+BOUNDARY
+## round 18 order 1 c6-arena2
+BOUNDARY
+## round 18 order 2 c2
+BOUNDARY
+## round 18 order 3 c12
+BOUNDARY
+## round 18 order 4 c6
+BOUNDARY
+## round 19 order 0 c12
+BOUNDARY
+## round 19 order 1 c6-arena2
+BOUNDARY
+## round 19 order 2 c6-copy
+BOUNDARY
+## round 19 order 3 c6
+BOUNDARY
+## round 19 order 4 c2
+BOUNDARY
+## round 20 order 0 c6-copy
+BOUNDARY
+## round 20 order 1 c6
+BOUNDARY
+## round 20 order 2 c12
+BOUNDARY
+## round 20 order 3 c6-arena2
+BOUNDARY
+## round 20 order 4 c2
+BOUNDARY

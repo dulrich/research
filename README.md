@@ -9,7 +9,11 @@ Each folder holds one investigation with its working notes and final report.
 - [Timing measurements](methods/timing.md): the standard every timing claim here follows (repetition, interleaving, placement bias, confidence intervals, noise floor).
 
 <!-- research-index:start -->
-## 2 research projects
+## 3 research projects
+
+### [Memory measurement calibration: what each memory source counts](memory-measurement-calibration/) (2026-11-13)
+
+A calibration of the memory numbers a container run can produce — the cgroup `memory.peak`, sampled cgroup `anon`/`file` high-water marks, the process's own `VmHWM`, and settled anon after a workload-complete boundary — against allocations of known size, against concurrent file…
 
 ### [Which live-workstation confounds matter for which measurement class](live-host-measurement-confounds/) (2026-11-11)
 

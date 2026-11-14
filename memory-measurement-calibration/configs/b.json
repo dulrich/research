@@ -1,0 +1,80 @@
+{
+ "warmup": 3,
+ "padMax": 4096,
+ "seed": 20261113,
+ "invocations": 30,
+ "variants": [
+  {
+   "name": "b64f256",
+   "group": "b64f256",
+   "argv": [
+    "sh",
+    "memory-measurement-calibration/run.sh",
+    "probe-alloc",
+    "64",
+    "256"
+   ]
+  },
+  {
+   "name": "b256f256",
+   "group": "b256f256",
+   "argv": [
+    "sh",
+    "memory-measurement-calibration/run.sh",
+    "probe-alloc",
+    "256",
+    "256"
+   ]
+  },
+  {
+   "name": "b64f256-copy",
+   "group": "b64f256-copy",
+   "argv": [
+    "sh",
+    "memory-measurement-calibration/run.sh",
+    "probe-alloc",
+    "64",
+    "256"
+   ]
+  }
+ ],
+ "aa": [
+  "b64f256",
+  "b64f256-copy"
+ ],
+ "baseline": "b64f256",
+ "metrics": {
+  "cgroup_peak_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_anon_hwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_file_hwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "vmhwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "anon_settled_0s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "rssanon_settled_0s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "self_vmhwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "self_cgroup_peak_mib": {
+   "kind": "level",
+   "better": "lower"
+  }
+ }
+}

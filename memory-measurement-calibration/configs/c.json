@@ -1,0 +1,145 @@
+{
+ "warmup": 1,
+ "padMax": 4096,
+ "seed": 20261113,
+ "invocations": 20,
+ "variants": [
+  {
+   "name": "c12",
+   "group": "c12",
+   "argv": [
+    "env",
+    "CAL_PIN=6-11,18-23",
+    "sh",
+    "memory-measurement-calibration/run.sh",
+    "probe-churn",
+    "12",
+    "0",
+    "420"
+   ]
+  },
+  {
+   "name": "c6",
+   "group": "c6",
+   "argv": [
+    "env",
+    "CAL_PIN=6-11",
+    "sh",
+    "memory-measurement-calibration/run.sh",
+    "probe-churn",
+    "12",
+    "0",
+    "420"
+   ]
+  },
+  {
+   "name": "c2",
+   "group": "c2",
+   "argv": [
+    "env",
+    "CAL_PIN=6,7",
+    "sh",
+    "memory-measurement-calibration/run.sh",
+    "probe-churn",
+    "12",
+    "0",
+    "420"
+   ]
+  },
+  {
+   "name": "c6-arena2",
+   "group": "c6-arena2",
+   "argv": [
+    "env",
+    "CAL_PIN=6-11",
+    "sh",
+    "memory-measurement-calibration/run.sh",
+    "probe-churn",
+    "12",
+    "2",
+    "420"
+   ]
+  },
+  {
+   "name": "c6-copy",
+   "group": "c6-copy",
+   "argv": [
+    "env",
+    "CAL_PIN=6-11",
+    "sh",
+    "memory-measurement-calibration/run.sh",
+    "probe-churn",
+    "12",
+    "0",
+    "420"
+   ]
+  }
+ ],
+ "aa": [
+  "c6",
+  "c6-copy"
+ ],
+ "baseline": "c6",
+ "metrics": {
+  "cgroup_peak_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_anon_hwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "cgroup_file_hwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "vmhwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "anon_settled_0s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "anon_settled_30s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "anon_settled_120s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "rssanon_settled_0s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "rssanon_settled_30s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "rssanon_settled_120s_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "self_rssanon_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "arenas": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "bad_mode_0s": {
+   "kind": "rate",
+   "better": "lower"
+  },
+  "bad_mode_30s": {
+   "kind": "rate",
+   "better": "lower"
+  },
+  "bad_mode_120s": {
+   "kind": "rate",
+   "better": "lower"
+  }
+ }
+}

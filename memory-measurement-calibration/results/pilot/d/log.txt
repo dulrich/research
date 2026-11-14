@@ -1,0 +1,42 @@
+## round 0 order 0 probe
+BOUNDARY
+## round 0 order 1 bare
+BOUNDARY
+## round 0 order 2 probe-copy
+BOUNDARY
+## round 1 order 0 probe
+BOUNDARY
+## round 1 order 1 bare
+BOUNDARY
+## round 1 order 2 probe-copy
+BOUNDARY
+## round 2 order 0 probe-copy
+BOUNDARY
+## round 2 order 1 bare
+BOUNDARY
+## round 2 order 2 probe
+BOUNDARY
+## round 3 order 0 probe-copy
+BOUNDARY
+## round 3 order 1 probe
+BOUNDARY
+## round 3 order 2 bare
+BOUNDARY
+## round 4 order 0 probe-copy
+BOUNDARY
+## round 4 order 1 probe
+BOUNDARY
+## round 4 order 2 bare
+BOUNDARY
+## round 5 order 0 probe-copy
+BOUNDARY
+## round 5 order 1 bare
+BOUNDARY
+## round 5 order 2 probe
+BOUNDARY
+## round 6 order 0 bare
+BOUNDARY
+## round 6 order 1 probe
+BOUNDARY
+## round 6 order 2 probe-copy
+BOUNDARY

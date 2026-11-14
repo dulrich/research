@@ -1,0 +1,56 @@
+{
+ "warmup": 3,
+ "padMax": 4096,
+ "seed": 20261113,
+ "invocations": 30,
+ "variants": [
+  {
+   "name": "bare",
+   "group": "bare",
+   "argv": [
+    "sh",
+    "memory-measurement-calibration/run.sh",
+    "bare-alloc",
+    "64",
+    "0"
+   ]
+  },
+  {
+   "name": "probe",
+   "group": "probe",
+   "argv": [
+    "sh",
+    "memory-measurement-calibration/run.sh",
+    "probe-alloc",
+    "64",
+    "0"
+   ]
+  },
+  {
+   "name": "probe-copy",
+   "group": "probe-copy",
+   "argv": [
+    "sh",
+    "memory-measurement-calibration/run.sh",
+    "probe-alloc",
+    "64",
+    "0"
+   ]
+  }
+ ],
+ "aa": [
+  "probe",
+  "probe-copy"
+ ],
+ "baseline": "bare",
+ "metrics": {
+  "self_vmhwm_mib": {
+   "kind": "level",
+   "better": "lower"
+  },
+  "self_cgroup_peak_mib": {
+   "kind": "level",
+   "better": "lower"
+  }
+ }
+}

@@ -1,0 +1,16 @@
+## round 0 order 0 c12
+BOUNDARY
+## round 0 order 1 c2
+BOUNDARY
+## round 1 order 0 c12
+BOUNDARY
+## round 1 order 1 c2
+BOUNDARY
+## round 2 order 0 c2
+BOUNDARY
+## round 2 order 1 c12
+BOUNDARY
+## round 3 order 0 c2
+BOUNDARY
+## round 3 order 1 c12
+BOUNDARY
