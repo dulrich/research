@@ -9,7 +9,7 @@ Each folder holds one investigation with its working notes and final report.
 - [Timing measurements](methods/timing.md): the standard every timing claim here follows (repetition, interleaving, placement bias, confidence intervals, noise floor).
 
 <!-- research-index:start -->
-## 4 research projects
+## 5 research projects
 
 ### [CPU measurement calibration: what each CPU source counts](cpu-measurement-calibration/) (2026-11-13)
 
@@ -18,6 +18,10 @@ A calibration of the CPU numbers a container run can produce — perf task-clock
 ### [Memory measurement calibration: what each memory source counts](memory-measurement-calibration/) (2026-11-13)
 
 A calibration of the memory numbers a container run can produce — the cgroup `memory.peak`, sampled cgroup `anon`/`file` high-water marks, the process's own `VmHWM`, and settled anon after a workload-complete boundary — against allocations of known size, against concurrent file…
+
+### [Where property-based testing would pay off in eight public repos, and a pilot that tried it](property-based-testing-fleet-guide/) (2026-11-13)
+
+This investigation read eight public repos (`crucible-dev-env`, `crucible-term`, `crucible-tui`, `crucible-vault`, `inference-engine`, `research`, `scripts`, `semsearch`) for places where property-based testing (generated inputs checked against stated properties, with automatic…
 
 ### [Which live-workstation confounds matter for which measurement class](live-host-measurement-confounds/) (2026-11-11)
 
