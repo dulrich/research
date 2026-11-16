@@ -1,0 +1,342 @@
+## round 0 order 0 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":11.6,"total_ms":11.7,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 0 order 1 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":98.9,"detail":""}
+## round 0 order 2 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.7,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 0 order 3 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":9.1,"detail":""}
+## round 0 order 4 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.9,"detail":""}
+## round 0 order 5 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":110.0,"detail":""}
+## round 1 order 0 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":109.2,"detail":""}
+## round 1 order 1 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.7,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 1 order 2 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":11.3,"total_ms":11.4,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 1 order 3 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.6,"detail":""}
+## round 1 order 4 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":26.7,"detail":""}
+## round 1 order 5 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.9,"detail":""}
+## round 2 order 0 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.0,"detail":""}
+## round 2 order 1 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.9,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 2 order 2 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":109.6,"detail":""}
+## round 2 order 3 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.4,"total_ms":10.6,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 2 order 4 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.9,"detail":""}
+## round 2 order 5 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":28.5,"detail":""}
+## round 3 order 0 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":4.1,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 3 order 1 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.6,"detail":""}
+## round 3 order 2 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.0,"detail":""}
+## round 3 order 3 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.3,"total_ms":10.3,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 3 order 4 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":109.8,"detail":""}
+## round 3 order 5 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.8,"detail":""}
+## round 4 order 0 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":9.0,"detail":""}
+## round 4 order 1 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.7,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 4 order 2 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.6,"total_ms":10.7,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 4 order 3 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.6,"detail":""}
+## round 4 order 4 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":26.8,"detail":""}
+## round 4 order 5 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":110.2,"detail":""}
+## round 5 order 0 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.4,"detail":""}
+## round 5 order 1 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.5,"detail":""}
+## round 5 order 2 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":9.2,"detail":""}
+## round 5 order 3 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":110.7,"detail":""}
+## round 5 order 4 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.6,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 5 order 5 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.5,"total_ms":10.6,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 6 order 0 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.3,"detail":""}
+## round 6 order 1 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.0,"detail":""}
+## round 6 order 2 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.5,"total_ms":10.6,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 6 order 3 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":108.7,"detail":""}
+## round 6 order 4 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.6,"detail":""}
+## round 6 order 5 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.8,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 7 order 0 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.7,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 7 order 1 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.8,"total_ms":10.9,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 7 order 2 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":110.5,"detail":""}
+## round 7 order 3 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":98.3,"detail":""}
+## round 7 order 4 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":9.0,"detail":""}
+## round 7 order 5 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.6,"detail":""}
+## round 8 order 0 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.5,"detail":""}
+## round 8 order 1 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":110.9,"detail":""}
+## round 8 order 2 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.4,"detail":""}
+## round 8 order 3 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.7,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 8 order 4 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.7,"total_ms":10.8,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 8 order 5 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.8,"detail":""}
+## round 9 order 0 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.7,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 9 order 1 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":9.0,"detail":""}
+## round 9 order 2 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.3,"detail":""}
+## round 9 order 3 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":26.4,"detail":""}
+## round 9 order 4 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":109.4,"detail":""}
+## round 9 order 5 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.6,"total_ms":10.7,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 10 order 0 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.4,"detail":""}
+## round 10 order 1 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":109.4,"detail":""}
+## round 10 order 2 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.6,"detail":""}
+## round 10 order 3 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.7,"total_ms":10.8,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 10 order 4 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":4.0,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 10 order 5 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.6,"detail":""}
+## round 11 order 0 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.6,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 11 order 1 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":9.3,"detail":""}
+## round 11 order 2 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":110.6,"detail":""}
+## round 11 order 3 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.2,"detail":""}
+## round 11 order 4 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":96.9,"detail":""}
+## round 11 order 5 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.6,"total_ms":10.7,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 12 order 0 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.5,"detail":""}
+## round 12 order 1 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.5,"total_ms":10.6,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 12 order 2 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.1,"detail":""}
+## round 12 order 3 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.0,"detail":""}
+## round 12 order 4 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":4.1,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 12 order 5 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":110.3,"detail":""}
+## round 13 order 0 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.5,"detail":""}
+## round 13 order 1 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.4,"total_ms":10.5,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 13 order 2 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.8,"detail":""}
+## round 13 order 3 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":109.5,"detail":""}
+## round 13 order 4 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.7,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 13 order 5 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.0,"detail":""}
+## round 14 order 0 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":110.1,"detail":""}
+## round 14 order 1 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.5,"detail":""}
+## round 14 order 2 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.7,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 14 order 3 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.4,"detail":""}
+## round 14 order 4 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.1,"detail":""}
+## round 14 order 5 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.3,"total_ms":10.4,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 15 order 0 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.9,"total_ms":11.0,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 15 order 1 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":26.8,"detail":""}
+## round 15 order 2 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":4.2,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 15 order 3 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":110.6,"detail":""}
+## round 15 order 4 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.5,"detail":""}
+## round 15 order 5 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.2,"detail":""}
+## round 16 order 0 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":96.4,"detail":""}
+## round 16 order 1 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":4.0,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 16 order 2 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.6,"detail":""}
+## round 16 order 3 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.5,"total_ms":10.6,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 16 order 4 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":26.4,"detail":""}
+## round 16 order 5 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":111.3,"detail":""}
+## round 17 order 0 proptest-url_invariants
+{"library":"proptest","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":97.3,"detail":""}
+## round 17 order 1 proptest-action_roundtrip
+{"library":"proptest","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":110.8,"detail":""}
+## round 17 order 2 hegel-action_roundtrip
+{"library":"hegel","property":"action_roundtrip","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":8.9,"detail":""}
+## round 17 order 3 hegel-action_layout_name-fail
+{"library":"hegel","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":1,"counterexample":"SetLayout(\"\")","shrink_ms":10.9,"total_ms":11.0,"detail":"text \"set-layout \" parsed to Err(\"expected a layout name\")"}
+let draw_1 = 0;
+let draw_2 = "";
+thread 'main' (1) panicked at src/lib.rs:274:9:
+text "set-layout " parsed to Err("expected a layout name")
+
+To reproduce this failure, call this on the Hegel builder before run():
+    .reproduce_failure("AAIAAAAACgEAAAAABAAAAAA=")
+## round 17 order 4 proptest-action_layout_name-fail
+{"library":"proptest","property":"action_layout_name","seed":0,"cases":1000,"status":"fail","cases_to_first_failure":29,"counterexample":"SetLayout(\"\\t\")","shrink_ms":0.0,"total_ms":3.8,"detail":"text \"set-layout \\t\" parsed to Err(\"expected a layout name\")"}
+## round 17 order 5 hegel-url_invariants
+{"library":"hegel","property":"url_invariants","seed":0,"cases":1000,"status":"pass","cases_to_first_failure":null,"counterexample":null,"shrink_ms":null,"total_ms":27.7,"detail":""}

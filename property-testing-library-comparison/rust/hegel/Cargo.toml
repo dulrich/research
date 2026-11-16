@@ -1,0 +1,13 @@
+[package]
+name = "ptlc-hegel"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+hegeltest = "=0.52.6"
+cv-text = { path = "../../../var/pbt-cmp/crucible-vault/crates/cv-text" }
+crucible-keys = { path = "../../../var/pbt-cmp/crucible-dev-env/crates/crucible-keys" }
+crucible-layout = { path = "../../../var/pbt-cmp/crucible-dev-env/crates/crucible-layout" }

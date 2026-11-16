@@ -1,0 +1,15 @@
+{
+  "variants": [
+    { "name": "hegel-url_invariants", "argv": ["property-testing-library-comparison/rust/hegel/target/debug/examples/run", "url_invariants", "0", "1000"] },
+    { "name": "proptest-url_invariants", "argv": ["property-testing-library-comparison/rust/proptest/target/debug/examples/run", "url_invariants", "0", "1000"] },
+    { "name": "hegel-action_roundtrip", "argv": ["property-testing-library-comparison/rust/hegel/target/debug/examples/run", "action_roundtrip", "0", "1000"] },
+    { "name": "proptest-action_roundtrip", "argv": ["property-testing-library-comparison/rust/proptest/target/debug/examples/run", "action_roundtrip", "0", "1000"] },
+    { "name": "hegel-action_layout_name-fail", "argv": ["property-testing-library-comparison/rust/hegel/target/debug/examples/run", "action_layout_name", "0", "1000"] },
+    { "name": "proptest-action_layout_name-fail", "argv": ["property-testing-library-comparison/rust/proptest/target/debug/examples/run", "action_layout_name", "0", "1000"] }
+  ],
+  "invocations": 15,
+  "warmup": 3,
+  "padMax": 0,
+  "seed": 1,
+  "metrics": { "run_ms": { "kind": "level", "better": "lower" } }
+}

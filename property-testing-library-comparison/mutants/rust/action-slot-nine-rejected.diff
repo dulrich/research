@@ -1,0 +1,13 @@
+diff --git a/crates/crucible-keys/src/action.rs b/crates/crucible-keys/src/action.rs
+index 53759db..a62a4d4 100644
+--- a/crates/crucible-keys/src/action.rs
++++ b/crates/crucible-keys/src/action.rs
+@@ -409,7 +409,7 @@ impl FromStr for Action {
+         let slot_index = |arg: Option<&&str>| -> Result<u8, ActionParseError> {
+             let arg = arg.ok_or_else(|| bad("expected a slot number 0-9".into()))?;
+             match arg.parse::<u8>() {
+-                Ok(n) if n <= 9 => Ok(n),
++                Ok(n) if n < 9 => Ok(n),
+                 Ok(_) => Err(bad(format!("slot `{arg}` is out of range (0-9)"))),
+                 Err(_) => Err(bad(format!("`{arg}` is not a slot number 0-9"))),
+             }

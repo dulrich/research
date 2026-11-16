@@ -1,0 +1,11 @@
+{
+  "variants": [
+    { "name": "hegel-first-build", "argv": ["bun", "property-testing-library-comparison/rust/drive.mjs", "clean-build", "hegel"] },
+    { "name": "proptest-first-build", "argv": ["bun", "property-testing-library-comparison/rust/drive.mjs", "clean-build", "proptest"] }
+  ],
+  "invocations": 5,
+  "warmup": 1,
+  "padMax": 0,
+  "seed": 1,
+  "metrics": { "first_build_s": { "kind": "level", "better": "lower" } }
+}

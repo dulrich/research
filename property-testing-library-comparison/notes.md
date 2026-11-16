@@ -1,0 +1,34 @@
+---
+created: 2026-11-15
+---
+
+# Property-testing library comparison: working notes
+
+A working log. Each step appends a dated entry: what was tried, what was learned.
+
+## 2026-11-15 — Rust harness set up, catalogue fixed before any run
+
+Built two isolated cargo packages, `rust/hegel` (Hegel, `hegeltest` 0.52.6) and `rust/proptest` (proptest 1.12.0). Each depends only on its own library plus the same three target crates by path (`cv-text`, `crucible-keys`, `crucible-layout`, cloned at the pinned commits into a git-ignored `var/` directory and never edited), edition 2024, default dev profile, so a clean build of one does not compile the other library. Each package exposes the same five properties (`url_never_panics`, `url_idempotent`, `url_invariants`, `action_roundtrip`, `action_layout_name`) written in that library's idiomatic generators, a `tests/` suite that is green on the unmutated targets (three properties at 1,000 cases plus two deterministic known-counterexample regressions for the two real defects), and an `examples/run.rs` that performs one seeded run and prints one JSON row. The run is an example rather than a `[[bin]]` so the repository's `--help` gate, which builds and probes every cargo binary, does not need the target clones.
+
+Before the catalogue was written I ran only `cargo test` and three smoke invocations of the Hegel runner (seed 3: `action_layout_name` failed at test case 1 with `SetLayout("")`; `url_idempotent` and `url_invariants` passed). Those smoke outputs were not saved and are not result rows.
+
+Catalogue `catalogue/rust.md` (two real defects, five one-line mutants, each with its hand-derived minimal counterexample and size measure) was written at 2026-11-15 21:16:13 -06:00 (file modification time recorded by the host; 03:16 UTC on 16 November). No result row predates it. The protocol is fixed: 50 runs per (library, defect), seeds 0-49, 1,000 test cases per run; default budgets (Hegel 100, proptest 256) are recorded in the catalogue and not used.
+
+Hand-derived minimal counterexamples were then checked directly against the targets (not through either library, with each mutant applied and reverted): `http:arxiv.org/abs/a.pdf/` is non-idempotent, `http:a?rEf` and `http:a?gclid` leave a tracking parameter, `CycleStack(2147483648)` fails to round-trip while `CycleStack(2147483647)` and `CycleStack(-2147483648)` pass, `Kelvin(6500)` and `Slot(9)` fail while their neighbours pass. All seven catalogue entries held as written; none was amended.
+
+## 2026-11-15 — Rust comparison runs and cost
+
+Ran `bun rust/drive.mjs run`: 7 defects x 2 libraries x 50 seeds (0-49) x 1,000 test cases = 700 runs, rows in `results/rust/runs.jsonl` (one JSON row per run: defect, library, property, seed, status, detected, cases to first failure, the final shrunk counterexample verbatim, shrink wall time, total wall time). Every run was a fresh child process; no run errored. The mutant was applied to a throwaway clone before each defect's runs and reverted after (clones verified clean at the end). Detection table and size columns: `results/rust/detection-table.md` (`bun rust/drive.mjs summary`).
+
+Detection k/50: both libraries 50/50 on all five mutants and on `action-layout-name`; on `url-idempotent-arxiv` Hegel 3/50, proptest 0/50. Shrink quality (exactly the catalogue minimum): `action-layout-name` Hegel 50/50 (`SetLayout("")`), proptest 27/50 (the rest `SetLayout("\t")`, size 1); `action-delta-i32` Hegel 50/50 (`2147483648`), proptest 22/50 (the rest negative, `-2147483649`); `action-kelvin-max-exclusive` and `action-slot-nine-rejected` both 50/50 on both libraries; the two URL mutants 0/50 on both libraries because the hand minimum needs a host neither generator can produce (both libraries shrink to the same list-host form, median 29 and 24 characters). Cases to first failure are test-function invocations counted by the harness (neither library exposes it directly); Hegel's first invocation is a minimal-choices case, so `action-layout-name` fails at invocation 1 in every Hegel run.
+
+Two things worth keeping straight. First, the pre-registered minimum for `url-idempotent-arxiv` (25 characters) was wrong; the true minimum is 21 (`http:arxiv.org/pdf/a/`), found only after the Hegel runs reported 23-character counterexamples. The catalogue was left as written and an errata section records the correction; the summary reports "exactly minimal" against both values (0 of 3 against either). Second, the arXiv defect has a 1,000-case detection of 3/50 for Hegel and 0/50 for proptest, consistent with the guide's pilot (the defect needs a conjunction of three structured features); with so few detections the two libraries' rates are not separated beyond their intervals (0.013-0.165 and 0.000-0.071), so no claim is made about which finds it more often.
+
+Cost, all *indicative* (not the standard protocol; `scripts/measure.mjs`, one build layout, no host tuning, a desktop-class 12-core CPU with the powersave governor and boost on, host type only):
+
+- First build (`cargo test --no-run` after deleting the package's `target/`, crate registry cache warm, debug profile, 5 timed invocations after 1 warm-up): Hegel median 10.1 s (95% CI 9.77-10.16), proptest median 3.6 s (3.55-3.63). Both include compiling the three target crates and their dependencies; Hegel also builds its nested engine. That is a separation of about 2.8x, with a narrow within-run spread, labelled indicative; the first-build figure moves with the host and the cache state and is not a precise ratio.
+- Warm run of one seeded 1,000-case run (the built example, 15 timed invocations after 3 warm-up, debug profile): `url_invariants` Hegel 27 ms vs proptest 97 ms; `action_roundtrip` Hegel 8.6 ms vs proptest 110 ms; the failing `action_layout_name` (including shrinking) Hegel 10.7 ms vs proptest 3.7 ms (proptest stops at the first case in the 29th invocation and shrinks almost instantly). The first two are 3.6x and 13x in Hegel's favour, the third 2.9x in proptest's; all indicative, no claim about causes. Note the debug build, generator cost and case distribution differ between the libraries, so these are not like-for-like throughput figures.
+
+Setup used: rustc 1.99.1, cargo 1.99.1, bun 1.4.4 (drivers only), `hegeltest` =0.52.6, `proptest` =1.12.0, no system packages beyond the host's C toolchain (Hegel builds a nested engine from source). Raw measure outputs are in `results/rust/cost/` (the host name in `env.json` is replaced by `host-redacted`).
+
+Deviations: the seeded runner is a cargo example (not a `[[bin]]`) so the repository's `--help` gate does not need the git-ignored target clones; `rust/drive.mjs` is the entrypoint and answers `--help` / `--build` / `--version`. The two packages' `target/` directories are deleted before hand-back so the private-token grep over the folder is clean (build output embeds absolute paths); rebuild with `cargo test --no-run` in each package.

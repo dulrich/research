@@ -1,0 +1,3 @@
+# Failing examples are not stored between runs, so no run replays an earlier failure.
+[profiles.development]
+database = "disabled"

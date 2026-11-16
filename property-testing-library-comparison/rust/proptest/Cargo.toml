@@ -1,0 +1,13 @@
+[package]
+name = "ptlc-proptest"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+proptest = "=1.12.0"
+cv-text = { path = "../../../var/pbt-cmp/crucible-vault/crates/cv-text" }
+crucible-keys = { path = "../../../var/pbt-cmp/crucible-dev-env/crates/crucible-keys" }
+crucible-layout = { path = "../../../var/pbt-cmp/crucible-dev-env/crates/crucible-layout" }

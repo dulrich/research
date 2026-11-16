@@ -1,0 +1,13 @@
+diff --git a/crates/cv-text/src/url_canon.rs b/crates/cv-text/src/url_canon.rs
+index 17222b59..e7a2f479 100644
+--- a/crates/cv-text/src/url_canon.rs
++++ b/crates/cv-text/src/url_canon.rs
+@@ -217,7 +217,7 @@ pub fn canonicalize_url(raw: &str) -> Option<CanonicalizedUrl> {
+     {
+         let mut ser = form_urlencoded::Serializer::new(String::new());
+         for (k, v) in form_urlencoded::parse(q.as_bytes()) {
+-            if !TRACKING_PARAMS.contains(&k.to_lowercase().as_str()) {
++            if !TRACKING_PARAMS.contains(&k.as_ref()) {
+                 ser.append_pair(&k, &v);
+             }
+         }

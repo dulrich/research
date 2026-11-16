@@ -1,0 +1,13 @@
+diff --git a/crates/crucible-keys/src/action.rs b/crates/crucible-keys/src/action.rs
+index 53759db..7b5e08c 100644
+--- a/crates/crucible-keys/src/action.rs
++++ b/crates/crucible-keys/src/action.rs
+@@ -403,7 +403,7 @@ impl FromStr for Action {
+         };
+         let delta = |arg: Option<&&str>| -> Result<i64, ActionParseError> {
+             let arg = arg.ok_or_else(|| bad("expected a signed integer step".into()))?;
+-            arg.parse::<i64>()
++            arg.parse::<i32>().map(i64::from)
+                 .map_err(|_| bad(format!("`{arg}` is not an integer")))
+         };
+         let slot_index = |arg: Option<&&str>| -> Result<u8, ActionParseError> {

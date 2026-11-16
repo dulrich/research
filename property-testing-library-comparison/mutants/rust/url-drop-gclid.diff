@@ -1,0 +1,12 @@
+diff --git a/crates/cv-text/src/url_canon.rs b/crates/cv-text/src/url_canon.rs
+index 17222b59..0cfd5850 100644
+--- a/crates/cv-text/src/url_canon.rs
++++ b/crates/cv-text/src/url_canon.rs
+@@ -126,7 +126,6 @@ const TRACKING_PARAMS: &[&str] = &[
+     "utm_term",
+     "utm_content",
+     "fbclid",
+-    "gclid",
+     "ref",
+     "ref_src",
+     "mc_cid",

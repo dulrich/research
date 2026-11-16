@@ -1,0 +1,12 @@
+## round 0 order 0 hegel-first-build
+## round 0 order 1 proptest-first-build
+## round 1 order 0 hegel-first-build
+## round 1 order 1 proptest-first-build
+## round 2 order 0 hegel-first-build
+## round 2 order 1 proptest-first-build
+## round 3 order 0 hegel-first-build
+## round 3 order 1 proptest-first-build
+## round 4 order 0 proptest-first-build
+## round 4 order 1 hegel-first-build
+## round 5 order 0 proptest-first-build
+## round 5 order 1 hegel-first-build

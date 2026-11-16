@@ -1,0 +1,12 @@
+{"round":0,"order":0,"variant":"hegel-first-build","group":"hegel-first-build","warmup":true,"padLen":0,"exit":0,"wallMs":10447.885731,"metrics":{"first_build_s":{"value":10.356,"unit":"s"}}}
+{"round":0,"order":1,"variant":"proptest-first-build","group":"proptest-first-build","warmup":true,"padLen":0,"exit":0,"wallMs":3646.914782,"metrics":{"first_build_s":{"value":3.578,"unit":"s"}}}
+{"round":1,"order":0,"variant":"hegel-first-build","group":"hegel-first-build","warmup":false,"padLen":0,"exit":0,"wallMs":10182.085640000001,"metrics":{"first_build_s":{"value":10.099,"unit":"s"}}}
+{"round":1,"order":1,"variant":"proptest-first-build","group":"proptest-first-build","warmup":false,"padLen":0,"exit":0,"wallMs":3623.3689919999997,"metrics":{"first_build_s":{"value":3.554,"unit":"s"}}}
+{"round":2,"order":0,"variant":"hegel-first-build","group":"hegel-first-build","warmup":false,"padLen":0,"exit":0,"wallMs":10251.984206000001,"metrics":{"first_build_s":{"value":10.164,"unit":"s"}}}
+{"round":2,"order":1,"variant":"proptest-first-build","group":"proptest-first-build","warmup":false,"padLen":0,"exit":0,"wallMs":3674.416642999997,"metrics":{"first_build_s":{"value":3.606,"unit":"s"}}}
+{"round":3,"order":0,"variant":"hegel-first-build","group":"hegel-first-build","warmup":false,"padLen":0,"exit":0,"wallMs":9852.451193,"metrics":{"first_build_s":{"value":9.769,"unit":"s"}}}
+{"round":3,"order":1,"variant":"proptest-first-build","group":"proptest-first-build","warmup":false,"padLen":0,"exit":0,"wallMs":3675.935777999999,"metrics":{"first_build_s":{"value":3.608,"unit":"s"}}}
+{"round":4,"order":0,"variant":"proptest-first-build","group":"proptest-first-build","warmup":false,"padLen":0,"exit":0,"wallMs":3702.484854000002,"metrics":{"first_build_s":{"value":3.632,"unit":"s"}}}
+{"round":4,"order":1,"variant":"hegel-first-build","group":"hegel-first-build","warmup":false,"padLen":0,"exit":0,"wallMs":9997.714012999997,"metrics":{"first_build_s":{"value":9.913,"unit":"s"}}}
+{"round":5,"order":0,"variant":"proptest-first-build","group":"proptest-first-build","warmup":false,"padLen":0,"exit":0,"wallMs":3666.4369279999955,"metrics":{"first_build_s":{"value":3.599,"unit":"s"}}}
+{"round":5,"order":1,"variant":"hegel-first-build","group":"hegel-first-build","warmup":false,"padLen":0,"exit":0,"wallMs":10206.813632000005,"metrics":{"first_build_s":{"value":10.124,"unit":"s"}}}

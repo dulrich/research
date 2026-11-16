@@ -1,0 +1,13 @@
+diff --git a/crates/crucible-keys/src/action.rs b/crates/crucible-keys/src/action.rs
+index 53759db..86d1107 100644
+--- a/crates/crucible-keys/src/action.rs
++++ b/crates/crucible-keys/src/action.rs
+@@ -425,7 +425,7 @@ impl FromStr for Action {
+                 "auto" => Ok(NightLightArg::Auto),
+                 digits if !digits.is_empty() && digits.bytes().all(|b| b.is_ascii_digit()) => {
+                     match digits.parse::<u32>() {
+-                        Ok(k) if (min..=max).contains(&k) => Ok(NightLightArg::Kelvin(k)),
++                        Ok(k) if (min..max).contains(&k) => Ok(NightLightArg::Kelvin(k)),
+                         _ => Err(bad(format!("`{arg}` is out of range ({min}-{max} K)"))),
+                     }
+                 }
