@@ -1,0 +1,37 @@
+diff --git a/crates/crucible-compositor/src/ipc.rs b/crates/crucible-compositor/src/ipc.rs
+index 5e08865..1375c7d 100644
+--- a/crates/crucible-compositor/src/ipc.rs
++++ b/crates/crucible-compositor/src/ipc.rs
+@@ -996,3 +996,32 @@ mod tests {
+         let _ = std::fs::remove_dir_all(&dir);
+     }
+ }
++
++#[cfg(test)]
++mod ptgs_checks {
++    use super::*;
++    use std::path::PathBuf;
++
++    #[test]
++    fn ptgs_root_dash_sentinel() {
++        let r = Request::SetRoot(Some(PathBuf::from("-")));
++        let line = r.to_line();
++        let back = Request::parse(&line);
++        println!("PTGS sentinel line={line:?} parsed={back:?} roundtrip_equal={}", back.as_ref().ok() == Some(&r));
++    }
++
++    #[test]
++    fn ptgs_non_utf8_path() {
++        use std::os::unix::ffi::OsStrExt;
++        let p = PathBuf::from(std::ffi::OsStr::from_bytes(b"/tmp/a\xffb"));
++        for (name, r) in [
++            ("open-folder", Request::OpenFolder(p.clone())),
++            ("capture", Request::Capture(p.clone())),
++            ("root", Request::SetRoot(Some(p.clone()))),
++        ] {
++            let line = r.to_line();
++            let back = Request::parse(&line);
++            println!("PTGS nonutf8 verb={name} line={line:?} roundtrip_equal={}", back.as_ref().ok() == Some(&r));
++        }
++    }
++}

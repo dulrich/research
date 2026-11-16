@@ -13,11 +13,15 @@ Each folder holds one investigation with its working notes and final report.
 - [Live-host measurement](methods/live-host.md): the procedure for measuring on a live workstation, with which classes are acceptable, the runtime controls and how to label the result.
 
 <!-- research-index:start -->
-## 8 research projects
+## 9 research projects
 
 ### [Binary-size calibration: which size, which build settings, how far attribution tools agree](binary-size-calibration/) (2026-11-15)
 
 On the fleet's musl toolchain (Rust 1.99.1, Alpine 3.24, `cargo auditable build --release --locked`), release binary sizes are exactly reproducible: three clean `--no-cache` builds of each of two web binaries gave the same SHA-256 and 0 differing bytes (router 5,618,832 B…
+
+### [Property-testing guide suspicions: of nine reading-only suspicions, five are confirmed defects, one is out of contract, one needs an owner decision, two are refuted](property-testing-guide-suspicions/) (2026-11-15)
+
+We ran every defect the fleet property-testing guide suspected from reading code but never executed, against the pinned targets: five confirmed defects (`root -` sentinel, `parseWidths`, `ts` calendar roll-over, `path_join_` NULL, `strncache` prefix key), one confirmed but out…
 
 ### [Hegel against proptest and fast-check: shrinking separated them, detection did not](property-testing-library-comparison/) (2026-11-15)
 
