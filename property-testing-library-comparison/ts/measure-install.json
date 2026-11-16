@@ -1,0 +1,24 @@
+{
+  "variants": [
+    {
+      "name": "install/hegel",
+      "argv": [
+        "bun",
+        "property-testing-library-comparison/ts/cost-install.mjs",
+        "hegel"
+      ]
+    },
+    {
+      "name": "install/fastcheck",
+      "argv": [
+        "bun",
+        "property-testing-library-comparison/ts/cost-install.mjs",
+        "fastcheck"
+      ]
+    }
+  ],
+  "invocations": 10,
+  "warmup": 3,
+  "padMax": 4096,
+  "seed": 1
+}

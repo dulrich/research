@@ -1,0 +1,11 @@
+--- a/measure-stats.mjs
++++ b/measure-stats.mjs
+@@ -28,7 +28,7 @@
+ export function percentile(xs, q) {
+   if (!xs.length) return NaN;
+   const s = Float64Array.from(xs).sort();
+-  const h = (s.length - 1) * q;
++  const h = s.length * q;
+   const lo = Math.floor(h);
+   return lo + 1 < s.length ? s[lo] + (h - lo) * (s[lo + 1] - s[lo]) : s[lo];
+ }

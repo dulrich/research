@@ -1,0 +1,3 @@
+# Failing examples are not stored between runs, so a pilot run leaves no example database behind.
+[profiles.development]
+database = "disabled"

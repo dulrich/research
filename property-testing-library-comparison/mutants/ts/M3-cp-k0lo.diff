@@ -1,0 +1,11 @@
+--- a/measure-stats.mjs
++++ b/measure-stats.mjs
+@@ -110,7 +110,7 @@
+ export function clopperPearson(k, n, alpha = 0.05) {
+   if (n <= 0) return [0, 1];
+   const a = alpha / 2;
+-  const lo = k === 0 ? 0 : bisect((p) => 1 - binomCdf(k - 1, n, p) - a, 0, 1);
++  const lo = k === 0 ? 1e-3 : bisect((p) => 1 - binomCdf(k - 1, n, p) - a, 0, 1);
+   const hi = k === n ? 1 : bisect((p) => a - binomCdf(k, n, p), 0, 1);
+   return [lo, hi];
+ }

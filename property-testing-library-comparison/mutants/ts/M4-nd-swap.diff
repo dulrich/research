@@ -1,0 +1,11 @@
+--- a/measure-stats.mjs
++++ b/measure-stats.mjs
+@@ -136,7 +136,7 @@
+   const [l1, u1] = wilson(k1, n1);
+   const [l2, u2] = wilson(k2, n2);
+   const d = p1 - p2;
+-  return { d, lo: d - Math.sqrt((p1 - l1) ** 2 + (u2 - p2) ** 2), hi: d + Math.sqrt((u1 - p1) ** 2 + (p2 - l2) ** 2) };
++  return { d, lo: d - Math.sqrt((p1 - l1) ** 2 + (p2 - l2) ** 2), hi: d + Math.sqrt((u1 - p1) ** 2 + (p2 - l2) ** 2) };
+ }
+ 
+ /**
