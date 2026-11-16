@@ -13,11 +13,15 @@ Each folder holds one investigation with its working notes and final report.
 - [Live-host measurement](methods/live-host.md): the procedure for measuring on a live workstation, with which classes are acceptable, the runtime controls and how to label the result.
 
 <!-- research-index:start -->
-## 7 research projects
+## 8 research projects
 
 ### [Binary-size calibration: which size, which build settings, how far attribution tools agree](binary-size-calibration/) (2026-11-15)
 
 On the fleet's musl toolchain (Rust 1.99.1, Alpine 3.24, `cargo auditable build --release --locked`), release binary sizes are exactly reproducible: three clean `--no-cache` builds of each of two web binaries gave the same SHA-256 and 0 differing bytes (router 5,618,832 B…
+
+### [Hegel against proptest and fast-check: shrinking separated them, detection did not](property-testing-library-comparison/) (2026-11-15)
+
+We ran Hegel (`hegeltest` 0.52.6 for Rust, `@hegeldev/hegel` 0.5.7 for TypeScript) against proptest 1.12.0 and fast-check 4.10.2 on one target per language: two real Rust defects plus five seeded mutants in two pinned crates, and six seeded mutants of a small statistics module…
 
 ### [glibc thread-arena retention: a reproducible bad mode with a known ground truth](glibc-arena-retention/) (2026-11-14)
 
