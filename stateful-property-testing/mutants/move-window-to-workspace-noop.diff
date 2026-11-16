@@ -1,0 +1,13 @@
+diff --git a/crates/crucible-layout/src/world/workspaces.rs b/crates/crucible-layout/src/world/workspaces.rs
+index 30b8d43..fca872a 100644
+--- a/crates/crucible-layout/src/world/workspaces.rs
++++ b/crates/crucible-layout/src/world/workspaces.rs
+@@ -221,7 +221,7 @@ impl World {
+ 
+         // Detach from the source pane and attach to the target workspace's focused pane.
+         let target_pane_id = self.workspaces.get(&target).expect("target").focused_pane;
+-        self.transfer(window, location.pane, target_pane_id);
++        self.transfer(window, location.pane, location.pane);
+ 
+         Ok(())
+     }

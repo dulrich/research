@@ -1,0 +1,13 @@
+diff --git a/crates/crucible-layout/src/world/windows.rs b/crates/crucible-layout/src/world/windows.rs
+index 54f5632..7ecda63 100644
+--- a/crates/crucible-layout/src/world/windows.rs
++++ b/crates/crucible-layout/src/world/windows.rs
+@@ -290,7 +290,7 @@ impl World {
+         }
+         self.exit_fullscreen(loc_a.workspace);
+         self.exit_fullscreen(loc_b.workspace);
+-        for (pane_id, out, incoming) in [(loc_a.pane, a, b), (loc_b.pane, b, a)] {
++        for (pane_id, out, incoming) in [(loc_a.pane, a, b), (loc_b.pane, b, b)] {
+             let stack = &mut self.panes.get_mut(&pane_id).expect("located pane").stack;
+             let focus = stack.focused_index();
+             let index = stack.position(&out).expect("window in its pane");

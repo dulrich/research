@@ -1,0 +1,11 @@
+[package]
+name = "spt-hegel"
+version = "0.0.0"
+edition = "2024"
+publish = false
+
+[workspace]
+
+[dependencies]
+hegeltest = "=0.52.6"
+crucible-layout = { path = "../../../var/spt/crucible-dev-env/crates/crucible-layout" }

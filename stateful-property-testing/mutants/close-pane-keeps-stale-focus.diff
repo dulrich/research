@@ -1,0 +1,12 @@
+diff --git a/crates/crucible-layout/src/world/windows.rs b/crates/crucible-layout/src/world/windows.rs
+index 54f5632..cc8457a 100644
+--- a/crates/crucible-layout/src/world/windows.rs
++++ b/crates/crucible-layout/src/world/windows.rs
+@@ -114,7 +114,6 @@ impl World {
+             .tree
+             .remove_and_promote(pane)
+             .ok_or(LayoutError::LastPane)?;
+-        ws.focused_pane = survivor;
+         self.panes.remove(&pane);
+         Ok(())
+     }

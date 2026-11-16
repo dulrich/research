@@ -1,0 +1,13 @@
+diff --git a/crates/crucible-layout/src/world/outputs.rs b/crates/crucible-layout/src/world/outputs.rs
+index a87dcb2..f71d58d 100644
+--- a/crates/crucible-layout/src/world/outputs.rs
++++ b/crates/crucible-layout/src/world/outputs.rs
+@@ -64,7 +64,7 @@ impl World {
+         // Migrate the removed output's workspaces (with their panes/windows) onto the survivor.
+         // They become inactive (the survivor keeps its own active index), so windows are hidden.
+         let survivor_output = self.outputs.get_mut(&survivor).expect("survivor present");
+-        survivor_output.stack.extend(removed.stack.into_vec());
++        survivor_output.stack.extend(removed.stack.into_vec().into_iter().skip(1));
+ 
+         // Repoint focus if we just removed the focused output.
+         if self.focused_output == id {

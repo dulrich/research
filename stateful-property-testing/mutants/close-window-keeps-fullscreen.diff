@@ -1,0 +1,12 @@
+diff --git a/crates/crucible-layout/src/world/windows.rs b/crates/crucible-layout/src/world/windows.rs
+index 54f5632..f304ff1 100644
+--- a/crates/crucible-layout/src/world/windows.rs
++++ b/crates/crucible-layout/src/world/windows.rs
+@@ -77,7 +77,6 @@ impl World {
+         let location = self
+             .locate_window(window)
+             .ok_or(LayoutError::UnknownWindow(window))?;
+-        self.exit_fullscreen_of(location.workspace, window);
+         self.windows.remove(&window);
+         if self.marked == Some(window) {
+             self.marked = None;

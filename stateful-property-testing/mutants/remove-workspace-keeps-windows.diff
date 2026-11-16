@@ -1,0 +1,12 @@
+diff --git a/crates/crucible-layout/src/world/workspaces.rs b/crates/crucible-layout/src/world/workspaces.rs
+index 30b8d43..bdd9937 100644
+--- a/crates/crucible-layout/src/world/workspaces.rs
++++ b/crates/crucible-layout/src/world/workspaces.rs
+@@ -243,7 +243,6 @@ impl World {
+         for pane_id in removed.panes() {
+             if let Some(pane) = self.panes.remove(&pane_id) {
+                 for w in pane.stack.into_vec() {
+-                    self.windows.remove(&w);
+                     if self.marked == Some(w) {
+                         self.marked = None;
+                     }

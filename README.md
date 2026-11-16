@@ -13,11 +13,15 @@ Each folder holds one investigation with its working notes and final report.
 - [Live-host measurement](methods/live-host.md): the procedure for measuring on a live workstation, with which classes are acceptable, the runtime controls and how to label the result.
 
 <!-- research-index:start -->
-## 10 research projects
+## 11 research projects
 
 ### [Sampled-list order and shrinking: order and content together, not order alone, closed the exactly-minimal gap](sampled-list-order-shrinking/) (2026-11-16)
 
 On the comparison's two URL mutants, neither sorting the sampled lists shortest first (order) nor adding the two entries the minimum needs, host `a` and query key `rEf` (content), made any run exactly minimal: 0/50 in every Hegel and proptest cell that changed only one factor…
+
+### [Stateful property testing found all six seeded layout defects in 50/50 runs, and Hegel shrank to the minimal sequence more often than proptest](stateful-property-testing/) (2026-11-16)
+
+We wrote one model and oracle for the layout model `World` of the `crucible-layout` crate (target `crucible-dev-env` at commit `d02df23`) and drove it with Hegel's state machine (`hegeltest` 0.52.6) and proptest's (`proptest` 1.12.0 with `proptest-state-machine` 0.9.0), both at…
 
 ### [Binary-size calibration: which size, which build settings, how far attribution tools agree](binary-size-calibration/) (2026-11-15)
 
