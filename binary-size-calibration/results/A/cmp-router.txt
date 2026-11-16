@@ -1,0 +1,4 @@
+router base2 cmp_l_diff_bytes=0
+router base3 cmp_l_diff_bytes=0
+router gitsha cmp_l_diff_bytes=118101
+router ver cmp_l_diff_bytes=2262964

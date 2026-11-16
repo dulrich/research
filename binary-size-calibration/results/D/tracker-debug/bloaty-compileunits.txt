@@ -1,0 +1,64 @@
+    FILE SIZE        VM SIZE    
+ --------------  -------------- 
+  35.3%  23.0Mi  17.7%  1.23Mi    crates/server/src/lib.rs/@/initiative_tracker_server.9c7df5479a9a1ee6-cgu.0
+  17.8%  11.6Mi  28.2%  1.96Mi    sqlite3/sqlite3.c
+   5.8%  3.78Mi   2.8%   196Ki    crates/domain/src/lib.rs/@/it_domain.379d44858fda4000-cgu.0
+   5.1%  3.34Mi   9.5%   679Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-syntax-0.8.11/src/lib.rs/@/regex_syntax.4cf41a153accfcee-cgu.0
+   5.1%  3.34Mi   3.2%   231Ki    crates/server/src/main.rs/@/initiative_tracker.11f3758e07680949-cgu.0
+   3.5%  2.27Mi   4.5%   318Ki    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/std/src/lib.rs/@/std.874b3852ee3928e7-cgu.0
+   3.5%  2.25Mi   1.8%   126Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-1.53.3/src/lib.rs/@/tokio.47c8ca9ebdc6d9de-cgu.0
+   3.4%  2.25Mi  16.2%  1.13Mi    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/icu_collator-2.3.1/src/lib.rs/@/icu_collator.a8638a66712bd708-cgu.0
+   3.3%  2.12Mi   2.2%   153Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-automata-0.4.18/src/lib.rs/@/regex_automata.498cea7cb6498f55-cgu.0
+   2.6%  1.69Mi   1.8%   125Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/yaml-rust2-0.13.0/src/lib.rs/@/yaml_rust2.4c794f00f7814f28-cgu.0
+   2.5%  1.65Mi   3.2%   226Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/jiff-0.2.38/src/lib.rs/@/jiff.df6e4262295ceb98-cgu.0
+   2.4%  1.57Mi   0.0%       0    [section .debug_loc]
+   1.2%   804Ki   0.7%  52.0Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hyper-1.12.0/src/lib.rs/@/hyper.5c6c1db11f295b3f-cgu.0
+   1.1%   735Ki   0.5%  34.8Ki    crates/fleetkit/src/lib.rs/@/fleetkit.98edd299eae4e169-cgu.0
+   1.0%   658Ki   0.4%  30.0Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/axum-0.8.9/src/lib.rs/@/axum.5e55f3e09f9e37d6-cgu.0
+   0.8%   502Ki   0.5%  37.9Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/lib.rs/@/serde_json.bd92a8f87ba005a-cgu.0
+   0.5%   356Ki   1.3%  90.6Ki    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/lib.rs/@/core.ed37fd7903368ee-cgu.0
+   0.5%   333Ki   0.8%  55.8Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/jiff-core-0.1.1/src/lib.rs/@/jiff_core.ba36e39d34cb62d7-cgu.0
+   0.4%   253Ki   1.0%  72.1Ki    [333 Others]
+   0.3%   223Ki   0.0%       0    [section .debug_ranges]
+   0.3%   209Ki   0.1%  8.74Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/axum-core-0.5.6/src/lib.rs/@/axum_core.d8069f852d1cfb14-cgu.0
+   0.3%   192Ki   0.1%  9.70Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/regex-1.13.1/src/lib.rs/@/regex.da9a6c86331ab29f-cgu.0
+   0.3%   181Ki   0.1%  10.0Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/matchit-0.8.4/src/lib.rs/@/matchit.e1599c3d7630aed5-cgu.0
+   0.3%   172Ki   0.1%  5.57Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/icu_locale_core-2.3.0/src/lib.rs/@/icu_locale_core.79edab6707bf1bc-cgu.0
+   0.2%   162Ki   0.1%  8.27Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/icu_provider-2.3.1/src/lib.rs/@/icu_provider.21eefc0270a29f2e-cgu.0
+   0.2%   161Ki   0.1%  8.90Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bytes-1.12.1/src/lib.rs/@/bytes.a1465f2644241b7a-cgu.0
+   0.2%   155Ki   0.2%  10.9Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rusqlite-0.41.1/src/lib.rs/@/rusqlite.d8bfb87053599296-cgu.0
+   0.2%   142Ki   0.2%  16.7Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/http-1.5.0/src/lib.rs/@/http.a78823e374fbb23-cgu.0
+   0.2%   139Ki   0.2%  12.3Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/icu_locale_fallback-2.3.0/src/lib.rs/@/icu_locale_fallback.dfeb7412ccb3c596-cgu.0
+   0.2%   125Ki   0.0%  2.38Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-registry-1.4.8/src/lib.rs/@/signal_hook_registry.4459a54ee5108886-cgu.0
+   0.2%   108Ki   0.1%  6.04Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/icu_normalizer-2.3.0/src/lib.rs/@/icu_normalizer.1ad82dba38256618-cgu.0
+   0.2%   105Ki   0.0%       0    [section .debug_aranges]
+   0.2%   103Ki   0.0%       0    [section .debug_str]
+   0.1%  78.8Ki   1.1%  78.8Ki    [section .text]
+   0.1%  74.2Ki   0.1%  5.83Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httparse-1.10.1/src/lib.rs/@/httparse.e8e4dd89a4d1c60c-cgu.0
+   0.1%  70.8Ki   0.0%  2.51Ki    crates/memstat/src/lib.rs/@/memstat.9b873c4675e5bc0b-cgu.0
+   0.1%  68.5Ki   0.1%  10.4Ki    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/alloc/src/lib.rs/@/alloc.d0a56055437745c0-cgu.0
+   0.1%  51.1Ki   0.1%  4.71Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/memchr-2.8.3/src/lib.rs/@/memchr.a9534a08fdcd018c-cgu.0
+   0.1%  38.9Ki   0.3%  18.0Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/src/lib.rs/@/zmij.8e75ba6f3543e963-cgu.0
+   0.1%  38.5Ki   0.0%     824    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mio-1.2.4/src/lib.rs/@/mio.d929cde8854e9708-cgu.0
+   0.1%  35.1Ki   0.0%  2.51Ki    ../src_musl/crt/rcrt1.c
+   0.1%  34.1Ki   0.0%  1.22Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/foldhash-0.2.0/src/lib.rs/@/foldhash.4b10ec3726034e01-cgu.0
+   0.0%  29.3Ki   0.0%  1.44Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/icu_collections-2.3.0/src/lib.rs/@/icu_collections.1e280687c7c05a2c-cgu.0
+   0.0%  23.9Ki   0.0%       0    [section .debug_frame]
+   0.0%  23.6Ki   0.0%     312    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/percent-encoding-2.3.2/src/lib.rs/@/percent_encoding.68d78f9d8b992982-cgu.0
+   0.0%  22.1Ki   0.0%     304    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hyper-util-0.1.21/src/lib.rs/@/hyper_util.947aa9053b6448a1-cgu.0
+   0.0%  21.2Ki   0.0%  1.41Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zerotrie-0.2.5/src/lib.rs/@/zerotrie.e79854655e78f117-cgu.0
+   0.0%  16.6Ki   0.1%  9.30Ki    ../src_musl/src/stdio/vfprintf.c
+   0.0%  15.2Ki   0.0%  3.32Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httpdate-1.0.3/src/lib.rs/@/httpdate.5697084cda85d8a3-cgu.0
+   0.0%  12.1Ki   0.1%  5.40Ki    ../src_musl/src/malloc/mallocng/malloc.c
+   0.0%  10.4Ki   0.1%  7.86Ki    ../src_musl/src/math/pow.c
+   0.0%  10.3Ki   0.0%  1.05Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/src/lib.rs/@/serde_core.c4510ee7b766f003-cgu.0
+   0.0%  10.1Ki   0.0%       0    [section .strtab]
+   0.0%  9.02Ki   0.0%     928    /rust/deps/memchr-2.8.3/src/lib.rs/@/memchr.5c2dbab10832dd85-cgu.0
+   0.0%  8.32Ki   0.0%  1.81Ki    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/std_detect/src/lib.rs/@/std_detect.af29b3a38b2c003f-cgu.0
+   0.0%  8.22Ki   0.1%  3.81Ki    ../src_musl/src/time/__tz.c
+   0.0%  7.69Ki   0.1%  4.11Ki    ../src_musl/src/network/lookup_name.c
+   0.0%  7.56Ki   0.0%  2.60Ki    ../src_musl/src/thread/pthread_create.c
+   0.0%  6.89Ki   0.0%     897    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libsqlite3-sys-0.39.1/src/lib.rs/@/libsqlite3_sys.23b1330185aa3f72-cgu.0
+   0.0%  6.33Ki   0.0%  1.97Ki    ../src_musl/src/malloc/mallocng/free.c
+   0.0%  6.19Ki   0.1%  3.68Ki    ../src_musl/src/network/res_msend.c
+ 100.0%  65.3Mi 100.0%  6.96Mi    TOTAL

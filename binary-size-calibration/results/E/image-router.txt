@@ -1,0 +1,10 @@
+image_id=sha256:c60a6f78f33eac59a924f419b5cfbb5f5c4bf79751f370b1d8fefdfa3c0fb90e size_bytes=8399821 layers=2
+0	ENTRYPOINT ["/inference-router"]
+0	HEALTHCHECK {Test:[CMD /inference-router healthcheck] Interval:30s Timeout:5s StartPeriod:1m30s StartInterval:0s Retries:3}
+0	EXPOSE [4813/tcp]
+0	USER 1001:1001
+0	ENV GATEWAY_CONFIG_PATH=/app/gateway.config.json GATEWAY_CATALOG_PATH=/app/catalog/catalog.json SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+5623808	COPY /inference-router /inference-router # buildkit
+196608	COPY /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt # buildkit
+0	LABEL org.opencontainers.image.revision=unknown
+0	ARG GIT_SHA=unknown

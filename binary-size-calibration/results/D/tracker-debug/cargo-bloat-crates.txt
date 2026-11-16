@@ -1,0 +1,67 @@
+   Compiling initiative-tracker-domain v0.1.0 (/src/crates/domain)
+   Compiling initiative-tracker-server v0.1.0 (/src/crates/server)
+    Finished `release` profile [optimized + debuginfo] target(s) in 57.46s
+    Analyzing target/release/initiative-tracker
+
+File  .text     Size Crate
+2.6%  37.9%   1.7MiB [Unknown]
+1.1%  15.1% 702.8KiB std
+0.7%   9.7% 451.8KiB initiative_tracker_server
+0.3%   5.0% 233.1KiB axum
+0.2%   3.4% 159.7KiB tokio
+0.2%   3.2% 147.4KiB it_domain
+0.2%   3.1% 145.3KiB serde_json
+0.2%   3.1% 142.9KiB regex_syntax
+0.2%   2.4% 111.3KiB libsqlite3_sys
+0.1%   2.1%  97.7KiB regex_automata
+0.1%   2.1%  95.8KiB yaml_rust2
+0.1%   1.8%  84.5KiB serde_core
+0.1%   1.4%  65.9KiB jiff
+0.1%   1.3%  62.3KiB hyper
+0.1%   1.1%  51.1KiB initiative_tracker
+0.1%   1.0%  45.5KiB icu_collator
+0.0%   0.7%  31.5KiB http
+0.0%   0.4%  19.9KiB fleetkit
+0.0%   0.3%  15.3KiB jiff_core
+0.0%   0.3%  14.6KiB rusqlite
+0.0%   0.3%  12.2KiB pkg_config
+0.0%   0.2%  11.5KiB hashbrown
+0.0%   0.2%  11.3KiB http_body_util
+0.0%   0.2%   9.9KiB regex
+0.0%   0.2%   9.5KiB matchit
+0.0%   0.2%   9.4KiB axum_core
+0.0%   0.2%   9.2KiB cc
+0.0%   0.2%   9.0KiB proc_macro2
+0.0%   0.2%   8.2KiB icu_normalizer
+0.0%   0.2%   7.3KiB icu_locale_core
+0.0%   0.1%   6.2KiB icu_locale_fallback
+0.0%   0.1%   5.9KiB tower
+0.0%   0.1%   5.7KiB bytes
+0.0%   0.1%   5.3KiB smallvec
+0.0%   0.1%   5.2KiB memchr
+0.0%   0.1%   4.8KiB icu_provider
+0.0%   0.1%   4.3KiB indexmap
+0.0%   0.1%   4.3KiB futures_util
+0.0%   0.1%   4.2KiB httparse
+0.0%   0.0%   1.6KiB httpdate
+0.0%   0.0%   1.4KiB serde
+0.0%   0.0%   1.4KiB syn
+0.0%   0.0%   1.3KiB zerotrie
+0.0%   0.0%   1.3KiB icu_collections
+0.0%   0.0%   1.3KiB hashlink
+0.0%   0.0%   1.3KiB find_msvc_tools
+0.0%   0.0%   1.2KiB zmij
+0.0%   0.0%   1.1KiB memstat
+0.0%   0.0%   1.1KiB foldhash
+0.0%   0.0%     884B signal_hook_registry
+0.0%   0.0%     574B itoa
+0.0%   0.0%     503B hyper_util
+0.0%   0.0%     389B shlex
+0.0%   0.0%     334B mio
+0.0%   0.0%     297B zerovec
+0.0%   0.0%     234B __rustc
+0.0%   0.0%     156B arraydeque
+0.0%   0.0%      44B vcpkg
+6.9% 100.0%   4.5MiB .text section size, the file size is 65.3MiB
+
+Note: numbers above are a result of guesswork. They are not 100% correct and never will be.

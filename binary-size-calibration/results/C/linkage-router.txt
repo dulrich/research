@@ -1,0 +1,12 @@
+musl:
+  Tag        Type                         Name/Value
+ 0x000000000000001e (FLAGS)              BIND_NOW
+ 0x000000006ffffffb (FLAGS_1)            Flags: NOW PIE
+var/size-out/router/base1/inference-router: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), static-pie linked, BuildID[sha1]=185735c0748bb4aa19d81dbff1fb1ab41c8cd2cc, stripped
+gnu:
+ 0x0000000000000001 (NEEDED)             Shared library: [libgcc_s.so.1]
+ 0x0000000000000001 (NEEDED)             Shared library: [libm.so.6]
+ 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+  [    20]  rustc version 1.99.1 (58cf8f9c3 2026-10-13)
+  [    4c]  Linker: LLD 23.1.1 (/checkout/src/llvm-project/llvm 1b9c0d5ff9bbe7634aead059efe6b11a7eeba145)
+

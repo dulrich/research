@@ -1,0 +1,3 @@
+crate	binary_file_bytes	layer_bytes_sum(history)	binary_share_of_layers_pct	image_Size_field	docker_save_bytes	binary_gzip9	binary_gzip_share_of_save_pct
+router(scratch)	5618832	5820416	96.53	8399821	2594304	2394411	92.29
+tracker(alpine)	7281208	38363136	18.97	56057160	17711104	3198285	18.05

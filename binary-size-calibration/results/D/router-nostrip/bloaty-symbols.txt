@@ -1,0 +1,44 @@
+    FILE SIZE        VM SIZE    
+ --------------  -------------- 
+  51.8%  4.27Mi  66.7%  3.58Mi    [6186 Others]
+  12.9%  1.06Mi   0.0%       0    [section .debug_str]
+   6.8%   577Ki   0.0%       0    [section .debug_info]
+   4.0%   333Ki   6.1%   333Ki    aws_lc_0_46_0_aes_gcm_decrypt_avx512
+   3.9%   332Ki   6.0%   332Ki    aws_lc_0_46_0_aes_gcm_encrypt_avx512
+   3.2%   269Ki   0.0%       0    [section .debug_line]
+   2.7%   231Ki   0.0%       0    [section .debug_ranges]
+   1.8%   148Ki   2.7%   148Ki    ecp_nistz256_precomputed
+   1.4%   115Ki   2.1%   115Ki    _RNvMs2_NtCsaAKHqETnhyv_4idna5uts46NtB5_5Uts4617process_innermost
+   1.3%   106Ki   1.9%   106Ki    kObjects
+   0.7%  60.8Ki   1.1%  60.8Ki    p521_g_pre_comp
+   0.7%  60.3Ki   1.1%  59.9Ki    aws_lc_0_46_0_edwards25519_scalarmulbase_alt
+   0.7%  60.1Ki   1.1%  59.6Ki    aws_lc_0_46_0_edwards25519_scalarmulbase
+   0.7%  59.9Ki   1.1%  59.4Ki    aws_lc_0_46_0_curve25519_x25519base_alt
+   0.7%  59.6Ki   1.1%  59.1Ki    aws_lc_0_46_0_curve25519_x25519base
+   0.5%  38.1Ki   0.7%  38.1Ki    [section .text]
+   0.4%  31.8Ki   0.6%  31.5Ki    _RNCNCINvNtCs2s9KoYJX1fl_4axum5serve17handle_connectionNtNtNtNtCs32W3bwZIjT_5tokio3net3tcp8listener11TcpListenerNtNtB8_7routing6RouterB1L_E0s1_0Cs1vr7IzPHhUG_16inference_router
+   0.4%  30.4Ki   0.6%  30.3Ki    _RNCNvCs1vr7IzPHhUG_16inference_router4main0B3_
+   0.4%  30.2Ki   0.5%  30.1Ki    _RNvMs2_NtNtCsdg8ZRGlwVLp_7reqwest10async_impl6clientNtB5_13ClientBuilder5build
+   0.4%  30.0Ki   0.5%  30.0Ki    p384_g_pre_comp
+   0.3%  25.0Ki   0.5%  24.9Ki    _RNvXs7_NtNtCs11qyEXd5hBX_6rustls6client5tls13NtB5_14ExpectFinishedINtNtB9_12common_state5StateNtNtB7_11client_conn20ClientConnectionDataE6handle
+   0.3%  23.0Ki   0.4%  22.8Ki    _RNCNvMs_NtNtNtCs3ZyQ8dW8xT3_10hyper_util6client6legacy6clientINtB6_6ClientNtNtCsdg8ZRGlwVLp_7reqwest7connect9ConnectorNtNtNtB1e_10async_impl4body4BodyE12send_request0B1e_
+   0.3%  22.4Ki   0.4%  22.4Ki    Lp384_montjscalarmul_alt_p384_montjadd
+   0.3%  21.7Ki   0.4%  21.4Ki    aws_lc_0_46_0_curve25519_x25519_byte_alt
+   0.3%  21.7Ki   0.4%  21.6Ki    Lp384_montjscalarmul_p384_montjadd
+   0.2%  21.0Ki   0.0%       0    [section .debug_aranges]
+   0.2%  20.8Ki   0.4%  20.5Ki    aws_lc_0_46_0_curve25519_x25519_byte
+   0.2%  20.3Ki   0.4%  20.1Ki    libunwind::CFI_Parser<>::parseFDEInstructions<>()
+   0.2%  19.7Ki   0.0%       0    [section .debug_frame]
+   0.2%  18.6Ki   0.0%       0    [section .debug_abbrev]
+   0.2%  17.9Ki   0.3%  17.8Ki    _RNvNtNtCslQ31pAzoeNu_16inference_router5relay8upstream7prepare
+   0.2%  17.8Ki   0.3%  17.3Ki    _RNvXsc_NtNtCsh90zwWaDB0N_12futures_util6future6futureINtB5_3MapINtNtB7_10try_future6MapErrINtNtNtNtNtCslIPVOg8Zzqg_5hyper6client4conn5http18upgrades21UpgradeableConnectionNtNtNtCsdg8ZRGlwVLp_7reqwest7connect6sealed4ConnNtNtNtB2P_10async_impl4body4BodyENCNCNCNCNvMs_NtNtNtCs3ZyQ8dW8xT3_10hyper_util6client6legacy6clientINtB4f_6ClientNtB2N_9ConnectorB3v_E10connect_to0s_000ENCB44_s_0ENtNtNtCs1gUZZmupoa8_4core6future6future6Future4pollB2P_
+   0.2%  17.7Ki   0.3%  17.1Ki    _RNvMNtNtNtCslIPVOg8Zzqg_5hyper5proto2h18dispatchINtB2_10DispatcherINtB2_6ServerINtNtNtCs3ZyQ8dW8xT3_10hyper_util7service4glue19TowerToHyperServiceINtNtNtCs9d99vT21AO6_5tower4util11map_request10MapRequestNtNtCs2s9KoYJX1fl_4axum7routing6RouterNCNCINvNtB3j_5serve17handle_connectionNtNtNtNtCs32W3bwZIjT_5tokio3net3tcp8listener11TcpListenerB3f_B3f_E0s0_0EENtNtNtB8_4body8incoming8IncomingENtNtCsehiF30RQnF5_9axum_core4body4BodyINtNtNtB1m_6common6rewind6RewindINtNtNtB1m_2rt5tokio7TokioIoNtNtB4x_6stream9TcpStreamEENtNtB4_4role6ServerE10poll_writeCs1vr7IzPHhUG_16inference_router
+   0.2%  17.4Ki   0.3%  17.3Ki    _RINvMs0_NtNtNtCsbCahC7CM8El_3std12backtrace_rs9symbolize5gimliNtB6_5Cache11with_globalNCNvB6_7resolves_0EBc_
+   0.2%  17.4Ki   0.3%  17.3Ki    _RNvNtNtCs11qyEXd5hBX_6rustls6client2hs27emit_client_hello_for_retry
+   0.2%  17.2Ki   0.3%  17.1Ki    _RNvNtCslQ31pAzoeNu_16inference_router7catalog5check
+   0.2%  17.1Ki   0.3%  16.8Ki    _RNvMNtNtNtCslIPVOg8Zzqg_5hyper5proto2h14connINtB2_4ConnINtNtNtCs3ZyQ8dW8xT3_10hyper_util6common6rewind6RewindINtNtNtBY_2rt5tokio7TokioIoNtNtNtNtCs32W3bwZIjT_5tokio3net3tcp6stream9TcpStreamEENtNtCsaK79et7qCVM_5bytes5bytes5BytesNtNtB4_4role6ServerE10write_headCs1vr7IzPHhUG_16inference_router
+   0.2%  16.8Ki   0.3%  16.8Ki    _RNvCslqpumYE50zA_4zmij11STATIC_DATA
+   0.2%  16.8Ki   0.3%  16.7Ki    aws_lc_0_46_0_p521_jdouble_alt
+   0.2%  16.1Ki   0.3%  16.0Ki    _RINvNtNtCsbCahC7CM8El_3std3sys9backtrace28___rust_begin_short_backtraceNCNvMNtNtCslQ31pAzoeNu_16inference_router9telemetry4sinkNtB1c_4Sink3new0uEB1g_
+   0.2%  16.0Ki   0.3%  16.0Ki    _RNvMNtNtCs32W3bwZIjT_5tokio7runtime7builderNtB2_7Builder5build
+ 100.0%  8.23Mi 100.0%  5.37Mi    TOTAL

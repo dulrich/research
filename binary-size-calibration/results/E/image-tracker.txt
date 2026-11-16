@@ -1,0 +1,14 @@
+image_id=sha256:4798cab53acfc8a8b945b6a2c2450509534b398ae57822cef62a7e19609bcee3 size_bytes=56057160 layers=4
+0	ENTRYPOINT ["/initiative-tracker"]
+0	HEALTHCHECK {Test:[CMD /initiative-tracker --healthcheck] Interval:30s Timeout:5s StartPeriod:10s StartInterval:0s Retries:3}
+0	USER app
+0	VOLUME [/data]
+0	EXPOSE [4750/tcp]
+0	ENV PORT=4750 APP_DB_PATH=/data/app.db APP_WEB_DIR=/web
+1036288	COPY /app/apps/web/dist /web # buildkit
+7286784	COPY /initiative-tracker /initiative-tracker # buildkit
+20959232	RUN |1 GIT_SHA=unknown /bin/sh -c apk upgrade --no-cache && apk add --no-cache git  && git config --system --add safe.directory '*'  && addgroup -g 1001 app && adduser -D -u 1001 -G app app  && mkdir -p /data && chown app:app /data # buildkit
+0	LABEL org.opencontainers.image.revision=unknown
+0	ARG GIT_SHA=unknown
+0	CMD ["/bin/sh"]
+9080832	ADD alpine-minirootfs-3.24.2-x86_64.tar.gz / # buildkit

@@ -1,0 +1,44 @@
+    FILE SIZE        VM SIZE    
+ --------------  -------------- 
+  54.0%  5.44Mi  68.0%  4.72Mi    [6260 Others]
+  11.5%  1.16Mi   0.0%       0    [section .debug_str]
+   8.7%   900Ki  12.7%   900Ki    _RNvXs3_NvNtCs8I4aq68qcNb_12icu_collator8provider1__NtB7_5BakedINtNtCs61hmyAhB7Mm_12icu_provider13data_provider12DataProviderNtB7_20CollationTailoringV1E4load
+   6.3%   646Ki   0.0%       0    [section .debug_info]
+   2.9%   296Ki   0.0%       0    [section .debug_line]
+   2.5%   261Ki   0.0%       0    [section .debug_ranges]
+   1.8%   184Ki   2.6%   184Ki    _RNvMs7_NtCs8I4aq68qcNb_12icu_collator8elementsINtB5_17CollationElementsNtNtNtCs1gUZZmupoa8_4core3str4iter5CharsE4nextB7_
+   1.3%   139Ki   2.0%   139Ki    _RNvXsd_NtCsahXPkgWjJwu_12regex_syntax3hirNtB5_17ClassUnicodeRangeNtNtB5_8interval8Interval16case_fold_simple
+   1.2%   123Ki   1.7%   123Ki    _RNvMs3_NtNtCsahXPkgWjJwu_12regex_syntax3hir9translateNtB5_11TranslatorI17hir_unicode_class
+   1.1%   114Ki   1.6%   114Ki    _RNvCsahXPkgWjJwu_12regex_syntax21try_is_word_character
+   0.7%  68.1Ki   1.0%  68.0Ki    _RNvNtCsahXPkgWjJwu_12regex_syntax7unicode14canonical_prop
+   0.5%  52.1Ki   0.7%  52.0Ki    _RNCNCNvNtCshb5J1bkiHRG_25initiative_tracker_server3git10git_status0s7_0B7_
+   0.5%  50.3Ki   0.7%  50.2Ki    sqlite3VdbeExec
+   0.5%  48.4Ki   0.7%  48.3Ki    _RNvXs3_NtCshO48o7Iz5ci_4jiff5errorNtB5_9ErrorKindNtNtCs1gUZZmupoa8_4core3fmt7Display3fmt
+   0.5%  46.4Ki   0.6%  46.2Ki    _RNCNCINvNtCse801yZ878iz_4axum5serve17handle_connectionNtNtNtNtCsfsRxkx9550x_5tokio3net3tcp8listener11TcpListenerNtNtB8_7routing6RouterB1M_E0s1_0CsiWxLMPiJnvj_18initiative_tracker
+   0.4%  43.7Ki   0.6%  43.7Ki    [section .text]
+   0.4%  38.7Ki   0.5%  38.6Ki    _RNvCsiWxLMPiJnvj_18initiative_tracker4main
+   0.4%  36.5Ki   0.5%  36.4Ki    _RNvNtCshb5J1bkiHRG_25initiative_tracker_server8security21build_security_status
+   0.3%  31.8Ki   0.4%  31.7Ki    _RNCNvCsiWxLMPiJnvj_18initiative_tracker5serve0B3_
+   0.3%  28.3Ki   0.4%  28.2Ki    _RNvNtCsbsiIVh3ojP4_9it_domain15security_status21build_security_status
+   0.3%  26.2Ki   0.4%  26.2Ki    yy_reduce.isra.0
+   0.3%  26.0Ki   0.4%  26.0Ki    sqlite3Pragma
+   0.2%  25.6Ki   0.4%  25.5Ki    _RNCNvNtCshb5J1bkiHRG_25initiative_tracker_server8sessions28build_active_sessions_report0B5_
+   0.2%  24.6Ki   0.0%       0    [section .debug_aranges]
+   0.2%  23.9Ki   0.0%       0    [section .debug_frame]
+   0.2%  22.9Ki   0.3%  22.9Ki    _RNvNtCsbsiIVh3ojP4_9it_domain6policy15evaluate_policy
+   0.2%  22.4Ki   0.0%       0    [section .debug_abbrev]
+   0.2%  22.3Ki   0.3%  22.0Ki    _RNCNvXs2_NtCse801yZ878iz_4axum7handlerNvNtCshb5J1bkiHRG_25initiative_tracker_server3app19initiative_statusesINtB7_7HandlerTNtNtNtCsc0T8PrgYEwX_9axum_core7extract7private8ViaPartsINtNtNtB9_7extract5state5StateINtNtCshUCiHv8I5f8_5alloc4sync3ArcNtBC_8AppStateEEEB3k_E4call0BE_
+   0.2%  21.8Ki   0.3%  21.7Ki    _RNvMs2_NtNtNtCsgZ4KUUAn7zc_14regex_automata3nfa8thompson8compilerNtB5_8Compiler1c
+   0.2%  21.6Ki   0.3%  21.6Ki    sqlite3Select
+   0.2%  20.3Ki   0.3%  20.2Ki    _RNvNtCshb5J1bkiHRG_25initiative_tracker_server8sessions6gather
+   0.2%  20.3Ki   0.3%  20.1Ki    libunwind::CFI_Parser<>::parseFDEInstructions<>()
+   0.2%  19.6Ki   0.3%  19.4Ki    _RINvMs1_NtNtNtCsgZ4KUUAn7zc_14regex_automata3nfa8thompson8compilerNtB6_8Compiler19build_many_from_hirRNtNtCsahXPkgWjJwu_12regex_syntax3hir3HirEBc_
+   0.2%  19.5Ki   0.3%  19.4Ki    sqlite3Update.constprop.0
+   0.2%  19.4Ki   0.3%  19.3Ki    _RNvNtNtCshb5J1bkiHRG_25initiative_tracker_server8sessions6outbox20read_outbox_sessions
+   0.2%  18.7Ki   0.3%  18.1Ki    _RNvMNtNtNtCs58jjQhnC2jW_5hyper5proto2h18dispatchINtB2_10DispatcherINtB2_6ServerINtNtNtCs7VdWpm0WFQY_10hyper_util7service4glue19TowerToHyperServiceINtNtNtCsdxFXQT462st_5tower4util11map_request10MapRequestNtNtCse801yZ878iz_4axum7routing6RouterNCNCINvNtB3j_5serve17handle_connectionNtNtNtNtCsfsRxkx9550x_5tokio3net3tcp8listener11TcpListenerB3f_B3f_E0s0_0EENtNtNtB8_4body8incoming8IncomingENtNtCsc0T8PrgYEwX_9axum_core4body4BodyINtNtNtB1m_6common6rewind6RewindINtNtNtB1m_2rt5tokio7TokioIoNtNtB4x_6stream9TcpStreamEENtNtB4_4role6ServerE10poll_writeCsiWxLMPiJnvj_18initiative_tracker
+   0.2%  18.6Ki   0.3%  18.3Ki    _RNvMNtNtNtCs58jjQhnC2jW_5hyper5proto2h14connINtB2_4ConnINtNtNtCs7VdWpm0WFQY_10hyper_util6common6rewind6RewindINtNtNtBY_2rt5tokio7TokioIoNtNtNtNtCsfsRxkx9550x_5tokio3net3tcp6stream9TcpStreamEENtNtCsaK79et7qCVM_5bytes5bytes5BytesNtNtB4_4role6ServerE10write_headCsiWxLMPiJnvj_18initiative_tracker
+   0.2%  18.4Ki   0.3%  18.4Ki    sqlite3WhereCodeOneLoopStart
+   0.2%  17.5Ki   0.2%  17.4Ki    _RNCNvNtCshb5J1bkiHRG_25initiative_tracker_server6status12build_status0B5_
+   0.2%  17.5Ki   0.2%  17.4Ki    _RNvMsj_NtNtCsgZ4KUUAn7zc_14regex_automata4meta5regexNtB5_7Builder5build
+   0.2%  17.4Ki   0.2%  17.3Ki    _RINvMs0_NtNtNtCsbCahC7CM8El_3std12backtrace_rs9symbolize5gimliNtB6_5Cache11with_globalNCNvB6_7resolves_0EBc_
+ 100.0%  10.1Mi 100.0%  6.94Mi    TOTAL

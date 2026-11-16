@@ -9,7 +9,11 @@ Each folder holds one investigation with its working notes and final report.
 - [Timing measurements](methods/timing.md): the standard every timing claim here follows (repetition, interleaving, placement bias, confidence intervals, noise floor).
 
 <!-- research-index:start -->
-## 6 research projects
+## 7 research projects
+
+### [Binary-size calibration: which size, which build settings, how far attribution tools agree](binary-size-calibration/) (2026-11-15)
+
+On the fleet's musl toolchain (Rust 1.99.1, Alpine 3.24, `cargo auditable build --release --locked`), release binary sizes are exactly reproducible: three clean `--no-cache` builds of each of two web binaries gave the same SHA-256 and 0 differing bytes (router 5,618,832 B…
 
 ### [glibc thread-arena retention: a reproducible bad mode with a known ground truth](glibc-arena-retention/) (2026-11-14)
 

@@ -1,0 +1,4 @@
+tracker base2 cmp_l_diff_bytes=0
+tracker base3 cmp_l_diff_bytes=0
+tracker gitsha cmp_l_diff_bytes=660661
+tracker ver cmp_l_diff_bytes=2648156

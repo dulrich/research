@@ -1,0 +1,64 @@
+    FILE SIZE        VM SIZE    
+ --------------  -------------- 
+  14.8%  6.96Mi   8.1%   445Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/reqwest-0.13.5/src/lib.rs/@/reqwest.1ec44def98e506f5-cgu.0
+  14.7%  6.90Mi   7.3%   399Ki    src/lib.rs/@/inference_router.8f5981fd254bba2b-cgu.0
+  14.4%  6.78Mi   9.0%   492Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustls-0.23.46/src/lib.rs/@/rustls.7e3c157852714d00-cgu.0
+   8.0%  3.78Mi  14.2%   778Ki    /aws-lc/crypto/fipsmodule/bcm.c
+   7.7%  3.63Mi   3.9%   216Ki    src/main.rs/@/inference_router.87939c4190bcde19-cgu.0
+   4.6%  2.16Mi   2.2%   119Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/tokio-1.53.3/src/lib.rs/@/tokio.3aa7c8ec1a84ce93-cgu.0
+   4.3%  2.02Mi   5.4%   298Ki    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/std/src/lib.rs/@/std.874b3852ee3928e7-cgu.0
+   3.7%  1.75Mi  12.4%   682Ki    [462 Others]
+   3.6%  1.68Mi   0.0%       0    [section .debug_loc]
+   2.3%  1.10Mi   1.4%  78.7Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hyper-1.12.0/src/lib.rs/@/hyper.3ddc419b5f83d98b-cgu.0
+   2.1%  1008Ki   1.2%  67.6Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustls-webpki-0.103.16/src/lib.rs/@/webpki.28cff795930fa700-cgu.0
+   2.0%   944Ki   1.1%  62.3Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/url-2.5.8/src/lib.rs/@/url.8f0d703205dc1284-cgu.0
+   1.7%   824Ki   2.6%   145Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/idna-1.1.0/src/lib.rs/@/idna.3d8feb2fc3c009de-cgu.0
+   1.6%   771Ki  12.5%   685Ki    /aws-lc/generated-src/linux-x86_64/crypto/fipsmodule/aesni-gcm-avx512.S
+   1.5%   723Ki   0.7%  35.9Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hyper-util-0.1.21/src/lib.rs/@/hyper_util.929a47625020dd23-cgu.0
+   1.4%   677Ki   0.8%  42.3Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.154/src/lib.rs/@/serde_json.f9e872bb2f71cee0-cgu.0
+   1.2%   592Ki   0.4%  24.2Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/axum-0.8.9/src/lib.rs/@/axum.9d7b34acbc073f2d-cgu.0
+   0.8%   363Ki   1.6%  89.1Ki    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/lib.rs/@/core.ed37fd7903368ee-cgu.0
+   0.8%   362Ki   0.2%  12.1Ki    crates/fleetkit/src/lib.rs/@/fleetkit.e9bf0b0c11c5fac5-cgu.0
+   0.7%   326Ki   0.3%  17.4Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustls-native-certs-0.8.5/src/lib.rs/@/rustls_native_certs.984307d413f3c199-cgu.0
+   0.6%   309Ki   0.0%       0    [section .debug_ranges]
+   0.5%   258Ki   0.3%  15.4Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/aws-lc-rs-1.18.2/src/lib.rs/@/aws_lc_rs.1a2a07a22f425f38-cgu.0
+   0.5%   253Ki   0.7%  36.7Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/http-1.5.0/src/lib.rs/@/http.a78823e374fbb23-cgu.0
+   0.5%   240Ki   0.3%  17.4Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustls-pki-types-1.15.1/src/lib.rs/@/rustls_pki_types.b8719c127cd4b571-cgu.0
+   0.4%   183Ki   0.2%  11.3Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/matchit-0.8.4/src/lib.rs/@/matchit.e1599c3d7630aed5-cgu.0
+   0.4%   178Ki   0.1%  6.79Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/axum-core-0.5.6/src/lib.rs/@/axum_core.22155f6b522152c2-cgu.0
+   0.3%   164Ki   0.2%  10.0Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/bytes-1.12.1/src/lib.rs/@/bytes.a1465f2644241b7a-cgu.0
+   0.3%   163Ki   0.1%  5.54Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/rustls-platform-verifier-0.7.1/src/lib.rs/@/rustls_platform_verifier.d98abe1d126d6983-cgu.0
+   0.3%   142Ki   2.2%   119Ki    /aws-lc/crypto/obj/obj.c
+   0.3%   138Ki   0.2%  9.33Ki    /aws-lc/crypto/poly1305/poly1305_vec.c
+   0.3%   125Ki   0.0%  2.33Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/signal-hook-registry-1.4.8/src/lib.rs/@/signal_hook_registry.4459a54ee5108886-cgu.0
+   0.2%   120Ki   0.0%       0    [section .debug_aranges]
+   0.2%   117Ki   0.1%  6.37Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/icu_normalizer-2.3.0/src/lib.rs/@/icu_normalizer.d0516e69f268523b-cgu.0
+   0.2%   110Ki   0.1%  6.58Ki    /aws-lc/crypto/decrepit/ripemd/ripemd.c
+   0.2%  96.1Ki   0.0%  2.68Ki    ../src_musl/crt/rcrt1.c
+   0.2%  89.4Ki   0.1%  7.51Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/httparse-1.10.1/src/lib.rs/@/httparse.e8e4dd89a4d1c60c-cgu.0
+   0.2%  83.4Ki   0.0%       0    [section .debug_str]
+   0.2%  80.4Ki   0.1%  4.03Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ipnet-2.12.2/src/lib.rs/@/ipnet.75186f641bd4fecc-cgu.0
+   0.2%  72.4Ki   0.2%  11.2Ki    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/alloc/src/lib.rs/@/alloc.d0a56055437745c0-cgu.0
+   0.1%  71.2Ki   1.3%  71.2Ki    [section .text]
+   0.1%  62.4Ki   1.1%  59.9Ki    /aws-lc/third_party/s2n-bignum/s2n-bignum-imported/x86_att/curve25519/edwards25519_scalarmulbase_alt.S
+   0.1%  62.2Ki   1.1%  59.6Ki    /aws-lc/third_party/s2n-bignum/s2n-bignum-imported/x86_att/curve25519/edwards25519_scalarmulbase.S
+   0.1%  61.9Ki   1.1%  59.4Ki    /aws-lc/third_party/s2n-bignum/s2n-bignum-imported/x86_att/curve25519/curve25519_x25519base_alt.S
+   0.1%  61.7Ki   1.1%  59.1Ki    /aws-lc/third_party/s2n-bignum/s2n-bignum-imported/x86_att/curve25519/curve25519_x25519base.S
+   0.1%  51.2Ki   0.1%  4.71Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/memchr-2.8.3/src/lib.rs/@/memchr.a9534a08fdcd018c-cgu.0
+   0.1%  50.8Ki   0.7%  41.0Ki    /aws-lc/third_party/s2n-bignum/s2n-bignum-imported/x86_att/p384/p384_montjscalarmul_alt.S
+   0.1%  48.5Ki   0.7%  39.8Ki    /aws-lc/generated-src/linux-x86_64/crypto/cipher_extra/chacha20_poly1305_x86_64.S
+   0.1%  47.9Ki   0.0%  2.70Ki    /aws-lc/crypto/cipher_extra/e_chacha20poly1305.c
+   0.1%  47.9Ki   0.7%  40.1Ki    /aws-lc/third_party/s2n-bignum/s2n-bignum-imported/x86_att/p384/p384_montjscalarmul.S
+   0.1%  46.4Ki   0.0%  1.31Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/percent-encoding-2.3.2/src/lib.rs/@/percent_encoding.68d78f9d8b992982-cgu.0
+   0.1%  44.8Ki   0.0%     690    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/mio-1.2.4/src/lib.rs/@/mio.d929cde8854e9708-cgu.0
+   0.1%  43.6Ki   0.1%  2.91Ki    /aws-lc/crypto/md4/md4.c
+   0.1%  41.6Ki   0.1%  3.54Ki    /aws-lc/crypto/bytestring/cbs.c
+   0.1%  40.0Ki   0.1%  4.01Ki    /aws-lc/crypto/bytestring/cbb.c
+   0.1%  38.9Ki   0.3%  18.1Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/zmij-1.0.23/src/lib.rs/@/zmij.8e75ba6f3543e963-cgu.0
+   0.1%  36.4Ki   0.1%  7.93Ki    /aws-lc/crypto/ec_extra/ec_brainpool.c
+   0.1%  33.4Ki   0.0%  1.00Ki    /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hyper-rustls-0.27.10/src/lib.rs/@/hyper_rustls.fd4934ef30dd8d99-cgu.0
+   0.1%  32.9Ki   0.3%  14.2Ki    /aws-lc/crypto/mem.c
+   0.1%  32.9Ki   0.5%  28.9Ki    /aws-lc/third_party/s2n-bignum/s2n-bignum-imported/x86_att/curve25519/edwards25519_scalarmuldouble_alt.S
+   0.1%  32.7Ki   0.1%  5.90Ki    /aws-lc/crypto/dsa/dsa.c
+   0.1%  32.5Ki   0.1%  4.64Ki    /aws-lc/crypto/rsa_extra/rsassa_pss_asn1.c
+ 100.0%  47.1Mi 100.0%  5.37Mi    TOTAL

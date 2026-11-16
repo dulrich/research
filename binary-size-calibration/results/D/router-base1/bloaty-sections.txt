@@ -1,0 +1,34 @@
+    FILE SIZE        VM SIZE    
+ --------------  -------------- 
+  77.5%  4.15Mi  77.3%  4.15Mi    .text
+  11.5%   630Ki  11.5%   630Ki    .rodata
+   4.6%   252Ki   4.6%   252Ki    .eh_frame
+   3.3%   178Ki   3.2%   178Ki    .rela.dyn
+   2.0%   110Ki   2.0%   109Ki    .data.rel.ro
+   0.8%  41.2Ki   0.7%  41.1Ki    .eh_frame_hdr
+   0.0%       0   0.4%  21.3Ki    .bss
+   0.1%  5.55Ki   0.1%  5.48Ki    .gcc_except_table
+   0.1%  4.51Ki   0.0%       0    [Unmapped]
+   0.1%  3.28Ki   0.1%  3.22Ki    .data
+   0.0%  2.20Ki   0.0%  2.14Ki    .got
+   0.0%  1.98Ki   0.0%       0    .dep-v0
+   0.0%     639   0.0%     639    [LOAD #0 [R]]
+   0.0%     448   0.0%     384    .dynamic
+   0.0%     299   0.0%       0    .shstrtab
+   0.0%     200   0.0%     136    .tdata
+   0.0%     192   0.0%       0    [ELF Headers]
+   0.0%       0   0.0%     160    .tbss
+   0.0%     153   0.0%       0    .comment
+   0.0%     128   0.0%      64    .plt.got
+   0.0%     100   0.0%      36    .note.gnu.build-id
+   0.0%      92   0.0%      28    .gnu.hash
+   0.0%      88   0.0%      24    .dynsym
+   0.0%      88   0.0%       0    .fini_array
+   0.0%      80   0.0%       0    .init_array
+   0.0%      80   0.0%      16    .plt
+   0.0%      67   0.0%       3    .fini
+   0.0%      67   0.0%       3    .init
+   0.0%      65   0.0%       1    .dynstr
+   0.0%      45   0.0%      45    [LOAD #1 [RX]]
+   0.0%      16   0.0%      16    [LOAD #3 [RW]]
+ 100.0%  5.36Mi 100.0%  5.37Mi    TOTAL

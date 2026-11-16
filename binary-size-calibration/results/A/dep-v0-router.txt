@@ -1,0 +1,6 @@
+base1 dep-v0 bytes=1961 sha=6a79523335b75553
+gitsha dep-v0 bytes=1961 sha=6a79523335b75553
+ver dep-v0 bytes=1964 sha=ac1173d338a55450
+base1: 0.1.0 len=10422
+gitsha: 0.1.0 len=10422
+ver: 0.1.1 len=10422

@@ -1,0 +1,64 @@
+    FILE SIZE        VM SIZE    
+ --------------  -------------- 
+  40.3%  4.06Mi  58.5%  4.06Mi    [section .text]
+  24.8%  2.50Mi   8.3%   589Ki    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/std/src/lib.rs/@/std.874b3852ee3928e7-cgu.0
+  18.8%  1.89Mi  23.5%  1.63Mi    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/lib.rs/@/core.ed37fd7903368ee-cgu.0
+   4.8%   491Ki   0.0%       0    [section .strtab]
+   2.8%   284Ki   4.0%   284Ki    [section .eh_frame]
+   2.0%   205Ki   1.9%   138Ki    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/alloc/src/lib.rs/@/alloc.d0a56055437745c0-cgu.0
+   1.2%   128Ki   0.4%  26.1Ki    [266 Others]
+   1.2%   122Ki   0.0%       0    [section .symtab]
+   0.5%  51.6Ki   0.6%  45.5Ki    ../src_musl/src/ldso/dlerror.c
+   0.4%  37.2Ki   0.5%  37.2Ki    [section .eh_frame_hdr]
+   0.3%  32.6Ki   0.3%  20.0Ki    ../src_musl/src/exit/exit.c
+   0.3%  31.0Ki   0.3%  23.7Ki    ../src_musl/src/stdio/vfprintf.c
+   0.3%  25.9Ki   0.0%  2.51Ki    ../src_musl/crt/rcrt1.c
+   0.2%  24.6Ki   0.0%       0    [section .debug_aranges]
+   0.2%  23.9Ki   0.0%       0    [section .debug_frame]
+   0.2%  16.0Ki   0.2%  15.4Ki    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/panic_abort/src/lib.rs/@/panic_abort.e3e3ac5705d4ace3-cgu.0
+   0.1%  12.1Ki   0.1%  5.40Ki    ../src_musl/src/malloc/mallocng/malloc.c
+   0.1%  10.4Ki   0.1%  7.86Ki    ../src_musl/src/math/pow.c
+   0.1%  10.2Ki   0.0%       0    [section .debug_str]
+   0.1%  10.2Ki   0.0%  1.02Ki    /rust/deps/memchr-2.8.3/src/lib.rs/@/memchr.5c2dbab10832dd85-cgu.0
+   0.1%  10.0Ki   0.1%  5.07Ki    ../src_musl/src/time/__tz.c
+   0.1%  9.57Ki   0.1%  8.29Ki    ../src_musl/src/process/fork.c
+   0.0%       0   0.1%  9.46Ki    [section .data.rel.ro]
+   0.1%  8.94Ki   0.0%  2.03Ki    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/std_detect/src/lib.rs/@/std_detect.af29b3a38b2c003f-cgu.0
+   0.1%  7.69Ki   0.1%  4.11Ki    ../src_musl/src/network/lookup_name.c
+   0.1%  7.57Ki   0.0%  2.60Ki    ../src_musl/src/thread/pthread_create.c
+   0.1%  7.49Ki   0.0%       0    [Unmapped]
+   0.1%  6.33Ki   0.0%  1.97Ki    ../src_musl/src/malloc/mallocng/free.c
+   0.1%  6.19Ki   0.1%  3.68Ki    ../src_musl/src/network/res_msend.c
+   0.1%  6.19Ki   0.1%  5.20Ki    ../src_musl/src/math/log.c
+   0.1%  5.93Ki   0.1%  5.93Ki    [section .gcc_except_table]
+   0.0%  4.54Ki   0.0%  1.77Ki    ../src_musl/src/stdlib/qsort.c
+   0.0%  3.54Ki   0.0%  2.58Ki    ../src_musl/src/network/resolvconf.c
+   0.0%  3.54Ki   0.0%  1.11Ki    ../src_musl/src/malloc/mallocng/realloc.c
+   0.0%  3.41Ki   0.0%  1.35Ki    ../src_musl/src/process/posix_spawn.c
+   0.0%  3.35Ki   0.0%  2.85Ki    ../src_musl/src/math/frexpl.c
+   0.0%  3.19Ki   0.0%  2.82Ki    ../src_musl/src/math/round.c
+   0.0%  2.78Ki   0.0%  1.58Ki    ../src_musl/src/internal/intscan.c
+   0.0%  2.75Ki   0.0%  2.21Ki    ../src_musl/src/errno/strerror.c
+   0.0%  2.00Ki   0.0%  2.66Ki    ../src_musl/src/thread/pthread_key_create.c
+   0.0%  2.42Ki   0.0%     839    ../src_musl/src/malloc/mallocng/aligned_alloc.c
+   0.0%  2.29Ki   0.0%     655    ../src_musl/src/env/__libc_start_main.c
+   0.0%  2.24Ki   0.0%       0    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/compiler-builtins/compiler-builtins/src/lib.rs/@/compiler_builtins.6194a6b7615163bc-cgu.013
+   0.0%  2.06Ki   0.0%       0    [ELF Headers]
+   0.0%  2.03Ki   0.0%     829    ../src_musl/src/thread/synccall.c
+   0.0%  2.02Ki   0.0%     966    ../src_musl/src/string/strstr.c
+   0.0%  2.00Ki   0.0%  1.12Ki    ../src_musl/src/misc/realpath.c
+   0.0%  1.97Ki   0.0%  1.04Ki    ../src_musl/src/multibyte/mbsrtowcs.c
+   0.0%  1.95Ki   0.0%  1.24Ki    ../src_musl/src/network/getaddrinfo.c
+   0.0%  1.84Ki   0.0%      44    ../src_musl/src/thread/pthread_attr_get.c
+   0.0%  1.82Ki   0.0%  1.08Ki    ../src_musl/src/env/__init_tls.c
+   0.0%  1.71Ki   0.0%     531    ../src_musl/src/signal/sigaction.c
+   0.0%  1.71Ki   0.0%     497    ../src_musl/src/thread/pthread_mutex_timedlock.c
+   0.0%  1.66Ki   0.0%     906    ../src_musl/src/network/lookup_serv.c
+   0.0%  1.65Ki   0.0%  1.02Ki    ../src_musl/src/conf/sysconf.c
+   0.0%  1.59Ki   0.0%     454    ../src_musl/src/thread/pthread_mutex_trylock.c
+   0.0%  1.56Ki   0.0%       0    [section .dep-v0]
+   0.0%  1.54Ki   0.0%     469    ../src_musl/src/thread/pthread_mutex_unlock.c
+   0.0%  1.52Ki   0.0%     196    /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/compiler-builtins/compiler-builtins/src/lib.rs/@/compiler_builtins.6194a6b7615163bc-cgu.180
+   0.0%  1.50Ki   0.0%     233    ../src_musl/src/stdio/__lockfile.c
+   0.0%  1.42Ki   0.0%     733    ../src_musl/src/time/__secs_to_tm.c
+ 100.0%  10.1Mi 100.0%  6.94Mi    TOTAL

@@ -1,0 +1,43 @@
+sections,vmsize,filesize
+.debug_loc,0,18813776
+.debug_info,0,17320571
+.debug_str,0,15500518
+.text,4750664,4750728
+.debug_ranges,0,4617296
+.debug_line,0,4010888
+.rodata,1687340,1687404
+.strtab,0,597832
+.eh_frame,284840,284904
+.rela.dyn,279720,279784
+.data.rel.ro,217544,217752
+.symtab,0,164632
+.debug_aranges,0,108144
+.eh_frame_hdr,43348,43412
+.debug_abbrev,0,32476
+.debug_frame,0,24488
+.data,19440,19504
+.bss,7904,0
+[Unmapped],0,6215
+.gcc_except_table,6076,6140
+.got,1336,1400
+[LOAD #0 [R]],639,639
+.dynamic,384,448
+.shstrtab,0,428
+.tdata,128,192
+[ELF Headers],0,192
+.tbss,160,0
+.comment,0,153
+.note.gnu.build-id,36,100
+.debug_gdb_scripts,34,98
+.gnu.hash,28,92
+.dynsym,24,88
+.plt.got,24,88
+.plt,16,80
+.fini_array,0,72
+.init_array,0,72
+.fini,3,67
+.init,3,67
+.dynstr,1,65
+[LOAD #3 [RW]],32,16
+[LOAD #1 [RX]],21,21
+[LOAD #2 [R]],6,6

@@ -1,0 +1,37 @@
+var/size-out/tracker/gnu/initiative-tracker  :
+section                 size      addr
+.interp                   28       736
+.note.ABI-tag             32       764
+.note.gnu.build-id        36       796
+.dynsym                 4344       832
+.gnu.version             362      5176
+.gnu.version_r           432      5540
+.gnu.hash                 28      5976
+.dynstr                 2464      6004
+.rela.dyn             279288      8472
+.rela.plt               1056    287760
+.gcc_except_table       6164    288816
+.rodata              1671996    295040
+.eh_frame_hdr          42932   1967036
+.eh_frame             328636   2009968
+.text                4526906   2342720
+.init                     23   6869628
+.fini                      9   6869652
+.plt                     720   6869664
+.tdata                   128   6874480
+.tbss                    160   6874608
+.fini_array                8   6874608
+.init_array               16   6874616
+.data.rel.ro          217336   6874656
+.dynamic                 464   7091992
+.got                    1448   7092456
+.got.plt                 376   7093904
+.relro_padding          4088   7094280
+.tm_clone_table            0   7098376
+.data                  19128   7098496
+.bss                    1448   7117632
+.comment                 170         0
+.dep-v0                 1602         0
+Total                7111828
+
+

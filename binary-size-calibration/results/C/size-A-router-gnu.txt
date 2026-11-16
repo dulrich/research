@@ -1,0 +1,37 @@
+var/size-out/router/gnu/inference-router  :
+section                 size      addr
+.interp                   28       736
+.note.ABI-tag             32       764
+.note.gnu.build-id        36       796
+.dynsym                 3432       832
+.gnu.version             286      4264
+.gnu.version_r           400      4552
+.gnu.hash                 28      4952
+.dynstr                 2010      4980
+.rela.dyn             182736      6992
+.rela.plt               1224    189728
+.rodata               622912    192512
+.gcc_except_table       5708    815424
+.eh_frame_hdr          42532    821132
+.eh_frame             263752    863664
+.text                4236632   1131520
+.init                     23   5368152
+.fini                      9   5368176
+.plt                     832   5368192
+.tdata                   136   5373120
+.tbss                    160   5373256
+.fini_array               24   5373256
+.init_array               24   5373280
+.data.rel.ro          112552   5373312
+.dynamic                 464   5485864
+.got                    2280   5486328
+.got.plt                 432   5488608
+.relro_padding          3696   5489040
+.tm_clone_table            0   5493136
+.data                   2748   5493136
+.bss                   14740   5495904
+.comment                 170         0
+.dep-v0                 1961         0
+Total                5501999
+
+

@@ -1,0 +1,46 @@
+    Finished `release` profile [optimized] target(s) in 0.06s
+    Analyzing target/release/inference-router
+
+ File  .text     Size            Crate Name
+ 3.9%   7.8% 332.0KiB       aws_lc_sys aws_lc_0_46_0_aes_gcm_encrypt_avx512
+ 3.9%   7.8% 332.0KiB       aws_lc_sys aws_lc_0_46_0_aes_gcm_decrypt_avx512
+ 0.3%   0.7%  28.0KiB       aws_lc_sys aws_lc_0_46_0_edwards25519_scalarmuldouble_alt
+ 0.3%   0.6%  27.5KiB       aws_lc_sys aws_lc_0_46_0_edwards25519_scalarmuldouble
+ 0.3%   0.6%  25.3KiB             axum axum::serve::handle_connection::<tokio::net::tcp::listener::TcpListener, axum::routing::Router, axum::routing::Router>::{closure#0}::{closure#3}
+ 0.3%   0.6%  24.0KiB           rustls <rustls::client::tls13::ExpectFinished as rustls::common_state::State<rustls::client::client_conn::ClientConnectionData>>::handle
+ 0.3%   0.5%  23.1KiB inference_router inference_router::main::{closure#0}
+ 0.3%   0.5%  22.3KiB        [Unknown] Lp384_montjscalarmul_alt_p384_montjadd
+ 0.3%   0.5%  21.5KiB        [Unknown] Lp384_montjscalarmul_p384_montjadd
+ 0.3%   0.5%  21.3KiB       aws_lc_sys aws_lc_0_46_0_curve25519_x25519_byte_alt
+ 0.2%   0.5%  20.9KiB       hyper_util <hyper_util::client::legacy::client::Client<reqwest::connect::Connector, reqwest::async_impl::body::Body>>::send_request::{closure#0}
+ 0.2%   0.5%  20.5KiB       aws_lc_sys aws_lc_0_46_0_curve25519_x25519_byte
+ 0.2%   0.4%  17.1KiB        [Unknown] _ZN9libunwind10CFI_ParserINS_17LocalAddressSpaceEE20parseFDEInstructionsINS_16Registers_x86_64EEEbRS1_RKNS2_8FDE_InfoERKNS2_8CIE_InfoENT_23link_hardened_reg_arg_tEiPNS2_10PrologInfoE
+ 0.2%   0.4%  16.6KiB       aws_lc_sys aws_lc_0_46_0_p521_jdouble_alt
+ 0.2%   0.4%  16.6KiB inference_router inference_router::relay::upstream::prepare
+ 0.2%   0.4%  16.4KiB              std <std::backtrace_rs::symbolize::gimli::Cache>::with_global::<std::backtrace_rs::symbolize::gimli::resolve::{closure#1}>
+ 0.2%   0.4%  16.3KiB           rustls rustls::client::hs::emit_client_hello_for_retry
+ 0.2%   0.4%  15.9KiB     futures_util <futures_util::future::future::Map<futures_util::future::try_future::MapErr<hyper::client::conn::http1::upgrades::UpgradeableConnection<reqwest::connect::sealed::Conn, reqwest::async_impl::body::Body>, <hyper_util::client::legacy::client::Client<reqwest::connect::Connector, reqwest::async_impl::body::Body>>::connect_to::{closure#0}::{closure#1}::{closure#0}::{closure#0}>, <hyper_util::client::legacy::client::Client<reqwest::connect::Connector, reqwest::async_impl::body::Body>>::connect_to::{closure#0}::{closure#1}::{closure#0}::{closure#1}> as core::future::future::Future>::poll
+ 0.2%   0.4%  15.5KiB       aws_lc_sys aws_lc_0_46_0_p521_jdouble
+ 0.2%   0.4%  15.2KiB inference_router std::sys::backtrace::__rust_begin_short_backtrace::<<inference_router::telemetry::sink::Sink>::new::{closure#0}, ()>
+ 0.2%   0.4%  15.2KiB inference_router inference_router::catalog::check
+ 0.2%   0.4%  15.1KiB            hyper <hyper::proto::h1::dispatch::Dispatcher<hyper::proto::h1::dispatch::Server<hyper_util::service::glue::TowerToHyperService<tower::util::map_request::MapRequest<axum::routing::Router, axum::serve::handle_connection<tokio::net::tcp::listener::TcpListener, axum::routing::Router, axum::routing::Router>::{closure#0}::{closure#2}>>, hyper::body::incoming::Incoming>, axum_core::body::Body, hyper_util::common::rewind::Rewind<hyper_util::rt::tokio::TokioIo<tokio::net::tcp::stream::TcpStream>>, hyper::proto::h1::role::Server>>::poll_write
+ 0.2%   0.4%  14.9KiB          reqwest <reqwest::async_impl::client::ClientBuilder>::build
+ 0.2%   0.3%  14.8KiB            tokio <tokio::runtime::builder::Builder>::build
+ 0.2%   0.3%  14.0KiB           rustls <rustls::conn::ConnectionCore<rustls::client::client_conn::ClientConnectionData>>::process_new_packets
+ 0.2%   0.3%  13.2KiB inference_router inference_router::relay::fallthrough::{closure#0}
+ 0.2%   0.3%  13.2KiB            hyper <hyper::proto::h1::conn::Conn<hyper_util::common::rewind::Rewind<hyper_util::rt::tokio::TokioIo<tokio::net::tcp::stream::TcpStream>>, bytes::bytes::Bytes, hyper::proto::h1::role::Server>>::write_head
+ 0.1%   0.3%  12.5KiB             idna <idna::uts46::Uts46>::process_innermost
+ 0.1%   0.3%  12.4KiB       aws_lc_sys aws_lc_0_46_0_edwards25519_scalarmulbase_alt
+ 0.1%   0.3%  12.2KiB              std <std::backtrace_rs::symbolize::gimli::Context>::new
+ 0.1%   0.3%  12.1KiB       aws_lc_sys aws_lc_0_46_0_edwards25519_scalarmulbase
+ 0.1%   0.3%  11.9KiB        [Unknown] chacha20_poly1305_seal_avx2
+ 0.1%   0.3%  11.8KiB       aws_lc_sys aws_lc_0_46_0_curve25519_x25519base_alt
+ 0.1%   0.3%  11.6KiB       aws_lc_sys aws_lc_0_46_0_curve25519_x25519base
+ 0.1%   0.3%  11.5KiB inference_router <inference_router::telemetry::record::State>::terminal
+ 0.1%   0.3%  11.4KiB       aws_lc_sys aws_lc_0_46_0_p384_montjdouble_alt
+ 0.1%   0.3%  11.4KiB        [Unknown] Lp384_montjscalarmul_alt_p384_montjdouble
+ 0.1%   0.3%  11.4KiB            hyper <hyper::proto::h1::dispatch::Dispatcher<hyper::proto::h1::dispatch::Client<reqwest::async_impl::body::Body>, reqwest::async_impl::body::Body, reqwest::connect::sealed::Conn, hyper::proto::h1::role::Client>>::poll_write
+ 0.1%   0.3%  11.3KiB       aws_lc_sys aws_lc_0_46_0_p384_montjdouble
+ 0.1%   0.3%  11.3KiB        [Unknown] Lp384_montjscalarmul_p384_montjdouble
+32.1%  63.6%   2.6MiB                  And 5472 smaller methods. Use -n N to show more.
+50.5% 100.0%   4.2MiB                  .text section size, the file size is 8.2MiB

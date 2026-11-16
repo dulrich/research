@@ -1,0 +1,266 @@
+compileunits,vmsize,filesize
+/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/lib.rs/@/core.ed37fd7903368ee-cgu.0,4833949,5614010
+/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/std/src/lib.rs/@/std.874b3852ee3928e7-cgu.0,261520,2050109
+[section .text],275508,275508
+/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/alloc/src/lib.rs/@/alloc.d0a56055437745c0-cgu.0,118646,188042
+[section .strtab],0,86979
+[section .eh_frame],29340,29340
+[section .symtab],0,26616
+../src_musl/crt/rcrt1.c,2742,22819
+[section .debug_aranges],0,21488
+[section .debug_frame],0,20136
+../src_musl/src/stdio/vfprintf.c,9083,16595
+../src_musl/src/malloc/mallocng/malloc.c,5481,12208
+../src_musl/src/math/pow.c,8065,10723
+/rust/deps/memchr-2.8.3/src/lib.rs/@/memchr.5c2dbab10832dd85-cgu.0,928,9871
+../src_musl/src/internal/floatscan.c,6092,9766
+[section .debug_str],0,9732
+/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/std_detect/src/lib.rs/@/std_detect.af29b3a38b2c003f-cgu.0,1868,8944
+../src_musl/src/thread/pthread_create.c,2666,7881
+../src_musl/src/network/lookup_name.c,4213,7875
+../src_musl/src/malloc/mallocng/free.c,2017,6495
+../src_musl/src/stdio/vfscanf.c,4141,6352
+../src_musl/src/network/res_msend.c,3770,6341
+[section .gcc_except_table],5616,5616
+[section .eh_frame_hdr],4964,4964
+../src_musl/src/stdlib/qsort.c,1815,4650
+[Unmapped],0,4630
+../src_musl/src/malloc/mallocng/realloc.c,1135,3621
+../src_musl/src/env/__libc_start_main.c,1826,3595
+../src_musl/src/network/resolvconf.c,2223,3209
+../src_musl/src/errno/strerror.c,2273,2833
+../src_musl/src/internal/intscan.c,1615,2831
+../src_musl/src/thread/pthread_key_create.c,2647,1933
+../src_musl/src/malloc/mallocng/aligned_alloc.c,839,2476
+/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/compiler-builtins/compiler-builtins/src/lib.rs/@/compiler_builtins.6194a6b7615163bc-cgu.013,0,2291
+../src_musl/src/env/__init_tls.c,1110,2209
+../src_musl/src/string/strstr.c,966,2068
+[ELF Headers],0,2048
+../src_musl/src/misc/realpath.c,1149,2045
+../src_musl/src/network/getaddrinfo.c,1266,1996
+../src_musl/src/exit/exit.c,820,1965
+../src_musl/src/math/scalbnl.c,1633,1935
+../src_musl/src/thread/pthread_attr_get.c,44,1877
+../src_musl/src/time/clock_gettime.c,1034,1803
+../src_musl/src/signal/sigaction.c,522,1747
+../src_musl/src/thread/pthread_mutex_timedlock.c,497,1746
+../src_musl/src/multibyte/mbsrtowcs.c,858,1735
+../src_musl/src/network/lookup_serv.c,906,1698
+../src_musl/src/conf/sysconf.c,1047,1686
+../src_musl/src/thread/pthread_mutex_trylock.c,454,1627
+/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/compiler-builtins/compiler-builtins/src/lib.rs/@/compiler_builtins.6194a6b7615163bc-cgu.180,200,1564
+../src_musl/src/thread/pthread_mutex_unlock.c,469,1561
+../src_musl/src/stdio/__lockfile.c,233,1538
+../src_musl/src/thread/pthread_once.c,251,1478
+../src_musl/src/network/inet_pton.c,669,1431
+../src_musl/src/thread/__lock.c,254,1400
+../src_musl/src/network/socketpair.c,235,1289
+../src_musl/src/stdio/getc.c,206,1278
+../src_musl/src/stdio/__stdio_exit.c,577,1261
+../src_musl/src/linux/epoll.c,219,1220
+../src_musl/src/stat/fstatat.c,459,1200
+/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/compiler-builtins/compiler-builtins/src/lib.rs/@/compiler_builtins.6194a6b7615163bc-cgu.251,225,1191
+../src_musl/src/multibyte/mbrtowc.c,539,1162
+../src_musl/src/internal/vdso.c,533,1138
+../src_musl/src/stdio/ofl.c,1112,528
+../src_musl/src/stdlib/strtol.c,163,1109
+../src_musl/src/fcntl/fcntl.c,341,1086
+../src_musl/src/string/memchr.c,214,1086
+../src_musl/src/thread/pthread_join.c,205,1079
+../src_musl/src/stdio/fwrite.c,340,1015
+../src_musl/src/thread/vmlock.c,143,1014
+../src_musl/src/thread/__timedwait.c,377,1002
+../src_musl/src/stdio/fgets.c,400,978
+../src_musl/src/dirent/readdir.c,113,969
+../src_musl/src/fcntl/open.c,146,947
+../src_musl/src/malloc/lite_malloc.c,5,938
+../src_musl/src/network/res_mkquery.c,409,936
+../src_musl/src/sched/affinity.c,55,919
+../src_musl/src/network/socket.c,155,893
+../src_musl/src/stdio/fflush.c,372,891
+../src_musl/src/exit/abort.c,146,887
+/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/panic_abort/src/lib.rs/@/panic_abort.e3e3ac5705d4ace3-cgu.0,245,876
+../src_musl/src/network/lookup_ipliteral.c,382,857
+../src_musl/src/signal/block.c,92,845
+../src_musl/src/thread/__wait.c,129,843
+../src_musl/src/network/accept4.c,209,835
+../src_musl/src/thread/pthread_rwlock_unlock.c,118,832
+/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/compiler-builtins/compiler-builtins/src/lib.rs/@/compiler_builtins.6194a6b7615163bc-cgu.043,0,829
+../src_musl/src/network/dns_parse.c,323,810
+../src_musl/src/network/sendmsg.c,263,809
+../src_musl/src/thread/pthread_rwlock_timedrdlock.c,137,806
+../src_musl/src/ldso/dl_iterate_phdr.c,350,804
+../src_musl/src/network/recvmsg.c,145,786
+../src_musl/src/thread/pthread_rwlock_timedwrlock.c,121,784
+../src_musl/src/stdio/__stdio_write.c,243,783
+../src_musl/src/network/dn_expand.c,307,782
+../src_musl/src/multibyte/wcrtomb.c,262,775
+../src_musl/src/stdio/vsnprintf.c,299,775
+../src_musl/src/string/stpncpy.c,194,766
+../src_musl/src/internal/shgetc.c,249,751
+../src_musl/src/env/__stack_chk_fail.c,80,750
+../src_musl/src/malloc/calloc.c,213,744
+../src_musl/src/exit/assert.c,410,718
+../src_musl/src/misc/getrlimit.c,124,717
+../src_musl/src/stdio/__stdio_read.c,188,714
+../src_musl/src/mman/mmap.c,190,698
+../src_musl/src/stdio/__fopen_rb_ca.c,168,696
+../src_musl/src/network/inet_aton.c,254,684
+../src_musl/src/network/gai_strerror.c,319,676
+../src_musl/src/thread/pthread_setname_np.c,260,673
+../src_musl/src/stdio/vsscanf.c,200,664
+../src_musl/src/thread/__syscall_cp.c,31,659
+../src_musl/src/linux/eventfd.c,49,647
+[LOAD #0 [R]],639,639
+../src_musl/src/locale/__lctrans.c,34,633
+../src_musl/src/mman/mremap.c,153,628
+../src_musl/src/string/strchrnul.c,152,610
+../src_musl/src/thread/pthread_detach.c,75,605
+../src_musl/src/thread/pthread_cleanup_push.c,54,586
+../src_musl/crt/x86_64/crti.s,2,577
+../src_musl/src/misc/syscall.c,105,568
+../src_musl/src/thread/pthread_getattr_np.c,172,568
+../src_musl/src/linux/prctl.c,91,565
+../src_musl/src/unistd/getcwd.c,147,549
+../src_musl/src/stdio/__stdio_close.c,38,535
+../src_musl/src/internal/procfdname.c,141,530
+,0,521
+../src_musl/src/network/if_nametoindex.c,103,518
+../src_musl/src/network/sendto.c,49,515
+../src_musl/src/stdio/__toread.c,104,515
+../src_musl/src/network/recvfrom.c,46,514
+../src_musl/src/string/stpcpy.c,113,510
+../src_musl/src/thread/pthread_rwlock_tryrdlock.c,51,509
+../src_musl/src/mman/mprotect.c,55,503
+../src_musl/src/signal/raise.c,76,502
+../src_musl/src/math/frexpl.c,143,492
+../src_musl/src/network/setsockopt.c,42,488
+../src_musl/src/mman/munmap.c,45,486
+../src_musl/src/network/getpeername.c,36,486
+../src_musl/src/signal/sigaltstack.c,86,486
+../src_musl/src/thread/pthread_setcancelstate.c,37,486
+../src_musl/src/network/getsockname.c,36,485
+../src_musl/src/thread/pthread_self.c,10,481
+../src_musl/src/time/clock_nanosleep.c,103,480
+../src_musl/src/network/getsockopt.c,39,479
+../src_musl/src/misc/ioctl.c,63,476
+../src_musl/src/network/listen.c,41,476
+../src_musl/src/stdio/__towrite.c,73,474
+../src_musl/src/thread/pthread_getspecific.c,23,472
+../src_musl/src/network/shutdown.c,41,468
+../src_musl/src/thread/pthread_rwlock_trywrlock.c,22,465
+../src_musl/src/network/bind.c,38,463
+../src_musl/src/thread/pthread_mutex_lock.c,29,459
+../src_musl/src/network/accept.c,47,452
+../src_musl/src/misc/getentropy.c,131,451
+../src_musl/src/network/freeaddrinfo.c,92,451
+../src_musl/src/thread/pthread_testcancel.c,8,451
+../src_musl/src/network/connect.c,46,449
+../src_musl/src/math/scalbn.c,163,447
+../src_musl/src/math/__math_xflow.c,49,446
+../src_musl/src/string/x86_64/memset.s,196,446
+../src_musl/src/dirent/opendir.c,65,445
+../src_musl/src/stdio/sscanf.c,143,445
+../src_musl/src/thread/pthread_setspecific.c,37,441
+../src_musl/src/misc/getauxval.c,67,435
+../src_musl/src/string/strerror_r.c,103,435
+../src_musl/src/signal/signal.c,88,433
+../src_musl/src/env/getenv.c,96,416
+../src_musl/src/linux/sysinfo.c,24,415
+../src_musl/src/unistd/readlink.c,66,414
+../src_musl/src/stdio/fprintf.c,143,413
+../src_musl/src/stdio/snprintf.c,138,411
+../src_musl/src/math/__fpclassifyl.c,89,410
+../src_musl/src/thread/__tls_get_addr.c,25,410
+../src_musl/src/stdlib/bsearch.c,110,409
+../src_musl/src/errno/__errno_location.c,14,405
+../src_musl/src/mman/madvise.c,27,403
+../src_musl/src/ctype/isalnum.c,36,394
+../src_musl/src/string/strlen.c,77,394
+../src_musl/src/unistd/lseek.c,21,393
+../src_musl/src/sched/sched_yield.c,24,390
+../src_musl/src/exit/_Exit.c,22,387
+../src_musl/src/thread/pthread_attr_init.c,60,386
+../src_musl/src/stdlib/qsort_nr.c,17,385
+../src_musl/src/thread/pthread_attr_setstacksize.c,41,384
+[section .dynamic],384,384
+../src_musl/src/string/strncmp.c,69,381
+../src_musl/src/unistd/close.c,64,379
+../src_musl/src/thread/pthread_rwlock_init.c,39,368
+../src_musl/src/stat/fstat.c,45,364
+../src_musl/src/unistd/unlink.c,24,363
+../src_musl/src/unistd/dup.c,27,360
+../src_musl/src/stat/mkdir.c,26,357
+/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/compiler-builtins/compiler-builtins/src/lib.rs/@/compiler_builtins.6194a6b7615163bc-cgu.000,0,355
+../src_musl/src/malloc/posix_memalign.c,47,354
+../src_musl/src/internal/syscall_ret.c,48,351
+../src_musl/src/thread/pthread_rwlock_rdlock.c,7,348
+../src_musl/src/unistd/getpid.c,8,348
+../src_musl/src/stdio/__uflow.c,57,343
+../src_musl/src/string/strdup.c,63,342
+../src_musl/src/thread/pthread_rwlock_wrlock.c,7,334
+[section .shstrtab],0,334
+../src_musl/src/math/copysignl.c,47,327
+../src_musl/src/string/memcmp.c,36,323
+../src_musl/src/string/strcmp.c,32,320
+../src_musl/src/network/htons.c,7,316
+../src_musl/src/thread/pthread_rwlock_destroy.c,3,316
+../src_musl/src/string/strnlen.c,45,312
+../src_musl/src/dirent/closedir.c,40,311
+../src_musl/src/string/x86_64/memcpy.s,50,308
+../src_musl/src/unistd/writev.c,46,308
+../src_musl/src/thread/pthread_attr_destroy.c,3,307
+../src_musl/src/signal/sigrtmax.c,6,302
+../src_musl/src/multibyte/mbstowcs.c,26,301
+../src_musl/src/linux/getrandom.c,42,300
+../src_musl/src/multibyte/mbsinit.c,20,296
+../src_musl/src/math/__math_invalid.c,9,295
+../src_musl/src/math/__math_oflow.c,21,295
+../src_musl/src/math/__math_uflow.c,21,295
+../src_musl/src/math/x86_64/fmodl.c,20,294
+../src_musl/src/unistd/write.c,46,294
+../src_musl/src/select/poll.c,44,293
+../src_musl/src/unistd/read.c,43,292
+../src_musl/src/multibyte/wctomb.c,24,291
+../src_musl/src/string/strchr.c,21,291
+../src_musl/src/unistd/pause.c,41,289
+[section .debug_ranges],0,288
+../src_musl/src/ldso/dladdr.c,3,285
+../src_musl/src/math/__signbitl.c,13,278
+../src_musl/src/stdio/__stdio_seek.c,8,278
+../src_musl/src/string/strncpy.c,16,278
+../src_musl/src/thread/x86_64/clone.s,57,278
+../src_musl/src/stdio/__fclose_ca.c,3,277
+../src_musl/src/string/strcpy.c,16,274
+../src_musl/src/math/x86_64/fabs.c,13,272
+../src_musl/src/math/x86_64/fabsl.c,7,270
+[section .data.rel.ro],264,0
+../src_musl/src/stat/stat.c,18,260
+../src_musl/src/dirent/dirfd.c,4,259
+../src_musl/src/network/recv.c,11,258
+../src_musl/src/malloc/free.c,5,253
+../src_musl/src/network/send.c,11,253
+../src_musl/src/string/bcmp.c,5,253
+../src_musl/src/string/x86_64/memmove.s,37,251
+../src_musl/src/signal/x86_64/restore.s,10,243
+../src_musl/src/malloc/realloc.c,5,242
+../src_musl/src/thread/x86_64/__set_thread_area.s,16,242
+/rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/compiler-builtins/compiler-builtins/src/lib.rs/@/compiler_builtins.6194a6b7615163bc-cgu.020,0,234
+../src_musl/src/thread/x86_64/__unmapself.s,17,232
+../src_musl/crt/x86_64/crtn.s,4,197
+[section .tdata],136,136
+[section .rodata],128,128
+[section .bss],112,0
+[section .comment],0,89
+[section .plt.got],64,64
+[LOAD #1 [RX]],45,45
+[section .debug_abbrev],0,41
+[section .note.gnu.build-id],36,36
+[section .gnu.hash],28,28
+[section .dynsym],24,24
+[section .got],24,24
+[section .rela.dyn],24,24
+[LOAD #3 [RW]],16,16
+[section .plt],16,16
+[section .data],8,8
+[section .dynstr],1,1

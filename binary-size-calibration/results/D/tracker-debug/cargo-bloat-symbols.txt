@@ -1,0 +1,46 @@
+    Finished `release` profile [optimized + debuginfo] target(s) in 0.04s
+    Analyzing target/release/initiative-tracker
+
+File  .text    Size                     Crate Name
+0.1%   1.1% 52.0KiB                 [Unknown] sqlite3VdbeExec
+0.1%   1.1% 50.1KiB initiative_tracker_server initiative_tracker_server::git::git_status::{closure#0}::{closure#9}
+0.1%   0.8% 37.1KiB                      axum axum::serve::handle_connection::<tokio::net::tcp::listener::TcpListener, axum::routing::Router, axum::routing::Router>::{closure#0}::{closure#3}
+0.0%   0.6% 29.2KiB        initiative_tracker initiative_tracker::main
+0.0%   0.6% 28.1KiB initiative_tracker_server initiative_tracker_server::security::build_security_status
+0.0%   0.6% 27.5KiB                 it_domain it_domain::security_status::build_security_status
+0.0%   0.6% 26.4KiB                 [Unknown] yy_reduce.isra.0
+0.0%   0.6% 26.0KiB                 [Unknown] sqlite3Pragma
+0.0%   0.5% 24.2KiB initiative_tracker_server initiative_tracker_server::sessions::build_active_sessions_report::{closure#0}
+0.0%   0.5% 21.9KiB        initiative_tracker initiative_tracker::serve::{closure#0}
+0.0%   0.5% 21.9KiB                 [Unknown] sqlite3Select
+0.0%   0.5% 21.2KiB                      axum <initiative_tracker_server::app::initiative_statuses as axum::handler::Handler<(axum_core::extract::private::ViaParts, axum::extract::state::State<alloc::sync::Arc<initiative_tracker_server::app::AppState>>), alloc::sync::Arc<initiative_tracker_server::app::AppState>>>::call::{closure#0}
+0.0%   0.4% 19.9KiB initiative_tracker_server initiative_tracker_server::sessions::gather
+0.0%   0.4% 19.8KiB                 it_domain it_domain::policy::evaluate_policy
+0.0%   0.4% 19.8KiB                 [Unknown] sqlite3Update.constprop.0
+0.0%   0.4% 19.6KiB                 [Unknown] sqlite3WhereCodeOneLoopStart
+0.0%   0.4% 19.5KiB            regex_automata <regex_automata::nfa::thompson::compiler::Compiler>::c
+0.0%   0.4% 19.1KiB initiative_tracker_server initiative_tracker_server::sessions::outbox::read_outbox_sessions
+0.0%   0.4% 18.6KiB              icu_collator <icu_collator::elements::CollationElements<core::str::iter::Chars>>::next
+0.0%   0.4% 17.1KiB                 [Unknown] _ZN9libunwind10CFI_ParserINS_17LocalAddressSpaceEE20parseFDEInstructionsINS_16Registers_x86_64EEEbRS1_RKNS2_8FDE_InfoERKNS2_8CIE_InfoENT_23link_hardened_reg_arg_tEiPNS2_10PrologInfoE
+0.0%   0.4% 16.8KiB                 [Unknown] sqlite3GenerateConstraintChecks
+0.0%   0.4% 16.6KiB                 [Unknown] sqlite3Insert
+0.0%   0.4% 16.4KiB                       std <std::backtrace_rs::symbolize::gimli::Cache>::with_global::<std::backtrace_rs::symbolize::gimli::resolve::{closure#1}>
+0.0%   0.3% 16.1KiB            libsqlite3_sys sqlite3_str_vappendf
+0.0%   0.3% 16.0KiB                      axum <initiative_tracker_server::app::activity_report as axum::handler::Handler<(axum_core::extract::private::ViaParts, axum::extract::state::State<alloc::sync::Arc<initiative_tracker_server::app::AppState>>, http::uri::Uri), alloc::sync::Arc<initiative_tracker_server::app::AppState>>>::call::{closure#0}
+0.0%   0.3% 15.6KiB            regex_automata <regex_automata::meta::regex::Builder>::build
+0.0%   0.3% 15.4KiB                 [Unknown] sqlite3ExprCodeTarget
+0.0%   0.3% 15.3KiB initiative_tracker_server initiative_tracker_server::status::build_status::{closure#0}
+0.0%   0.3% 15.2KiB                       std <core::iter::adapters::GenericShunt<rusqlite::row::MappedRows<initiative_tracker_server::sessions::outbox::load_rows::{closure#0}::{closure#0}>, core::result::Result<core::convert::Infallible, rusqlite::error::Error>> as core::iter::traits::iterator::Iterator>::next
+0.0%   0.3% 15.0KiB                 [Unknown] resolveExprStep
+0.0%   0.3% 14.8KiB                     hyper <hyper::proto::h1::dispatch::Dispatcher<hyper::proto::h1::dispatch::Server<hyper_util::service::glue::TowerToHyperService<tower::util::map_request::MapRequest<axum::routing::Router, axum::serve::handle_connection<tokio::net::tcp::listener::TcpListener, axum::routing::Router, axum::routing::Router>::{closure#0}::{closure#2}>>, hyper::body::incoming::Incoming>, axum_core::body::Body, hyper_util::common::rewind::Rewind<hyper_util::rt::tokio::TokioIo<tokio::net::tcp::stream::TcpStream>>, hyper::proto::h1::role::Server>>::poll_write
+0.0%   0.3% 14.8KiB                     tokio <tokio::sync::once_cell::OnceCell<core::option::Option<it_domain::status_types::PublicationStatus>>>::get_or_init::<initiative_tracker_server::git::git_status::{closure#0}::{closure#8}::{closure#0}, initiative_tracker_server::publication::publication_status::{closure#0}>::{closure#0}
+0.0%   0.3% 14.4KiB                      axum <initiative_tracker_server::app::initiative_status as axum::handler::Handler<(axum_core::extract::private::ViaParts, axum::extract::state::State<alloc::sync::Arc<initiative_tracker_server::app::AppState>>, axum::extract::path::Path<alloc::string::String>), alloc::sync::Arc<initiative_tracker_server::app::AppState>>>::call::{closure#0}
+0.0%   0.3% 14.1KiB                 it_domain it_domain::dispositions::merge
+0.0%   0.3% 13.8KiB                 [Unknown] exprAnalyze
+0.0%   0.3% 13.8KiB            regex_automata <regex_automata::nfa::thompson::compiler::Compiler>::build_many_from_hir::<&regex_syntax::hir::Hir>
+0.0%   0.3% 13.5KiB                yaml_rust2 <yaml_rust2::parser::Parser<core::str::iter::Chars>>::peek_token
+0.0%   0.3% 13.5KiB                      jiff <jiff::error::ErrorKind as core::fmt::Display>::fmt
+0.0%   0.3% 13.2KiB                      jiff <jiff::fmt::strtime::printer::Formatter<jiff::fmt::strtime::DefaultCustom>>::format_one
+0.0%   0.3% 13.2KiB initiative_tracker_server initiative_tracker_server::metadata::list_review_records
+5.6%  81.4%  3.7MiB                           And 5747 smaller methods. Use -n N to show more.
+6.9% 100.0%  4.5MiB                           .text section size, the file size is 65.3MiB

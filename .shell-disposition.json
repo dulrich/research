@@ -1,6 +1,7 @@
 {
   "exclude": [],
   "entries": [
+    {"path":"binary-size-calibration/size-cal.sh","disposition":"sh","modes":["exec"],"strict":"required"},
     {"path":"cpu-measurement-calibration/offline-run.sh","disposition":"sh","modes":["exec"],"strict":"required"},
     {"path":"cpu-measurement-calibration/run.sh","disposition":"sh","modes":["exec"],"strict":"required"},
     {"path":"live-host-measurement-confounds/cell","disposition":"sh","modes":["exec"],"strict":"required"},
