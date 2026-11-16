@@ -1,0 +1,65 @@
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -41,18 +41,46 @@
+     prop::collection::vec(any::<char>(), 0..=max).prop_map(|v| v.into_iter().collect())
+ }
+ 
++/// List-variant switch (environment variable `SLOS_LISTS`, read once): `committed` (default), `ordered`,
++/// `committed+short`, `ordered+short`. `ordered` sorts every sampled list shortest first (stable, by
++/// character count); `+short` adds host `a` and query key `rEf` (appended for `committed+short`, sorted in
++/// for `ordered+short`). An unknown value aborts the run.
++fn list_variant() -> &'static str {
++    static V: std::sync::OnceLock<String> = std::sync::OnceLock::new();
++    V.get_or_init(|| {
++        let v = std::env::var("SLOS_LISTS").unwrap_or_else(|_| "committed".into());
++        if !["committed", "ordered", "committed+short", "ordered+short"].contains(&v.as_str()) {
++            panic!("SLOS_LISTS must be committed, ordered, committed+short or ordered+short, got {v:?}");
++        }
++        v
++    })
++}
++
++/// The sampled list for the active variant; `extra` is the content added by the `+short` variants.
++fn variant_list(base: &[&'static str], extra: &[&'static str]) -> Vec<&'static str> {
++    let v = list_variant();
++    let mut l: Vec<&'static str> = base.to_vec();
++    if v.ends_with("+short") {
++        l.extend_from_slice(extra);
++    }
++    if v.starts_with("ordered") {
++        l.sort_by_key(|s| s.chars().count());
++    }
++    l
++}
++
+ fn structured_url() -> impl Strategy<Value = String> {
+     let head = (
+-        select(SCHEMES),
+-        select(vec!["://", ":/", ":", "//", ""]),
+-        prop::option::of(select(vec!["u", "u:p", "ü:%40", ":", "a@b"])),
+-        select(HOSTS),
+-        prop::option::of(select(vec!["80", "443", "8080", "0", "65536", "", "x"])),
++        select(variant_list(SCHEMES, &[])),
++        select(variant_list(&["://", ":/", ":", "//", ""], &[])),
++        prop::option::of(select(variant_list(&["u", "u:p", "ü:%40", ":", "a@b"], &[]))),
++        select(variant_list(HOSTS, &["a"])),
++        prop::option::of(select(variant_list(&["80", "443", "8080", "0", "65536", "", "x"], &[]))),
+     );
+-    let segment = prop_oneof![select(SEGMENTS).prop_map(String::from), text(6)];
++    let segment = prop_oneof![select(variant_list(SEGMENTS, &[])).prop_map(String::from), text(6)];
+     let path = (prop::collection::vec(segment, 0..=6), any::<bool>());
+-    let query = prop::collection::vec((select(QUERY_KEYS), prop::option::of(text(5))), 0..=4);
+-    let tail = (prop::option::of(select(FRAGMENTS)), select(vec!["", " ", "\t", "\n "]));
++    let query = prop::collection::vec((select(variant_list(QUERY_KEYS, &["rEf"])), prop::option::of(text(5))), 0..=4);
++    let tail = (prop::option::of(select(variant_list(FRAGMENTS, &[]))), select(variant_list(&["", " ", "\t", "\n "], &[])));
+     (head, path, query, tail).prop_map(|((scheme, sep, userinfo, host, port), (segs, slash), query, (frag, pad))| {
+         let mut s = String::new();
+         s.push_str(pad);
+@@ -281,6 +309,7 @@
+ 
+ /// Runs `prop` once with `cases` test cases and a fixed `seed`; failure persistence is off.
+ pub fn run(prop: Prop, seed: u64, cases: u64) -> Outcome {
++    list_variant();
+     let cases = u32::try_from(cases).expect("cases fits u32");
+     match prop {
+         Prop::UrlNeverPanics => drive(any_input(), seed, cases, |s| {

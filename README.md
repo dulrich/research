@@ -13,7 +13,11 @@ Each folder holds one investigation with its working notes and final report.
 - [Live-host measurement](methods/live-host.md): the procedure for measuring on a live workstation, with which classes are acceptable, the runtime controls and how to label the result.
 
 <!-- research-index:start -->
-## 9 research projects
+## 10 research projects
+
+### [Sampled-list order and shrinking: order and content together, not order alone, closed the exactly-minimal gap](sampled-list-order-shrinking/) (2026-11-16)
+
+On the comparison's two URL mutants, neither sorting the sampled lists shortest first (order) nor adding the two entries the minimum needs, host `a` and query key `rEf` (content), made any run exactly minimal: 0/50 in every Hegel and proptest cell that changed only one factor…
 
 ### [Binary-size calibration: which size, which build settings, how far attribution tools agree](binary-size-calibration/) (2026-11-15)
 

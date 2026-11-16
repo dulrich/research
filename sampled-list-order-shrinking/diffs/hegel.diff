@@ -1,0 +1,77 @@
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -6,7 +6,6 @@
+ use cv_text::url_canon::canonicalize_url;
+ use crucible_keys::{Action, NightLightArg};
+ use crucible_layout::Direction;
+-use hegel::generators as gs;
+ use hegel::{Hegel, Settings, TestCase};
+ use std::panic::{AssertUnwindSafe, catch_unwind};
+ use std::sync::Mutex;
+@@ -15,6 +14,58 @@
+ 
+ pub const LIBRARY: &str = "hegel";
+ 
++/// List-variant switch (environment variable `SLOS_LISTS`, read once): `committed` (default), `ordered`,
++/// `committed+short`, `ordered+short`. `ordered` sorts every sampled list of strings shortest first (stable, by
++/// character count); `+short` adds host `a` (to the host list) and query key `rEf` (to the key list), appended
++/// for `committed+short` and sorted in for `ordered+short`. An unknown value aborts the run.
++fn list_variant() -> &'static str {
++    static V: std::sync::OnceLock<String> = std::sync::OnceLock::new();
++    V.get_or_init(|| {
++        let v = std::env::var("SLOS_LISTS").unwrap_or_else(|_| "committed".into());
++        if !["committed", "ordered", "committed+short", "ordered+short"].contains(&v.as_str()) {
++            panic!("SLOS_LISTS must be committed, ordered, committed+short or ordered+short, got {v:?}");
++        }
++        v
++    })
++}
++
++/// `hegel::generators` with `sampled_from` wrapped by the list variant. `#[hegel::composite]` derives its label
++/// from the token text of the function body, so the generator bodies stay textually unchanged and the switch
++/// sits behind the `gs` path instead (editing the body changes Hegel's draw stream even for the default variant).
++/// Lists of `&'static str` are transformed; every other element type, and the default variant, pass through.
++mod gs {
++    pub use hegel::generators::*;
++    use std::any::Any;
++    use std::borrow::Cow;
++
++    pub fn sampled_from<'a, T, S>(elements: S) -> SampledFromGenerator<'a, T>
++    where
++        T: Clone + Send + Sync + 'static,
++        S: Into<Cow<'a, [T]>>,
++    {
++        let cow: Cow<'a, [T]> = elements.into();
++        let variant = super::list_variant();
++        if variant == "committed" {
++            return hegel::generators::sampled_from(cow);
++        }
++        let mut owned: Vec<T> = cow.into_owned();
++        if let Some(list) = (&mut owned as &mut dyn Any).downcast_mut::<Vec<&'static str>>() {
++            if variant.ends_with("+short") {
++                if list.contains(&"example.com") {
++                    list.push("a");
++                }
++                if list.contains(&"UTM_MEDIUM") {
++                    list.push("rEf");
++                }
++            }
++            if variant.starts_with("ordered") {
++                list.sort_by_key(|s| s.chars().count());
++            }
++        }
++        hegel::generators::sampled_from(owned)
++    }
++}
++
+ const SCHEMES: &[&str] = &["http", "https", "HTTP", "Https", "ftp", "mailto", "javascript", ""];
+ const HOSTS: &[&str] = &[
+     "example.com", "EXAMPLE.com", "example.com.", "www.example.org", "xn--bcher-kva.example",
+@@ -277,6 +328,7 @@
+ 
+ /// Runs `prop` once with `cases` test cases and a fixed `seed`; the example database is off.
+ pub fn run(prop: Prop, seed: u64, cases: u64) -> Outcome {
++    list_variant();
+     let rec = Rec { calls: AtomicU64::new(0), first: Mutex::new(None), last: Mutex::new(None) };
+     let settings = Settings::new().test_cases(cases).seed(Some(seed)).database(None);
+     let t0 = Instant::now();
