@@ -7,6 +7,10 @@ Each folder holds one investigation with its working notes and final report.
 ## Methods
 
 - [Timing measurements](methods/timing.md): the standard every timing claim here follows (repetition, interleaving, placement bias, confidence intervals, noise floor).
+- [Binary-size measurements](methods/size.md): which size answers which question, the build inputs a size number states, when one build is exact, and how far attribution tools can be trusted.
+- [Memory measurements](methods/memory.md): which memory source answers peak, settled and growth questions, and the container and allocator effects that move a memory number.
+- [CPU-usage measurements](methods/cpu.md): which CPU source answers which question, and the SMT and placement effects that move CPU time, instructions and cycles.
+- [Live-host measurement](methods/live-host.md): the procedure for measuring on a live workstation, with which classes are acceptable, the runtime controls and how to label the result.
 
 <!-- research-index:start -->
 ## 7 research projects
