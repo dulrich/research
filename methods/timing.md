@@ -105,7 +105,7 @@ Measuring on a live workstation someone is using: follow [live-host.md](live-hos
 - `probe` (optional): `cpu` names the pinned CPU for the sibling record when pinning is not in variant argv (for example a long-lived container created with `--cpuset-cpus`; it must agree with any `--cpuset-cpus` in argv), and `container` records that container's image id and cpuset (`container_image`, `container_cpuset`) via `docker inspect`; a failed inspect is recorded as `unavailable` with a `container_probe_error`.
 - `metrics` (optional): `{ "<metric>": { "kind": "level" | "rate", "better": "lower" | "higher" } }`, both keys required. A metric without an entry is a time: lower is better and verdicts read "faster"/"slower", exactly as before. A `level` entry keeps the median, ratio and claim rule but words verdicts "lower"/"higher" with "(better)"/"(worse)" from `better`. A `rate` entry requires every value to be 0 or 1 (any other value fails the run) and is reported per the R6-R8 rate carve-out.
 - Substitution: `{pad}` (this invocation's padding string) and `{host}` (from `--host`) are replaced in every argv element; `MEASURE_PAD` is also set in the child environment.
-- Line protocol: the experiment prints `MEASURE <metric> <number> [unit]`, one or more lines per invocation; other output goes to a log.
+- Line protocol: the experiment prints `MEASURE <metric> <number> [unit]`, one or more lines per invocation; other output goes to a log. `<number>` is a finite decimal number with an optional sign, fraction and exponent (`-1`, `2.50`, `1e+06`); other forms (`0x10`, `0b11`, `0o17`, `1_000`, `NaN`, `Infinity`) are protocol errors and fail the run.
 
 Example config (A/B plus an A/A duplicate, run on a remote machine):
 

@@ -14,7 +14,8 @@ const USAGE = `usage: measure.mjs run --config <file.json> --out <dir> [--seed N
 
 run     Runs warmup+invocations rounds; each round runs every variant once in a seeded random order,
         with env MEASURE_PAD (and argv token {pad}) set to 0..padMax bytes of padding and {host}
-        replaced by --host. Variants print "MEASURE <metric> <number> [unit]" lines on stdout.
+        replaced by --host. Variants print "MEASURE <metric> <number> [unit]" lines on stdout;
+        <number> is decimal (optional sign, fraction and exponent: -1, 2.50, 1e+06).
         Writes <out>/raw.jsonl, <out>/env.json and <out>/log.txt. A non-zero exit, a protocol error
         or a missing metric fails the run (exit 1) after writing what was recorded.
 report  Prints per-metric Markdown tables (hierarchical bootstrap over layout builds, then

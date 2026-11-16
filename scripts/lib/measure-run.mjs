@@ -74,6 +74,9 @@ export function validateConfig(c, { host } = {}) {
 }
 
 const LINE = /^MEASURE (\S+) (\S+)(?: (\S+))?$/;
+// A value is a decimal number: optional sign, digits with an optional fraction, optional exponent.
+// Other JS numeric literal forms (0x10, 0b11, 0o17, Infinity) are protocol errors.
+const DECIMAL = /^[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?$/;
 
 /** Parses MEASURE lines from stdout. Returns { metrics, other, errors }. */
 export function parseProtocol(stdout) {
@@ -83,8 +86,8 @@ export function parseProtocol(stdout) {
   for (const line of stdout.split("\n")) {
     if (!line.startsWith("MEASURE")) { if (line) other.push(line); continue; }
     const m = LINE.exec(line);
-    const value = m ? Number(m[2]) : NaN;
-    if (!m || m[2].trim() === "" || !Number.isFinite(value)) { errors.push(`protocol error: ${JSON.stringify(line)}`); continue; }
+    const value = m && DECIMAL.test(m[2]) ? Number(m[2]) : NaN;
+    if (!m || !Number.isFinite(value)) { errors.push(`protocol error: ${JSON.stringify(line)}`); continue; }
     if (m[1] in metrics) { errors.push(`protocol error: duplicate metric ${m[1]}`); continue; }
     metrics[m[1]] = { value, unit: m[3] ?? "" };
   }
