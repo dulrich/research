@@ -34,7 +34,8 @@ RUN gcc -O2 -fPIC -shared -s c/parse_number.c -o c/parse_number.so \
 # test/fuzz/bench lists) + every variant. Each line: crate name features rustflags.
 COPY harness.patch /work/
 COPY rust-raw/Cargo.toml rust-raw/lib.rs /work/rust-raw/
-COPY rust-safe/Cargo.toml rust-safe/lib.rs rust-safe/parse.rs /work/rust-safe/
+COPY rust-safe/Cargo.toml rust-safe/lib.rs rust-safe/parse.rs rust-safe/bigdec.rs /work/rust-safe/
+COPY rust-safe/tests/bigdec.rs /work/rust-safe/tests/
 ENV ALIGN="-C llvm-args=-align-all-functions=6 -C llvm-args=-align-loops=64"
 RUN git apply harness.patch \
  && printf '%s\n' \
@@ -47,12 +48,17 @@ RUN git apply harness.patch \
       'rust-raw nostd-fast-align64 nostd,fast align' \
       'rust-safe std - -' \
       'rust-safe nostd nostd -' \
+      'rust-safe nostd-bigdec nostd,bigdec -' \
     | while read -r crate n f fl; do \
       [ "$f" = - ] && f=; \
       if [ "$fl" = align ]; then fl="$ALIGN"; else fl=; fi; \
       (cd "$crate" && RUSTFLAGS="$fl" CARGO_TARGET_DIR="target/$n" cargo build --release ${f:+--features "$f"} \
         && mkdir -p "$n" && cp "target/$n/release/libparse_number.so" "$n/") || exit 1; \
     done
+
+# Round 6: differential tests of the `bigdec` slow path against core's
+# correctly rounded parser (see README round 6). Any mismatch fails the build.
+RUN cd rust-safe && CARGO_TARGET_DIR=target/test cargo test --release --features bigdec -- --nocapture
 
 # Round 4: layout-perturbed copies of the compared variants (code placement
 # is a random factor). Suffix -a16/-a32/-a64 is the loop alignment in bytes.
@@ -96,6 +102,7 @@ RUN mkdir -p /work/sizes \
  && c Os-gnuld-all      -Os $SZ_LINK $SZ_CC \
  && c O2-lld-all        -O2 -B"$LLD_DIR" -fuse-ld=lld -Wl,--build-id=none -Wl,-z,norelro $SZ_CC \
  && cp rust-raw/nostd-fast-strtod/libparse_number.so sizes/rust-nostd-strtod-lld.so \
+ && cp rust-safe/nostd-bigdec/libparse_number.so sizes/rust-safe-nostd-bigdec-lld.so \
  && (cd rust-raw && RUSTFLAGS="$(printf -- '-C link-arg=%s ' $SZ_LINK)" CARGO_TARGET_DIR=target/sz \
       cargo build --release --features nostd,strtod) \
  && cp rust-raw/target/sz/release/libparse_number.so sizes/rust-nostd-strtod-lld-all.so \

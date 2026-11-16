@@ -1,0 +1,6 @@
+# Three clean identical-input builds of rust-safe nostd,bigdec (docker build --no-cache), then the build inside the full investigation image.
+# Format: sha256, bytes. Inputs: image rust:1.99.1-slim-trixie (rustc/cargo 1.99.1), x86_64-unknown-linux-gnu cdylib, [profile.release] opt-level=3 lto=true codegen-units=1 panic=abort strip=true, features nostd,bigdec, no --locked (no dependencies; no lockfile copied), builder cargo build --release, no build id.
+build 1: 8aa57a44432cd5cf3a61c1dd433411be98531223e699e218fc6a691195691a88  libparse_number.so 8144 
+build 2: 8aa57a44432cd5cf3a61c1dd433411be98531223e699e218fc6a691195691a88  libparse_number.so 8144 
+build 3: 8aa57a44432cd5cf3a61c1dd433411be98531223e699e218fc6a691195691a88  libparse_number.so 8144 
+full image (Dockerfile build, variant loop): 8aa57a44432cd5cf3a61c1dd433411be98531223e699e218fc6a691195691a88  8144

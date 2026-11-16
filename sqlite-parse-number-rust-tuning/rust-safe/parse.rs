@@ -2,7 +2,7 @@
 //! `fast` build, with no `unsafe` (enforced).
 #![forbid(unsafe_code)]
 
-#[cfg(feature = "nostd")]
+#[cfg(all(feature = "nostd", not(feature = "bigdec")))]
 use alloc::vec::Vec;
 
 pub enum Num {
@@ -91,8 +91,19 @@ pub fn parse_number(s: &[u8]) -> Option<Num> {
     parse_slow(s)
 }
 
+/// Rare path (very long numbers), feature `bigdec`: a compact correctly
+/// rounded decimal parser that needs no table, no allocation and no locale.
+/// `s` is the trimmed, still decorated input, already validated.
+#[cfg(feature = "bigdec")]
+#[cold]
+#[inline(never)]
+fn parse_slow(s: &[u8]) -> Option<Num> {
+    Some(Num::Real(crate::bigdec::parse(s)))
+}
+
 /// Rare path (very long numbers): rebuild "-digits.digits" and use core's
 /// correctly rounded parser. Allocates; input is already validated.
+#[cfg(not(feature = "bigdec"))]
 #[cold]
 #[inline(never)]
 fn parse_slow(s: &[u8]) -> Option<Num> {

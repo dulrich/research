@@ -16,6 +16,8 @@
 extern crate alloc;
 
 mod parse;
+#[cfg(feature = "bigdec")]
+mod bigdec;
 
 mod ffi {
     //! The only module allowed to contain `unsafe`.

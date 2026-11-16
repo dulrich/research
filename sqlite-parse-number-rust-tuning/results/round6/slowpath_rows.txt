@@ -1,0 +1,8 @@
+# rows reaching parse_slow (rust-safe parse.rs decision logic, replicated)
+bench mixed rows=2000000 slow=0 (integer-path=799507 exact-division=1000231 invalid=200262)
+bench int   rows=2000000 slow=0 (integer-path=2000000 exact-division=0 invalid=0)
+bench real  rows=2000000 slow=0 (integer-path=0 exact-division=2000000 invalid=0)
+fuzz seed 0 inputs=500000 slow=156898 (integer-path=59752 exact-division=154639 invalid/NULL=128711)
+fuzz seed 1 inputs=500000 slow=157137 (integer-path=59913 exact-division=154326 invalid/NULL=128624)
+fuzz seed 2 inputs=500000 slow=157059 (integer-path=59777 exact-division=154292 invalid/NULL=128872)
+fuzz seed 3 inputs=500000 slow=157158 (integer-path=60271 exact-division=154321 invalid/NULL=128250)

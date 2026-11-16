@@ -14,6 +14,7 @@ path = "lib.rs"
 nostd = []
 # Round 5: stub `rust_eh_personality` for `nostd` builds without LTO.
 eh-stub = []
+bigdec = []
 
 [profile.release]
 opt-level = 3

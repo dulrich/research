@@ -1,0 +1,64 @@
+# seed 0
+c          500000/500000 match reference
+c-fast     500000/500000 match reference
+rusqlite   500000/500000 match reference
+sqlite-loadable 500000/500000 match reference
+raw-std    500000/500000 match reference
+raw-nostd  500000/500000 match reference
+raw-fast   500000/500000 match reference
+raw-nostd-fast 500000/500000 match reference
+raw-nostd-fast-strtod 500000/500000 match reference
+raw-fast-align64 500000/500000 match reference
+raw-nostd-fast-align64 500000/500000 match reference
+safe-std   500000/500000 match reference
+safe-nostd 500000/500000 match reference
+safe-nostd-bigdec 500000/500000 match reference
+exit 0
+# seed 1
+c          500000/500000 match reference
+c-fast     500000/500000 match reference
+rusqlite   500000/500000 match reference
+sqlite-loadable 500000/500000 match reference
+raw-std    500000/500000 match reference
+raw-nostd  500000/500000 match reference
+raw-fast   500000/500000 match reference
+raw-nostd-fast 500000/500000 match reference
+raw-nostd-fast-strtod 500000/500000 match reference
+raw-fast-align64 500000/500000 match reference
+raw-nostd-fast-align64 500000/500000 match reference
+safe-std   500000/500000 match reference
+safe-nostd 500000/500000 match reference
+safe-nostd-bigdec 500000/500000 match reference
+exit 0
+# seed 2
+c          500000/500000 match reference
+c-fast     500000/500000 match reference
+rusqlite   500000/500000 match reference
+sqlite-loadable 500000/500000 match reference
+raw-std    500000/500000 match reference
+raw-nostd  500000/500000 match reference
+raw-fast   500000/500000 match reference
+raw-nostd-fast 500000/500000 match reference
+raw-nostd-fast-strtod 500000/500000 match reference
+raw-fast-align64 500000/500000 match reference
+raw-nostd-fast-align64 500000/500000 match reference
+safe-std   500000/500000 match reference
+safe-nostd 500000/500000 match reference
+safe-nostd-bigdec 500000/500000 match reference
+exit 0
+# seed 3
+c          500000/500000 match reference
+c-fast     500000/500000 match reference
+rusqlite   500000/500000 match reference
+sqlite-loadable 500000/500000 match reference
+raw-std    500000/500000 match reference
+raw-nostd  500000/500000 match reference
+raw-fast   500000/500000 match reference
+raw-nostd-fast 500000/500000 match reference
+raw-nostd-fast-strtod 500000/500000 match reference
+raw-fast-align64 500000/500000 match reference
+raw-nostd-fast-align64 500000/500000 match reference
+safe-std   500000/500000 match reference
+safe-nostd 500000/500000 match reference
+safe-nostd-bigdec 500000/500000 match reference
+exit 0

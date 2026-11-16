@@ -1,0 +1,7 @@
+running 3 tests
+test hand_cases ... ok
+test decorated_regressions ... ok
+random 2000000 ties 400000 (+2 nudges each) mismatches 0
+test random_and_ties ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 25.72s

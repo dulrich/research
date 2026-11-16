@@ -1,6 +1,6 @@
 # Can Rust match fast C for a SQLite `parse_number()` extension?
 
-A follow-up to Simon Willison's [sqlite-parse-number-c-vs-rust](https://github.com/simonw/research/tree/main/sqlite-parse-number-c-vs-rust), where hand-optimised C (`c-fast`) was ~2× faster than the Rust extensions and 20× smaller (14 KB vs ~300 KB). Rust with no dependencies and the same inline fast path, even with the parser written in 100% safe Rust, can match fast C, but which one wins depends on the compiler backend. Round 5 measures C and Rust each on both backends (GCC and LLVM), each pushed to its ceiling, on a second, quiet machine with the repository's [timing standard](../methods/timing.md) (6 code layouts per build, 10 invocations each, bootstrap CIs, an A/A noise floor): with GCC, C (gcc `-O3` with PGO) is the fastest (raw `unsafe` Rust takes 1.19-1.25× as long; safe Rust 1.09-1.14×, not measurable for integers); with LLVM, raw Rust takes 0.91-0.94× the time of C (clang `-O2`) in every dataset and safe Rust is faster or indistinguishable. Rust is 7-17% faster on LLVM than on GCC (where measurable), while C's best build is the GCC one, which uses PGO, something the Rust GCC backend cannot do. Round 4's "every Rust variant is 12-27% faster" compared Rust on LLVM against upstream's `gcc -O2` C build and mixed the language with the backend; it was not wrong as a measurement but it was not like-vs-like. Dropping `std` takes the `.so` to 24 KB, and handing the rare slow path to `strtod` takes it to 6 KB. That first looked smaller than the C file, but the gap was linker defaults: with the same linker and size flags, C is a little smaller (4.6–5.0 KB vs 5.5 KB).
+A follow-up to Simon Willison's [sqlite-parse-number-c-vs-rust](https://github.com/simonw/research/tree/main/sqlite-parse-number-c-vs-rust), where hand-optimised C (`c-fast`) was ~2× faster than the Rust extensions and 20× smaller (14 KB vs ~300 KB). Rust with no dependencies and the same inline fast path, even with the parser written in 100% safe Rust, can match fast C, but which one wins depends on the compiler backend. Round 5 measures C and Rust each on both backends (GCC and LLVM), each pushed to its ceiling, on a second, quiet machine with the repository's [timing standard](../methods/timing.md) (6 code layouts per build, 10 invocations each, bootstrap CIs, an A/A noise floor): with GCC, C (gcc `-O3` with PGO) is the fastest (raw `unsafe` Rust takes 1.19-1.25× as long; safe Rust 1.09-1.14×, not measurable for integers); with LLVM, raw Rust takes 0.91-0.94× the time of C (clang `-O2`) in every dataset and safe Rust is faster or indistinguishable. Rust is 7-17% faster on LLVM than on GCC (where measurable), while C's best build is the GCC one, which uses PGO, something the Rust GCC backend cannot do. Round 4's "every Rust variant is 12-27% faster" compared Rust on LLVM against upstream's `gcc -O2` C build and mixed the language with the backend; it was not wrong as a measurement but it was not like-vs-like. Dropping `std` takes the `.so` to 24 KB, and handing the rare slow path to `strtod` takes it to 6 KB. That first looked smaller than the C file, but the gap was linker defaults: with the same linker and size flags, C is a little smaller (4.6–5.0 KB vs 5.5 KB). Round 6 gets the safe crate to 8,144 B (exact) without `strtod`: a 150-line, table-free, allocation-free, locale-independent slow path in safe Rust, checked bit for bit against core's parser.
 
 > Every line of text and code here was written by an LLM (Claude Code).
 
@@ -18,7 +18,7 @@ Two crates, both with **zero dependencies**. Each calls SQLite through the `sqli
 
 [`rust-safe/`](rust-safe/) is the same `fast` algorithm with `unsafe` kept to the FFI boundary:
 
-- **Parser:** [`parse.rs`](rust-safe/parse.rs) is `#![forbid(unsafe_code)]`. It uses slices, iterators and checked indexing, and the rare slow path allocates a `Vec`.
+- **Parser:** [`parse.rs`](rust-safe/parse.rs) is `#![forbid(unsafe_code)]`. It uses slices, iterators and checked indexing, and the rare slow path allocates a `Vec`. With the round-6 feature **`bigdec`** the slow path is [`bigdec.rs`](rust-safe/bigdec.rs) instead (also `forbid(unsafe_code)`): no allocation, no table, no locale.
 - **FFI glue:** [`lib.rs`](rust-safe/lib.rs) holds every `unsafe`, about 30 lines. That covers reading API slots, turning `argv` and the text pointer into a slice, the entry point, and, in the `nostd` build, a global allocator over `sqlite3_malloc` plus the panic handler's `abort`.
 
 | | `unsafe` blocks | `unsafe fn` definitions | parsing code in unsafe context |
@@ -29,6 +29,44 @@ Two crates, both with **zero dependencies**. Each calls SQLite through the `sqli
 The four upstream extensions were rebuilt from upstream's source at commit `aa4e39e` and measured on the same machine.
 
 ## Results
+
+### Round 6: a compact, safe, locale-independent slow path (`bigdec`)
+
+The `nostd` safe crate is 24,912 B, and 13.7 KB of it is core's float parser (`.rodata` 12,808 B, mostly the Eisel-Lemire power-of-five table), which exists only for the rare slow path: more than 19 significant digits, more than 22 fraction digits, or a significand over 2^53. Round 2 replaced that path with the C library's `strtod`, which gave the 6,072 B file but made the slow path locale-dependent. Round 6 asks the question round 2 left open: can a small, correctly rounded, locale-independent slow path stay in safe Rust? The new `bigdec` feature of `rust-safe` answers it with `nostd,bigdec` at **8,144 B** (exact), with 0 mismatches against core's parser over ~3.2M differential comparisons, 28M fuzz comparisons and the upstream tests. The default build, and every number of rounds 1-5, is unchanged: `bigdec` is an added feature and the default slow path is still core's `str::parse`. Round 6 makes no timing claim.
+
+**Method.** [`rust-safe/bigdec.rs`](rust-safe/bigdec.rs) is about 150 lines, `#![forbid(unsafe_code)]`, with no allocation, no locale and a 9-entry constant table. It holds the digits in a fixed 800-digit decimal buffer, scales them by shifts of at most 60 bits into [0.5, 1), adjusts for denormals, shifts by 53 bits and rounds half to even with a truncation flag (digits beyond the buffer only set the flag). Left shifts carry right-to-left into a scratch buffer, so Go's left-shift table is not needed. The slow path is called with the trimmed, still decorated input (`$`, `,`, `%` and the two bytes of `£` are still in it), and the module skips every byte that is not a digit, `.` or `-`, so the normalisation needs no buffer; `parse_number` has already validated the input.
+
+The algorithm is the shape of the "decimal" fallback in Go's `strconv` ([`decimal.go`](https://github.com/golang/go/blob/master/src/strconv/decimal.go), BSD-3-Clause). `bigdec.rs` is an independent reimplementation of the published algorithm; only the nine `POWTAB` constants are taken from Go's file.
+
+**Correctness** (every number is from [`results/round6/`](results/round6/); the image builds and runs all of it):
+
+| Test | Inputs | Result |
+|---|---|---|
+| Differential tests ([`rust-safe/tests/bigdec.rs`](rust-safe/tests/bigdec.rs), `cargo test --release --features bigdec`, fixed seeds, bit-exact against core's `str::parse::<f64>`; [`checker.txt`](results/round6/checker.txt)) | 2,000,000 random decimals (up to 24 integer digits, 0-39 fraction digits, leading-zero runs, every 97th with up to 900 extra digits); 400,000 exact halfway points between adjacent doubles over the whole exponent range (up to ~1,100 digits), each with an up-nudge and a down-nudge (1.2M inputs); 10 hand cases and a 1,000-digit tail | 0 mismatches |
+| Decorated regressions (same file, through `parse_number`, the real seam) | 9 fixed cases such as `$1,234.5678901234567890123`, `-£0.000000000000000000000000001` and `99.99999999999999999999%`, each also with surrounding spaces, plus 200,000 random long decimals wrapped in `$`/`£`, thousands separators, `-` and `%` | 0 mismatches |
+| Upstream `test.py` ([`test.txt`](results/round6/test.txt)) | 40 cases per build | the new build passes 40/40, like all others |
+| Upstream `fuzz.py`, seeds 0-3 ([`fuzz.txt`](results/round6/fuzz.txt)) | 4 seeds x 500,000 inputs x 14 extensions = 28M comparisons against a correctly rounded Python reference | 0 mismatches |
+
+Which test covers what: upstream's fuzz generator does reach the slow path (31.4% of its inputs, below), so the fuzz exercises `bigdec` through SQLite, but only up to 25 digits; the long-input and exact-tie classes (up to ~1,100 digits, the truncation flag, denormals, the largest double) are covered by the Cargo tests.
+
+**Which benchmark rows reach the slow path.** None. [`slowpath_rows.py`](results/round6/slowpath_rows.py) replicates `parse_number`'s decision logic (the same scan and the same three conditions) over the upstream generators; it is a replica, not an instrumented build, and its validity decisions agree with the upstream fuzz reference on all 500,000 inputs of seed 0. [`slowpath_rows.txt`](results/round6/slowpath_rows.txt) has the counts (the fuzz seeds 0-3 give 156,898 to 157,158 slow-path inputs of 500,000):
+
+| Dataset (upstream `bench.py`, seed 1) | Rows | Reach the slow path | Integer path | Exact-division path | Rejected (NULL) |
+|---|---|---|---|---|---|
+| mixed | 2,000,000 | 0 | 799,507 | 1,000,231 | 200,262 |
+| integers | 2,000,000 | 0 | 2,000,000 | 0 | 0 |
+| decimals | 2,000,000 | 0 | 0 | 2,000,000 | 0 |
+
+The slow path of `parse_number` never runs in any of the three benchmark datasets (values have at most 7 digits and at most 3 fraction digits), so a change to it can only move the file's size, not these datasets' speed. Round 4 measured the same kind of change (`nostd,strtod`, a different slow path) as no measurable difference on all three datasets; round 6 does not measure `bigdec`'s timing and makes no claim about it, including on inputs that do reach the slow path.
+
+**Size** (exact). Question and source ([size standard](../methods/size.md) S1): disk bytes (`stat`) of the stripped `.so`, with `.text` and `.rodata` from `size -A`. Inputs (S2): image `rust:1.99.1-slim-trixie` (rustc and cargo 1.99.1, Debian 13), target `x86_64-unknown-linux-gnu` `cdylib`, linker LLD (rustc's default), `[profile.release]` `opt-level = 3`, `lto = true`, `codegen-units = 1`, `panic = "abort"`, `strip = true`, plain `cargo build --release` (no dependencies and no lockfile copied, so `--locked` has no effect), no build id. Exactness (S3, S6): three clean `--no-cache` builds of `rust-safe` `nostd,bigdec` from identical inputs ([`identity/Dockerfile`](results/round6/identity/Dockerfile); [`identity.txt`](results/round6/identity.txt)) all gave SHA-256 `8aa57a44432cd5cf3a61c1dd433411be98531223e699e218fc6a691195691a88` and 8,144 B, and so did the build inside the full investigation image, so one build per number is exact on this toolchain image and host (cross-host determinism was not tested).
+
+| Build | Stripped `.so` | `.text` | `.rodata` | Shared libs needed |
+|---|---|---|---|---|
+| safe `nostd` (default slow path; the round 1-5 row, reproduced) | 24,912 B | 7,352 B | 12,808 B | none |
+| **safe `nostd,bigdec`** | **8,144 B** | 3,474 B | 313 B | none |
+
+`nostd,bigdec` is 16,768 B (67%) smaller than safe `nostd`, with the same imports (`abort`, `memcpy`, `memset`) and no `NEEDED` entries; the `Vec` and the allocator's slow-path use are gone. It is 2,072 B larger than `rust-raw` `nostd,strtod` (6,072 B, same linker, profile and image) and, unlike it, locale-independent and safe. The round-3 size flags (`-z noseparate-code` and the rest) were not applied to it, so it has no row in that comparison.
 
 ### Round 5 (like-vs-like: C and Rust on GCC and LLVM, each at its ceiling)
 
@@ -186,7 +224,7 @@ Machine: AMD Ryzen 9 7900X, container pinned to one core. Absolute numbers are a
 - **Safe Rust is still faster than `c-fast`, but not as fast as the `unsafe` parser (round 4).** The safe crates run at 0.82-0.88 of `c-fast`'s time (safe `nostd`: 0.881 [0.854, 0.918] mixed, 0.822 [0.791, 0.856] integers, 0.866 [0.846, 0.921] decimals), and safe `nostd` takes 1.095 [1.079, 1.109], 1.118 [1.082, 1.227] and 1.078 [1.052, 1.093] times as long as raw `nostd,fast` (the decimals effect only just clears the 0.076 floor). The earlier "`unsafe` bought nothing measurable" does not survive; the safe hot loop's one array index is guarded by `frac <= 22` (I didn't confirm in the disassembly that the compiler drops that check). The only `unsafe` that's needed is the FFI boundary, which no SQLite extension in any language can avoid. Safe `std` and safe `nostd` show no measurable difference in any dataset.
 - **`no_std` makes the mixed-data build faster, and alignment does not explain it (round 4); `strtod` does not change speed.** raw `fast` takes 1.087 [1.072, 1.108] times as long as raw `nostd,fast` on mixed data, with the gap at each of the three alignments (a16 25.5 vs 23.5, a32 25.7 vs 23.5, a64 26.2 vs 24.0 ns), so forcing alignment does not erase it, which contradicts the round-2 explanation; on integers and decimals there is no measurable difference (their effects fall inside the noise floor). Code placement still matters a lot: the same safe `std` code spans 24.2-29.5 ns across three alignments. In round 2 the hot function compiled to the same instructions in both builds (245 vs 243) and differed in address constants and the cold panic path, so the cause remains unidentified. `nostd,strtod` against `nostd,fast`: 1.015 [0.961, 1.108], 0.995 [0.976, 1.115], 1.000 [0.958, 1.064], no measurable difference in any dataset.
 - **The 289 KB is `std`, not rusqlite.** Every `std` build is ~289 KB with no dependencies at all. Without `std` it's 23–25 KB, and the file links no shared libraries: it resolves `abort`, `memcpy` and `memset` (or `strtod`) from the host process when it's loaded.
-- **Most of the remaining size is Rust's float parser.** 10.4 KB of the `no_std` file is core's Eisel-Lemire power-of-five table, plus 3.3 KB of `f64::from_str`. Calling `strtod` for the slow path drops all of it: **6,072 B, 3.4 KB of actual content**. The price is the same as `c-fast`'s: the rare slow path reads the decimal point from the host's locale. Since the slow path is rare, speed is unchanged (round 4 measured: no measurable difference). `opt-level = "s"`/`"z"` only reaches 22.8 KB, because the float table sets the floor.
+- **Most of the remaining size is Rust's float parser.** 10.4 KB of the `no_std` file is core's Eisel-Lemire power-of-five table, plus 3.3 KB of `f64::from_str`. Calling `strtod` for the slow path drops all of it: **6,072 B, 3.4 KB of actual content**. The price is the same as `c-fast`'s: the rare slow path reads the decimal point from the host's locale. Since the slow path is rare, speed is unchanged (round 4 measured: no measurable difference). `opt-level = "s"`/`"z"` only reaches 22.8 KB, because the float table sets the floor. **Round 6 (exact):** a compact slow path in safe Rust (`rust-safe` `nostd,bigdec`) drops the float parser's tables without `strtod`: **8,144 B** (`.text` 3,474 B, `.rodata` 313 B), 16,768 B (67%) smaller than safe `nostd`, locale-independent, with 0 mismatches in the differential, upstream test and fuzz checks; it is 2,072 B larger than `strtod`'s 6,072 B. No speed claim (none of the benchmark rows reaches the slow path; see round 6).
 - **Size across both backends (round 5, exact byte counts).** C is 14.2-14.3 KB on either compiler, but only 3.1-3.4 KB of that is content; the rest is GNU ld segment padding (PGO adds 211-225 B over `-O3`). Rust `nostd` is 23.5-24.9 KB with LLVM and LTO and 29.9-33.8 KB without LTO, which includes every GCC-backend build (raw `nostd`: 30,256 B on GCC against 29,904 B on LLVM without LTO, so the difference is LTO, not the backend). Its content is ~21-31 KB, about 12.5-13.8 KB of it read-only data (the float parser's tables, as in round 3), so in this round's builds Rust's extra size is real content as well as linker padding. `std` builds are 288-292 KB with LTO and 333-334 KB without. Both safe-Rust speed ceilings (safe×GCC, safe×LLVM) are `std` builds without LTO at ~334 KB, about 23× the C file; the fastest raw-Rust build (raw×LLVM) is 23,464 B. Full table: [`results/round5/sizes.txt`](results/round5/sizes.txt).
 - **Rust is not smaller than C once the linkers match (round 3).** The 14 KB vs 6 KB gap was the linkers, not the languages. gcc links with GNU ld, whose default `-z separate-code` pads each segment to a 4 KB file offset; rustc links with LLD, which does not. Linking `c-fast` with the same LLD gives 5,784 B against Rust's 6,072 B. With the same size flags on both (`-z noseparate-code`, no build-id, no RELRO, no unwind tables, `--gc-sections`, `.comment` stripped), `c-fast` is 4,752 B (`-O2`) or 4,560 B (`-Os`), and Rust `nostd,strtod` is 5,456 B ([`results/sizes_round3.txt`](results/sizes_round3.txt)). The Rust file has about 0.6 KB more content (3,378 vs 2,782 B `size`). These are size-only builds and were not benchmarked.
 
@@ -195,14 +233,14 @@ Machine: AMD Ryzen 9 7900X, container pinned to one core. Absolute numbers are a
 | Fastest overall (round 5) | `c-fast` source built with gcc `-O3` + PGO (needs a training run; 0.71-0.82 of the upstream `gcc -O2` build's time) |
 | Fastest without PGO, on LLVM | `rust-raw` `nostd,fast` with LTO (0.91-0.94 of clang `-O2` C's time; accepts an `unsafe` parser) |
 | Fast with least `unsafe`, on LLVM | `rust-safe` (`std` is fine; faster than clang `-O2` C on decimals, no measurable difference on mixed and integer data) |
-| Small file, still safe and locale-independent | `rust-safe` `nostd` (25 KB) |
+| Small file, still safe and locale-independent | `rust-safe` `nostd,bigdec` (8.1 KB, round 6; `nostd` alone is 25 KB) |
 | Smallest Rust file | `rust-raw` `nostd,strtod` (6 KB, 5.5 KB with size link flags; locale-dependent slow path, like `c-fast`) |
 | Smallest file overall | `c-fast` with size flags (4.6 KB) |
 
 ## Correctness
 
-- Upstream `test.py`: all 13 extensions pass all 40 cases.
-- Upstream `fuzz.py`, 4 seeds × 500k inputs × 13 extensions = 26M bit-exact comparisons against a correctly rounded Python reference: **no mismatches** ([`results/fuzz.txt`](results/fuzz.txt)). In the C locale the image runs in, the `strtod` builds also match exactly.
+- Upstream `test.py`: all 13 extensions pass all 40 cases (round 6: the new `safe-nostd-bigdec` build passes too, 40/40).
+- Upstream `fuzz.py`, 4 seeds × 500k inputs × 13 extensions = 26M bit-exact comparisons (round 6 re-ran the fuzz with the new build: 14 extensions, 28M comparisons, [`results/round6/fuzz.txt`](results/round6/fuzz.txt); the original `results/fuzz.txt` is unchanged) against a correctly rounded Python reference: **no mismatches** ([`results/fuzz.txt`](results/fuzz.txt)). In the C locale the image runs in, the `strtod` builds also match exactly.
 
 ## Setup and reproduce
 
@@ -226,7 +264,7 @@ Round 5 adds to the same image (versions from [`results/round5/toolchains.txt`](
 
 Round 4 also needs, on the host that runs the driver: [bun](https://bun.sh) (the driver, `scripts/measure.mjs`, has no dependencies and no network use) and, for a remote measured machine, passwordless `ssh` to it. The measured machine needs only Docker; the driver's environment probe uses POSIX `sh` and coreutils there.
 
-The build fetches upstream, applies [`harness.patch`](harness.patch) (it adds the nine new builds to the extension lists in `test.py`, `fuzz.py` and `bench.py`, the 18 layout builds to `test.py`, and the single-invocation timing entry `measure_one.py`), and builds all 13 extensions. The 64-byte-aligned builds use `RUSTFLAGS="-C llvm-args=-align-all-functions=6 -C llvm-args=-align-loops=64"`. A stage after the main builds makes the round-4 layout builds under `/work/layouts/` (Rust `-C llvm-args=-align-all-functions={4,5,6} -C llvm-args=-align-loops={16,32,64}`; C `-falign-functions={16,32,64} -falign-loops={16,32,64}`; suffix `-a16`/`-a32`/`-a64`). A last stage builds the round-3 size-only variants into `/work/sizes/`: `c-fast` with GNU ld and with the LLD that rustc ships (reached with `gcc -B<rustc gcc-ld dir> -fuse-ld=lld`), and Rust `nostd,strtod` with the same size link flags. List them with `docker compose run --rm exp sh -c 'cd sizes && ls -l'`.
+The build fetches upstream, applies [`harness.patch`](harness.patch) (it adds the nine new builds (ten with round 6's `safe-nostd-bigdec`) to the extension lists in `test.py`, `fuzz.py` and `bench.py`, the 18 layout builds to `test.py`, and the single-invocation timing entry `measure_one.py`), and builds all 13 extensions. The 64-byte-aligned builds use `RUSTFLAGS="-C llvm-args=-align-all-functions=6 -C llvm-args=-align-loops=64"`. A stage after the main builds makes the round-4 layout builds under `/work/layouts/` (Rust `-C llvm-args=-align-all-functions={4,5,6} -C llvm-args=-align-loops={16,32,64}`; C `-falign-functions={16,32,64} -falign-loops={16,32,64}`; suffix `-a16`/`-a32`/`-a64`). A last stage builds the round-3 size-only variants into `/work/sizes/`: `c-fast` with GNU ld and with the LLD that rustc ships (reached with `gcc -B<rustc gcc-ld dir> -fuse-ld=lld`), and Rust `nostd,strtod` with the same size link flags. List them with `docker compose run --rm exp sh -c 'cd sizes && ls -l'`.
 
 ```bash
 docker compose build
@@ -236,6 +274,27 @@ docker compose run --rm exp python3 bench.py mixed   # or: int, real
 ```
 
 `compose.yaml` pins the container to CPU 2 for stable timings (round 4 ran on a 4-thread laptop with CPU 2's SMT sibling, CPU 3, offline); change `cpuset` to suit your machine.
+
+### Reproduce round 6
+
+Round 6 needs nothing beyond the image above (`cargo test` runs in `rust:1.99.1-slim-trixie`, with no further crates). The image build itself runs the differential tests (any mismatch fails the build) and builds `rust-safe` `nostd,bigdec` into `rust-safe/nostd-bigdec/`:
+
+```bash
+docker compose build
+docker compose run --rm exp python3 test.py                       # 40/40 for every build, including safe-nostd-bigdec
+for s in 0 1 2 3; do docker compose run --rm exp python3 fuzz.py $s; done
+docker compose run --rm exp sh -c 'cd rust-safe && CARGO_TARGET_DIR=target/test cargo test --release --features bigdec -- --nocapture'
+python3 results/round6/slowpath_rows.py                           # rows reaching the slow path (python3 standard library only; works in the image or on any host)
+```
+
+The identity check builds from a small context (the `COPY` lines of its [`Dockerfile`](results/round6/identity/Dockerfile) name the files); run the last two commands three times and compare the printed SHA-256 and size:
+
+```bash
+mkdir -p ctx/rust-safe && cp results/round6/identity/Dockerfile ctx/ \
+  && cp rust-safe/Cargo.toml rust-safe/lib.rs rust-safe/parse.rs rust-safe/bigdec.rs ctx/rust-safe/
+docker build --no-cache -t bigdec-identity ctx
+docker run --rm bigdec-identity
+```
 
 ### Reproduce round 4
 

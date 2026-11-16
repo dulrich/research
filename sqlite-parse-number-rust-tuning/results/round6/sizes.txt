@@ -1,0 +1,31 @@
+== rust-safe/nostd/libparse_number.so
+dfad6cd25ee841adc6a83dd1f64ea44f0acf1825a4186613bca10a531f62dff7  rust-safe/nostd/libparse_number.so
+bytes 24912
+   text	   data	    bss	    dec	    hex	filename
+  21790	    464	   1688	  23942	   5d86	rust-safe/nostd/libparse_number.so
+.dynsym                216     664
+.dynstr                130     912
+.rodata              12808    1312
+.eh_frame_hdr          148   14120
+.eh_frame              740   14272
+.text                 7352   19152
+.data                    8   35192
+.bss                    16   35200
+0
+ __gmon_start__ _ITM_deregisterT[...] _ITM_registerTMC[...] __cxa_finalize abort memcpy memset 
+== rust-safe/nostd-bigdec/libparse_number.so
+8aa57a44432cd5cf3a61c1dd433411be98531223e699e218fc6a691195691a88  rust-safe/nostd-bigdec/libparse_number.so
+bytes 8144
+   text	   data	    bss	    dec	    hex	filename
+   5017	    464	   2072	   7553	   1d81	rust-safe/nostd-bigdec/libparse_number.so
+.dynsym               216     664
+.dynstr               130     912
+.rodata               313    1312
+.eh_frame_hdr          76    1628
+.eh_frame             412    1704
+.text                3474    6256
+.data                   8   18424
+.bss                   16   18432
+0
+ __gmon_start__ _ITM_deregisterT[...] _ITM_registerTMC[...] __cxa_finalize abort memset memcpy 
+-rwxr-xr-x 1 root root  8144 Nov 16 02:09 rust-safe-nostd-bigdec-lld.so

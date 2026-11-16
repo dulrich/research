@@ -2,7 +2,7 @@ diff --git a/bench.py b/bench.py
 index e2d764a..edc743a 100644
 --- a/bench.py
 +++ b/bench.py
-@@ -32,6 +32,15 @@ EXTS = {
+@@ -32,6 +32,16 @@ EXTS = {
      "c-fast": "c-fast/parse_number.so",
      "rusqlite": "rust-rusqlite/target/release/libparse_number.so",
      "sqlite-loadable": "rust-loadable/target/release/libparse_number.so",
@@ -15,6 +15,7 @@ index e2d764a..edc743a 100644
 +    "raw-nostd-fast-align64": "rust-raw/nostd-fast-align64/libparse_number.so",
 +    "safe-std": "rust-safe/std/libparse_number.so",
 +    "safe-nostd": "rust-safe/nostd/libparse_number.so",
++    "safe-nostd-bigdec": "rust-safe/nostd-bigdec/libparse_number.so",
  }
  PURE_SQL = ("sum(cast(nullif(replace(replace(replace(replace(v, ',', ''), "
              "'$', ''), '£', ''), '%', ''), '') as real))")
@@ -22,7 +23,7 @@ diff --git a/fuzz.py b/fuzz.py
 index 6ccd292..ae7ee4f 100644
 --- a/fuzz.py
 +++ b/fuzz.py
-@@ -5,6 +5,15 @@ EXTS = {
+@@ -5,6 +5,16 @@ EXTS = {
      "c-fast": "c-fast/parse_number.so",
      "rusqlite": "rust-rusqlite/target/release/libparse_number.so",
      "sqlite-loadable": "rust-loadable/target/release/libparse_number.so",
@@ -35,6 +36,7 @@ index 6ccd292..ae7ee4f 100644
 +    "raw-nostd-fast-align64": "rust-raw/nostd-fast-align64/libparse_number.so",
 +    "safe-std": "rust-safe/std/libparse_number.so",
 +    "safe-nostd": "rust-safe/nostd/libparse_number.so",
++    "safe-nostd-bigdec": "rust-safe/nostd-bigdec/libparse_number.so",
  }
  
  def reference(s):
@@ -177,7 +179,7 @@ diff --git a/test.py b/test.py
 index c0e983a..97c8e8e 100644
 --- a/test.py
 +++ b/test.py
-@@ -5,6 +5,33 @@ EXTS = {
+@@ -5,6 +5,34 @@ EXTS = {
      "c-fast": "c-fast/parse_number.so",
      "rusqlite": "rust-rusqlite/target/release/libparse_number.so",
      "sqlite-loadable": "rust-loadable/target/release/libparse_number.so",
@@ -190,6 +192,7 @@ index c0e983a..97c8e8e 100644
 +    "raw-nostd-fast-align64": "rust-raw/nostd-fast-align64/libparse_number.so",
 +    "safe-std": "rust-safe/std/libparse_number.so",
 +    "safe-nostd": "rust-safe/nostd/libparse_number.so",
++    "safe-nostd-bigdec": "rust-safe/nostd-bigdec/libparse_number.so",
 +    "c-fast-a16": "layouts/c-fast-a16/parse_number.so",
 +    "c-fast-a32": "layouts/c-fast-a32/parse_number.so",
 +    "c-fast-a64": "layouts/c-fast-a64/parse_number.so",
@@ -211,7 +214,7 @@ index c0e983a..97c8e8e 100644
  }
  
  CASES = [
-@@ -26,6 +53,9 @@ EXTS = {
+@@ -26,6 +54,9 @@ EXTS = {
      (42, 42), (3.14, 3.14), (b"123", None),
  ]
  
