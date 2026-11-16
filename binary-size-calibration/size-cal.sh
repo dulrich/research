@@ -59,6 +59,9 @@ crate_vars() {
     *) die "unknown crate '$1' (router|tracker)" ;;
   esac
   [ -d "$CTX" ] || die "corpus $CTX missing (extract it first, see notes.md)"
+  # The extract carries its source repo's coordination file; a second copy inside this repo
+  # confuses repo-level tooling, and it is not a build input.
+  rm -f "$CTX/INITIATIVE.md"
 }
 
 mode=${1:?mode (try --help)}

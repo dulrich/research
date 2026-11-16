@@ -26,3 +26,7 @@ Working log, appended as the investigation proceeds. `README.md` is the report; 
 - Attribution (`--attrib`, musl only): `bloaty -d sections|symbols|compileunits` and `cargo bloat --crates` inside the `attrib` stage. Two things learned: `cargo bloat` always runs its own `cargo build` (without cargo-auditable), so its file and `.text` totals come from a different build than the driver's binary; and the first run of `bloaty --csv` ran after that rebuild, so the `.csv` and `.json` outputs share a denominator (the cargo-bloat build), not the driver binary's. The attribution table states both denominators.
 - Images (`size-cal.sh image`): the crate's own Dockerfile (from the corpus copy) built as `bsc:router-img` and `bsc:tracker-img` with `GIT_SHA=unknown`. The binary copied out of each image has the same SHA-256 as the driver's `base1` build. `docker history --human=false` gives layer bytes; the containerd store's `.Size` equals unpacked layer bytes plus compressed blob bytes (router 5,820,416 + about 2.58 MB = 8,399,821), so it is not an on-disk or download number by itself.
 - Scratch images removed at the end (`docker image rm`); `var/` stays gitignored.
+
+## 2026-11-15 follow-up
+
+- The tracker crate's directory carries its source repo's top-level coordination file, and the extract and the `--ver` scratch copy brought it into `var/`, where repo-level tooling read it as a second copy of another project. `size-cal.sh` now deletes it from the corpus directory before any build or copy. It is not a build input, so no result changes.
