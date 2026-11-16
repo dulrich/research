@@ -16,17 +16,17 @@ esac
 if [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
   cat <<'USAGE'
 usage: size-cal.sh tools [musl|gnu]      build the tools image (bsc:tools or bsc:tools-gnu), print toolchain and tool versions
-       size-cal.sh build CRATE NAME      docker build the release binary of CRATE (router|tracker) into var/size-out/CRATE/NAME/
+       size-cal.sh build CRATE NAME      docker build the release binary of CRATE (router|tracker) into runs/spike/size-out/CRATE/NAME/
        size-cal.sh measure CRATE NAME    print one TSV row for that binary (host binutils, gzip, zstd, sha256)
        size-cal.sh image CRATE           build the crate's own Dockerfile as bsc:CRATE-img, print inspect and history
        size-cal.sh --help | --build | --version
 build options: --env "K=V K=V"  CARGO_PROFILE_RELEASE_* overrides (empty = the fleet profile)
                --flavor F       musl (default, the fleet recipe) or gnu (Debian toolchain, glibc)
                --no-cache       docker build --no-cache
-               --attrib         also run cargo-bloat and bloaty, results in var/size-out/CRATE/NAME/attr/ (musl only)
+               --attrib         also run cargo-bloat and bloaty, results in runs/spike/size-out/CRATE/NAME/attr/ (musl only)
                --gitsha S       GIT_SHA build arg (default unknown)
                --ver V          build a scratch copy of the crate with only its package version string set to V
-The corpus is read from var/size-corpus/router/router/gateway and var/size-corpus/tracker/initiative_tracker
+The corpus is read from runs/spike/size-corpus/router/router/gateway and runs/spike/size-corpus/tracker/initiative_tracker
 (git archive extracts, see notes.md). Fleet repos are never modified; images use the bsc: tag prefix.
 Measure columns: crate name sha256 file_bytes size_A_sum text_bytes load_filesz load_memsz gzip9 zstd19.
 USAGE
@@ -46,8 +46,8 @@ case ${1:-} in
   --build|--version) build_id; exit 0 ;;
 esac
 ROOT=$(cd "$HERE/.." && pwd)
-CORPUS=$ROOT/var/size-corpus
-OUT=$ROOT/var/size-out
+CORPUS=$ROOT/runs/spike/size-corpus
+OUT=$ROOT/runs/spike/size-out
 die() { echo "size-cal.sh: $*" >&2; exit 2; }
 
 crate_vars() {
@@ -98,7 +98,7 @@ case $mode in
     [ -z "$attrib" ] || [ "$fl" = musl ] || die "--attrib needs the musl flavor"
     ctx=$CTX
     if [ -n "$ver" ]; then
-      ctx=$ROOT/var/size-ctx/$crate-$name
+      ctx=$ROOT/runs/spike/size-ctx/$crate-$name
       rm -rf "$ctx"; mkdir -p "$ctx"; cp -a "$CTX/." "$ctx/"
       sed -i '0,/^version = ".*"$/s//version = "'"$ver"'"/' "$ctx/$VTOML"
       sed -i '/^name = "'"$VPKG"'"$/{n;s/^version = .*/version = "'"$ver"'"/}' "$ctx/Cargo.lock"

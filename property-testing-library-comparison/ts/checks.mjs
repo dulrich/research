@@ -4,7 +4,7 @@
 // only the generators that build the inputs differ (see hegel/props.mjs and fastcheck/props.mjs).
 import { fileURLToPath } from "node:url";
 
-export const DEFAULT_TARGET = fileURLToPath(new URL("../../var/ptlc-ts/measure-stats.mjs", import.meta.url));
+export const DEFAULT_TARGET = fileURLToPath(new URL("../../runs/spike/ptlc-ts/measure-stats.mjs", import.meta.url));
 export const TARGET = process.env.PTLC_TARGET || DEFAULT_TARGET;
 const { clopperPearson, newcombeDiff, percentile } = await import(TARGET);
 

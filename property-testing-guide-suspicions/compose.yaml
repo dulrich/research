@@ -1,4 +1,4 @@
-# One service: runs the checks inside the image, as the host user, against the clones under var/ptgs.
+# One service: runs the checks inside the image, as the host user, against the clones under runs/spike/ptgs.
 # Run from the repository root with the host ids exported (the driver does this itself):
 #   PTGS_UID=$(id -u) PTGS_GID=$(id -g) docker compose -f property-testing-guide-suspicions/compose.yaml run --rm checks
 # `run.mjs setup` must have run first on the host: it creates the clones and the writable work directory,
@@ -10,12 +10,12 @@ services:
     user: "${PTGS_UID:-1000}:${PTGS_GID:-1000}"
     working_dir: /work/property-testing-guide-suspicions
     environment:
-      HOME: /work/var/ptgs-work/home
-      CARGO_HOME: /work/var/ptgs-work/cargo-home
-      CARGO_TARGET_DIR: /work/var/ptgs-work/target
+      HOME: /work/runs/spike/ptgs-work/home
+      CARGO_HOME: /work/runs/spike/ptgs-work/cargo-home
+      CARGO_TARGET_DIR: /work/runs/spike/ptgs-work/target
       PTGS_IN_CONTAINER: "1"
     volumes:
       - ./:/work/property-testing-guide-suspicions
-      - ../var/ptgs:/work/var/ptgs
-      - ../var/ptgs-work:/work/var/ptgs-work
+      - ../runs/spike/ptgs:/work/runs/spike/ptgs
+      - ../runs/spike/ptgs-work:/work/runs/spike/ptgs-work
     command: ["bun", "run.mjs", "run-inner"]

@@ -8,4 +8,4 @@ publish = false
 
 [dependencies]
 hegeltest = "=0.52.6"
-crucible-layout = { path = "../../../var/spt/crucible-dev-env/crates/crucible-layout" }
+crucible-layout = { path = "../../../runs/spike/spt/crucible-dev-env/crates/crucible-layout" }

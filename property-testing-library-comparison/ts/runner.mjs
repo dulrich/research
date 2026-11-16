@@ -6,7 +6,7 @@ const USAGE = `usage: runner.mjs <hegel|fastcheck> <property-id> [--seeds A-B] [
        runner.mjs --help | --build | --version
 
 Runs the property once per seed (default 0-49) at N test cases (default 1000) against the target selected by
-the PTLC_TARGET environment variable (default: the unmodified copy under var/), printing one JSON row per
+the PTLC_TARGET environment variable (default: the unmodified copy under runs/spike/), printing one JSON row per
 run: library, defect, seed, detected (0/1), cases, counterexample (verbatim), inputs, shrinkMs, totalMs.
 --defect only labels the rows. --measure prints "MEASURE run_ms <v> ms" (sum over seeds) and
 "MEASURE process_ms <v> ms" (process start to end) instead of rows, for scripts/measure.mjs.

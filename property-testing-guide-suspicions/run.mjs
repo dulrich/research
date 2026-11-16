@@ -10,10 +10,10 @@ const USAGE = `usage: run.mjs setup [--src DIR]
        run.mjs --help | --build | --version
 
 setup   host side. Clones each target repo from DIR/<repo> (default: the directory that holds this repository)
-        into the gitignored var/ptgs/<repo> and checks out the pinned commit; creates var/ptgs-work (cargo
+        into the gitignored runs/spike/ptgs/<repo> and checks out the pinned commit; creates runs/spike/ptgs-work (cargo
         home, target dir, probe binary) so the container never creates root-owned mount sources.
 run     builds nothing itself: runs "docker compose run --rm checks" (as the host user), which executes all nine
-        checks inside the image and leaves their rows in var/ptgs-work/rows.jsonl; then writes the rows to FILE
+        checks inside the image and leaves their rows in runs/spike/ptgs-work/rows.jsonl; then writes the rows to FILE
         (default results/verdicts.jsonl) and the table next to it (verdicts.md beside FILE, only for the
         default FILE). Build the image first with: docker compose -f property-testing-guide-suspicions/compose.yaml build
 Run from the repository root. Targets are never edited: the Rust check applies a diff to its clone and reverts it.
@@ -32,7 +32,7 @@ if (argv.includes("--build") || argv.includes("--version")) {
 }
 
 const IN_CONTAINER = process.env.PTGS_IN_CONTAINER === "1";
-const VAR = IN_CONTAINER ? "/work/var" : join(ROOT, "var");
+const VAR = IN_CONTAINER ? "/work/runs/spike" : join(ROOT, "runs", "spike");
 const CLONES = join(VAR, "ptgs");
 const WORK = join(VAR, "ptgs-work");
 const PINS = {

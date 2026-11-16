@@ -17,7 +17,7 @@ const USAGE = `usage: run.mjs setup [--src DIR] [--vars DIR]
 setup     Clones crucible-vault (49a46372) and crucible-dev-env (d02df23) from SRC/<repo> into VARS, copies the
           comparison's two harness packages (without target/) to VARS/harness/<lib>, rewrites their path
           dependencies to the clones, and applies diffs/<lib>.diff. SRC defaults to the directory holding this
-          repository; VARS defaults to var/slos in this repository (git-ignored). Needs git, patch, cargo, network for
+          repository; VARS defaults to runs/spike/slos in this repository (git-ignored). Needs git, patch, cargo, network for
           the first cargo build. Idempotent: an existing clone must be at its pin and clean.
 run       For each defect (url-idempotent-arxiv, url-tracking-case, url-drop-gclid): apply its mutant diff to the
           clone, build both packages (debug, as the comparison), then run every variant x seed x library as one child
@@ -75,7 +75,7 @@ function flags(args, allowed) {
   return o;
 }
 
-const varsDir = (o) => resolve(o.vars ?? join(REPO, "var/slos"));
+const varsDir = (o) => resolve(o.vars ?? join(REPO, "runs/spike/slos"));
 
 function setup(args) {
   const o = flags(args, ["src", "vars"]);
@@ -100,8 +100,8 @@ function setup(args) {
     cpSync(join(COMPARISON, "rust", lib), dst, { recursive: true, filter: (p) => !/(^|\/)target(\/|$)/.test(p) });
     const toml = join(dst, "Cargo.toml");
     const text = readFileSync(toml, "utf8");
-    if (!text.includes("../../../var/pbt-cmp/")) fail(`${toml} has no path dependency to rewrite`);
-    writeFileSync(toml, text.replaceAll("../../../var/pbt-cmp/", "../../"));
+    if (!text.includes("../../../runs/spike/pbt-cmp/")) fail(`${toml} has no path dependency to rewrite`);
+    writeFileSync(toml, text.replaceAll("../../../runs/spike/pbt-cmp/", "../../"));
     const r = sh("patch", ["-p1", "-s", "-d", dst, "-i", join(HERE, "diffs", `${lib}.diff`)], dst);
     if (r.status !== 0) fail(`diffs/${lib}.diff does not apply: ${r.stderr}`);
   }

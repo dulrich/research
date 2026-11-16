@@ -9,4 +9,4 @@ publish = false
 [dependencies]
 proptest = "=1.12.0"
 proptest-state-machine = "=0.9.0"
-crucible-layout = { path = "../../../var/spt/crucible-dev-env/crates/crucible-layout" }
+crucible-layout = { path = "../../../runs/spike/spt/crucible-dev-env/crates/crucible-layout" }

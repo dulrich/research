@@ -20,7 +20,7 @@ setup     Fetches the Bombadil release binary (v0.7.10) into VARS/bombadil (or r
           refuses a mismatch), clones crucible-tui (pin 192552b) and crucible-term (pin 12358e2) from SRC/<name>
           into VARS/src, builds them with cargo build --release, and writes the fixed inputs (mdview's rendered
           output, the jsonedit document). SRC defaults to the directory holding this repository; VARS defaults to
-          var/btp in this repository (git-ignored). Idempotent; refuses a dirty or off-pin clone. The one network
+          runs/spike/btp in this repository (git-ignored). Idempotent; refuses a dirty or off-pin clone. The one network
           use is the binary download.
 run       Runs every arm RUNS times (default 20) with --time-limit LIMIT seconds (default 60), default 100x40,
           default specification, without --exit-on-violation. Arms are interleaved in a seeded random order per
@@ -82,7 +82,7 @@ const intFlag = (o, k, d) => {
   if (!/^\d+$/.test(v) || Number(v) < 1) fail(`--${k} must be a positive integer`);
   return Number(v);
 };
-const varsDir = (o) => resolve(o.vars ?? join(REPO, "var/btp"));
+const varsDir = (o) => resolve(o.vars ?? join(REPO, "runs/spike/btp"));
 const sha256 = (file) => createHash("sha256").update(readFileSync(file)).digest("hex");
 
 // ---------- pure helpers (tested in run.test.mjs) ----------

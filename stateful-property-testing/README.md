@@ -75,7 +75,7 @@ We did not test whether a different step encoding (explicit ids from the referen
 - No container: two Rust crates, one host C toolchain, no system libraries beyond a default Debian base.
 
 ```bash
-bun run.mjs setup        # clone the target at its pin into var/spt (git-ignored), copy the harness crates
+bun run.mjs setup        # clone the target at its pin into the git-ignored scratch directory named in `bun run.mjs --help`, copy the harness crates
 bun run.mjs run          # 2 clean runs + 6 mutants x 2 libraries x 50 seeds -> results/runs.jsonl (about a minute)
 bun run.mjs summary      # results/summary.md
 ```

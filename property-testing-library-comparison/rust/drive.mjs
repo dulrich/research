@@ -15,7 +15,7 @@ const USAGE = `usage: drive.mjs run [--defect ID]... [--seeds A-B] [--cases N] [
 run          For each defect (all, or the --defect ids): apply its mutant diff (real defects need none), build both
              packages, then for each seed run each library once. Appends one JSON row per run to --out
              (default results/rust/runs.jsonl, relative to the investigation folder). Defaults: seeds 0-49,
-             cases 1000, vars = the git-ignored clone directory three levels above this folder (var/pbt-cmp).
+             cases 1000, vars = the git-ignored clone directory three levels above this folder (runs/spike/pbt-cmp).
              Refuses to start when a clone has uncommitted changes; always reverts the mutant, also on a signal.
 clean-build  Deletes the package's target/ and times 'cargo test --no-run'; prints MEASURE first_build_s <seconds> s.
 summary      Prints detection k/50 per (library, defect) with a Clopper-Pearson 95% interval, the exactly-minimal
@@ -87,7 +87,7 @@ function run(args) {
   if (b === undefined || a > b) die("--seeds must be A-B with A <= B");
   const cases = /^\d+$/.test(o.cases ?? "1000") ? Number(o.cases ?? "1000") : die("--cases must be an integer");
   const out = resolve(FOLDER, o.out ?? "results/rust/runs.jsonl");
-  const vars = resolve(o.vars ?? join(FOLDER, "../var/pbt-cmp"));
+  const vars = resolve(o.vars ?? join(FOLDER, "../runs/spike/pbt-cmp"));
   const wanted = o.defect.length ? DEFECTS.filter((d) => o.defect.includes(d.id)) : DEFECTS;
   if (o.defect.some((id) => !DEFECTS.some((d) => d.id === id))) die("unknown --defect id");
   for (const r of ["crucible-vault", "crucible-dev-env"]) {

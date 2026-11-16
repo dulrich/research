@@ -12,13 +12,13 @@ const USAGE = `usage: driver.mjs setup
        driver.mjs --help | --build | --version
 
 setup   copies the pinned target (scripts/lib/measure-stats.mjs at commit 0384852, read with git show) into
-        the gitignored var/ptlc-ts/ and applies each mutants/ts/<id>.diff to its own copy with patch.
+        the gitignored runs/spike/ptlc-ts/ and applies each mutants/ts/<id>.diff to its own copy with patch.
 run     for each (library, defect) runs ts/runner.mjs once over the seeds (default 0-49) at N cases (default
         1000) against that defect's mutant, writing one JSON row per run to results/ts/<library>__<defect>.jsonl.
 tally   prints detection k/50 with a Clopper-Pearson 95% interval, median cases to first failure, and the
         exactly-minimal and size-minimal fractions of the detecting runs, as Markdown (also written to
         results/ts/tally.md).
-Run from the repository root. Mutants are applied to var/ copies; scripts/lib/ is never edited.
+Run from the repository root. Mutants are applied to runs/spike/ copies; scripts/lib/ is never edited.
 `;
 
 const argv = process.argv.slice(2);
@@ -32,7 +32,7 @@ if (rc !== null) process.exit(rc);
 const TS = fileURLToPath(new URL(".", import.meta.url));
 const FOLDER = join(TS, "..");
 const ROOT = join(FOLDER, "..");
-const VAR = join(ROOT, "var", "ptlc-ts");
+const VAR = join(ROOT, "runs", "spike", "ptlc-ts");
 const BASE_COMMIT = "0384852";
 const { DEFECTS, DEFECT_IDS, MIN_SIZE } = await import("./defects.mjs");
 const opt = (name, dflt) => {

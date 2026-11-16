@@ -103,7 +103,7 @@ All 300 committed rows reproduce the comparison on every projected field. Gettin
 
 ## Setup and dependencies
 
-Run from the repository root: `bun sampled-list-order-shrinking/run.mjs setup` (clones the two targets at their pins from `--src DIR`, default the directory holding this repository, into the git-ignored `var/slos/`, copies the comparison's two harness packages there, applies the diffs), then `run`, `summary`, `baseline`. The first cargo build needs crates.io access. Nothing fetched is committed; this folder holds the diffs, driver, notes and results.
+Run from the repository root: `bun sampled-list-order-shrinking/run.mjs setup` (clones the two targets at their pins from `--src DIR`, default the directory holding this repository, into the git-ignored scratch directory named in `run.mjs --help`, copies the comparison's two harness packages there, applies the diffs), then `run`, `summary`, `baseline`. The first cargo build needs crates.io access. Nothing fetched is committed; this folder holds the diffs, driver, notes and results.
 
 | component | version | where |
 |---|---|---|

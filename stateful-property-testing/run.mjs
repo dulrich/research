@@ -16,7 +16,7 @@ const USAGE = `usage: run.mjs setup [--src DIR] [--vars DIR]
 setup     Clones crucible-dev-env (pin d02df23) from SRC/crucible-dev-env into VARS/crucible-dev-env, copies the two
           harness crates and their shared model (rust/common) without target/ to VARS/harness/<lib>, and rewrites
           their path dependency to the clone. SRC defaults to the directory holding this repository; VARS defaults
-          to var/spt in this repository (git-ignored). Needs git, cargo, a C toolchain and network for the first
+          to runs/spike/spt in this repository (git-ignored). Needs git, cargo, a C toolchain and network for the first
           cargo build. Idempotent: an existing clone must be at its pin and clean.
 run       Builds both harnesses (release) and runs one clean run per library (seed 0, --clean-cases, default 50000),
           then, for each of the six mutants in mutants/*.diff: applies it to the clone, rebuilds, runs every seed x
@@ -39,7 +39,7 @@ const REPO = resolve(HERE, "..");
 const LIBS = ["hegel", "proptest"];
 const PIN = "d02df23";
 const TARGET = "crucible-dev-env";
-const PATH_DEP = "../../../var/spt/crucible-dev-env/";
+const PATH_DEP = "../../../runs/spike/spt/crucible-dev-env/";
 
 /** The pre-registered catalogue (catalogue.md): mutant file and hand-minimal step count. */
 export const DEFECTS = [
@@ -70,7 +70,7 @@ function flags(args, allowed) {
   return o;
 }
 
-const varsDir = (o) => resolve(o.vars ?? join(REPO, "var/spt"));
+const varsDir = (o) => resolve(o.vars ?? join(REPO, "runs/spike/spt"));
 const intFlag = (o, k, d) => { const v = o[k] ?? String(d); if (!/^\d+$/.test(v) || Number(v) < 1) fail(`--${k} must be a positive integer`); return Number(v); };
 
 function checkClone(clone) {

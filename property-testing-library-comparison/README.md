@@ -173,7 +173,7 @@ All timings are *indicative* (the repository's timing standard, "rigor follows u
 
 ## How to reproduce
 
-Run from the repository root. The two Rust targets are gitignored clones of the public `crucible-vault` and `crucible-dev-env` repositories under `var/pbt-cmp/`, with `crucible-vault` checked out at `49a46372` and `crucible-dev-env` at `d02df23`; the harness packages reach them by relative path. The TypeScript target is `scripts/lib/measure-stats.mjs` at commit `0384852`, copied into `var/ptlc-ts/` by `ts/driver.mjs setup`.
+Run from the repository root. The two Rust targets are gitignored clones of the public `crucible-vault` and `crucible-dev-env` repositories under the scratch directory named in `rust/drive.mjs --help`, with `crucible-vault` checked out at `49a46372` and `crucible-dev-env` at `d02df23`; the harness packages reach them by relative path. The TypeScript target is `scripts/lib/measure-stats.mjs` at commit `0384852`, copied into the scratch directory named in `ts/driver.mjs --help` by `ts/driver.mjs setup`.
 
 ```bash
 # Rust
