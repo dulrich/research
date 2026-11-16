@@ -13,7 +13,11 @@ Each folder holds one investigation with its working notes and final report.
 - [Live-host measurement](methods/live-host.md): the procedure for measuring on a live workstation, with which classes are acceptable, the runtime controls and how to label the result.
 
 <!-- research-index:start -->
-## 11 research projects
+## 12 research projects
+
+### [Bombadil's terminal driver against the fleet's terminal programs](bombadil-terminal-programs/) (2026-11-16)
+
+Does Bombadil's experimental terminal driver run on terminal programs, and does the default specification find anything? (a) It runs: `bombadil terminal test` drove `mdview`, `jsonedit`, `less` and `vi` for 100 runs of up to 60 s each at 100x40, about 150 states/s, with no…
 
 ### [Sampled-list order and shrinking: order and content together, not order alone, closed the exactly-minimal gap](sampled-list-order-shrinking/) (2026-11-16)
 
