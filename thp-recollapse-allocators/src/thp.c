@@ -123,13 +123,27 @@ static void read_line(const char *phase, double t0) {
 
 /* One smaps mapping: only writable, non-file, non-stack/vvar/vdso/vsyscall mappings are kept. */
 struct map { unsigned long a, b; char perms[8], name[64]; long rss, anon, ahp; int eligible; char flags[160]; };
+/* The smaps tables live in one mmap region marked MADV_NOHUGEPAGE and are skipped by load_maps, so the harness's own
+ * bookkeeping never contributes AnonHugePages (a static table put the 3.4 MiB data/bss mapping over the 2 MiB threshold). */
+#define MAXMAPS 4096
+static struct map *tabs; static unsigned long tab_lo, tab_hi;
+static struct map *tab(int k) { /* k = 0..2 */
+  if (!tabs) {
+    size_t sz = 3 * MAXMAPS * sizeof(struct map);
+    tabs = mmap(0, sz, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    if (tabs == MAP_FAILED) { perror("mmap tables"); exit(1); }
+    madvise(tabs, sz, MADV_NOHUGEPAGE);
+    tab_lo = (unsigned long)tabs; tab_hi = tab_lo + sz;
+  }
+  return tabs + (size_t)k * MAXMAPS;
+}
 static int load_maps(struct map *m, int max) {
   FILE *f = fopen("/proc/self/smaps", "r"); char l[512]; int n = 0, keep = 0;
   while (f && fgets(l, sizeof l, f)) {
     unsigned long a, b; char p[8], rest[256] = "";
     if (sscanf(l, "%lx-%lx %7s %*s %*s %*s %255[^\n]", &a, &b, p, rest) >= 3) { /* key lines never match: no dash after the hex run */
       const char *name = rest; while (*name == ' ') name++;
-      keep = p[0] == 'r' && p[1] == 'w' && !strchr(name, '/') && strncmp(name, "[stack", 6) && strncmp(name, "[v", 2);
+      keep = p[0] == 'r' && p[1] == 'w' && !strchr(name, '/') && strncmp(name, "[stack", 6) && strncmp(name, "[v", 2) && !(tab_hi && a < tab_hi && b > tab_lo);
       if (keep && n < max) { memset(&m[n], 0, sizeof m[n]); m[n].a = a; m[n].b = b; strcpy(m[n].perms, p); snprintf(m[n].name, sizeof m[n].name, "%s", *name ? name : "anon"); n++; }
       else keep = 0;
       continue;
@@ -146,7 +160,7 @@ static int load_maps(struct map *m, int max) {
   return n;
 }
 static void dump_maps(const char *phase) {
-  static struct map m[4096]; int n = load_maps(m, 4096);
+  struct map *m = tab(0); int n = load_maps(m, MAXMAPS);
   long orss = 0, oahp = 0; int on = 0; unsigned long omax = 0;
   for (int i = 0; i < n; i++) {
     if (m[i].rss < 512 && m[i].ahp == 0) { if (m[i].rss > 0) { on++; orss += m[i].rss; oahp += m[i].ahp; if (m[i].b - m[i].a > omax) omax = m[i].b - m[i].a; } continue; }
@@ -157,14 +171,14 @@ static void dump_maps(const char *phase) {
 }
 /* madvise(MADV_COLLAPSE) on each mapping's 2 MiB-aligned span; then join each call with the post-call smaps. */
 static void collapse(void) {
-  static struct map m[4096], after[4096]; static unsigned long sa[4096], sb[4096]; static int ret[4096], err[4096]; static long pre[4096];
-  int n = load_maps(m, 4096), ns = 0;
+  struct map *m = tab(1), *after = tab(2); static unsigned long sa[4096], sb[4096]; static int ret[4096], err[4096]; static long pre[4096];
+  int n = load_maps(m, MAXMAPS), ns = 0;
   for (int i = 0; i < n; i++) {
     unsigned long s = (m[i].a + 0x1fffff) & ~0x1fffffUL, e = m[i].b & ~0x1fffffUL;
     if (e <= s) continue;
     errno = 0; ret[ns] = madvise((void *)s, e - s, MADV_COLLAPSE); err[ns] = ret[ns] ? errno : 0; sa[ns] = s; sb[ns] = e; pre[ns] = m[i].ahp; ns++;
   }
-  int na = load_maps(after, 4096);
+  int na = load_maps(after, MAXMAPS);
   for (int i = 0; i < ns; i++) for (int j = 0; j < na; j++) if (sa[i] >= after[j].a && sa[i] < after[j].b)
     printf("SPAN range=%lx-%lx span_kb=%lu ret=%d errno=%d map_ahp_before_kb=%ld map_ahp_after_kb=%ld map_anon_after_kb=%ld map_size_kb=%lu\n", sa[i], sb[i], (sb[i] - sa[i]) / 1024, ret[i], err[i], pre[i], after[j].ahp, after[j].anon, (after[j].b - after[j].a) / 1024);
   printf("SPANS total=%d fail=%d\n", ns, ({ int f = 0; for (int i = 0; i < ns; i++) f += ret[i] != 0; f; }));
@@ -210,7 +224,7 @@ static long num(const char *flag, const char *v, long min) {
 }
 int main(int argc, char **argv) {
   for (int i = 1; i < argc; i++) if (!strcmp(argv[i], "--help")) { fputs(USAGE, stdout); return 0; }
-  for (int i = 1; i < argc; i++) if (!strcmp(argv[i], "--version") || !strcmp(argv[i], "--build")) { puts("thp-harness 1 " ANAME); return 0; }
+  for (int i = 1; i < argc; i++) if (!strcmp(argv[i], "--version") || !strcmp(argv[i], "--build")) { puts("thp-harness 2 " ANAME); return 0; }
   for (int i = 1; i < argc; i++) {
     const char *k = argv[i], *v = i + 1 < argc ? argv[i + 1] : 0;
     if (!strcmp(k, "--collapse")) { do_collapse = 1; continue; }

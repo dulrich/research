@@ -1,19 +1,23 @@
 // run.mjs - driver for the thp-recollapse-allocators harness: one invocation per fresh container (M4), plus the
 // natural-arm wave and the pilot batches. Rows are appended to <out>/<arm>.jsonl; MEASURE lines go to stdout.
 import { spawn, spawnSync } from "node:child_process";
-import { appendFileSync, mkdirSync, readFileSync } from "node:fs";
+import { appendFileSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { handleBuildFlags } from "../scripts/lib/build-id.mjs";
+import { buildSummary } from "./summary.mjs";
 
 const USAGE = `usage: run.mjs one --alloc A [--thp on|off|advised] [--arm forced|natural|cpu] [options]
        run.mjs natural-wave [--blocks N] [--parallel N] [--out DIR]
        run.mjs pilot-forced [--reps N] [--out DIR]
        run.mjs pilot-cpu [--reps N] [--out DIR]
+       run.mjs claim-forced [--blocks N] [--blocks-mimalloc-on N] [--aa-blocks N] [--seed N] [--out DIR]
+       run.mjs claim-cpu [--blocks N] [--seed N] [--out DIR]
        run.mjs summarize <file.jsonl>
+       run.mjs summary --forced F --cpu C --natural N [--pilot-forced P] [--out FILE]
        run.mjs --help | --build | --version
 
-Runs the thp-recollapse:1 image (build it with: docker build -t thp-recollapse:1 thp-recollapse-allocators) once
+Runs the thp-recollapse:2 image (build it with: docker build -t thp-recollapse:2 thp-recollapse-allocators) once
 per invocation with --rm --memory 1g. Rows go to <out>/<name>.jsonl (default out: results/); \`--out DIR\` writes
 elsewhere. Every row carries allocator + version, tunables, THP mode, shape, threads, cpuset requested and
 effective, host THP settings, uptime and the khugepaged full_scans counter.
@@ -35,7 +39,13 @@ one options
   --provenance NAME         row provenance: pilot, natural, claim, smoke (default pilot)
   --label TEXT              free label stored in the row (cell name)
   --out DIR --name NAME     row output directory and file stem
-  --scan-incs K --stop-on-growth-mib X --max-wait S    natural arm (see: docker run --rm thp-recollapse:1 thp-glibc --help)
+  --scan-incs K --stop-on-growth-mib X --max-wait S    natural arm (see: docker run --rm thp-recollapse:2 thp-glibc --help)
+claim-forced: provenance claim, the 43 pilot cells (4 allocators x on/off x strides 0/32/128/1024 KiB, the mixed
+shape at 128 KiB, three native-control cells), 10 blocks per cell (20 for every mimalloc "on" cell) plus an A/A copy of
+glibc-on-s128 and mimalloc-on-s128 at 20 blocks, round-robin over cells (order randomized per round, seed recorded in
+every row), four pinned lanes (6,18 7,19 8,20 9,21). claim-cpu: 33 cells x 20 blocks, strictly sequential and
+interleaved the same way, 1 thread on CPU 6, 4 threads on 6,7,8,9, cpuprobe.sh --sibling 18. Failed blocks stay in
+the file with ok=false and are counted by \`summary\`. summary: generates results/summary.md from the row files.
 Exit status 2: usage error.
 `;
 
@@ -46,7 +56,7 @@ if (rc !== null) process.exit(rc);
 
 const here = dirname(fileURLToPath(import.meta.url));
 const probes = join(here, "..", "scripts");
-const IMAGE = "thp-recollapse:1";
+const IMAGE = "thp-recollapse:2";
 const ALLOCS = ["glibc", "jemalloc", "mimalloc", "musl"];
 function die(msg) { process.stderr.write(`run.mjs: ${msg}\n`); process.exit(2); }
 const CPUSET = /^[0-9]+([,-][0-9]+)*$/;
@@ -155,6 +165,7 @@ export async function runOne(o) {
     host: ev.env ? { thp_enabled: ev.env.thp_enabled, defrag: ev.env.thp_defrag, max_ptes_none: ev.env.max_ptes_none, pages_to_scan: ev.env.pages_to_scan, scan_sleep_ms: ev.env.scan_sleep_ms } : null,
     uptime_s: ev.env?.uptime_s ?? null, full_scans_start: ev.env?.full_scans ?? null, prctl_thp_disable: ev.env?.prctl_thp_disable ?? null,
     image: iv.image, image_versions: iv.versions, driver: process.env.THP_DRIVER_BUILD ?? null,
+    ...(o.extra ?? {}),
     ...ev, stderr: r.err.trim().split("\n").slice(-3).join(" | "),
   };
   // probe MEASURE lines (memprobe/cpuprobe) are part of the same stdout
@@ -221,6 +232,52 @@ if (cmd === "one") {
     const o = parseOne(["--alloc", j.alloc, "--thp", j.thp, "--arm", "cpu", "--threads", String(j.th), "--mib", String(j.mib), "--reps", "10", "--stride-kb", "0", "--pin", pin, "--sibling", "18", "--label", j.label, "--provenance", "pilot", "--out", out, "--name", "pilot-cpu"]);
     const { row } = await runOne(o); if (!row.ok) process.stderr.write(`FAILED ${j.label} ${row.stderr}\n`);
   }
+} else if (cmd === "claim-forced") {
+  const blocks = intFlag(argv, "--blocks", 10), blocksMi = intFlag(argv, "--blocks-mimalloc-on", 20), aaBlocks = intFlag(argv, "--aa-blocks", 20), seed = intFlag(argv, "--seed", 20261118), out = outFlag(argv), lanes = ["6,18", "7,19", "8,20", "9,21"];
+  const cells = [];
+  for (const alloc of ALLOCS) for (const thp of ["on", "off"]) {
+    for (const s of [0, 32, 128, 1024]) cells.push({ alloc, thp, s, shape: "fixed", env: [], label: `${alloc}-${thp}-s${s}` });
+    cells.push({ alloc, thp, s: 128, shape: "mixed", env: [], label: `${alloc}-${thp}-mixed128` });
+  }
+  for (const [k, [alloc, env]] of Object.entries(NATIVE)) cells.push({ alloc, thp: "on", s: 128, shape: "fixed", env, label: `${k}-on-s128` });
+  for (const c of cells) c.blocks = c.alloc === "mimalloc" && c.thp === "on" ? blocksMi : blocks;
+  cells.push({ alloc: "glibc", thp: "on", s: 128, shape: "fixed", env: [], label: "glibc-on-s128-AA", blocks: aaBlocks });
+  cells.push({ alloc: "mimalloc", thp: "on", s: 128, shape: "fixed", env: [], label: "mimalloc-on-s128-AA", blocks: aaBlocks });
+  const queue = []; const rounds = Math.max(...cells.map((c) => c.blocks));
+  for (let r = 0; r < rounds; r++) queue.push(...shuffle(cells.filter((c) => c.blocks > r).map((c) => ({ ...c, r })), seed + r));
+  process.stderr.write(`claim-forced: ${cells.length} cells, ${queue.length} blocks planned, ${rounds} rounds, seed ${seed}\n`);
+  let qi = 0, failed = 0, done = 0;
+  await Promise.all(lanes.map(async (pin) => { while (qi < queue.length) {
+    const j = queue[qi++];
+    const o = parseOne(["--alloc", j.alloc, "--thp", j.thp, "--stride-kb", String(j.s), "--shape", j.shape, "--collapse", "--pin", pin, "--label", `${j.label}#${j.r}`, "--provenance", "claim", "--out", out, "--name", "claim-forced", ...j.env.flatMap((e) => ["--env", e])]);
+    o.extra = { seed, round: j.r, lane: pin };
+    const { row } = await runOne(o); done++; if (!row.ok) { failed++; process.stderr.write(`FAILED ${j.label}#${j.r} ${row.stderr}\n`); }
+    if (done % 50 === 0) process.stderr.write(`claim-forced: ${done}/${queue.length} done, ${failed} failed\n`);
+  } }));
+  process.stdout.write(`claim-forced: ${queue.length} planned, ${done} run, ${failed} failed\n`);
+} else if (cmd === "claim-cpu") {
+  const blocks = intFlag(argv, "--blocks", 20), seed = intFlag(argv, "--seed", 20261119), out = outFlag(argv);
+  const cells = [];
+  for (const alloc of ALLOCS) for (const thp of ["on", "off"]) for (const th of [1, 4]) for (const mib of [64, 0]) cells.push({ alloc, thp, th, mib, label: `${alloc}-${thp}-t${th}-${mib === 0 ? "control" : "burst"}` });
+  cells.push({ alloc: "glibc", thp: "on", th: 1, mib: 64, label: "glibc-on-t1-burst-AA" });
+  const queue = []; for (let r = 0; r < blocks; r++) queue.push(...shuffle(cells.map((c) => ({ ...c, r })), seed + r));
+  process.stderr.write(`claim-cpu: ${cells.length} cells, ${queue.length} blocks planned, seed ${seed}\n`);
+  let done = 0, failed = 0;
+  for (const j of queue) { // strictly sequential
+    const pin = j.th === 1 ? "6" : "6,7,8,9";
+    const o = parseOne(["--alloc", j.alloc, "--thp", j.thp, "--arm", "cpu", "--threads", String(j.th), "--mib", String(j.mib), "--reps", "10", "--stride-kb", "0", "--pin", pin, "--sibling", "18", "--label", `${j.label}#${j.r}`, "--provenance", "claim", "--out", out, "--name", "claim-cpu"]);
+    o.extra = { seed, round: j.r };
+    const { row } = await runOne(o); done++; if (!row.ok) { failed++; process.stderr.write(`FAILED ${j.label}#${j.r} ${row.stderr}\n`); }
+    if (done % 33 === 0) process.stderr.write(`claim-cpu: ${done}/${queue.length} done, ${failed} failed\n`);
+  }
+  process.stdout.write(`claim-cpu: ${queue.length} planned, ${done} run, ${failed} failed\n`);
+} else if (cmd === "summary") {
+  const flag = (n) => { const i = argv.indexOf(n); return i < 0 ? null : argv[i + 1] ?? die(`${n} needs a value`); };
+  const load = (f) => readFileSync(f, "utf8").trim().split("\n").map((l) => JSON.parse(l));
+  const f = flag("--forced"), c = flag("--cpu"), n = flag("--natural"), out = flag("--out");
+  if (!f || !c || !n) die("summary needs --forced, --cpu and --natural");
+  const md = buildSummary({ forced: load(f), cpu: load(c), natural: load(n) });
+  if (out) writeFileSync(out, md); else process.stdout.write(md);
 } else if (cmd === "summarize") {
   const rows = readFileSync(argv[1] ?? die("summarize needs a .jsonl file"), "utf8").trim().split("\n").map((l) => JSON.parse(l));
   const g = new Map();

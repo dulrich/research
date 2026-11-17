@@ -13,7 +13,7 @@ Each folder holds one investigation with its working notes and final report.
 - [Live-host measurement](methods/live-host.md): the procedure for measuring on a live workstation, with which classes are acceptable, the runtime controls and how to label the result.
 
 <!-- research-index:start -->
-## 12 research projects
+## 13 research projects
 
 ### [Bombadil's terminal driver against the fleet's terminal programs](bombadil-terminal-programs/) (2026-11-16)
 
@@ -26,6 +26,10 @@ On the comparison's two URL mutants, neither sorting the sampled lists shortest 
 ### [Stateful property testing found all six seeded layout defects in 50/50 runs, and Hegel shrank to the minimal sequence more often than proptest](stateful-property-testing/) (2026-11-16)
 
 We wrote one model and oracle for the layout model `World` of the `crucible-layout` crate (target `crucible-dev-env` at commit `d02df23`) and drove it with Hegel's state machine (`hegeltest` 0.52.6) and proptest's (`proptest` 1.12.0 with `proptest-state-machine` 0.9.0), both at…
+
+### [THP re-collapse across allocators: khugepaged refills what glibc, jemalloc and mimalloc released; musl mostly escapes, and only a per-process switch stops all four](thp-recollapse-allocators/) (2026-11-16)
+
+With transparent huge pages on (host mode `always`, `max_ptes_none=511`), a burst-then-release workload with scattered survivors (64 MiB of 64 B objects, one survivor per 128 KiB, then the allocator's release call) ends with its released memory collapsed back into huge pages…
 
 ### [Binary-size calibration: which size, which build settings, how far attribution tools agree](binary-size-calibration/) (2026-11-15)
 
