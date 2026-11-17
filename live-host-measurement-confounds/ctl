@@ -24,14 +24,15 @@ if [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
   echo "status    print guard/abort flags"
   echo "dropcache evict the whole page cache (an operation, never restored; needs LHMC_AFK=1)"
   echo "Root controls go through a short-lived privileged container (nsenter into PID 1 namespaces)."
-  echo "Env: LHMC_STATE (state dir, default var/ctl beside this script), LHMC_STRESS_IMAGE (default lhmc-stress)."
+  echo "Env: LHMC_STATE (state dir, default runs/spike/lhmc/ctl in this repository, git-ignored), LHMC_STRESS_IMAGE (default lhmc-stress)."
   exit 0
 fi
 set -eu
 
 
 HERE=$(cd "$(dirname "$0")" && pwd)
-STATE=${LHMC_STATE:-$HERE/var/ctl}
+SPIKE=$(cd "$HERE/.." && pwd)/runs/spike/lhmc
+STATE=${LHMC_STATE:-$SPIKE/ctl}
 IMG=${LHMC_STRESS_IMAGE:-lhmc-stress}
 ROOTIMG=debian:trixie-slim
 CCD0="0-5,12-17"
@@ -78,7 +79,7 @@ pre() { # pre <key> <default>
 stop_loads() {
   ids=$(docker ps -aq --filter label=lhmc=load 2>/dev/null || true)
   [ -z "$ids" ] || docker rm -f $ids >/dev/null 2>&1 || true
-  rm -rf "$HERE/var/hdd" 2>/dev/null || true
+  rm -rf "$SPIKE/hdd" 2>/dev/null || true
   if [ -f "$STATE/guard.pid" ]; then
     gp=$(cat "$STATE/guard.pid")
     [ "$gp" = "${LHMC_GUARD_SELF:-}" ] || kill "$gp" 2>/dev/null || true
@@ -121,8 +122,8 @@ start_load() {
       [ "$bytes" -gt 0 ] || { echo "ctl: L3 refused, MemAvailable ${avail} kB leaves no headroom above 8 GB" >&2; return 1; }
       $base --name lhmc-load-vm "$IMG" stress-ng --vm 4 --vm-bytes "$bytes" --vm-keep --timeout 86400 >/dev/null ;;
     L4)
-      mkdir -p "$HERE/var/hdd"
-      $base -v "$HERE/var/hdd:/w" --name lhmc-load-hdd "$IMG" stress-ng --hdd 4 --hdd-opts wr-seq,fsync --hdd-bytes 1g --temp-path /w --timeout 86400 >/dev/null ;;
+      mkdir -p "$SPIKE/hdd"
+      $base -v "$SPIKE/hdd:/w" --name lhmc-load-hdd "$IMG" stress-ng --hdd 4 --hdd-opts wr-seq,fsync --hdd-bytes 1g --temp-path /w --timeout 86400 >/dev/null ;;
     *) echo "ctl: unknown load $1" >&2; return 2 ;;
   esac
 }

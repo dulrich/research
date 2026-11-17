@@ -14,7 +14,7 @@ if [ "${1:-}" = "--help" ] || [ "${1:-}" = "-h" ]; then
   echo "       runk.sh --help | --build | --version"
   echo "k2/k3/k3-120   cv scenario B / A daemon block (cvblock.sh; k3 idles 30 s, k3-120 idles 120 s) in the lhmc-bench container on the scratch vault"
   echo "k3s     allocator-churn program (src/k3s.c)"
-  echo "k4-*    page-cache reads of var/k4/*: warm (untimed pass first), cold (whole-cache drop via ctl, needs LHMC_AFK=1),"
+  echo "k4-*    page-cache reads of runs/spike/lhmc/k4/*: warm (untimed pass first), cold (whole-cache drop via ctl, needs LHMC_AFK=1),"
   echo "        cold-local (drops only the files' own pages)"
   echo "Env: LHMC_PIN cpuset for the measured container (empty = unpinned), LHMC_CV_DIR directory of the cv binary,"
   echo "     AIDLE/BLOAD/BPASS/PASSES scenario shortening (see cvblock.sh)."
@@ -28,7 +28,7 @@ case ${1:-} in
   --build|--version) exec "$HERE/ctl" --build ;;
 esac
 cls=${1:?class}; pad=${2:-0}
-V=$HERE/var
+V=$(cd "$HERE/.." && pwd)/runs/spike/lhmc
 PIN=${LHMC_PIN:-}
 CVDIR=${LHMC_CV_DIR:-$V/build/pre/target/release}
 pinarg=""
