@@ -49,9 +49,9 @@ HERE=$(cd "$(dirname "$0")" && pwd)
 build_id() {
   d=$(git --no-optional-locks -C "$HERE" rev-parse --show-toplevel 2>/dev/null) || d=
   [ -n "$d" ] || { echo unknown; return; }
-  sha=$(git --no-optional-locks -C "$d" log -1 --format=%H -- "$d" 2>/dev/null) || sha=
+  sha=$(git --no-optional-locks -C "$d" log -1 --format=%H -- . ':(exclude)plans' ':(exclude)references' ':(exclude,glob)**/FEEDBACK.md' ':(exclude,glob)**/INITIATIVE.md' 2>/dev/null) || sha=
   [ -n "$sha" ] || { echo unknown; return; }
-  if [ -n "$(git --no-optional-locks -C "$d" status --porcelain --untracked-files=no -- "$d" 2>/dev/null)" ]; then echo "$sha-dirty"; else echo "$sha"; fi
+  if [ -n "$(git --no-optional-locks -C "$d" status --porcelain --untracked-files=no -- . ':(exclude)plans' ':(exclude)references' ':(exclude,glob)**/FEEDBACK.md' ':(exclude,glob)**/INITIATIVE.md' 2>/dev/null)" ]; then echo "$sha-dirty"; else echo "$sha"; fi
 }
 case ${1:-} in
   --build|--version) build_id; exit 0 ;;
