@@ -1,0 +1,16 @@
+diff --git a/crates/crucible-greetd/src/machine.rs b/crates/crucible-greetd/src/machine.rs
+index ed1054d..b6fe62e 100644
+--- a/crates/crucible-greetd/src/machine.rs
++++ b/crates/crucible-greetd/src/machine.rs
+@@ -193,10 +193,7 @@ impl LoginMachine {
+                 auth_message,
+             } => match auth_message_type {
+                 AuthMessageType::Visible | AuthMessageType::Secret => {
+-                    self.state = State::Prompt {
+-                        text: auth_message,
+-                        secret: auth_message_type == AuthMessageType::Secret,
+-                    };
++                    self.state = State::Starting;
+                     // An info/error line stays visible until the next Submit clears it.
+                     self.out(None)
+                 }

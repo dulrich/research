@@ -1,0 +1,299 @@
+diff --git a/crates/crucible-greetd/src/codec.rs b/crates/crucible-greetd/src/codec.rs
+index f4ec703..43295b5 100644
+--- a/crates/crucible-greetd/src/codec.rs
++++ b/crates/crucible-greetd/src/codec.rs
+@@ -4,13 +4,18 @@
+ use std::fmt;
+ use std::io::{self, Read, Write};
+ 
++#[cfg(not(verus_keep_ghost))]
+ use serde::{Deserialize, Serialize};
++#[cfg(verus_keep_ghost)]
++use vstd::prelude::*;
+ 
+ /// Largest message body accepted from the peer.
+ pub const MAX_MESSAGE_LEN: usize = 64 * 1024;
+ 
++#[cfg(not(verus_keep_ghost))]
+ /// A codec failure; malformed input is always an error, never a panic.
+ #[derive(Debug, thiserror::Error)]
++#[cfg_attr(verus_keep_ghost, verus_verify)]
+ pub enum CodecError {
+     /// The stream failed or ended early.
+     #[error("greetd io: {0}")]
+@@ -27,10 +32,13 @@ pub enum CodecError {
+ /// whose bytes are overwritten with zeros when it is dropped (each clone wipes its own copy).
+ /// Only the final buffer is wiped: copies left behind by earlier reallocations, by `serde_json`
+ /// while decoding, or in socket buffers are not.
+-#[derive(Clone, PartialEq, Eq, Serialize, Deserialize)]
+-#[serde(transparent)]
++#[derive(Clone, PartialEq, Eq)]
++#[cfg_attr(not(verus_keep_ghost), derive(Serialize, Deserialize))]
++#[cfg_attr(not(verus_keep_ghost), serde(transparent))]
++#[cfg_attr(verus_keep_ghost, verus_verify)]
+ pub struct Secret(String);
+ 
++#[cfg_attr(verus_keep_ghost, verus_verify)]
+ impl Secret {
+     /// Wraps a secret value.
+     pub fn new(value: impl Into<String>) -> Self {
+@@ -68,8 +76,10 @@ impl fmt::Debug for Secret {
+ }
+ 
+ /// A request to greetd.
+-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+-#[serde(tag = "type", rename_all = "snake_case")]
++#[derive(Debug, Clone, PartialEq, Eq)]
++#[cfg_attr(not(verus_keep_ghost), derive(Serialize, Deserialize))]
++#[cfg_attr(not(verus_keep_ghost), serde(tag = "type", rename_all = "snake_case"))]
++#[cfg_attr(verus_keep_ghost, verus_verify)]
+ pub enum Request {
+     /// Begin authenticating `username`.
+     CreateSession {
+@@ -93,8 +103,10 @@ pub enum Request {
+ }
+ 
+ /// Why greetd refused a request.
+-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+-#[serde(rename_all = "snake_case")]
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++#[cfg_attr(not(verus_keep_ghost), derive(Serialize, Deserialize))]
++#[cfg_attr(not(verus_keep_ghost), serde(rename_all = "snake_case"))]
++#[cfg_attr(verus_keep_ghost, verus_verify)]
+ pub enum ErrorType {
+     /// Authentication failed (wrong credentials).
+     AuthError,
+@@ -103,8 +115,10 @@ pub enum ErrorType {
+ }
+ 
+ /// The kind of an auth message.
+-#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+-#[serde(rename_all = "snake_case")]
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++#[cfg_attr(not(verus_keep_ghost), derive(Serialize, Deserialize))]
++#[cfg_attr(not(verus_keep_ghost), serde(rename_all = "snake_case"))]
++#[cfg_attr(verus_keep_ghost, verus_verify)]
+ pub enum AuthMessageType {
+     /// A prompt whose answer may be echoed.
+     Visible,
+@@ -117,8 +131,10 @@ pub enum AuthMessageType {
+ }
+ 
+ /// A reply from greetd.
+-#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+-#[serde(tag = "type", rename_all = "snake_case")]
++#[derive(Debug, Clone, PartialEq, Eq)]
++#[cfg_attr(not(verus_keep_ghost), derive(Serialize, Deserialize))]
++#[cfg_attr(not(verus_keep_ghost), serde(tag = "type", rename_all = "snake_case"))]
++#[cfg_attr(verus_keep_ghost, verus_verify)]
+ pub enum Response {
+     /// The request succeeded.
+     Success,
+@@ -138,6 +154,7 @@ pub enum Response {
+     },
+ }
+ 
++#[cfg(not(verus_keep_ghost))]
+ /// Writes one length-prefixed JSON message.
+ pub fn write_message<W: Write, T: Serialize>(w: &mut W, msg: &T) -> Result<(), CodecError> {
+     let body = serde_json::to_vec(msg)?;
+@@ -148,6 +165,7 @@ pub fn write_message<W: Write, T: Serialize>(w: &mut W, msg: &T) -> Result<(), C
+     Ok(())
+ }
+ 
++#[cfg(not(verus_keep_ghost))]
+ /// Reads one length-prefixed JSON message, rejecting lengths above [`MAX_MESSAGE_LEN`].
+ pub fn read_message<R: Read, T: for<'de> Deserialize<'de>>(r: &mut R) -> Result<T, CodecError> {
+     let mut head = [0u8; 4];
+diff --git a/crates/crucible-greetd/src/machine.rs b/crates/crucible-greetd/src/machine.rs
+index 1100456..ed1054d 100644
+--- a/crates/crucible-greetd/src/machine.rs
++++ b/crates/crucible-greetd/src/machine.rs
+@@ -2,9 +2,13 @@
+ //! No I/O happens here.
+ 
+ use crate::codec::{AuthMessageType, Request, Response, Secret};
++#[cfg(verus_keep_ghost)]
++use vstd::prelude::*;
+ 
+ /// Where the login flow is.
+ #[derive(Debug, Clone, PartialEq, Eq)]
++#[cfg_attr(verus_keep_ghost, verus_verify)]
++#[cfg_attr(verus_keep_ghost, verifier::external_derive(Clone))]
+ pub enum State {
+     /// Waiting for the user to type a username.
+     Username,
+@@ -27,6 +31,7 @@ pub enum State {
+ 
+ /// An input to the machine.
+ #[derive(Debug, Clone, PartialEq, Eq)]
++#[cfg_attr(verus_keep_ghost, verus_verify)]
+ pub enum Event {
+     /// The user submitted the field (Enter); redacted in `Debug` since it may be a password.
+     Submit(Secret),
+@@ -38,6 +43,7 @@ pub enum Event {
+ 
+ /// What the UI should show.
+ #[derive(Debug, Clone, PartialEq, Eq)]
++#[cfg_attr(verus_keep_ghost, verus_verify)]
+ pub struct View {
+     /// The field label ("Username" or the PAM prompt).
+     pub prompt: String,
+@@ -49,6 +55,7 @@ pub struct View {
+ 
+ /// The result of one transition.
+ #[derive(Debug, Clone, PartialEq, Eq)]
++#[cfg_attr(verus_keep_ghost, verus_verify)]
+ pub struct Output {
+     /// The request to send to greetd, if any.
+     pub request: Option<Request>,
+@@ -58,6 +65,7 @@ pub struct Output {
+ 
+ /// The login flow for one configured session command.
+ #[derive(Debug, Clone)]
++#[cfg_attr(verus_keep_ghost, verus_verify)]
+ pub struct LoginMachine {
+     state: State,
+     message: Option<String>,
+@@ -66,6 +74,7 @@ pub struct LoginMachine {
+ 
+ impl LoginMachine {
+     /// Starts at the username prompt; `session_cmd` is split on whitespace for `start_session`.
++    #[cfg_attr(verus_keep_ghost, verus_verify, verifier::external_body)]
+     pub fn new(session_cmd: &str) -> Self {
+         Self {
+             state: State::Username,
+@@ -75,11 +84,13 @@ impl LoginMachine {
+     }
+ 
+     /// The current state.
++    #[cfg_attr(verus_keep_ghost, verus_verify)]
+     pub fn state(&self) -> &State {
+         &self.state
+     }
+ 
+     /// The current view.
++    #[cfg_attr(verus_keep_ghost, verus_verify, verifier::external_body)]
+     pub fn view(&self) -> View {
+         let (prompt, secret) = match &self.state {
+             State::Prompt { text, secret } => (text.clone(), *secret),
+@@ -92,6 +103,9 @@ impl LoginMachine {
+         }
+     }
+ 
++    #[cfg_attr(verus_keep_ghost, verus_spec(r =>
++        ensures r.request == request,
++    ))]
+     fn out(&self, request: Option<Request>) -> Output {
+         Output {
+             request,
+@@ -99,6 +113,12 @@ impl LoginMachine {
+         }
+     }
+ 
++    #[cfg_attr(verus_keep_ghost, verus_spec(r =>
++        ensures
++            final(self).spec_state() is Cancelling,
++            final(self).spec_cmd() == old(self).spec_cmd(),
++            r.request == Some(Request::CancelSession),
++    ))]
+     fn cancel(&mut self, message: Option<String>) -> Output {
+         self.state = State::Cancelling;
+         self.message = message;
+@@ -106,6 +126,15 @@ impl LoginMachine {
+     }
+ 
+     /// Applies one event.
++    #[cfg_attr(verus_keep_ghost, verus_spec(r =>
++        ensures
++            c2_start_only_after_auth(*old(self), event, *final(self), r),
++            c2_done_only_from_starting(*old(self), event, *final(self), r),
++            c2_answer_only_from_prompt(*old(self), event, *final(self), r),
++            c2_no_arm_no_effect(*old(self), event, *final(self), r),
++            c2_start_carries_cmd(*old(self), r),
++            final(self).spec_cmd() == old(self).spec_cmd(),
++    ))]
+     pub fn handle(&mut self, event: Event) -> Output {
+         match (self.state.clone(), event) {
+             (State::Username, Event::Submit(text)) => {
+@@ -139,6 +168,16 @@ impl LoginMachine {
+         }
+     }
+ 
++    #[cfg_attr(verus_keep_ghost, verus_spec(r =>
++        requires old(self).spec_state() is Authenticating,
++        ensures
++            r.request matches Some(Request::StartSession { .. }) ==> resp == Response::Success,
++            c2_start_carries_cmd(*old(self), r),
++            resp == Response::Success <==> final(self).spec_state() is Starting,
++            !(final(self).spec_state() is Done),
++            !(r.request matches Some(Request::PostAuthMessageResponse { response: Some(_) })),
++            final(self).spec_cmd() == old(self).spec_cmd(),
++    ))]
+     fn on_auth_response(&mut self, resp: Response) -> Output {
+         match resp {
+             Response::Success => {
+@@ -169,3 +208,63 @@ impl LoginMachine {
+         }
+     }
+ }
++
++#[cfg(verus_keep_ghost)]
++verus! {
++
++/// Whether `handle` has a match arm for this (state, event) pair other than the final `_`.
++pub open spec fn has_arm(s: State, e: Event) -> bool {
++    match (s, e) {
++        (State::Username, Event::Submit(_)) => true,
++        (State::Prompt { .. }, Event::Submit(_)) => true,
++        (State::Prompt { .. }, Event::Escape) => true,
++        (State::Authenticating, Event::Response(_)) => true,
++        (State::Starting, Event::Response(Response::Success)) => true,
++        (State::Starting, Event::Response(Response::Error { .. })) => true,
++        (State::Cancelling, Event::Response(_)) => true,
++        _ => false,
++    }
++}
++
++// Assumed, not proved: the derived `Clone` of `State` returns an equal value (its fields are
++// `String` and `bool`).
++pub assume_specification[ <State as Clone>::clone ](s: &State) -> (r: State)
++    ensures r == *s;
++
++impl LoginMachine {
++    pub closed spec fn spec_state(&self) -> State { self.state }
++    pub closed spec fn spec_message(&self) -> Option<String> { self.message }
++    pub closed spec fn spec_cmd(&self) -> Vec<String> { self.cmd }
++}
++
++/// A session start is requested only after an accepted authentication, and moves to `Starting`.
++pub open spec fn c2_start_only_after_auth(pre: LoginMachine, e: Event, post: LoginMachine, r: Output) -> bool {
++    r.request matches Some(Request::StartSession { .. }) ==>
++        pre.spec_state() is Authenticating && e == Event::Response(Response::Success) && post.spec_state() is Starting
++}
++
++/// A session start carries exactly the configured command (element-wise; see the clone note).
++pub open spec fn c2_start_carries_cmd(pre: LoginMachine, r: Output) -> bool {
++    r.request matches Some(Request::StartSession { cmd, .. }) ==>
++        vstd::view::View::view(&cmd) == vstd::view::View::view(&pre.spec_cmd())
++}
++
++/// `Done` is entered only from `Starting` on `Success`.
++pub open spec fn c2_done_only_from_starting(pre: LoginMachine, e: Event, post: LoginMachine, r: Output) -> bool {
++    post.spec_state() is Done ==> pre.spec_state() is Done
++        || (pre.spec_state() is Starting && e == Event::Response(Response::Success))
++}
++
++/// A submitted answer leaves only from `Prompt` on `Submit`, and it is exactly the submitted answer.
++pub open spec fn c2_answer_only_from_prompt(pre: LoginMachine, e: Event, post: LoginMachine, r: Output) -> bool {
++    r.request matches Some(Request::PostAuthMessageResponse { response: Some(a) }) ==>
++        pre.spec_state() is Prompt && e == Event::Submit(a)
++}
++
++/// An event with no matching arm emits nothing and changes neither the state nor the message.
++pub open spec fn c2_no_arm_no_effect(pre: LoginMachine, e: Event, post: LoginMachine, r: Output) -> bool {
++    !has_arm(pre.spec_state(), e) ==>
++        r.request is None && post.spec_state() == pre.spec_state() && post.spec_message() == pre.spec_message()
++}
++
++} // verus!

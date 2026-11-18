@@ -1,0 +1,13 @@
+diff --git a/twins/c2_machine.rs b/twins/c2_machine.rs
+index aa6215d..021723d 100644
+--- a/twins/c2_machine.rs
++++ b/twins/c2_machine.rs
+@@ -139,7 +139,7 @@ impl LoginMachine {
+             (State::Prompt { .. }, Event::Submit(answer)) => {
+                 self.state = State::Authenticating;
+                 self.message = None;
+-                self.out(Some(Request::PostAuthMessageResponse { response: Some(answer) }))
++                self.out(Some(Request::StartSession { cmd: self.cmd.clone(), env: Vec::new() }))
+             }
+             (State::Prompt { .. }, Event::Escape) => self.cancel(None),
+             (State::Authenticating, Event::Response(resp)) => self.on_auth_response(resp),

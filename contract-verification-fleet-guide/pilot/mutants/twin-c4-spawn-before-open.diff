@@ -1,0 +1,12 @@
+diff --git a/twins/c4_worker.rs b/twins/c4_worker.rs
+index c188ad4..8ea0efd 100644
+--- a/twins/c4_worker.rs
++++ b/twins/c4_worker.rs
+@@ -167,6 +167,7 @@ fn serve(reqs: &Vec<Req>, phase: &mut Phase, log: &mut Ghost<Seq<Ev>>) -> (code:
+             Req::Spawn { fd, target_fd } => {
+                 let vt = match phase {
+                     Phase::Opened { vt } => *vt,
++                    Phase::CredEstablished => 0,
+                     _ => continue,
+                 };
+                 let ok_extra = match (fd, target_fd) {

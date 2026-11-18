@@ -1,0 +1,16 @@
+diff --git a/crates/crucible-greetd/src/machine.rs b/crates/crucible-greetd/src/machine.rs
+index ed1054d..aed96c2 100644
+--- a/crates/crucible-greetd/src/machine.rs
++++ b/crates/crucible-greetd/src/machine.rs
+@@ -147,8 +147,9 @@ impl LoginMachine {
+             (State::Prompt { .. }, Event::Submit(answer)) => {
+                 self.state = State::Authenticating;
+                 self.message = None;
+-                self.out(Some(Request::PostAuthMessageResponse {
+-                    response: Some(answer),
++                self.out(Some(Request::StartSession {
++                    cmd: self.cmd.clone(),
++                    env: Vec::new(),
+                 }))
+             }
+             (State::Prompt { .. }, Event::Escape) => self.cancel(None),

@@ -1,0 +1,16 @@
+diff --git a/twins/c2_machine.rs b/twins/c2_machine.rs
+index aa6215d..7f282a8 100644
+--- a/twins/c2_machine.rs
++++ b/twins/c2_machine.rs
+@@ -176,10 +176,7 @@ impl LoginMachine {
+             Response::Error { description, .. } => self.cancel(Some(description)),
+             Response::AuthMessage { auth_message_type, auth_message } => match auth_message_type {
+                 AuthMessageType::Visible | AuthMessageType::Secret => {
+-                    self.state = State::Prompt {
+-                        text: auth_message,
+-                        secret: matches!(auth_message_type, AuthMessageType::Secret),
+-                    };
++                    self.state = State::Starting;
+                     self.out(None)
+                 }
+                 AuthMessageType::Info | AuthMessageType::Error => {

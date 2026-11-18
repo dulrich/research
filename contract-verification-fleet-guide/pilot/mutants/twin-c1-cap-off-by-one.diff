@@ -1,0 +1,13 @@
+diff --git a/twins/c1_codec.rs b/twins/c1_codec.rs
+index 8f3382f..36f7d9f 100644
+--- a/twins/c1_codec.rs
++++ b/twins/c1_codec.rs
+@@ -97,7 +97,7 @@ pub fn read_message(s: &mut Stream) -> (r: Result<Vec<u8>, CodecError>)
+     let head = read_exact(s, 4)?;
+     let len = (head[0] as u32 + head[1] as u32 * 256 + head[2] as u32 * 65536 + head[3] as u32 * 16777216) as usize;
+     assert(head@ == old(s).data@.subrange(0, 4));
+-    if len > MAX_MESSAGE_LEN {
++    if len >= MAX_MESSAGE_LEN {
+         return Err(CodecError::TooLarge(len));
+     }
+     s.allocs = Ghost(s.allocs@.push(len as nat)); // `vec![0u8; len]`

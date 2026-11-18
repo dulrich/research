@@ -1,0 +1,87 @@
+diff --git a/crates/crucible-login/src/worker/spawn.rs b/crates/crucible-login/src/worker/spawn.rs
+index d854f06..046ba1c 100644
+--- a/crates/crucible-login/src/worker/spawn.rs
++++ b/crates/crucible-login/src/worker/spawn.rs
+@@ -6,6 +6,8 @@ use std::io;
+ use std::os::fd::{AsRawFd, OwnedFd, RawFd};
+ 
+ use crate::seam::Class;
++#[cfg(verus_keep_ghost)]
++use vstd::prelude::*;
+ 
+ /// The `PATH` every session starts with.
+ pub const SESSION_PATH: &str = "/usr/local/bin:/usr/bin:/bin";
+@@ -97,9 +99,65 @@ pub fn login_argv(shell: &str, cmd: &[String]) -> Vec<String> {
+     v
+ }
+ 
++// verus-extract-begin (the contract and the function verified by the pilot harness)
++#[cfg(verus_keep_ghost)]
++verus! {
++/// Range `p` (inclusive) contains descriptor `fd`.
++pub open spec fn in_range(p: (u32, u32), fd: u32) -> bool {
++    p.0 <= fd <= p.1
++}
++
++/// `fd` is the descriptor to keep: `keep` names it and it is not stdio.
++pub open spec fn kept(keep: Option<RawFd>, fd: u32) -> bool {
++    keep is Some && keep->0 >= 3 && fd == keep->0 as u32
++}
++
++/// Some range contains `fd`.
++pub open spec fn covered(s: Seq<(u32, u32)>, fd: u32) -> bool {
++    exists|i: int| 0 <= i < s.len() && #[trigger] in_range(s[i], fd)
++}
++
++/// Exactly one range contains `fd`.
++pub open spec fn covered_once(s: Seq<(u32, u32)>, fd: u32) -> bool {
++    exists|i: int| 0 <= i < s.len() && #[trigger] in_range(s[i], fd)
++        && forall|j: int| 0 <= j < s.len() && j != i ==> !#[trigger] in_range(s[j], fd)
++}
++
++/// The ranges `close_ranges` returns, as a model.
++pub open spec fn ranges_model(keep: Option<RawFd>) -> Seq<(u32, u32)> {
++    if keep is Some && keep->0 > 3 {
++        seq![(3u32, (keep->0 - 1) as u32), ((keep->0 + 1) as u32, u32::MAX)]
++    } else if keep == Some(3i32) {
++        seq![(4u32, u32::MAX)]
++    } else {
++        seq![(3u32, u32::MAX)]
++    }
++}
++
++/// The model closes no stdio descriptor and not the kept one, and every other descriptor
++/// from 3 to `u32::MAX` exactly once.
++pub proof fn lemma_ranges_model(keep: Option<RawFd>)
++    ensures
++        forall|fd: u32| fd < 3 || kept(keep, fd) ==> !#[trigger] covered(ranges_model(keep), fd),
++        forall|fd: u32| 3 <= fd && !kept(keep, fd) ==> #[trigger] covered_once(ranges_model(keep), fd),
++{
++    let s = ranges_model(keep);
++    assert forall|fd: u32| 3 <= fd && !kept(keep, fd) implies #[trigger] covered_once(s, fd) by {
++        if keep is Some && keep->0 > 3 && fd > keep->0 as u32 {
++            assert(in_range(s[1], fd));
++        } else {
++            assert(in_range(s[0], fd));
++        }
++    }
++}
++} // verus!
++
+ /// The fds that survive a close: stdio plus `keep` (the extra fd's target in the user process,
+ /// the daemon socket in the worker). Returns the inclusive ranges to close (`close_range`),
+ /// everything else.
++#[cfg_attr(verus_keep_ghost, verus_spec(r =>
++    ensures r@ == ranges_model(keep),
++))]
+ pub fn close_ranges(keep: Option<RawFd>) -> Vec<(u32, u32)> {
+     match keep {
+         Some(t) if t > 3 => vec![(3, t as u32 - 1), (t as u32 + 1, u32::MAX)],
+@@ -107,6 +165,7 @@ pub fn close_ranges(keep: Option<RawFd>) -> Vec<(u32, u32)> {
+         _ => vec![(3, u32::MAX)],
+     }
+ }
++// verus-extract-end
+ 
+ /// `close_range(2)` over each of `ranges` (async-signal-safe: one syscall per range).
+ pub(super) fn close_all(ranges: &[(u32, u32)]) {

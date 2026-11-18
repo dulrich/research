@@ -1,0 +1,13 @@
+diff --git a/crates/crucible-login/src/worker/spawn.rs b/crates/crucible-login/src/worker/spawn.rs
+index 046ba1c..9e1e2c8 100644
+--- a/crates/crucible-login/src/worker/spawn.rs
++++ b/crates/crucible-login/src/worker/spawn.rs
+@@ -160,7 +160,7 @@ pub proof fn lemma_ranges_model(keep: Option<RawFd>)
+ ))]
+ pub fn close_ranges(keep: Option<RawFd>) -> Vec<(u32, u32)> {
+     match keep {
+-        Some(t) if t > 3 => vec![(3, t as u32 - 1), (t as u32 + 1, u32::MAX)],
++        Some(t) if t > 3 => vec![(3, t as u32), (t as u32 + 1, u32::MAX)],
+         Some(3) => vec![(4, u32::MAX)],
+         _ => vec![(3, u32::MAX)],
+     }

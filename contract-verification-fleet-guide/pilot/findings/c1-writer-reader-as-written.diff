@@ -1,0 +1,20 @@
+diff --git a/twins/c1_codec.rs b/twins/c1_codec.rs
+index 8f3382f..c802265 100644
+--- a/twins/c1_codec.rs
++++ b/twins/c1_codec.rs
+@@ -143,5 +143,15 @@ proof fn writer_reader_disagree_above_cap(body: Seq<u8>)
+     assert(frame(body).subrange(0, 4) =~= le4(body.len()));
+ }
+ 
++/// The survey's statement as written: anything `write_message` accepts, `read_message` accepts.
++proof fn writer_reader_agree_as_written(body: Seq<u8>)
++    requires write_accepts(body),
++    ensures read_spec(frame(body)) is Ok,
++{
++    lemma_le4(body.len());
++    assert(frame(body).subrange(0, 4) =~= le4(body.len()));
++    assert(frame(body).subrange(4, 4 + body.len() as int) =~= body);
++}
++
+ fn main() {}
+ }

@@ -1,0 +1,16 @@
+# The greeter pilot. Run from this folder:  docker compose run --rm verus make all
+# The crucible-dev-env checkout is expected beside this repository; it is mounted read-only and
+# only its git objects are read (the pinned commit is staged into a disposable directory).
+services:
+  verus:
+    build:
+      context: .
+      dockerfile: verus.Dockerfile
+    image: contract-verification-pilot-verus
+    volumes:
+      - ./:/pilot:ro
+      - ../../../crucible-dev-env:/src:ro
+    tmpfs:
+      - /work:exec,size=1g
+    working_dir: /pilot
+    command: ["make", "all"]

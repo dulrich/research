@@ -1,0 +1,13 @@
+diff --git a/twins/c3_close_ranges.rs b/twins/c3_close_ranges.rs
+index ca8ef7b..da60c52 100644
+--- a/twins/c3_close_ranges.rs
++++ b/twins/c3_close_ranges.rs
+@@ -47,7 +47,7 @@ pub proof fn lemma_ranges_model(keep: Option<i32>)
+ ))]
+ pub fn close_ranges(keep: Option<RawFd>) -> Vec<(u32, u32)> {
+     match keep {
+-        Some(t) if t > 3 => vec![(3, t as u32 - 1), (t as u32 + 1, u32::MAX)],
++        Some(t) if t > 3 => vec![(3, t as u32), (t as u32 + 1, u32::MAX)],
+         Some(3) => vec![(4, u32::MAX)],
+         _ => vec![(3, u32::MAX)],
+     }
