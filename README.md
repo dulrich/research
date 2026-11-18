@@ -13,7 +13,11 @@ Each folder holds one investigation with its working notes and final report.
 - [Live-host measurement](methods/live-host.md): the procedure for measuring on a live workstation, with which classes are acceptable, the runtime controls and how to label the result.
 
 <!-- research-index:start -->
-## 13 research projects
+## 14 research projects
+
+### [Where machine-checked contracts would pay off across the fleet's repos, and a Verus and Kani pilot on the login greeter](contract-verification-fleet-guide/) (2026-11-18)
+
+This investigation asked where machine-checked contracts (a stated precondition, postcondition or state invariant that a tool proves for every input, or for every input up to a stated bound) would add value over tests and property tests in nine of the fleet's public repos, and…
 
 ### [Bombadil's terminal driver against the fleet's terminal programs](bombadil-terminal-programs/) (2026-11-16)
 

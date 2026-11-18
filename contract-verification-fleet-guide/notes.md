@@ -187,3 +187,16 @@ Line counts are physical lines of the files or diffs named, comments included. V
 ### Defects
 
 No real defect was found in the greeter. The writer/reader length disagreement already recorded from the Verus pilot reproduces on the real `read_message`: any prefix above 65,536 is refused, while the writer emits any body length that fits a `u32`. A counterexample was not extracted (`--concrete-playback` not run): any `n > 65,536` meets the failed check.
+
+## 2026-11-18 — Guide written
+
+`README.md` draws on this file (the two pilot entries for every measured number, outcome and timing, quoted with their conditions and rigor labels), on `survey/tools.md` (the approaches table, with its documentation-only rows kept as labelled), and on `survey/crucible.md` and `survey/others.md` (candidates, anchors copied exactly, and the reading-only hypotheses). No measurement was repeated and no new one was made.
+
+Inconsistencies found while writing, and the source followed:
+
+- `survey/tools.md` marks the Kani row and prose as documentation-only and says "a later step may measure Kani"; the Kani entry above measured it. The guide's comparison table marks Verus and Kani as measured and every other row as documentation-only. Followed: this file.
+- `survey/tools.md` (and the feasibility check above) describe the failed `Vec<String>::clone` conjunct as a symptom with the cause not investigated; the Verus pilot entry (obstacle O4) found the cause (after `Vec::clone` `vstd` gives equality of views, not of vectors, for any element type). Followed: the pilot entry.
+- An earlier summary of the pilot described Kani as reaching three of the four contracts on the unmodified crate within bounds. Per this file only C1 and C2 are by path on the unmodified crate and bounded; C3 and C4 (`teardown_for`) go through `cfg(kani)` harness modules appended to private source files (no non-test code change) and need no input bound. Followed: this file.
+- The expected Verus summary line `21 pass, 0 fail` is not recorded in the Verus pilot entry above (only the Kani `15 pass, 0 fail` is); the README states it as the expected line, not as a figure recorded in this file. It is not re-verified here.
+- Line counts differ by method and are labelled so: the twin sizes in the Kani comparison table are physical lines (147, 195, 200 for C1, C2, C4), the Verus effort entry uses a non-blank, non-comment classifier (C1: 61 + 44 lines); both are quoted with their method.
+- The `clamp_usage` line is `:550` in `survey/others.md` (and `:538` for `usage_out`) but `:548` in the property-based-testing guide's survey; the guide follows this folder's survey. Not re-checked.
