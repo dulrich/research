@@ -1,0 +1,13 @@
+diff --git a/crates/crucible-greetd/src/codec.rs b/crates/crucible-greetd/src/codec.rs
+--- a/crates/crucible-greetd/src/codec.rs
++++ b/crates/crucible-greetd/src/codec.rs
+@@ -153,9 +153,6 @@ pub fn read_message<R: Read, T: for<'de> Deserialize<'de>>(r: &mut R) -> Result<
+     let mut head = [0u8; 4];
+     r.read_exact(&mut head)?;
+     let len = u32::from_ne_bytes(head) as usize;
+-    if len > MAX_MESSAGE_LEN {
+-        return Err(CodecError::TooLarge(len));
+-    }
+     let mut body = vec![0u8; len];
+     r.read_exact(&mut body)?;
+     Ok(serde_json::from_slice(&body)?)

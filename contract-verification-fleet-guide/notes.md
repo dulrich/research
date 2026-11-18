@@ -115,3 +115,75 @@ Each reproduction is in `pilot/obstacles/` and is run by the pilot command, whic
 - Line counts per artifact. For the twins, a line classifier over non-blank, non-comment lines (approximate): `c1_codec.rs` 61 specification and proof lines, 44 other lines (executable code, type declarations, `use` and braces); `c2_machine.rs` 52 and 106; `c3_close_ranges.rs` 35 and 8; `c4_worker.rs` 80 and 74. For the real source: C3 adds 53 lines for 7 non-blank, non-comment lines of `close_ranges`; C2 adds 117 lines (32 of them build plumbing) against 72 non-blank, non-comment lines of `machine.rs` from `fn out` to the end of the file (`out`, `cancel`, `handle`, `on_auth_response`).
 - Authoring effort, counted as verifier runs until the artifact verified (scratch runs included, mutants and obstacles not): C1 twin 6; C2 twin 2 (it reused the in-source contract); C2 in-source 13, plus 2 scratch probes of clone specifications; C3 4 (the same contract served the twin and the source); C4 twin 4.
 - Verifier wall time, *indicative*: each verifying artifact was run 3 times with `verus <file>` inside the container on one x86-64 desktop host, untuned, shared (24 hardware threads), timed with `date +%s%N` around the call: C1 twin 677 to 707 ms; C2 twin 472 to 502 ms; C3 twin 506 to 584 ms; C4 twin 490 to 499 ms; C2 real source 545 to 561 ms; C3 real source 482 to 499 ms. Most of that is the verifier's start-up; expected rejections were not timed.
+
+## 2026-11-18 — Kani on the same properties
+
+### Setup
+
+- Same target and staging as the Verus pilot: `crucible-dev-env` at `cd2df19e6eca85b282db8fddd29882abd83d78d1`, mounted read-only; `git archive` of `crates/crucible-greetd crates/crucible-login Cargo.toml Cargo.lock` into a tmpfs; every diff applied with `git apply --check` then `git apply`. The workspace manifest's `members = ["crates/*"]` picks up the harness crate copied to `crates/kani-harness` beside the staged crates, so neither the staged manifest nor any crate manifest is edited.
+- Image (`pilot/kani.Dockerfile`, Compose service `kani`, image `contract-verification-pilot-kani`): the same base `rust:1.99.1-slim-trixie@sha256:f6c4a35d21dbb3c89d7a8d056c193e94fc09037f2b58dd858b09c39a47dd02d7`; Debian packages `ca-certificates curl git make gcc libc6-dev`; `cargo install --locked kani-verifier --version 0.68.0` then `cargo kani setup`, which fetched the Kani 0.68.0 bundle with CBMC 6.11.0 and the toolchain `nightly-2026-08-21` (`rustc 1.100.0-nightly (8925ea358 2026-08-20)`). The bundle and nightly are fetched by `cargo kani setup` at build time and are pinned only through the kani-verifier version.
+- Registry dependencies of the staged crates (`serde`, `serde_json`, `thiserror`, `libc`, `tracing`, `tracing-subscriber` and their dependencies, at the versions in the staged `Cargo.lock`) are fetched at run time into the tmpfs (`CARGO_HOME` points there), so the run needs network access. Build output also stays in the tmpfs.
+- One command, from `contract-verification-fleet-guide/pilot/`: `docker compose run --rm kani make -f kani.mk all`. The Verus command and its `Makefile` are unchanged. Every harness runs under `timeout 600`; a timeout is recorded as "did not finish". A mutant or finding counts only when Kani printed `VERIFICATION:- FAILED` and the intended check is among its `Failed Checks`; the blocker counts only when its named message is printed.
+- Image size: the unpacked layer bytes from `docker history --human=false` for the image after `docker compose build --no-cache kani` sum to 2,177,323,008 bytes (about 2.2 GB), image store: Docker with the containerd snapshotter (overlayfs); this includes the base image layers; inputs as listed above.
+- `git status --short` in the checkout printed nothing before the first Kani run. After the last run it listed modified and untracked files in `crucible-compositor`, `crucible-config`, `crucible-keys` and `docs/`, with a new commit at the checkout's HEAD made during the session: concurrent work in that checkout, in crates this pilot does not stage. The pilot reads only git objects of the pinned commit through a read-only mount.
+
+### Routes
+
+- **C1, C2: real crate by path.** A harness crate (`pilot/kani/harness/`) depends on the staged `crucible-greetd` by path and calls only its public API: `codec::read_message`, `CodecError`, `MAX_MESSAGE_LEN`, `LoginMachine::new`, `handle`, `state`, `view`. C2's private fields were not needed: the state is read through `state()`, the message line through `view().message`, and `cmd` is visible in every `StartSession` it emits. Machine states are reached by driving `new` with symbolic event sequences, not by building them directly.
+- **C3, C4: in-source harness diffs.** `close_ranges` and `teardown_for` sit in the private modules `worker::spawn` and `worker::process`, so no outside crate can call them. `pilot/kani/in-source/c3-close-ranges.diff` (28 lines added, none removed) and `c4-teardown.diff` (33 added, none removed) only append a `#[cfg(kani)] mod kani_proofs` at the end of each file. No non-test code changes.
+- **Stubbing in C1.** Without stubs, `c1_reject_above_cap` was still in symbolic execution of `serde_json` and the float-parsing code under it (`core::num::imp::bignum`) when the 600 s limit ran out. CBMC does not drop the decode path just because its guard (`len <= cap` together with `len > cap`) can never be true. The three symbolic C1 harnesses therefore replace `serde_json::from_slice` with `#[kani::stub]` (`-Z stubbing`) by a function that hits `unreachable!`, so the run also checks that the decoder is never reached on those paths. That was the second attempt. `c1_concrete_frame_decodes` runs the real `serde_json` on one concrete frame (`null`, `T = ()`) and does not use the stub.
+
+### Per-property evidence
+
+Each row comes from one run of the pilot command after `docker compose build --no-cache kani` (run 1 of 3; runs 2 and 3 gave the same outcomes). The summary was `==== 15 pass, 0 fail`.
+
+| Contract | Artifact | Assumed and bounded | Obligation | Outcome | Kani result line |
+|---|---|---|---|---|---|
+| C1 | real crate by path, `c1_reject_above_cap` | symbolic 4-byte prefix, any value above 65,536; reader is `&[u8]` (prefix plus one byte); `T = ()`; `serde_json::from_slice` stubbed as unreachable; unwind 6 | refused as `TooLarge(len)` with the same `len`; only the 4 header bytes consumed; decoder not reached | proved within the bound | `VERIFICATION:- SUCCESSFUL` |
+| C1 | real crate by path, `c1_accept_within_cap` | symbolic prefix from 1 to 65,536; the stream ends after the header; decoder stubbed as unreachable; unwind 6 | not refused by the cap: the body (a buffer of up to 65,536 bytes) is requested, and the read fails with an I/O error because the stream has ended | proved within the bound | `VERIFICATION:- SUCCESSFUL` |
+| C1 | real crate by path, `c1_concrete_frame_decodes` | one concrete frame (length 4, body `null`, `T = ()`); real `serde_json`; unwind 10 | the frame decodes | proved within the bound (one input) | `VERIFICATION:- SUCCESSFUL` |
+| C1 | finding, `c1_writer_reader_agree` | symbolic `n: u32 >= 1` as the prefix `write_message` emits for an `n`-byte body; only its `u32::try_from` length conversion is modelled, because serialising a body that large is out of reach; decoder stubbed | "every length the writer emits is accepted by the reader" | failed (expected: the statement is false) | `VERIFICATION:- FAILED` (`Failed Checks: "C1 every length the writer emits is accepted by the reader"`) |
+| C1 | mutant `c1-cap-removed` | as `c1_reject_above_cap` | cap check deleted | failed as intended | `VERIFICATION:- FAILED` (`"C1 a length above the cap is refused as TooLarge(len)"`) |
+| C1 | mutant `c1-cap-off-by-one` | as `c1_accept_within_cap` | `>` changed to `>=` | failed as intended | `VERIFICATION:- FAILED` (`"C1 a length within the cap is accepted and the body is requested"`) |
+| C2 | real crate by path, `c2_machine_safety` | from `LoginMachine::new("s")`, every sequence of 3 events; events: `Submit` (secret `"u"` or `"pw"`), `Escape`, `Success`, `Error` (both error types, description `"d"`), `AuthMessage` (all four types, text `"p"`); unwind 6 | after every event: `StartSession` only from `Authenticating` on `Success`, followed by `Starting`, carrying the configured command and an empty env; `Starting` is entered only together with a `StartSession`; `Done` only from `Starting` on `Success`; an answer (`PostAuthMessageResponse` with `Some`) leaves only from `Prompt` on `Submit`, carrying exactly the submitted secret; an event with no match arm emits nothing and leaves the state and message line unchanged | proved within the bound | `VERIFICATION:- SUCCESSFUL` |
+| C2 | mutant `c2-start-session-from-prompt` | as the harness | `Submit` in `Prompt` emits `StartSession` | failed as intended | `VERIFICATION:- FAILED` (`"C2 StartSession only from Authenticating on Success, then Starting"`) |
+| C2 | mutant `c2-starting-on-auth-message` | as the harness | a visible or secret `AuthMessage` moves to `Starting` | failed as intended | `VERIFICATION:- FAILED` (`"C2 Starting is entered only with a StartSession request"`) |
+| C3 | in-source harness diff, `c3_close_ranges` | every `keep: Option<i32>` and every `fd: u32` (no bound on the inputs); unwind 3 covers the at most two ranges | no range contains 0, 1, 2 or the kept descriptor (when at least 3); every other descriptor is in exactly one range; every range is ordered; no arithmetic overflow (Kani's default checks) | proved, no bound needed (the unwind bound covers the whole loop) | `VERIFICATION:- SUCCESSFUL` |
+| C3 | mutant `c3-range-off-by-one` | as the harness | first range ends at `t` instead of `t - 1` | failed as intended | `VERIFICATION:- FAILED` (`"C3 stdio and the kept descriptor are never closed"`) |
+| C4 | in-source harness diff, `c4_teardown_for` | every `Phase`, including every `vt` | `close_session` implies `delete_cred`; `delete_cred` exactly when past `Authenticated`; `close_session` exactly when `Opened` | proved, no bound needed | `VERIFICATION:- SUCCESSFUL` |
+| C4 | mutant `c4-teardown-cred-kept` (new; the Verus C4 mutant was on the twin) | as the harness | `CredEstablished` no longer deletes credentials | failed as intended | `VERIFICATION:- FAILED` (`"C4 delete_cred exactly when credentials were established"`) |
+| C4 | real `serve` / `serve_open` (blocker reproduction `c4_serve_needs_pam`) | none | the request-ordering contract | could not be stated | `VERIFICATION:- FAILED` with `Failed Checks: call to foreign "C" function \`pam_start\` is not currently supported by Kani` (a tool limitation, not a property failure) |
+
+Kept apart from property failures: the only tool failures were the C1 run before stubbing (did not finish within 600 s, in `serde_json`'s number parsing) and the `pam_start` foreign-function check. No build or dependency failure happened in the final runs. The C4 twin (`twins/c4_worker.rs`) is written in Verus syntax and was not run under Kani.
+
+What the bounds leave out: C1 covers every prefix value but only the two stream shapes above. The body contents and the JSON decoding are not covered, apart from the one concrete frame. Partial reads are not covered either, since `&[u8]` delivers everything it has. C2 covers only sequences of at most 3 events from the initial state. Events out of `Done` (all on the `_` arm) are never checked as a starting state, and string contents are limited to the fixed values listed, so the strings are not symbolic. Nothing about `Secret`'s wipe on drop is checked. C3 and C4 (`teardown_for`) have no input bound. C4's ordering of PAM calls in `serve` is not covered at all.
+
+### Timing (*indicative*)
+
+Kani's own `Verification Time` line (the CBMC phase only; compilation is extra), from 3 runs of `docker compose run --rm kani make -f kani.mk all` on one x86-64 desktop host, untuned, shared. Only harnesses that pass are listed.
+
+| Harness | Run 1 | Run 2 | Run 3 |
+|---|---|---|---|
+| `c1_reject_above_cap` | 0.97 s | 1.03 s | 1.06 s |
+| `c1_accept_within_cap` | 0.87 s | 0.88 s | 0.87 s |
+| `c1_concrete_frame_decodes` | 1.93 s | 2.14 s | 1.95 s |
+| `c2_machine_safety` (3 events) | 211.2 s | 222.4 s | 219.8 s |
+| `c3_close_ranges` | 0.32 s | 0.33 s | 0.33 s |
+| `c4_teardown_for` | 0.019 s | 0.018 s | 0.018 s |
+
+At 4 events, `c2_machine_safety` did not finish within 300 s in an earlier trial run, so the bound was set to 3.
+
+### Comparison with Verus, per property
+
+| Contract | Twin needed | Bound | Lines written | Changes to the target source | Not reached |
+|---|---|---|---|---|---|
+| C1 | Verus: yes (`twins/c1_codec.rs`, 147 lines including the twin code); Kani: no, the real `read_message` | Verus: none; Kani: none on the prefix, but two fixed stream shapes, and decoding replaced by a stub (one concrete frame decoded for real) | Kani: 82 lines (the `c1` module of `harness/src/lib.rs`, with the stub and comments) | Verus: none (twin only; obstacle O1); Kani: none | Verus: generic `Read`, `io::Error`, `from_ne_bytes`, `serde_json`. Kani: symbolic `serde_json` decoding (time) |
+| C2 | Verus: twin plus the real source; Kani: no, the real public API | Verus: none (all states, unbounded strings); Kani: 3 events, fixed strings | Kani: 101 lines (the `c2` module); Verus: 117 added and 10 removed lines in `in-source/c2-machine.diff`, and the 195-line twin | Verus: 117/10-line diff with serde gated off and one assumed clone specification; Kani: none | Verus: derived `Clone` (assumed), private fields (spec accessors). Kani: unbounded strings and event sequences longer than 3 |
+| C3 | Verus: twin and the real function; Kani: no twin | neither: Kani's inputs are unbounded and the loop is covered in full | Kani: 28 added lines (in-source diff); Verus: 53 added lines (in-source diff) | Verus: a 53-line diff (`cfg(verus_keep_ghost)` contract and lemma); Kani: a 28-line `cfg(kani)` module, needed only because the module is private | nothing for either |
+| C4 | Verus: yes (`twins/c4_worker.rs`, 200 lines); Kani: no twin, but only `teardown_for` | `teardown_for`: none | Kani: 33 added lines (in-source diff, including the blocker reproduction) | Kani: a `cfg(kani)` module; Verus: none (twin only) | both: the real `serve` (the `Pam` FFI handle and socket I/O). Kani reports `pam_start` as an unsupported foreign call. Verus would need assumed specifications for every `Pam` method (O5) |
+
+Line counts are physical lines of the files or diffs named, comments included. Verus's diff counts include the specification and proof lines together with the build plumbing described in its entry. The Kani counts are the harness lines only; the 103-line `kani.mk` and 15-line `kani.Dockerfile` are not included.
+
+### Defects
+
+No real defect was found in the greeter. The writer/reader length disagreement already recorded from the Verus pilot reproduces on the real `read_message`: any prefix above 65,536 is refused, while the writer emits any body length that fits a `u32`. A counterexample was not extracted (`--concrete-playback` not run): any `n > 65,536` meets the failed check.

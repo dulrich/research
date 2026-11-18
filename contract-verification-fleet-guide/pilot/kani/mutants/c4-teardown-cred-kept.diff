@@ -1,0 +1,12 @@
+diff --git a/crates/crucible-login/src/worker/process.rs b/crates/crucible-login/src/worker/process.rs
+--- a/crates/crucible-login/src/worker/process.rs
++++ b/crates/crucible-login/src/worker/process.rs
+@@ -67,7 +67,7 @@ fn teardown_for(phase: Phase) -> Teardown {
+         // Credentials established before a failed pam_open_session are still deleted.
+         Phase::CredEstablished => Teardown {
+             close_session: false,
+-            delete_cred: true,
++            delete_cred: false,
+         },
+         Phase::Opened { .. } => Teardown {
+             close_session: true,

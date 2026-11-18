@@ -1,0 +1,37 @@
+diff --git a/crates/crucible-login/src/worker/spawn.rs b/crates/crucible-login/src/worker/spawn.rs
+--- a/crates/crucible-login/src/worker/spawn.rs
++++ b/crates/crucible-login/src/worker/spawn.rs
+@@ -373,3 +373,33 @@ mod tests {
+         }
+     }
+ }
++
++/// Kani proof harness for C3 (`close_ranges`).
++#[cfg(kani)]
++mod kani_proofs {
++    use super::close_ranges;
++
++    /// For every `keep` and every descriptor `fd`: stdio and the kept descriptor are in no
++    /// range; every other descriptor from 3 up is in exactly one range; each range is ordered.
++    #[kani::proof]
++    #[kani::unwind(3)]
++    fn c3_close_ranges() {
++        let keep: Option<i32> = kani::any();
++        let fd: u32 = kani::any();
++        let ranges = close_ranges(keep);
++        assert!(ranges.len() <= 2, "C3 at most two ranges");
++        let mut hits = 0u32;
++        for &(lo, hi) in ranges.iter() {
++            assert!(lo <= hi, "C3 each range is ordered");
++            if lo <= fd && fd <= hi {
++                hits += 1;
++            }
++        }
++        let kept = matches!(keep, Some(t) if t >= 3 && t as u32 == fd);
++        if fd < 3 || kept {
++            assert!(hits == 0, "C3 stdio and the kept descriptor are never closed");
++        } else {
++            assert!(hits == 1, "C3 every other descriptor is closed by exactly one range");
++        }
++    }
++}

@@ -1,0 +1,12 @@
+diff --git a/crates/crucible-login/src/worker/spawn.rs b/crates/crucible-login/src/worker/spawn.rs
+--- a/crates/crucible-login/src/worker/spawn.rs
++++ b/crates/crucible-login/src/worker/spawn.rs
+@@ -102,7 +102,7 @@ pub fn login_argv(shell: &str, cmd: &[String]) -> Vec<String> {
+ /// everything else.
+ pub fn close_ranges(keep: Option<RawFd>) -> Vec<(u32, u32)> {
+     match keep {
+-        Some(t) if t > 3 => vec![(3, t as u32 - 1), (t as u32 + 1, u32::MAX)],
++        Some(t) if t > 3 => vec![(3, t as u32), (t as u32 + 1, u32::MAX)],
+         Some(3) => vec![(4, u32::MAX)],
+         _ => vec![(3, u32::MAX)],
+     }

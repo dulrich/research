@@ -14,3 +14,19 @@ services:
       - /work:exec,size=1g
     working_dir: /pilot
     command: ["make", "all"]
+  # Kani on the same properties:  docker compose run --rm kani make -f kani.mk all
+  # The staged crates' registry dependencies are fetched at run time into the tmpfs (network needed).
+  kani:
+    build:
+      context: .
+      dockerfile: kani.Dockerfile
+    image: contract-verification-pilot-kani
+    volumes:
+      - ./:/pilot:ro
+      - ../../../crucible-dev-env:/src:ro
+    tmpfs:
+      - /work:exec,size=4g
+    environment:
+      CARGO_HOME: /work/cargo-home
+    working_dir: /pilot
+    command: ["make", "-f", "kani.mk", "all"]

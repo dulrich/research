@@ -1,0 +1,43 @@
+diff --git a/crates/crucible-login/src/worker/process.rs b/crates/crucible-login/src/worker/process.rs
+--- a/crates/crucible-login/src/worker/process.rs
++++ b/crates/crucible-login/src/worker/process.rs
+@@ -345,3 +345,39 @@ mod tests {
+         assert_eq!(teardown_for(Phase::Opened { vt: 8 }), t(true, true));
+     }
+ }
++
++/// Kani proof harness for the C4 part that is reachable without PAM: `teardown_for`.
++#[cfg(kani)]
++mod kani_proofs {
++    use super::{Phase, teardown_for};
++
++    /// For every phase: `close_session` implies `delete_cred`; `delete_cred` exactly when past
++    /// `Authenticated`; `close_session` exactly when `Opened`.
++    #[kani::proof]
++    fn c4_teardown_for() {
++        let phase = match kani::any::<u8>() {
++            0 => Phase::Authenticated,
++            1 => Phase::CredEstablished,
++            _ => Phase::Opened { vt: kani::any() },
++        };
++        let t = teardown_for(phase);
++        assert!(!t.close_session || t.delete_cred, "C4 close_session implies delete_cred");
++        assert!(
++            t.delete_cred == (phase != Phase::Authenticated),
++            "C4 delete_cred exactly when credentials were established"
++        );
++        assert!(
++            t.close_session == matches!(phase, Phase::Opened { .. }),
++            "C4 close_session exactly when the session was opened"
++        );
++    }
++
++    /// Blocker reproduction: `serve` needs a `Pam` handle, and every `Pam` method is a libpam
++    /// FFI call with no body Kani can check. Starting one is enough to show it.
++    #[kani::proof]
++    #[kani::unwind(8)]
++    fn c4_serve_needs_pam() {
++        let pam = crate::pam::Pam::start("login", "u", Box::new(|_, _| Err(())));
++        assert!(pam.is_ok() || pam.is_err(), "C4 a Pam handle can be started");
++    }
++}

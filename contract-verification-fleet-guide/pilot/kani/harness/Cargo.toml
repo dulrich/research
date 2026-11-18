@@ -1,0 +1,11 @@
+[package]
+name = "kani-greeter-harness"
+version = "0.0.0"
+edition = "2024"
+publish = false
+description = "Kani proof harnesses for crucible-greetd, calling only its public API"
+
+[dependencies]
+crucible-greetd = { path = "../crucible-greetd" }
+serde = "1"
+serde_json = "1"
